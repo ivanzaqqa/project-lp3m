@@ -1,30 +1,69 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Auth extends CI_Controller {
+class Auth extends CI_Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
-        $this->load->model('auth_model');
+        $this->load->library('form_validation');
     }
 
-    public function login() {
-        //code...
+    public function index()
+    {
+        $this->form_validation->set_rules('username', 'Username', 'trim|required');
+        $this->form_validation->set_rules('password', 'Password', 'trim|required');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/auth_header');
+            $this->load->view('auth/login');
+            $this->load->view('templates/auth_footer');
+        } else {
+            //validation success
+            $this->_login();
+        }
     }
 
-    public function register() {
-        //code...
-    }
-    
-    public function proses_login() {
-        //code...
-    }
-    
-    public function proses_register() {
-        //code...
+    private function _login()
+    {
+        $username = $this->input->post('username');
+        $password = $this->input->post('password');
+
+        $dosen = $this->db->get_where('dosen', ['username' => $username])->row_array();
+
+        //jika usernya ada
+        if ($dosen) {
+            //jika usernya aktif
+
+            if ($dosen['is_active'] == 1) {
+                //cek password
+                if (password_verify($password, $dosen['password'])) {
+                    $data = [
+                        'username' => $dosen['username'],
+                        'id_role' => $dosen['id_role']
+                    ];
+                    $this->session->set_userdata($data);
+                    redirect('operator');
+                } else {
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password salah!</div>');
+                    redirect('auth');
+                }
+            } else {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Operator belum di aktivasi!</div>');
+                redirect('auth');
+            }
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Operator dengan username tersebut tidak ada!</div>');
+            redirect('auth');
+        }
     }
 
-    public function logout() {
-        //code...
+    public function logout()
+    {
+        $this->session->unset_userdata('username');
+        $this->session->unset_userdata('id_role');
+
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Anda berhasil logout!</div>');
+        redirect('auth');
     }
 }

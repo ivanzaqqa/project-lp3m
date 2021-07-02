@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Operator extends CI_Controller {
+class Operator extends CI_Controller
+{
 
 	/**
 	 * Index Page for this controller.
@@ -20,7 +21,8 @@ class Operator extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('dashboard_template');
+		$data['dosen'] = $this->db->get_where('dosen', ['username' => $this->session->userdata('username')])->row_array();
+		echo 'Selamat Datang ' . $data['dosen']['name'];
+		// $this->load->view('dashboard_template');
 	}
-
 }
