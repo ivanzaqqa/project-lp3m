@@ -21,8 +21,6 @@ class Operator extends CI_Controller
 	 */
 	public function index()
 	{
-		$data['dosen'] = $this->db->get_where('dosen', ['username' => $this->session->userdata('username')])->row_array();
-		echo 'Selamat Datang ' . $data['dosen']['name'];
-		// $this->load->view('dashboard_template');
+		$this->load->view('operator/home');
 	}
 }
