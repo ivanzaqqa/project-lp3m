@@ -1,26 +1,39 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Dosen extends CI_Controller {
-
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/user_guide/general/urls.html
-	 */
+class Dosen extends CI_Controller
+{
 	public function index()
 	{
+		$this->load->view('templates/auth_header');
 		$this->load->view('dosen/home');
+		$this->load->view('templates/auth_footer');
 	}
 
+	public function dashboard()
+	{
+		$this->load->view('templates/auth_header');
+		$this->load->view('dosen/menu_sidebar');
+		$this->load->view('templates/topbar');
+		$this->load->view('templates/content');
+		$this->load->view('templates/auth_footer');
+	}
+
+	public function arsip()
+	{
+		$this->load->view('templates/auth_header');
+		$this->load->view('dosen/menu_sidebar');
+		$this->load->view('templates/topbar');
+		$this->load->view('dosen/arsip');
+		$this->load->view('templates/auth_footer');
+	}
+
+	public function daftarusulanpenelitian()
+	{
+		$this->load->view('templates/auth_header');
+		$this->load->view('dosen/menu_sidebar');
+		$this->load->view('templates/topbar');
+		$this->load->view('dosen/daftar_usulan_penelitian');
+		$this->load->view('templates/auth_footer');
+	}
 }
