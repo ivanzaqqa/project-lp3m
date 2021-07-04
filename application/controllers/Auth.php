@@ -35,28 +35,23 @@ class Auth extends CI_Controller
         if ($dosen) {
             //jika usernya aktif
 
-            if ($dosen['is_active'] == 1) {
-                //cek password
-                if (password_verify($password, $dosen['password'])) {
-                    $data = [
-                        'username' => $dosen['username'],
-                        'id_role' => $dosen['id_role']
-                    ];
-                    $this->session->set_userdata($data);
-                    //check id role
-                    if ($dosen['id_role'] == 1) {
-                        redirect('dosen');
-                    } elseif ($dosen['id_role'] == 2) {
-                        redirect('operator');
-                    } else {
-                        echo 'Anda Bukan Dosen atau Operator!';
-                    }
+            //cek password
+            if (password_verify($password, $dosen['password'])) {
+                $data = [
+                    'username' => $dosen['username'],
+                    'id_role' => $dosen['id_role']
+                ];
+                $this->session->set_userdata($data);
+                //check id role
+                if ($dosen['id_role'] == 1) {
+                    redirect('dosen');
+                } elseif ($dosen['id_role'] == 2) {
+                    redirect('operator');
                 } else {
-                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password salah!</div>');
-                    redirect('auth');
+                    echo 'Anda Bukan Dosen atau Operator!';
                 }
             } else {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Operator belum di aktivasi!</div>');
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password salah!</div>');
                 redirect('auth');
             }
         } else {
