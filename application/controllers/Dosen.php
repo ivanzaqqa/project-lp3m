@@ -5,8 +5,10 @@ class Dosen extends CI_Controller
 {
 	public function index()
 	{
+		$data['dosen'] = $this->db->get_where('dosen', ['username' =>
+		$this->session->userdata('username')])->row_array();
 		$this->load->view('templates/auth_header');
-		$this->load->view('dosen/home');
+		$this->load->view('dosen/home', $data);
 		$this->load->view('templates/auth_footer');
 	}
 
