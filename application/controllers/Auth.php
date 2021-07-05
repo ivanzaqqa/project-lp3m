@@ -29,23 +29,23 @@ class Auth extends CI_Controller
         $username = $this->input->post('username');
         $password = $this->input->post('password');
 
-        $dosen = $this->db->get_where('dosen', ['username' => $username])->row_array();
+        $users = $this->db->get_where('users', ['username' => $username])->row_array();
 
         //jika usernya ada
-        if ($dosen) {
+        if ($users) {
             //jika usernya aktif
 
             //cek password
-            if (password_verify($password, $dosen['password'])) {
+            if (password_verify($password, $users['password'])) {
                 $data = [
-                    'username' => $dosen['username'],
-                    'id_role' => $dosen['id_role']
+                    'username' => $users['username'],
+                    'id_role' => $users['id_role']
                 ];
                 $this->session->set_userdata($data);
                 //check id role
-                if ($dosen['id_role'] == 1) {
+                if ($users['id_role'] == 1) {
                     redirect('dosen');
-                } elseif ($dosen['id_role'] == 2) {
+                } elseif ($users['id_role'] == 2) {
                     redirect('operator');
                 } else {
                     echo 'Anda Bukan Dosen atau Operator!';

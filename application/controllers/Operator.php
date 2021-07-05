@@ -5,7 +5,7 @@ class Operator extends CI_Controller
 {
 	public function index()
 	{
-		$data['dosen'] = $this->db->get_where('dosen', ['username' =>
+		$data['users'] = $this->db->get_where('users', ['username' =>
 		$this->session->userdata('username')])->row_array();
 		$this->load->view('templates/auth_header');
 		$this->load->view('operator/home', $data);

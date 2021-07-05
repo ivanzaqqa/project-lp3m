@@ -15,7 +15,7 @@
 
                             <?= $this->session->flashdata('message'); ?>
 
-                            <form class="dosen" method="POST" action="<?= base_url('auth') ?>">
+                            <form class="users" method="POST" action="<?= base_url('auth') ?>">
                                 <div class="form-group">
                                     <input type="text" name="username" class="form-control form-control-user" id="username" placeholder="Masukkan username">
                                     <?= form_error('username', '<small class="text-danger pl-3">', '</small>'); ?>
