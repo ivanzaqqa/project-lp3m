@@ -4,7 +4,7 @@
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
             <div class="sidebar-brand-icon">
-                <img widht="300" class="logo" src="<?= base_url() ?>/assets/img/logo.png" alt="">
+                <img widht="300" class="logo" src="<?= base_url() ?>/assets/img/default/logo.png" alt="">
             </div>
         </a>
         <!-- Divider -->
