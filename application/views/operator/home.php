@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand navbar-light bg-sidebar topbar mb-4 static-top shadow">
     <a class="navbar-brand" href="#">
-        <img src="<?= base_url() ?>/assets/img/logo.png" width="30%" alt="">
+        <img src="<?= base_url() ?>/assets/img/default/logo.png" width="30%" alt="">
     </a>
     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
         <i class="fa fa-bars"></i>
