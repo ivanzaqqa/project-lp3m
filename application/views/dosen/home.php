@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand navbar-light bg-sidebar topbar mb-4 static-top shadow">
     <a class="navbar-brand" href="#">
-        <img src="<?= base_url() ?>/assets/img/logo.png" width="30%" alt="">
+        <img src="<?= base_url() ?>/assets/img/default/logo.png" width="30%" alt="">
     </a>
     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
         <i class="fa fa-bars"></i>
@@ -38,7 +38,7 @@
                 </div>
                 <div class="card-body">
                     <p class="card-text text-white">Menu penelitian</p>
-                    <a href="<?= site_url('dosen/dashboard') ?>" class="btn btn-primary">Kunjungi</a>
+                    <a href="<?= base_url('dosen/penelitian') ?>" class="btn btn-primary">Kunjungi</a>
                 </div>
             </div>
         </div>
@@ -67,7 +67,7 @@
     </div>
 </div>
 <footer class="footer-login sticky-footer bg-sidebar" style="position: absolute; bottom: 0; width:100%;">
-    <div class="container-fluid">
+    <div class="container-fluid my-auto">
         <div class="copyright text-center text-white">
             <span>Copyright &copy; Sistem Management Hibah Internal Universitas Kadiri</span>
         </div>
