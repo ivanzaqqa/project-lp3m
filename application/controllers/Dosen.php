@@ -12,10 +12,10 @@ class Dosen extends CI_Controller
 		$this->load->view('templates/auth_footer');
 	}
 
-	public function dashboard()
+	public function penelitian()
 	{
 		$this->load->view('templates/auth_header');
-		$this->load->view('dosen/menu_sidebar');
+		$this->load->view('dosen/penelitian/menu');
 		$this->load->view('templates/topbar');
 		$this->load->view('templates/content');
 		$this->load->view('templates/auth_footer');
@@ -24,18 +24,18 @@ class Dosen extends CI_Controller
 	public function arsip()
 	{
 		$this->load->view('templates/auth_header');
-		$this->load->view('dosen/menu_sidebar');
+		$this->load->view('dosen/penelitian/menu');
 		$this->load->view('templates/topbar');
-		$this->load->view('dosen/arsip');
+		$this->load->view('dosen/penelitian/arsip');
 		$this->load->view('templates/auth_footer');
 	}
 
 	public function daftarusulanpenelitian()
 	{
 		$this->load->view('templates/auth_header');
-		$this->load->view('dosen/menu_sidebar');
+		$this->load->view('dosen//penelitian/menu');
 		$this->load->view('templates/topbar');
-		$this->load->view('dosen/daftar_usulan_penelitian');
+		$this->load->view('dosen/penelitian/daftar_usulan_penelitian');
 		$this->load->view('templates/auth_footer');
 	}
 }
