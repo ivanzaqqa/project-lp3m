@@ -2,20 +2,17 @@
     <div class="card shadow">
         <div class="row">
             <div class="col-2">
-                <a href="" name="tambahdatadosen" type="button" class="ml-2 mt-2 mb-2 mr-2 btn btn-success btn-sm">Tambah Data Dosen</a>
-            </div>
-            <div class="col-10">
-                <a href="<?= base_url('operator/datadosen') ?>" name="tambahdatadosen" type="button" class="ml-2 mt-2 mb-2 mr-2 btn btn-danger btn-sm">Kembali</a>
+                <a href="" name="tambahdatadosen" type="button" class="ml-2 mt-2 mb-2 mr-2 btn btn-warning btn-sm">Tambah Data Dosen</a>
             </div>
         </div>
         <div class="row">
             <div class="col-6">
-                <div class="ml-2 mt-2 mb-2 mr-2 card bg-light" style="width: 35rem;">
-                    <div class="card-header bg-primary ">
+                <div class="ml-2 mt-2 mr-2 card bg-light" style="width: 35rem;">
+                    <div class="card-header" style="background-color: #670099;">
                         <h5 class="font-weight-bold text-white">Detail DIka Mahardi</h5>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="ml-2 mb-2 card-body bg-gradient-secondary text-white" style="width: 35rem;">
                     <table class="font-weight-bold">
                         <tr>
                             <td>Nidn</td>
@@ -67,6 +64,13 @@
             </div>
             <div class="col-6">
                 <img style="width: 20rem;" class="ml-4 mt-3 mb-3 img-profile rounded-circle" src="<?= base_url() ?>/assets/img/users/erickkirek.jpg" alt="">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <a href="<?= base_url('operator/datadosen') ?>" type="button" class="ml-2 mt-2 mb-2 mr-2 btn btn-sm text-white" style="background-color: #670099;">Kembali</a>
+                <a href="<?= base_url('') ?>" type="button" class="ml-2 mt-2 mb-2 mr-2 btn btn-warning btn-sm">Hapus</a>
+                <a href="<?= base_url('') ?>" type="button" class="ml-2 mt-2 mb-2 mr-2 btn btn-sm text-white" style="background-color: #670099;">Edit</a>
             </div>
         </div>
     </div>

@@ -8,8 +8,8 @@
     <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-white-600 small"><?= $users['name']; ?></span>
-                <img class="img-profile rounded-circle" src="<?= base_url('assets/img/default/users/') . $users['image']; ?>">
+                <span class="mr-2 d-none d-lg-inline text-white-600 small"><?= $this->fungsi->user_login()->name; ?></span>
+                <img class="img-profile rounded-circle" src="<?= base_url('assets/img/default/users/') . $this->fungsi->user_login()->image;  ?>">
             </a>
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#">
@@ -32,8 +32,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4">
-            <div class="card" style=" width: 17rem; background-color: #670099;">
-                <div class="card-header">
+            <div class="card border-left-warning border-bottom-warning" style=" width: 17rem; background-color: #670099;">
+                <div class=" card-header">
                     Penelitian
                 </div>
                 <div class="card-body">
@@ -43,18 +43,18 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card bg-warning" style=" width: 17rem;">
+            <div class="card border-left-primary bg-warning border-bottom-primary" style=" width: 17rem;">
                 <div class="card-header">
                     Pengabdian Masyarakat
                 </div>
                 <div class="card-body">
                     <p class="card-text text-white">Menu pengabdian masyarakat</p>
-                    <button href="#" class="btn btn-primary">Kunjungi</button>
+                    <a href="<?= base_url('dosen/pengabdian_masyarakat') ?>" class="btn btn-primary">Kunjungi</a>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card" style=" width: 17rem; background-color: #670099;">
+            <div class="card border-left-warning border-bottom-warning " style=" width: 17rem; background-color: #670099;">
                 <div class="card-header">
                     Insentif Publikasi
                 </div>
