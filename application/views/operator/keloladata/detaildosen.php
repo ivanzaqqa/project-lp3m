@@ -6,16 +6,16 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-6">
-                <div class="ml-2 mt-2 mr-2 card bg-light" style="width: 35rem;">
-                    <div class="card-header" style="background-color: #670099;">
-                        <h5 class="font-weight-bold text-white">Detail DIka Mahardi</h5>
+            <?php
+            foreach ($row->result() as $key => $data) { ?>
+                <div class="col-6">
+                    <div class="ml-2 mt-2 mr-2 card bg-light" style="width: 35rem;">
+                        <div class="card-header" style="background-color: #670099;">
+                            <h5 class="font-weight-bold text-white">Detail <?= $data->name; ?></h5>
+                        </div>
                     </div>
-                </div>
-                <div class="ml-2 mb-2 card-body bg-gradient-secondary text-white" style="width: 35rem;">
-                    <table>
-                        <?php
-                        foreach ($row->result() as $key => $data) { ?>
+                    <div class="ml-2 mb-2 card-body bg-gradient-secondary text-white" style="width: 35rem;">
+                        <table>
                             <tr>
                                 <td class="font-weight-bold">Nidn</td>
                                 <td>:</td>
@@ -61,10 +61,11 @@
                                 <td>:</td>
                                 <td><?= $data->no_hp ?></td>
                             </tr>
-                        <?php } ?>
-                    </table>
+
+                        </table>
+                    </div>
                 </div>
-            </div>
+            <?php } ?>
             <div class="col-6">
                 <img style="width: 20rem;" class="ml-4 mt-3 mb-3 img-profile rounded-circle" src="<?= base_url('assets/img/users/') . $data->image ?>" alt="">
             </div>
