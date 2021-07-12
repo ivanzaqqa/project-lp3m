@@ -13,57 +13,60 @@
                     </div>
                 </div>
                 <div class="ml-2 mb-2 card-body bg-gradient-secondary text-white" style="width: 35rem;">
-                    <table class="font-weight-bold">
-                        <tr>
-                            <td>Nidn</td>
-                            <td>:</td>
-                            <td>1222</td>
-                        </tr>
-                        <tr>
-                            <td>ID Sinta</td>
-                            <td>:</td>
-                            <td>1122334455</td>
-                        </tr>
-                        <tr>
-                            <td>Nama</td>
-                            <td>:</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Email</td>
-                            <td>:</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Jenis Kelamin</td>
-                            <td>:</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Program Studi</td>
-                            <td>:</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Fakultas</td>
-                            <td>:</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Alamat</td>
-                            <td>:</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>No Handphone</td>
-                            <td>:</td>
-                            <td></td>
-                        </tr>
+                    <table>
+                        <?php
+                        foreach ($row->result() as $key => $data) { ?>
+                            <tr>
+                                <td class="font-weight-bold">Nidn</td>
+                                <td>:</td>
+                                <td><?= $data->nidn ?></td>
+                            </tr>
+                            <tr>
+                                <td class="font-weight-bold">ID Sinta</td>
+                                <td>:</td>
+                                <td><?= $data->id_sinta ?></td>
+                            </tr>
+                            <tr>
+                                <td class="font-weight-bold">Nama</td>
+                                <td>:</td>
+                                <td><?= $data->name ?></td>
+                            </tr>
+                            <tr>
+                                <td class="font-weight-bold">Email</td>
+                                <td>:</td>
+                                <td><?= $data->email ?></td>
+                            </tr>
+                            <tr>
+                                <td class="font-weight-bold">Jenis Kelamin</td>
+                                <td>:</td>
+                                <td><?= $data->jk ?></td>
+                            </tr>
+                            <tr>
+                                <td class="font-weight-bold">Program Studi</td>
+                                <td>:</td>
+                                <td><?= $data->program_studi ?></td>
+                            </tr>
+                            <tr>
+                                <td class="font-weight-bold">Fakultas</td>
+                                <td>:</td>
+                                <td><?= $data->fakultas ?></td>
+                            </tr>
+                            <tr>
+                                <td class="font-weight-bold">Alamat</td>
+                                <td>:</td>
+                                <td><?= $data->alamat ?></td>
+                            </tr>
+                            <tr>
+                                <td class="font-weight-bold">No Handphone</td>
+                                <td>:</td>
+                                <td><?= $data->no_hp ?></td>
+                            </tr>
+                        <?php } ?>
                     </table>
                 </div>
             </div>
             <div class="col-6">
-                <img style="width: 20rem;" class="ml-4 mt-3 mb-3 img-profile rounded-circle" src="<?= base_url() ?>/assets/img/users/erickkirek.jpg" alt="">
+                <img style="width: 20rem;" class="ml-4 mt-3 mb-3 img-profile rounded-circle" src="<?= base_url('assets/img/users/') . $data->image ?>" alt="">
             </div>
         </div>
         <div class="row">

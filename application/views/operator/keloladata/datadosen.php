@@ -24,45 +24,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>124588990</td>
-                        <td>8878</td>
-                        <td>Mutiara Cinta Melenia Putri</td>
-                        <td>Sipil</td>
-                        <td>Teknik</td>
-                        <td>
-                            <a href="" name="editdatadosen" type="button" class="btn btn-sm ml-1 text-white" style="background-color: #670099;">Edit</a>
-                            <a name="hapusdatadosen" type="button" class="btn btn-warning btn-sm ml-1 text-white">Hapus</a>
-                            <a href="<?= base_url('operator/detaildosen') ?>" name="detaildatadosen" type="button" class="btn btn-sm ml-1 text-white" style="background-color: #670099;">Detail</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>12458893</td>
-                        <td>7893</td>
-                        <td>Mahardi</td>
-                        <td>Sipil</td>
-                        <td>Teknik</td>
-                        <td>
-                            <a name="editdatadosen" type="button" class="btn btn-sm ml-1 text-white" style="background-color: #670099;">Edit</a>
-                            <a name="hapusdatadosen" type="button" class="btn btn-warning btn-sm ml-1 text-white">Hapus</a>
-                            <a href="<?= base_url('operator/detaildosen') ?>" name="detaildatadosen" type="button" class="btn btn-sm ml-1 text-white" style="background-color: #670099;">Detail</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>12458893</td>
-                        <td>7893</td>
-                        <td>Erick Kusuma Wardani</td>
-                        <td>Sipil</td>
-                        <td>Teknik</td>
-                        <td>
-                            <a name="editdatadosen" type="button" class="btn btn-sm ml-1 text-white" style="background-color: #670099;">Edit</a>
-                            <a name="hapusdatadosen" type="button" class="btn btn-warning btn-sm ml-1 text-white">Hapus</a>
-                            <a href="<?= base_url('operator/detaildosen') ?>" name="detaildatadosen" type="button" class="btn btn-sm ml-1 text-white" style="background-color: #670099;">Detail</a>
-                        </td>
-                    </tr>
+                    <?php
+                    $no = 1;
+                    foreach ($row->result() as $key => $data) { ?>
+                        <tr>
+                            <td><?= $no++   ?></td>
+                            <td><?= $data->nidn ?></td>
+                            <td><?= $data->id_sinta ?></td>
+                            <td><?= $data->name ?></td>
+                            <td><?= $data->program_studi ?></td>
+                            <td><?= $data->fakultas ?></td>
+                            <td>
+                                <a href="" name="editdatadosen" type="button" class="btn btn-sm ml-1 text-white" style="background-color: #670099;">Edit</a>
+                                <a name="hapusdatadosen" type="button" class="btn btn-warning btn-sm ml-1 text-white">Hapus</a>
+                                <a href="<?= site_url('operator/detaildosen/' . $data->id) ?>" name="detaildatadosen" type="button" class="btn btn-sm ml-1 text-white" style="background-color: #670099;">Detail</a>
+                            </td>
+                        </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>
