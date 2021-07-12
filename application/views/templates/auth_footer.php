@@ -10,8 +10,8 @@
             </div> -->
             <div class="modal-body">Yakin Logout?</div>
             <div class="modal-footer">
-                <button class="btn btn-danger" type="button" data-dismiss="modal">Batal</button>
-                <a class="btn btn-warning" href="">Logout</a>
+                <button class="btn text-white" style="background-color: #670099;" type="button" data-dismiss="modal">Batal</button>
+                <a class="btn btn-warning" href="<?= base_url('auth/logout') ?>">Logout</a>
             </div>
         </div>
     </div>
