@@ -10,7 +10,7 @@
                     <div class="col-lg login-page">
                         <div class="p-5">
                             <div class="text-center">
-                                <img class="pb-3 logo-login" src="<?= base_url() ?>/assets/img/logo.png" alt="">
+                                <img class="pb-3 logo-login" src="<?= base_url() ?>/assets/img/default/logo.png" alt="">
                             </div>
 
                             <?= $this->session->flashdata('message'); ?>

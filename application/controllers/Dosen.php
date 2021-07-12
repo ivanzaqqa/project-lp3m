@@ -5,37 +5,74 @@ class Dosen extends CI_Controller
 {
 	public function index()
 	{
-		$data['users'] = $this->db->get_where('users', ['username' =>
-		$this->session->userdata('username')])->row_array();
 		$this->load->view('templates/auth_header');
-		$this->load->view('dosen/home', $data);
+		$this->load->view('dosen/home');
 		$this->load->view('templates/auth_footer');
 	}
 
-	public function dashboard()
+	public function penelitian()
 	{
 		$this->load->view('templates/auth_header');
-		$this->load->view('dosen/menu_sidebar');
+		$this->load->view('dosen/menu');
 		$this->load->view('templates/topbar');
-		$this->load->view('templates/content');
+		$this->load->view('dosen/penelitian/daftar_usulan_penelitian');
 		$this->load->view('templates/auth_footer');
 	}
 
-	public function arsip()
+	public function arsip_penelitian()
 	{
 		$this->load->view('templates/auth_header');
-		$this->load->view('dosen/menu_sidebar');
+		$this->load->view('dosen/menu');
 		$this->load->view('templates/topbar');
-		$this->load->view('dosen/arsip');
+		$this->load->view('dosen/penelitian/arsip');
 		$this->load->view('templates/auth_footer');
 	}
 
 	public function daftarusulanpenelitian()
 	{
 		$this->load->view('templates/auth_header');
-		$this->load->view('dosen/menu_sidebar');
+		$this->load->view('dosen/menu');
 		$this->load->view('templates/topbar');
-		$this->load->view('dosen/daftar_usulan_penelitian');
+		$this->load->view('dosen/penelitian/daftar_usulan_penelitian');
+		$this->load->view('templates/auth_footer');
+	}
+
+	public function pengabdian_masyarakat()
+	{
+
+		$this->load->view('templates/auth_header');
+		$this->load->view('dosen/menu');
+		$this->load->view('templates/topbar');
+		$this->load->view('dosen/pengabdian_masyarakat/daftar_usulan_pengabdian');
+		$this->load->view('templates/auth_footer');
+	}
+
+	public function daftarusulanpengabdian()
+	{
+
+		$this->load->view('templates/auth_header');
+		$this->load->view('dosen/menu');
+		$this->load->view('templates/topbar');
+		$this->load->view('dosen/pengabdian_masyarakat/daftar_usulan_pengabdian');
+		$this->load->view('templates/auth_footer');
+	}
+	public function arsip_pengabdian()
+	{
+
+		$this->load->view('templates/auth_header');
+		$this->load->view('dosen/menu');
+		$this->load->view('templates/topbar');
+		$this->load->view('dosen/pengabdian_masyarakat/arsip');
+		$this->load->view('templates/auth_footer');
+	}
+
+	public function editprofile()
+	{
+
+		$this->load->view('templates/auth_header');
+		$this->load->view('dosen/menu');
+		$this->load->view('templates/topbar');
+		$this->load->view('dosen/editprofile');
 		$this->load->view('templates/auth_footer');
 	}
 }

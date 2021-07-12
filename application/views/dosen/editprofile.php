@@ -1,6 +1,6 @@
 <div class="container-fluid">
 
-    <h5 class=" mb-3 text-gray-800">Home</h5>
+    <h5 class=" mb-3 text-gray-800">Edit Profile</h5>
 
 </div>
 <!-- /.container-fluid -->
