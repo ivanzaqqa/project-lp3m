@@ -3,6 +3,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Operator extends CI_Controller
 {
+
+	function __construct()
+	{
+		parent::__construct();
+		$this->load->model('user_m');
+	}
+
 	public function index()
 	{
 		$this->load->view('templates/auth_header');
@@ -39,7 +46,6 @@ class Operator extends CI_Controller
 	// Kelola Data
 	public function keloladata()
 	{
-		$this->load->model('user_m');
 		$data['row'] = $this->user_m->get();
 
 		$this->load->view('templates/auth_header');
@@ -51,7 +57,6 @@ class Operator extends CI_Controller
 
 	public function datadosen()
 	{
-		$this->load->model('user_m');
 		$data['row'] = $this->user_m->get();
 
 		$this->load->view('templates/auth_header');
@@ -63,7 +68,6 @@ class Operator extends CI_Controller
 
 	public function detaildosen($id)
 	{
-		$this->load->model('user_m');
 		$detail['row'] = $this->user_m->get($id);
 
 		$this->load->view('templates/auth_header');
@@ -82,25 +86,30 @@ class Operator extends CI_Controller
 		$this->form_validation->set_rules('nama', 'Nama', 'required');
 		$this->form_validation->set_rules('email', 'Email', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
-		$this->form_validation->set_rules(
-			'passconf',
-			'Konfirmasi Password',
-			'required|matches[password]',
-			array('matches' => '%s Tidak sesuai dengan password!!')
-		);
+		$this->form_validation->set_rules('passconf', 'Konfirmasi Password', 'required|matches[password]');
 		$this->form_validation->set_rules('jk', 'Jenis Kelamin', 'required');
 		$this->form_validation->set_rules('programstudi', 'Program Studi', 'required');
 		$this->form_validation->set_rules('fakultas', 'Fakultas', 'required');
-		$this->form_validation->set_rules('level', 'Level', 'required');
+		$this->form_validation->set_rules('role', 'Role', 'required');
+
+		$this->form_validation->set_message('matches', '%s Tidak sesuai dengan password, harap ulangi!');
 		$this->form_validation->set_message('required', '%s Masih Kosong!!');
 		$this->form_validation->set_error_delimiters('<span class="help-block text-danger">', '</span>');
 
+		$data['row'] = $this->user_m->get_role();
 		if ($this->form_validation->run() == FALSE) {
 			$this->load->view('templates/auth_header');
 			$this->load->view('operator/menu');
 			$this->load->view('templates/topbar');
-			$this->load->view('operator/keloladata/tambahdosen');
+			$this->load->view('operator/keloladata/tambahdosen', $data);
 			$this->load->view('templates/auth_footer');
+		} else {
+			$post = $this->input->post(null,  TRUE);
+			$this->user_m->tambah_dosen($post);
+			if ($this->db->affected_rows() > 0) {
+				echo "<script>alert('Data Dosen Baru Berhasil Di Simpan');</script>";
+			}
+			echo "<script>window.location='" . base_url('operator/datadosen') . "';</script>";
 		}
 	}
 	// End Kelola Data

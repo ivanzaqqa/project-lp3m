@@ -1,8 +1,8 @@
 <div class="container-fluid">
     <div class="card shadow">
         <div class="row">
-            <div class="col-2">
-                <a href="" name="tambahdatadosen" type="button" class="ml-2 mt-2 mb-2 mr-2 btn btn-warning btn-sm">Tambah Data Dosen</a>
+            <div class="col-3">
+                <a href="" name="tambahdatadosen" type="button" class="ml-2 mt-2 mb-2 mr-2 btn btn-warning btn-sm"><i class="fa fa-user-plus"></i>Tambah Data Dosen</a>
             </div>
         </div>
         <div class="row">
@@ -65,16 +65,17 @@
                         </table>
                     </div>
                 </div>
+                <div class="col-6">
+                    <img style="width: 20rem;" class="ml-4 mt-3 mb-3 img-profile rounded-circle" src="<?= base_url('assets/img/users/') . $data->image ?>" alt="">
+                </div>
             <?php } ?>
-            <div class="col-6">
-                <img style="width: 20rem;" class="ml-4 mt-3 mb-3 img-profile rounded-circle" src="<?= base_url('assets/img/users/') . $data->image ?>" alt="">
-            </div>
         </div>
         <div class="row">
             <div class="col">
-                <a href="<?= base_url('operator/datadosen') ?>" type="button" class="ml-2 mt-2 mb-2 mr-2 btn btn-sm text-white" style="background-color: #670099;">Kembali</a>
-                <a href="<?= base_url('') ?>" type="button" class="ml-2 mt-2 mb-2 mr-2 btn btn-warning btn-sm">Hapus</a>
-                <a href="<?= base_url('') ?>" type="button" class="ml-2 mt-2 mb-2 mr-2 btn btn-sm text-white" style="background-color: #670099;">Edit</a>
+                <a href="<?= base_url('operator/datadosen') ?>" type="button" class="ml-2 mt-2 mb-2 mr-2 btn btn-sm text-white" style="background-color: #670099;"> <i class="fa fa-chevron-circle-left"></i>
+                    Kembali</a>
+                <a href="<?= base_url('') ?>" type="button" class="ml-2 mt-2 mb-2 mr-2 btn btn-warning btn-sm"> <i class="fa fa-trash"></i> Hapus</a>
+                <a href="<?= base_url('') ?>" type="button" class="ml-2 mt-2 mb-2 mr-2 btn btn-sm text-white" style="background-color: #670099;"><i class="fa fa-edit"></i> Edit</a>
             </div>
         </div>
     </div>
