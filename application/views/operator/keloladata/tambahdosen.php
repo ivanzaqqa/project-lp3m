@@ -84,7 +84,7 @@
                         </select>
                         <?= form_error('role') ?>
                     </div>
-                    <div class="form-group <?= form_error('id_sinta') ? 'has-error' : null ?>">
+                    <div class="form-group">
                         <button type="submit" class="btn btn-sm text-white" style="background-color: #670099;">
                             <i class="fa fa-paper-plane"></i> Simpan
                         </button>

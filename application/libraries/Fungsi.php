@@ -12,8 +12,8 @@ class Fungsi
     function user_login()
     {
         $this->ci->load->model('user_m');
-        $id = $this->ci->session->userdata('id');
-        $user_data = $this->ci->user_m->get($id)->row();
+        $user_id = $this->ci->session->userdata('id');
+        $user_data = $this->ci->user_m->get($user_id)->row();
         return $user_data;
     }
 }

@@ -9,7 +9,6 @@ class Operator extends CI_Controller
 		parent::__construct();
 		$this->load->model('user_m');
 	}
-
 	public function index()
 	{
 		$this->load->view('templates/auth_header');

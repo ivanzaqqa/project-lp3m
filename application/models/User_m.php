@@ -3,11 +3,11 @@
 class User_m extends CI_Model
 {
 
-    public function get($id = null)
+    public function get($user_id = null)
     {
         $this->db->from('users');
-        if ($id != null) {
-            $this->db->where('id', $id);
+        if ($user_id != null) {
+            $this->db->where('id', $user_id);
         }
         $query = $this->db->get();
         return $query;
@@ -53,21 +53,6 @@ class User_m extends CI_Model
         $params['no_hp'] = $post['nohp'];
         $params['id_role'] = $post['role'];
 
-        // $data = array(
-        //     'nidn' => $nidn,
-        //     'id_sinta' => $id_sinta,
-        //     'username' => $username,
-        //     'name' => $nama,
-        //     'email' => $email,
-        //     'password' => $password,
-        //     'image' => $image,
-        //     'jk' => $jk,
-        //     'program_studi' => $program_studi,
-        //     'fakultas' => $fakultas,
-        //     'alamat' => $alamat,
-        //     'no_hp' => $no_hp,
-        //     'id_role' => $id_role,
-        // );
 
         $this->db->insert('users', $params);
     }

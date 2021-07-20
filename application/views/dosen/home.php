@@ -9,7 +9,7 @@
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-white-600 small"><?= $this->fungsi->user_login()->name; ?></span>
-                <img class="img-profile rounded-circle" src="<?= base_url('assets/img/default/users/') . $this->fungsi->user_login()->image;  ?>">
+                <img class="img-profile rounded-circle" src="<?= base_url('assets/img/users/') . $this->fungsi->user_login()->image;  ?>">
             </a>
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#">
@@ -38,7 +38,7 @@
                 </div>
                 <div class="card-body">
                     <p class="card-text text-white">Menu penelitian</p>
-                    <a href="<?= base_url('dosen/penelitian') ?>" class="btn btn-primary">Kunjungi</a>
+                    <a href="<?= base_url('dosen/daftarusulanpenelitian') ?>" class="btn btn-primary">Kunjungi</a>
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@
                 </div>
                 <div class="card-body">
                     <p class="card-text text-white">Menu pengabdian masyarakat</p>
-                    <a href="<?= base_url('dosen/pengabdian_masyarakat') ?>" class="btn btn-primary">Kunjungi</a>
+                    <a href="<?= base_url('dosen/daftarusulanpengabdian') ?>" class="btn btn-primary">Kunjungi</a>
                 </div>
             </div>
         </div>

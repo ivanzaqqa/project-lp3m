@@ -12,9 +12,7 @@
                             <div class="text-center">
                                 <img class="pb-3 logo-login" src="<?= base_url() ?>/assets/img/default/logo.png" alt="">
                             </div>
-
                             <?= $this->session->flashdata('message'); ?>
-
                             <form class="users" method="POST" action="<?= base_url('auth') ?>">
                                 <div class="form-group">
                                     <input type="text" name="username" class="form-control form-control-user" id="username" placeholder="Masukkan username">
@@ -29,7 +27,7 @@
                                 </button>
                             </form>
                             <div class="text-center">
-                                <a class="small text-white" href="forgot-password.html">Lupa Password?</a>
+                                <a class="small text-white" href="">Lupa Password?</a>
                             </div>
                         </div>
                     </div>
