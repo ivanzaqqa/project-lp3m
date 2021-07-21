@@ -56,4 +56,11 @@ class User_m extends CI_Model
 
         $this->db->insert('users', $params);
     }
+
+    function deldos($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('users');
+        return true;
+    }
 }

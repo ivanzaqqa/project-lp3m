@@ -111,5 +111,12 @@ class Operator extends CI_Controller
 			echo "<script>window.location='" . base_url('operator/datadosen') . "';</script>";
 		}
 	}
+
+	public function deldos($id)
+	{
+		// $data['row'] = $this->user_m->get($id);
+		$this->user_m->deldos($id);
+		redirect('operator/datadosen');
+	}
 	// End Kelola Data
 }

@@ -36,7 +36,7 @@
                             <td><?= $data->fakultas ?></td>
                             <td>
                                 <a href="" name="editdatadosen" type="button" class="btn btn-sm ml-1 text-white" style="background-color: #670099;"> <i class="fa fa-edit"></i> Edit</a>
-                                <a name="hapusdatadosen" type="button" class="btn btn-warning btn-sm ml-1 text-white"> <i class="fa fa-trash"></i> Hapus</a>
+                                <a href="<?= site_url('operator/deldos/' . $data->id) ?>" onclick="return confirm('Hapus data?')" ; type="button" class="btn btn-warning btn-sm ml-1 text-white"> <i class="fa fa-trash"></i> Hapus</a>
                                 <a href="<?= site_url('operator/detaildosen/' . $data->id) ?>" name="detaildatadosen" type="button" class="btn btn-sm ml-1 text-white" style="background-color: #670099;"> <i class="far fa-id-card"></i> Detail</a>
                             </td>
                         </tr>
