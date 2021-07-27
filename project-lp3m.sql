@@ -89,7 +89,7 @@ CREATE TABLE `tbl_penelitian` (
   `file_proposal` varchar(300) NOT NULL,
   `file_rps` varchar(300) NOT NULL,
   `form_integrasi` varchar(300) NOT NULL,
-  `tgl_submit` date NOT NULL DEFAULT current_timestamp()
+  `tgl_submit` datetime NOT NULL DEFAULT current_timestamp
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -117,7 +117,7 @@ CREATE TABLE `tbl_pengabmas` (
   `file_proposal` varchar(300) NOT NULL,
   `file_rps` varchar(300) NOT NULL,
   `form_integrasi` varchar(300) NOT NULL,
-  `tgl_submit` date NOT NULL DEFAULT current_timestamp()
+  `tgl_submit` datetime NOT NULL DEFAULT current_timestamp
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --

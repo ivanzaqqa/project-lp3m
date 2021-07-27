@@ -7,6 +7,7 @@ class Operator extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
+		logged_in();
 		$this->load->model('user_m');
 	}
 	public function index()
