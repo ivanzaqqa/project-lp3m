@@ -8,6 +8,7 @@ class Operator extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('user_m');
+		$this->load->model('pengabmas_m');
 	}
 	public function index()
 	{
@@ -33,10 +34,11 @@ class Operator extends CI_Controller
 
 	public function pengabdian_masyarakat()
 	{
+		$data['row'] = $this->pengabmas_m->get_pengabmas();
 		$this->load->view('templates/auth_header');
 		$this->load->view('operator/menu');
 		$this->load->view('templates/topbar');
-		$this->load->view('operator/pengabdian_masyarakat/pengabdian_masyarakat');
+		$this->load->view('operator/pengabdian_masyarakat/pengabdian_masyarakat', $data);
 		$this->load->view('templates/auth_footer');
 	}
 
@@ -65,9 +67,9 @@ class Operator extends CI_Controller
 		$this->load->view('templates/auth_footer');
 	}
 
-	public function detaildosen($id)
+	public function detaildosen($user_id)
 	{
-		$detail['row'] = $this->user_m->get($id);
+		$detail['row'] = $this->user_m->get($user_id);
 
 		$this->load->view('templates/auth_header');
 		$this->load->view('operator/menu');
@@ -111,11 +113,88 @@ class Operator extends CI_Controller
 			echo "<script>window.location='" . base_url('operator/datadosen') . "';</script>";
 		}
 	}
-
-	public function deldos($id)
+	public function editdos($user_id)
 	{
-		// $data['row'] = $this->user_m->get($id);
-		$this->user_m->deldos($id);
+		$query = $this->user_m->get($user_id);
+		if ($query->num_rows() > 0) {
+			$user = $query->row();
+			$query_role = $this->user_m->get_role();
+			$role[null] = '- Pilih -';
+			foreach ($query_role->result() as $roleid) {
+				$role[$roleid->id_role] = $roleid->role;
+			}
+			$data = array(
+				'page' => 'submit_edit',
+				'row' => $user,
+				'role' => $query_role,
+				'user_role' => $role, 'selectedrole' => $user->id_role,
+			);
+			$this->load->view('templates/auth_header');
+			$this->load->view('operator/menu');
+			$this->load->view('templates/topbar');
+			$this->load->view('operator/keloladata/editdosen', $data);
+			$this->load->view('templates/auth_footer');
+		} else {
+			echo "<script>alert(Data tidak ditemukan!);";
+			echo "window.location='" . site_url('operator/editdos') . "';</script>";
+		}
+	}
+	public function proses()
+	{
+		$config['upload_path']          = './assest/users/';
+		$config['allowed_types']        = 'jpg|png|jpeg';
+		$this->load->library('upload', $config);
+
+		$post = $this->input->post(null, TRUE);
+		if (isset($_POST['submit_edit'])) {
+			$this->user_m->edit_dosen($post);
+			if (@$_FILES['image']['name'] != null) {
+				if ($this->upload->do_upload('image')) {
+					$user_image = $this->user_m->get($post['id'])->row();
+					if ($user_image->image !=  null) {
+						$target_file = './assest/users/' . $user_image->image;
+						unlink($target_file);
+					}
+					$post['image'] = $this->upload->data('file_name');
+					$this->user_m->edit_dosen($post);
+					if ($this->db->affected_rows() > 0) {
+						$this->session->set_flashdata('msg', 'Data Berhasil disimpan');
+					}
+					redirect('operator/datadosen');
+				} else {
+					$error = $this->upload->display_errors();
+					$this->session->set_flashdata('msg', $error);
+					redirect('operator/editdos');
+				}
+			} else {
+				$post['image'] = null;
+				$this->user_m->edit_dosen($post);
+				if ($this->db->affected_rows() > 0) {
+					$this->session->set_flashdata('msg', 'Data Berhasil disimpan');
+				}
+				redirect('operator/datadosen');
+			}
+		}
+	}
+	//edit dosen belum selesai
+
+
+	public function deldos($user_id)
+	{
+		$users = $this->user_m->get($user_id)->row();
+		if ($users->image != null) {
+			$target_file = './assets/users/' . $users->image;
+			unlink($target_file);
+		}
+		$this->user_m->deldos($user_id);
+		if ($this->db->affected_rows() > 0) {
+			$this->session->set_flashdata('successdel', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+			<strong>Data Dosen Berhasil Dihapus.</strong>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+			</button>
+		</div>');
+		}
 		redirect('operator/datadosen');
 	}
 	// End Kelola Data

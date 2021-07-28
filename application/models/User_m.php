@@ -6,6 +6,7 @@ class User_m extends CI_Model
     public function get($user_id = null)
     {
         $this->db->from('users');
+        $this->db->join('user_role', 'user_role.id_role = users.id_role');
         if ($user_id != null) {
             $this->db->where('id', $user_id);
         }
@@ -17,7 +18,7 @@ class User_m extends CI_Model
     {
         $this->db->from('user_role');
         if ($id != null) {
-            $this->db->where('id', $id);
+            $this->db->where('id_role', $id);
         }
         $query = $this->db->get();
         return $query;
@@ -57,10 +58,33 @@ class User_m extends CI_Model
         $this->db->insert('users', $params);
     }
 
-    function deldos($id)
+    function deldos($user_id)
     {
-        $this->db->where('id', $id);
+        $this->db->where('id', $user_id);
         $this->db->delete('users');
         return true;
+    }
+
+    function edit_dosen($post)
+    {
+        $params = [
+            'nidn' => $post['nidn'],
+            'id_sinta' => $post['id_sinta'],
+            'username' => $post['username'],
+            'name' => $post['nama'],
+            'email' => $post['email'],
+            'password' => sha1($post['password']),
+            'jk' => $post['jk'],
+            'program_studi' => $post['programstudi'],
+            'fakultas' => $post['fakultas'],
+            'alamat' => $post['alamat'],
+            'no_hp' => $post['nohp'],
+            'id_role' => $post['role']
+        ];
+        if ($post['image'] != null) {
+            $params['image'] = $post['image'];
+        }
+        $this->db->where('id', $post['id']);
+        $this->db->update('users', $params);
     }
 }

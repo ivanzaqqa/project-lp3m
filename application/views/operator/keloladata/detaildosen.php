@@ -66,7 +66,7 @@
                     </div>
                 </div>
                 <div class="col-6">
-                    <img style="width: 20rem;" class="ml-4 mt-3 mb-3 img-profile rounded-circle" src="<?= base_url('assets/img/users/') . $data->image ?>" alt="">
+                    <img style="width: 20rem;" class="ml-4 mt-3 mb-3 img-profile rounded-circle" src="<?= base_url('assets/users/') . $data->image ?>" alt="">
                 </div>
             <?php } ?>
         </div>
@@ -74,8 +74,8 @@
             <div class="col">
                 <a href="<?= base_url('operator/datadosen') ?>" type="button" class="ml-2 mt-2 mb-2 mr-2 btn btn-sm text-white" style="background-color: #670099;"> <i class="fa fa-chevron-circle-left"></i>
                     Kembali</a>
-                <a href="<?= base_url('') ?>" type="button" class="ml-2 mt-2 mb-2 mr-2 btn btn-warning btn-sm"> <i class="fa fa-trash"></i> Hapus</a>
-                <a href="<?= base_url('') ?>" type="button" class="ml-2 mt-2 mb-2 mr-2 btn btn-sm text-white" style="background-color: #670099;"><i class="fa fa-edit"></i> Edit</a>
+                <a href="<?= site_url('operator/deldos/' . $data->id) ?>" onclick="return confirm('Hapus Data Dosen?')" type=" button" class="ml-2 mt-2 mb-2 mr-2 btn btn-warning btn-sm"> <i class="fa fa-trash"></i> Hapus</a>
+                <a href="<?= site_url('operator/editdos/' . $data->id) ?>" type="button" class="ml-2 mt-2 mb-2 mr-2 btn btn-sm text-white" style="background-color: #670099;"><i class="fa fa-edit"></i> Edit</a>
             </div>
         </div>
     </div>

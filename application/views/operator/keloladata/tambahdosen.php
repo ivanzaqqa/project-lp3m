@@ -79,7 +79,7 @@
                         <select class="form-control" name="role" id="role">
                             <option value="">- Pilih -</option>
                             <?php foreach ($row->result() as $key => $data) { ?>
-                                <option value="<?= $data->id ?>" <?= set_value(' role') == '$data->id' ? "selected" : null ?>><?= $data->role ?></option>;
+                                <option value="<?= $data->id_role ?>" <?= set_value(' role') == '$data->id_role' ? "selected" : null ?>><?= $data->role ?></option>;
                             <?php } ?>
                         </select>
                         <?= form_error('role') ?>

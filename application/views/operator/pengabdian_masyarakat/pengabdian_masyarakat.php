@@ -6,83 +6,61 @@
         <div class="card-body">
             <div class="table-responsive table-striped">
                 <table class="table" id="dataTable" width="100%" cellspacing="0">
-                    <thead class="bg-sidebar text-white">
+                    <thead class="bg-sidebar text-white text-sm">
                         <tr>
                             <th>No</th>
+                            <th>Nama</th>
                             <th>Judul Penelitian</th>
                             <th>Periode Pengajuan</th>
                             <th>Tanggal Submit</th>
+                            <th>Matkul Diampu</th>
                             <th>Mahasiswa Yang Dilibatkan</th>
+                            <th>Kelompok Riset</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Analisa Kadar Tanah Untuk Bangunan Gedung Bertingkat</td>
-                            <td>Ganjil 2021</td>
-                            <td>20 Mei 2021</td>
-                            <td>Mahardi (0035)</td>
-                            <td>Didanai</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button class="btn btn-md btn-warning dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Pilih Action
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                        <button class="dropdown-item" type="button">Didanai</button>
-                                        <button class="dropdown-item" type="button">Ditolak</button>
+                        <?php
+                        $no = 1;
+                        foreach ($row->result() as $key => $data) { ?>
+                            <tr>
+                                <td><?= $no++ ?></td>
+                                <td><?= $data->name; ?></td>
+                                <td><?= $data->judul_pengabmas ?></td>
+                                <td><?= $data->tahun_periode; ?></td>
+                                <td><?= $data->tgl_submit; ?></td>
+                                <td><?= $data->matkul_diampu; ?></td>
+                                <td><?= $data->kelompok_riset; ?></td>
+                                <td><?= $data->mhs_terlibat; ?></td>
+                                <td><?= $data->status; ?></td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-md btn-warning dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Pilih Action
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                            <button class="dropdown-item" type="button">Didanai</button>
+                                            <button class="dropdown-item" type="button">Ditolak</button>
 
-                                        <button class="dropdown-item dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Download
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Proposal</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">RPS</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Form Integrasi</a>
-                                            <div class="dropdown-divider"></div>
+                                            <button class="dropdown-item dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Download
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="#">Proposal</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="#">RPS</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="#">Form Integrasi</a>
+                                                <div class="dropdown-divider"></div>
+                                            </div>
+                                            <button class="dropdown-item" type="button">Tahapan Pelaksanaan</button>
                                         </div>
-                                        <button class="dropdown-item" type="button">Tahapan Pelaksanaan</button>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Penggunaan tanah lempung sebagai alat memperkuat bangunan</td>
-                            <td>Ganjil 2021</td>
-                            <td>20 Mei 2021</td>
-                            <td>Mahardi (0035)</td>
-                            <td>Didanai</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button class="btn btn-md btn-warning dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Pilih Action
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                        <button class="dropdown-item" type="button">Didanai</button>
-                                        <button class="dropdown-item" type="button">Ditolak</button>
-                                        <button class="dropdown-item dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Download
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Proposal</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">RPS</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Form Integrasi</a>
-                                            <div class="dropdown-divider"></div>
-                                        </div>
-                                        <button class="dropdown-item" type="button">Tahapan Pelaksanaan</button>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
