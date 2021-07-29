@@ -7,7 +7,7 @@ class Operator extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		logged_in();
+		check_not_login();
 		$this->load->model('user_m');
 		$this->load->model('pengabmas_m');
 	}

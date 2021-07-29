@@ -13,7 +13,7 @@
                                 <img class="pb-3 logo-login" src="<?= base_url() ?>/assets/img/default/logo.png" alt="">
                             </div>
                             <?= $this->session->flashdata('message'); ?>
-                            <form class="users" method="POST" action="<?= base_url('auth') ?>">
+                            <form method="post" action="<?= site_url('auth/process') ?>">
                                 <div class="form-group">
                                     <input type="text" name="username" class="form-control form-control-user" id="username" placeholder="Masukkan username">
                                     <?= form_error('username', '<small class="text-danger pl-3">', '</small>'); ?>
@@ -22,7 +22,7 @@
                                     <input type="password" name="password" class="form-control form-control-user" id="password" placeholder="Password">
                                     <?= form_error('password', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
-                                <button type="submit" class="btn btn-warning btn-user btn-block btn-md" name="submit" size="20">
+                                <button type="submit" class="btn btn-warning btn-user btn-block btn-md" name="login" size="20">
                                     Login
                                 </button>
                             </form>
