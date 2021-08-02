@@ -1,10 +1,19 @@
 <?php
 
-function check_already_login() {
+function check_already_login_operator() {
     $ci =& get_instance();
 
-    $user_session = $ci->session->userdata('id');
-    if ($user_session) {
+    $user_session = $ci->session->userdata('id_role');
+    if ($user_session == 2) {
+        redirect('operator');
+    }
+} 
+
+function check_already_login_dosen() {
+    $ci =& get_instance();
+
+    $user_session = $ci->session->userdata('id_role');
+    if ($user_session == 1) {
         redirect('dosen');
     }
 } 

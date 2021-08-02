@@ -25,7 +25,8 @@ class Auth extends CI_Controller
     // }
 
     public function index() {
-        check_already_login();
+        check_already_login_operator();
+        check_already_login_dosen();
         $this->load->view('templates/auth_header');
         $this->load->view('auth/login');
         $this->load->view('templates/auth_footer');
