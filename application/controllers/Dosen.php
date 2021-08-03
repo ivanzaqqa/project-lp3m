@@ -125,9 +125,6 @@ class Dosen extends CI_Controller
 			$this->form_validation->set_rules('matkul_diampu', 'Matkul Yang Diampu', 'required');
 			$this->form_validation->set_rules('kelompok_riset', 'Kelompok Riset', 'required');
 			$this->form_validation->set_rules('mhs_terlibat', 'Mahasiswa Yang Dilibatkan', 'required');
-			// $this->form_validation->set_rules('file_proposal', 'File Proposal', 'required');
-			// $this->form_validation->set_rules('file_rps', 'File RPS', 'required');
-			// $this->form_validation->set_rules('form_integrasi', 'Form Intergrasi', 'required');
 			$this->form_validation->set_message('required', '%s Masih Kosong!!');
 			$this->form_validation->set_error_delimiters('<span class="help-block text-danger">', '</span>');
 
@@ -172,7 +169,7 @@ class Dosen extends CI_Controller
 				];
 				$insert = $this->db->insert('tbl_pengabmas', $data);
 				if ($insert) {
-					$this->session->set_flashdata('successnotif', '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+					$this->session->set_flashdata('successalert', '<div class="alert alert-warning alert-dismissible fade show" role="alert">
 						<strong>Data Pendaftaran Pangabdian Masyarakat Berhasil Disubmit.</strong>
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -189,11 +186,11 @@ class Dosen extends CI_Controller
 	}
 	public function arsip_pengabdian()
 	{
-
+		$arsip['row'] = $this->pengabmas_m->get_pengabmas();
 		$this->load->view('templates/auth_header');
 		$this->load->view('dosen/menu');
 		$this->load->view('templates/topbar');
-		$this->load->view('dosen/pengabdian_masyarakat/arsip');
+		$this->load->view('dosen/pengabdian_masyarakat/arsip', $arsip);
 		$this->load->view('templates/auth_footer');
 	}
 
