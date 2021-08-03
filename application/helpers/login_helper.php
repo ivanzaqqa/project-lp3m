@@ -27,6 +27,42 @@ function check_not_login() {
     }
 }
 
+function check_dosen() {
+    $ci =& get_instance();
+
+    $user_session = $ci->session->userdata('id_role');
+    if ($user_session == 1) {
+        redirect('dosen');
+    }
+
+
+    // $ci =& get_instance();
+
+    // $ci->load->library('fungsi');
+
+    // if ($ci->fungsi->user_login()->id_role != 1) {
+    //     redirect('dosen');
+    // }
+}
+
+function check_operator() {
+    $ci =& get_instance();
+
+    $user_session = $ci->session->userdata('id_role');
+    if ($user_session == 2) {
+        redirect('operator');
+    }
+
+
+    // $ci =& get_instance();
+
+    // $ci->load->library('fungsi');
+
+    // if ($ci->fungsi->user_login()->id_role != 1) {
+    //     redirect('dosen');
+    // }
+}
+
     // else {
     //     $role_id = $ci->session->userdata('role_id');
     //     $menu = $ci->uri->segment(1);

@@ -8,6 +8,7 @@ class Dosen extends CI_Controller
 	{
 		parent::__construct();
 		check_not_login();
+		check_operator();
 		$this->load->model('penelitian_m');
 	}
 	public function index()

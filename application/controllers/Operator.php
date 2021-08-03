@@ -8,6 +8,7 @@ class Operator extends CI_Controller
 	{
 		parent::__construct();
 		check_not_login();
+		check_dosen();
 		$this->load->model('user_m');
 		$this->load->model('pengabmas_m');
 	}
