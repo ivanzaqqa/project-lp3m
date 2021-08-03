@@ -47,13 +47,11 @@
                                                 Download
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                                <div class="dropdown-divider"></div>
                                                 <a class="dropdown-item" href="#">Proposal</a>
                                                 <div class="dropdown-divider"></div>
                                                 <a class="dropdown-item" href="#">RPS</a>
                                                 <div class="dropdown-divider"></div>
                                                 <a class="dropdown-item" href="#">Form Integrasi</a>
-                                                <div class="dropdown-divider"></div>
                                             </div>
                                             <button class="dropdown-item" type="button">Tahapan Pelaksanaan</button>
                                         </div>

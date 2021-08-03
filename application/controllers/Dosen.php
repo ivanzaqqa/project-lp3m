@@ -97,12 +97,13 @@ class Dosen extends CI_Controller
 			$this->daftarusulanpenelitian();
 		}
 	}
-	public function arsip_penelitian()
+	public function arsippenelitian()
 	{
+		$arsip['row'] = $this->penelitian_m->get_penelitian();
 		$this->load->view('templates/auth_header');
 		$this->load->view('dosen/menu');
 		$this->load->view('templates/topbar');
-		$this->load->view('dosen/penelitian/arsip');
+		$this->load->view('dosen/penelitian/arsip', $arsip);
 		$this->load->view('templates/auth_footer');
 	}
 	public function daftarusulanpengabdian()

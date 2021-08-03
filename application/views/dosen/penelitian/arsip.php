@@ -18,32 +18,37 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- -->
+                        <?php $no = 1;
+                        foreach($row->result() as $key => $arsip) { ?>
                         <tr>
-                            <td>1</td>
-                            <td>Analisa Kadar Tanah Untuk Bangunan Gedung Bertingkat</td>
-                            <td>Ganjil 2021</td>
-                            <td>20 Mei 2021</td>
-                            <td>Mahardi (0035)</td>
-                            <td>Didanai</td>
+                            <td><?=$no++?>.</td>
+                            <td><?=$arsip->judul_penelitian?></td>
+                            <td><?= $arsip->tahun_periode; ?></td>
+                            <td><?=date('d-m-Y', strtotime($arsip->tgl_submit))?></td>
+                            <td><?=$arsip->mhs_terlibat?></td>
+                            <td><?=$arsip->status; ?></td>
                             <td>
-                                <div class="btn-group bg-sidebar">
-                                    <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Download
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-warning dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Pilih Action
                                     </button>
-                                    <div class="dropdown-menu">
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Proposal</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">RPS</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Form Integrasi</a>
-                                        <div class="dropdown-divider"></div>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                        <button class="dropdown-item dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Download
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                            <a class="dropdown-item" href="#">Proposal</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">RPS</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Form Integrasi</a>
+                                        </div>
+                                        <button class="dropdown-item" type="button">Tahapan Pelaksanaan</button>
                                     </div>
                                 </div>
-                                <button name="submit" type="submit" class="btn btn-warning btn-sm ml-1">Tahapan Pelaksanaan</button>
                             </td>
                         </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
