@@ -29,7 +29,7 @@
                                 <td><?= $data->name; ?></td>
                                 <td><?= $data->judul_pengabmas ?></td>
                                 <td><?= $data->tahun_periode; ?></td>
-                                <td><?= $data->tgl_submit; ?></td>
+                                <td><?=date('d-m-Y', strtotime($data->tgl_submit))?></td>
                                 <td><?= $data->matkul_diampu; ?></td>
                                 <td><?= $data->kelompok_riset; ?></td>
                                 <td><?= $data->mhs_terlibat; ?></td>

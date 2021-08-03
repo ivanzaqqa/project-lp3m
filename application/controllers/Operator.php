@@ -19,7 +19,7 @@ class Operator extends CI_Controller
 		$this->load->view('templates/auth_footer');
 	}
 
-	// Penelitian
+	// USULAN PENELITIAN
 	public function penelitian()
 	{
 		$data['row'] = $this->penelitian_m->get_penelitian();
@@ -30,11 +30,9 @@ class Operator extends CI_Controller
 		$this->load->view('templates/auth_footer');
 	}
 
-	// End Penelitian
 
 
-	// Pengabdian Masyarakat
-
+	// PENGABDIAN MASYARAKAT
 	public function pengabdian_masyarakat()
 	{
 		$data['row'] = $this->pengabmas_m->get_pengabmas();
@@ -45,9 +43,9 @@ class Operator extends CI_Controller
 		$this->load->view('templates/auth_footer');
 	}
 
-	// End Pengabdian Masyarakat
 
-	// Kelola Data
+
+	// KELOLA DATA DOSEN
 	public function datadosen()
 	{
 		$data['row'] = $this->user_m->get();
