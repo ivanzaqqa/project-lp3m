@@ -184,7 +184,30 @@ class Dosen extends CI_Controller
 			$this->daftarusulanpenelitian();
 		}
 	}
-	public function arsip_pengabdian()
+
+	// FOR DOWNLOAD FILE PDF
+	public function downloadpengabmasproposal($id){
+		$this->load->helper('download');
+		$fileinfo = $this->pengabmas_m->downloadpengabmas($id);
+		$file = 'upload/pengabdian_masyarakat/'.$fileinfo['file_proposal'];
+		force_download($file, NULL);
+	}
+
+	public function downloadpengabmasrps($id){
+		$this->load->helper('download');
+		$fileinfo = $this->pengabmas_m->downloadpengabmas($id);
+		$file = 'upload/pengabdian_masyarakat/'.$fileinfo['file_rps'];
+		force_download($file, NULL);
+	}
+
+	public function downloadpengabmasform($id){
+		$this->load->helper('download');
+		$fileinfo = $this->pengabmas_m->downloadpengabmas($id);
+		$file = 'upload/pengabdian_masyarakat/'.$fileinfo['form_integrasi'];
+		force_download($file, NULL);
+	}
+
+	public function arsippengabdian()
 	{
 		$arsip['row'] = $this->pengabmas_m->get_pengabmas();
 		$this->load->view('templates/auth_header');
