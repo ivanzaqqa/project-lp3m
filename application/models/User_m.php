@@ -83,7 +83,6 @@ class User_m extends CI_Model
             'username' => $post['username'],
             'name' => $post['nama'],
             'email' => $post['email'],
-            'password' => sha1($post['password']),
             'jk' => $post['jk'],
             'program_studi' => $post['programstudi'],
             'fakultas' => $post['fakultas'],
@@ -91,6 +90,9 @@ class User_m extends CI_Model
             'no_hp' => $post['nohp'],
             'id_role' => $post['role']
         ];
+        if (!empty($post['password'])) {
+            $params['password'] = sha1($post['password']);
+        }
         if ($post['image'] != null) {
             $params['image'] = $post['image'];
         }

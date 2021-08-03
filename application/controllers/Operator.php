@@ -47,17 +47,6 @@ class Operator extends CI_Controller
 	// End Pengabdian Masyarakat
 
 	// Kelola Data
-	public function keloladata()
-	{
-		$data['row'] = $this->user_m->get();
-
-		$this->load->view('templates/auth_header');
-		$this->load->view('operator/menu');
-		$this->load->view('templates/topbar');
-		$this->load->view('operator/keloladata/datadosen', $data);
-		$this->load->view('templates/auth_footer');
-	}
-
 	public function datadosen()
 	{
 		$data['row'] = $this->user_m->get();

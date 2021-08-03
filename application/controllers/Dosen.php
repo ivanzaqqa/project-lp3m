@@ -37,9 +37,7 @@ class Dosen extends CI_Controller
 			$this->form_validation->set_rules('matkul_diampu', 'Matkul Yang Diampu', 'required');
 			$this->form_validation->set_rules('kelompok_riset', 'Kelompok Riset', 'required');
 			$this->form_validation->set_rules('mhs_terlibat', 'Mahasiswa Yang Dilibatkan', 'required');
-			// $this->form_validation->set_rules('file_proposal', 'File Proposal', 'required');
-			// $this->form_validation->set_rules('file_rps', 'File RPS', 'required');
-			// $this->form_validation->set_rules('form_integrasi', 'Form Intergrasi', 'required');
+		
 			$this->form_validation->set_message('required', '%s Masih Kosong!!');
 			$this->form_validation->set_error_delimiters('<span class="help-block text-danger">', '</span>');
 
@@ -77,6 +75,7 @@ class Dosen extends CI_Controller
 					'matkul_diampu' => $matkul_diampu,
 					'kelompok_riset' => $kelompok_riset,
 					'mhs_terlibat' => $mhs_terlibat,
+					'id_status' => "3",
 					'file_proposal' => $file_proposal,
 					'file_rps' => $file_rps,
 					'form_integrasi' => $form_integrasi
@@ -165,6 +164,7 @@ class Dosen extends CI_Controller
 					'matkul_diampu' => $matkul_diampu,
 					'kelompok_riset' => $kelompok_riset,
 					'mhs_terlibat' => $mhs_terlibat,
+					'id_status' => "3",
 					'file_proposal' => $file_proposal,
 					'file_rps' => $file_rps,
 					'form_integrasi' => $form_integrasi

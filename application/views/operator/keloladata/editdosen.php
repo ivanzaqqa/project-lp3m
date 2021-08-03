@@ -33,11 +33,6 @@
                         <label class="font-weight-bold" for="nama">Ganti Password </label>
                         <input type="password" name="password" value="" class="form-control form-control-md" id="password" placeholder="Masukkan Password">
                     </div>
-                    <!-- <div class="form-group <?= form_error('passconf') ? 'has-error' : null ?>">
-                        <label class="font-weight-bold" for="nama">Konfirmasi Password  </label>
-                        <input type="password" name="passconf" value="<?= set_value('passconf') ?>" class="form-control form-control-md" id="passconf" placeholder="Konfirmasi Password">
-                        <?= form_error('passconf') ?>
-                    </div> -->
                     <div class="form-group">
                         <label class="font-weight-bold" for="jk">Jenis Kelamin </label>
                         <select class="form-control" name="jk" id="jk">

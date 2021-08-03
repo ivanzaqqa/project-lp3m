@@ -38,45 +38,11 @@
                                             Download
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                            <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="#">Proposal</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="#">RPS</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="#">Form Integrasi</a>
-                                            <div class="dropdown-divider"></div>
-                                        </div>
-                                        <button class="dropdown-item" type="button">Tahapan Pelaksanaan</button>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Penggunaan tanah lempung sebagai alat memperkuat bangunan</td>
-                            <td>Ganjil 2021</td>
-                            <td>20 Mei 2021</td>
-                            <td>Mahardi (0035)</td>
-                            <td>Didanai</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button class="btn btn-sm btn-warning dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Pilih Action
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                        <button class="dropdown-item" type="button">Didanai</button>
-                                        <button class="dropdown-item" type="button">Ditolak</button>
-                                        <button class="dropdown-item dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Download
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Proposal</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">RPS</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Form Integrasi</a>
-                                            <div class="dropdown-divider"></div>
                                         </div>
                                         <button class="dropdown-item" type="button">Tahapan Pelaksanaan</button>
                                     </div>
