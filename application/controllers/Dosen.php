@@ -18,6 +18,8 @@ class Dosen extends CI_Controller
 		$this->load->view('templates/auth_footer');
 	}
 
+
+	// DAFTAR USULAN PENELITIAN
 	public function daftarusulanpenelitian()
 	{
 		$periode['row'] = $this->penelitian_m->get_periode();
@@ -97,6 +99,29 @@ class Dosen extends CI_Controller
 			$this->daftarusulanpenelitian();
 		}
 	}
+
+	// FOR DOWNLOAD FILE PDF PENGABDIAN MASYARAKAT
+	public function download_dpu_proposal($id){
+		$this->load->helper('download');
+		$fileinfo = $this->penelitian_m->download($id);
+		$file = 'upload/penelitian/'.$fileinfo['file_proposal'];
+		force_download($file, NULL);
+	}
+
+	public function download_dpu_rps($id){
+		$this->load->helper('download');
+		$fileinfo = $this->penelitian_m->download($id);
+		$file = 'upload/penelitian/'.$fileinfo['file_rps'];
+		force_download($file, NULL);
+	}
+
+	public function download_dpu_form($id){
+		$this->load->helper('download');
+		$fileinfo = $this->penelitian_m->download($id);
+		$file = 'upload/penelitian/'.$fileinfo['form_integrasi'];
+		force_download($file, NULL);
+	}
+	
 	public function arsippenelitian()
 	{
 		$arsip['row'] = $this->penelitian_m->get_penelitian();
@@ -106,6 +131,9 @@ class Dosen extends CI_Controller
 		$this->load->view('dosen/penelitian/arsip', $arsip);
 		$this->load->view('templates/auth_footer');
 	}
+
+
+	// PENGABDIAN MASYARAKAT
 	public function daftarusulanpengabdian()
 	{
 		$periode['row'] = $this->penelitian_m->get_periode();
@@ -185,24 +213,24 @@ class Dosen extends CI_Controller
 		}
 	}
 
-	// FOR DOWNLOAD FILE PDF
+	// FOR DOWNLOAD FILE PDF PENGABDIAN MASYARAKAT
 	public function downloadpengabmasproposal($id){
 		$this->load->helper('download');
-		$fileinfo = $this->pengabmas_m->downloadpengabmas($id);
+		$fileinfo = $this->pengabmas_m->download($id);
 		$file = 'upload/pengabdian_masyarakat/'.$fileinfo['file_proposal'];
 		force_download($file, NULL);
 	}
 
 	public function downloadpengabmasrps($id){
 		$this->load->helper('download');
-		$fileinfo = $this->pengabmas_m->downloadpengabmas($id);
+		$fileinfo = $this->pengabmas_m->download($id);
 		$file = 'upload/pengabdian_masyarakat/'.$fileinfo['file_rps'];
 		force_download($file, NULL);
 	}
 
 	public function downloadpengabmasform($id){
 		$this->load->helper('download');
-		$fileinfo = $this->pengabmas_m->downloadpengabmas($id);
+		$fileinfo = $this->pengabmas_m->download($id);
 		$file = 'upload/pengabdian_masyarakat/'.$fileinfo['form_integrasi'];
 		force_download($file, NULL);
 	}

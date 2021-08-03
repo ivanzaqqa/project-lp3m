@@ -15,7 +15,7 @@ class Pengabmas_m extends CI_Model
         return $query;
     }
 
-    public function downloadpengabmas($id){
+    public function download($id){
         $query = $this->db->get_where('tbl_pengabmas',array('id_pengabmas'=>$id));
         return $query->row_array();
        }
