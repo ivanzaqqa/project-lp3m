@@ -115,6 +115,7 @@ class Operator extends CI_Controller
 			echo "<script>window.location='" . base_url('operator/datadosen') . "';</script>";
 		}
 	}
+	
 	public function editdos($user_id)
 	{
 		$query = $this->user_m->get($user_id);
@@ -141,6 +142,7 @@ class Operator extends CI_Controller
 			echo "window.location='" . site_url('operator/editdos') . "';</script>";
 		}
 	}
+
 	public function proses()
 	{
 		$config['upload_path']          = './assest/users/';
