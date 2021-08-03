@@ -61,7 +61,7 @@
                     <div class="form-group <?= form_error('file_proposal') ? 'has-error' : null ?>">
                         <span for="file_proposal">Upload File Proposal "PDF" </span><br>
                         <?= form_error('file_proposal') ?>
-                        <input type="file" name="file_proposal" value="<?= set_value('file_proposal') ?>" class="form-control-file form-control-sm" id="file_proposal">
+                        <input type="file" name="file_proposal" value="<?= set_value('file_proposal') ?>" class="form-control-file form-control-sm" id="file_proposal" accept="application/pdf">
                         <small class="text-muted">
                             Catatan: File Proposal Meliputi Cover, Pengesahan, dan BAB 1-3
                         </small>
