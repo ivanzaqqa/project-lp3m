@@ -31,7 +31,6 @@ class Operator extends CI_Controller
 	}
 
 
-
 	// PENGABDIAN MASYARAKAT
 	public function pengabdian_masyarakat()
 	{
@@ -41,6 +40,23 @@ class Operator extends CI_Controller
 		$this->load->view('templates/topbar');
 		$this->load->view('operator/pengabdian_masyarakat/pengabdian_masyarakat', $data);
 		$this->load->view('templates/auth_footer');
+	}
+
+	public function changestat() {
+		$id_pengabmas = $this->input->post("id_pengabmas", TRUE);
+		//die($id_pengabmas);
+		// print_r($this->pengabmas_m->get_pengabmas($id_pengabmas));die();
+		$check = $this->pengabmas_m->get_by_id($id_pengabmas);
+		$newstat = $check->id_status==1?2:1;
+		// $newstat = $check->id_status==1 && $check->id_status==2?3:1;
+		// $newstat = $check->id_status>0?1:1;
+		// ==1?2:1
+		$data = array(
+			'id_status' => $newstat
+		);
+		$this->pengabmas_m->update($id_pengabmas, $data);
+		$res['msg']="Status Pengabdian Masyarakat dengan judul penelitian ". $check->judul_pengabmas." telah berhasil di update";
+		echo json_encode($res);
 	}
 
 
@@ -190,18 +206,5 @@ class Operator extends CI_Controller
 		redirect('operator/datadosen');
 	}
 	// End Kelola Data
-
-	public function changestat() {
-		$id_pengabmas = $this->input->post("id_pengabmas");
-		// print_r($this->pengabmas_m->get_pengabmas($id_pengabmas));die();
-		$check = $this->pengabmas_m->get_pengabmas($id_pengabmas);
-		$newstat = $check->id_status==1?2:1;
-		$data = array(
-			'id_status' => $newstat
-		);
-		$this->pengabmas_m->update($id_pengabmas, $data);
-		$res['msg']="Data status Pengabdian Masyarakat berhasil ".$check->id_status;
-		echo json_encode($res);
-	}
 
 }

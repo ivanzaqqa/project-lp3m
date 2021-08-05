@@ -75,8 +75,7 @@ class User_m extends CI_Model
         return true;
     }
 
-    function edit_dosen($post)
-    {
+    function edit_dosen($post) {
         $params = [
             'nidn' => $post['nidn'],
             'id_sinta' => $post['id_sinta'],
@@ -99,4 +98,5 @@ class User_m extends CI_Model
         $this->db->where('id', $post['id']);
         $this->db->update('users', $params);
     }
+
 }

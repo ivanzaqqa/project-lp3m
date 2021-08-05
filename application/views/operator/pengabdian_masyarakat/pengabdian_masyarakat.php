@@ -31,12 +31,12 @@
                                 <td><?= $data->tahun_periode; ?></td>
                                 <td><?=date('d-m-Y', strtotime($data->tgl_submit))?></td>
                                 <td><?= $data->matkul_diampu; ?></td>
-                                <td><?= $data->kelompok_riset; ?></td>
                                 <td><?= $data->mhs_terlibat; ?></td>
+                                <td><?= $data->kelompok_riset; ?></td>
                                 <td>
                                     <?php 
                                         echo form_dropdown('id_status'.$data->id_pengabmas,
-                                        array(""=>"Direview", 1=>"Didanai", 2=>"Ditolak"),
+                                        array(1=>"Didanai", 2=>"Ditolak", 3=>"Direview"),
                                         $data->id_status,
                                         array('class'=>"btn btn-md btn-primary dropdown-toggle",
                                         'onchange' => "changeStat($data->id_pengabmas)"

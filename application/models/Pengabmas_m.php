@@ -15,6 +15,21 @@ class Pengabmas_m extends CI_Model
         return $query;
     }
 
+    public function get_by_id($id_pengabmas) {
+        $this->db->where("id_pengabmas", $id_pengabmas);
+        return $this->db->get('tbl_pengabmas')->row();
+    }
+
+    public function get_status_id($id_status) {
+        $this->db->where("id_status", $id_status);
+        return $this->db->get('status')->row();
+    }
+
+    public function update($id,$post) {
+        $this->db->where('id_pengabmas', $id);
+        $this->db->update('tbl_pengabmas', $post);
+    }
+
     public function download($id){
         $query = $this->db->get_where('tbl_pengabmas',array('id_pengabmas'=>$id));
         return $query->row_array();
