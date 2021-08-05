@@ -100,7 +100,7 @@ class Dosen extends CI_Controller
 		}
 	}
 
-	// FOR DOWNLOAD FILE PDF PENGABDIAN MASYARAKAT
+	// FOR DOWNLOAD FILE PDF USULAN PENELITIAN
 	public function download_dpu_proposal($id){
 		$this->load->helper('download');
 		$fileinfo = $this->penelitian_m->download($id);

@@ -62,11 +62,11 @@
                                                 Download
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                                <a class="dropdown-item" href="<?php echo base_url().'upload/penelitian/'.$arsip->file_proposal; ?>">Proposal</a>
+                                                <a class="dropdown-item" href="<?php echo base_url().'upload/penelitian/'.$data->file_proposal; ?>">Proposal</a>
                                                 <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="<?php echo base_url().'upload/penelitian/'.$arsip->file_rps; ?>">RPS</a>
+                                                <a class="dropdown-item" href="<?php echo base_url().'upload/penelitian/'.$data->file_rps; ?>">RPS</a>
                                                 <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="<?php echo base_url().'upload/penelitian/'.$arsip->form_integrasi; ?>">Form Integrasi</a>
+                                                <a class="dropdown-item" href="<?php echo base_url().'upload/penelitian/'.$data->form_integrasi; ?>">Form Integrasi</a>
                                             </div>
                                             <button class="dropdown-item" type="button">Tahapan Pelaksanaan</button>
                                         </div>

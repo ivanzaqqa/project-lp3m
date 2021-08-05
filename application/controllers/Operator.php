@@ -42,6 +42,28 @@ class Operator extends CI_Controller
 		echo json_encode($res);
 	}
 
+	// FOR DOWNLOAD FILE PDF USULAN PENELITIAN
+	public function download_dpu_proposal($id){
+		$this->load->helper('download');
+		$fileinfo = $this->penelitian_m->download($id);
+		$file = 'upload/penelitian/'.$fileinfo['file_proposal'];
+		force_download($file, NULL);
+	}
+
+	public function download_dpu_rps($id){
+		$this->load->helper('download');
+		$fileinfo = $this->penelitian_m->download($id);
+		$file = 'upload/penelitian/'.$fileinfo['file_rps'];
+		force_download($file, NULL);
+	}
+
+	public function download_dpu_form($id){
+		$this->load->helper('download');
+		$fileinfo = $this->penelitian_m->download($id);
+		$file = 'upload/penelitian/'.$fileinfo['form_integrasi'];
+		force_download($file, NULL);
+	}
+
 
 	// PENGABDIAN MASYARAKAT
 	public function pengabdian_masyarakat()
@@ -64,6 +86,28 @@ class Operator extends CI_Controller
 		$this->pengabmas_m->update($id_pengabmas, $data);
 		$res['msg']="Status Pengabdian Masyarakat dengan judul penelitian ". $check->judul_pengabmas." telah berhasil di update";
 		echo json_encode($res);
+	}
+
+	// FOR DOWNLOAD FILE PDF PENGABDIAN MASYARAKAT
+	public function downloadpengabmasproposal($id){
+		$this->load->helper('download');
+		$fileinfo = $this->pengabmas_m->download($id);
+		$file = 'upload/pengabdian_masyarakat/'.$fileinfo['file_proposal'];
+		force_download($file, NULL);
+	}
+
+	public function downloadpengabmasrps($id){
+		$this->load->helper('download');
+		$fileinfo = $this->pengabmas_m->download($id);
+		$file = 'upload/pengabdian_masyarakat/'.$fileinfo['file_rps'];
+		force_download($file, NULL);
+	}
+
+	public function downloadpengabmasform($id){
+		$this->load->helper('download');
+		$fileinfo = $this->pengabmas_m->download($id);
+		$file = 'upload/pengabdian_masyarakat/'.$fileinfo['form_integrasi'];
+		force_download($file, NULL);
 	}
 
 
@@ -191,7 +235,6 @@ class Operator extends CI_Controller
 			}
 		}
 	}
-	//edit dosen belum selesai
 
 
 	public function deldos($user_id)
