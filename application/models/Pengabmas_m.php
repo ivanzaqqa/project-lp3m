@@ -20,11 +20,6 @@ class Pengabmas_m extends CI_Model
         return $this->db->get('tbl_pengabmas')->row();
     }
 
-    public function get_status_id($id_status) {
-        $this->db->where("id_status", $id_status);
-        return $this->db->get('status')->row();
-    }
-
     public function update($id,$post) {
         $this->db->where('id_pengabmas', $id);
         $this->db->update('tbl_pengabmas', $post);
