@@ -33,15 +33,36 @@
                                 <td><?= $data->matkul_diampu; ?></td>
                                 <td><?= $data->kelompok_riset; ?></td>
                                 <td><?= $data->mhs_terlibat; ?></td>
-                                <td><?= $data->status; ?></td>
                                 <td>
+                                    <?php 
+                                        echo form_dropdown('id_status'.$data->id_pengabmas,
+                                        array(""=>"Direview", 1=>"Didanai", 2=>"Ditolak"),
+                                        $data->id_status,
+                                        array('class'=>"btn btn-md btn-primary dropdown-toggle",
+                                        'onchange' => "changeStat($data->id_pengabmas)"
+                                    ));?>
+
+                            <script type="text/javascript">
+                            function changeStat(id_pengabmas) {
+                            $.ajax( {
+                            url:"<?=base_url()?>operator/changestat",
+                            type:"POST",
+                            dataType:"json",
+                            data:{id_pengabmas:id_pengabmas},
+                            success:function(data) {
+                            alert(data.msg);
+                                }
+                            })
+                        }
+                    </script>
+                                </td>
+                                <td>
+
                                     <div class="dropdown">
                                         <button class="btn btn-md btn-warning dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Pilih Action
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                            <button class="dropdown-item" type="button">Didanai</button>
-                                            <button class="dropdown-item" type="button">Ditolak</button>
 
                                             <button class="dropdown-item dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 Download

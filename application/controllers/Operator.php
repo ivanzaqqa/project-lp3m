@@ -190,4 +190,18 @@ class Operator extends CI_Controller
 		redirect('operator/datadosen');
 	}
 	// End Kelola Data
+
+	public function changestat() {
+		$id_pengabmas = $this->input->post("id_pengabmas");
+		// print_r($this->pengabmas_m->get_pengabmas($id_pengabmas));die();
+		$check = $this->pengabmas_m->get_pengabmas($id_pengabmas);
+		$newstat = $check->id_status==1?2:1;
+		$data = array(
+			'id_status' => $newstat
+		);
+		$this->pengabmas_m->update($id_pengabmas, $data);
+		$res['msg']="Data status Pengabdian Masyarakat berhasil ".$check->id_status;
+		echo json_encode($res);
+	}
+
 }

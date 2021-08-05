@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 30, 2021 at 03:11 PM
+-- Generation Time: Aug 05, 2021 at 05:37 AM
 -- Server version: 5.7.35
 -- PHP Version: 7.3.29
 
@@ -20,18 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `project_lp3m`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `arsip_penelitian`
---
-
-CREATE TABLE `arsip_penelitian` (
-  `id_arsip` int(11) NOT NULL,
-  `id_penelitian` int(11) NOT NULL,
-  `id_status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -89,6 +77,7 @@ CREATE TABLE `tbl_penelitian` (
   `file_proposal` varchar(300) NOT NULL,
   `file_rps` varchar(300) NOT NULL,
   `form_integrasi` varchar(300) NOT NULL,
+  `id_status` int(11) NOT NULL,
   `tgl_submit` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -96,10 +85,9 @@ CREATE TABLE `tbl_penelitian` (
 -- Dumping data for table `tbl_penelitian`
 --
 
-INSERT INTO `tbl_penelitian` (`id_penelitian`, `id`, `id_periode`, `judul_penelitian`, `matkul_diampu`, `kelompok_riset`, `mhs_terlibat`, `file_proposal`, `file_rps`, `form_integrasi`, `tgl_submit`) VALUES
-(14, 1, 2, 'coba', 'coba', 'coba', 'coba', '00af423068ce9563b6641434b0d63338.pdf', '766120a91c48e06cf3c82dbd20f22a21.pdf', '3d56fdb0d301443a6ae1abe2c7997423.pdf', '2021-07-20 00:00:00'),
-(15, 1, 1, 'data 1', 'data 1', 'data 1', 'data 1', 'c5e1ec268bb8d6ff9387b07643d3e19b.pdf', 'be03204432400f88cb7b347389792174.pdf', '1e9f53627d1687f5305a292fe34814cc.pdf', '2021-07-20 00:00:00'),
-(16, 1, 2, 'asdasdsd', 'asdasd', 'asdasd', '12321039', 'project-lp3m.sql', 'readme.rst', 'composer.json', '2021-07-26 17:52:55');
+INSERT INTO `tbl_penelitian` (`id_penelitian`, `id`, `id_periode`, `judul_penelitian`, `matkul_diampu`, `kelompok_riset`, `mhs_terlibat`, `file_proposal`, `file_rps`, `form_integrasi`, `id_status`, `tgl_submit`) VALUES
+(16, 1, 1, 'Bangun Tanah Persegi', 'Sipil', 'Surya Kencana', 'Tatit (192829)', '578eecb8aaa426d38179ff80f66c64df.pdf', '06a86a3f55657d1cbacb8a15f1f402ab.pdf', '1e27c13dc6994e137aefb6490e71d75d.pdf', 3, '2021-08-03 18:14:13'),
+(17, 1, 1, 'sdasdd', 'asdsada', 'asdsad', 'asdasd', '362b3e9fccc281c2b911c8dfb83f69c2.pdf', '6e8757d22f57ec663cc89cc6ab312358.pdf', 'e14671d24ffa5feb67feb7d1eeac422d.pdf', 3, '2021-08-03 18:33:02');
 
 -- --------------------------------------------------------
 
@@ -118,6 +106,7 @@ CREATE TABLE `tbl_pengabmas` (
   `file_proposal` varchar(300) NOT NULL,
   `file_rps` varchar(300) NOT NULL,
   `form_integrasi` varchar(300) NOT NULL,
+  `id_status` int(11) NOT NULL,
   `tgl_submit` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -125,8 +114,9 @@ CREATE TABLE `tbl_pengabmas` (
 -- Dumping data for table `tbl_pengabmas`
 --
 
-INSERT INTO `tbl_pengabmas` (`id_pengabmas`, `id`, `id_periode`, `judul_pengabmas`, `matkul_diampu`, `kelompok_riset`, `mhs_terlibat`, `file_proposal`, `file_rps`, `form_integrasi`, `tgl_submit`) VALUES
-(1, 1, 2, 'coba 2', 'coba 2', 'coba 2', 'coba 2', '92509eb4cea53179bc5c13f8416c8b45.pdf', '88c8deff2874662ae4b2fb33d701a57f.pdf', '8fa9448fbebcce0ccb5e6e90d6e5b8f6.pdf', '2021-07-20 00:00:00');
+INSERT INTO `tbl_pengabmas` (`id_pengabmas`, `id`, `id_periode`, `judul_pengabmas`, `matkul_diampu`, `kelompok_riset`, `mhs_terlibat`, `file_proposal`, `file_rps`, `form_integrasi`, `id_status`, `tgl_submit`) VALUES
+(2, 1, 2, 'Mengabdi kepada para penghuni', 'Manajemen', 'Masykulin', 'Bagas (19317321)', '15ab7a6f477320baf38551802e4ce8ce.pdf', '890051a3a2f70dcb5dfeca438a91a3c1.pdf', '72a6196073d80e1f617135b66159bd30.pdf', 2, '2021-08-03 20:46:10'),
+(3, 1, 1, 'Sultan Nih Bos', 'Jaringan', 'Efek', 'Andik (1233139)', '3d3a534ec9c0dae4b8aafe0c634bc55e.pdf', '6ec6320834d0114d35bb38d838418624.pdf', '0f58c2c436795db24037011913d79378.pdf', 3, '2021-08-03 20:49:39');
 
 -- --------------------------------------------------------
 
@@ -157,8 +147,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `nidn`, `id_sinta`, `username`, `name`, `email`, `password`, `image`, `jk`, `program_studi`, `fakultas`, `alamat`, `no_hp`, `id_role`, `created_at`) VALUES
-(1, 1931701, 1931701, 'dikaipip', 'Mahardika Ipip', 'dikaipip@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'dikaipip.jpg', 'L', 'Teknik Sipil', 'Teknik', 'desa grandong', 822913422, 1, '2021-07-02 03:12:11'),
-(2, 12323, 12321, 'erickkirek', 'asdasd', 'asdsad@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'erickkirek1.jpg', 'L', 'asdsdasd', 'asdasd', 'asdasd', 123213, 2, NULL);
+(1, 1931701, 1931701, 'dikaipip', 'Mahardika Ipip', 'dikaipip@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'dikaipip.jpg', 'L', 'Teknik Sipil', 'Teknik', 'desa sumberejo', 822913422, 1, '2021-07-02 03:12:11'),
+(2, 12323, 12321, 'erickkirek', 'Erick Kusuma W', 'erickkirek@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'erickkirek1.jpg', 'L', 'Teknik Sipil', 'Teknik', 'Gondanglegi', 2147483647, 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -245,14 +235,6 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `is_active`) VALUE
 --
 
 --
--- Indexes for table `arsip_penelitian`
---
-ALTER TABLE `arsip_penelitian`
-  ADD PRIMARY KEY (`id_arsip`),
-  ADD UNIQUE KEY `id_penelitian` (`id_penelitian`),
-  ADD UNIQUE KEY `id_status` (`id_status`);
-
---
 -- Indexes for table `periode_pengajuan`
 --
 ALTER TABLE `periode_pengajuan`
@@ -270,7 +252,8 @@ ALTER TABLE `status`
 ALTER TABLE `tbl_penelitian`
   ADD PRIMARY KEY (`id_penelitian`),
   ADD KEY `id` (`id`),
-  ADD KEY `id_periode` (`id_periode`);
+  ADD KEY `id_periode` (`id_periode`),
+  ADD KEY `id_status` (`id_status`);
 
 --
 -- Indexes for table `tbl_pengabmas`
@@ -278,7 +261,8 @@ ALTER TABLE `tbl_penelitian`
 ALTER TABLE `tbl_pengabmas`
   ADD PRIMARY KEY (`id_pengabmas`),
   ADD KEY `id` (`id`),
-  ADD KEY `id_periode` (`id_periode`);
+  ADD KEY `id_periode` (`id_periode`),
+  ADD KEY `id_status` (`id_status`);
 
 --
 -- Indexes for table `users`
@@ -322,12 +306,6 @@ ALTER TABLE `user_sub_menu`
 --
 
 --
--- AUTO_INCREMENT for table `arsip_penelitian`
---
-ALTER TABLE `arsip_penelitian`
-  MODIFY `id_arsip` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `periode_pengajuan`
 --
 ALTER TABLE `periode_pengajuan`
@@ -343,13 +321,13 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT for table `tbl_penelitian`
 --
 ALTER TABLE `tbl_penelitian`
-  MODIFY `id_penelitian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_penelitian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `tbl_pengabmas`
 --
 ALTER TABLE `tbl_pengabmas`
-  MODIFY `id_pengabmas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pengabmas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
