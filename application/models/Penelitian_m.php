@@ -24,6 +24,16 @@ class Penelitian_m extends CI_Model {
         return $query;
     }
 
+    public function get_by_id($id_penelitian) {
+        $this->db->where("id_penelitian", $id_penelitian);
+        return $this->db->get('tbl_penelitian')->row();
+    }
+
+    public function update($id,$post) {
+        $this->db->where('id_penelitian', $id);
+        $this->db->update('tbl_penelitian', $post);
+    }
+
     public function download($id){
         $query = $this->db->get_where('tbl_penelitian',array('id_penelitian'=>$id));
         return $query->row_array();

@@ -45,7 +45,7 @@
                             <script type="text/javascript">
                             function changeStat(id_pengabmas) {
                             $.ajax( {
-                            url:"<?=base_url()?>operator/changestat",
+                            url:"<?=base_url()?>operator/changestat_pengabmas",
                             type:"POST",
                             dataType:"json",
                             data:{id_pengabmas:id_pengabmas},

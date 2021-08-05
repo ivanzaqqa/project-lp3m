@@ -18,37 +18,62 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Analisa Kadar Tanah Untuk Bangunan Gedung Bertingkat</td>
-                            <td>Ganjil 2021</td>
-                            <td>20 Mei 2021</td>
-                            <td>Mahardi (0035)</td>
-                            <td>Didanai</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button class="btn btn-sm btn-warning dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Pilih Action
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                        <button class="dropdown-item" type="button">Didanai</button>
-                                        <button class="dropdown-item" type="button">Ditolak</button>
+                    <?php
+                        $no = 1;
+                        foreach ($row->result() as $key => $data) { ?>
+                            <tr>
+                                <td><?= $no++ ?></td>
+                                <td><?= $data->judul_penelitian; ?></td>
+                                <td><?= $data->tahun_periode; ?></td>
+                                <td><?=date('d-m-Y', strtotime($data->tgl_submit))?></td>
+                                <td><?= $data->mhs_terlibat; ?></td>
+                                <td>
+                                    <?php 
+                                        echo form_dropdown('id_status'.$data->id_penelitian,
+                                        array(1=>"Didanai", 2=>"Ditolak", 3=>"Direview"),
+                                        $data->id_status,
+                                        array('class'=>"btn btn-md btn-primary dropdown-toggle",
+                                        'onchange' => "changeStat($data->id_penelitian)"
+                                    ));?>
 
-                                        <button class="dropdown-item dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Download
+                            <script type="text/javascript">
+                            function changeStat(id_penelitian) {
+                            $.ajax( {
+                            url:"<?=base_url()?>operator/changestat_penelitian",
+                            type:"POST",
+                            dataType:"json",
+                            data:{id_penelitian:id_penelitian},
+                            success:function(data) {
+                            alert(data.msg);
+                                }
+                            })
+                        }
+                    </script>
+                                </td>
+                                <td>
+
+                                    <div class="dropdown">
+                                        <button class="btn btn-md btn-warning dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Pilih Action
                                         </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                            <a class="dropdown-item" href="#">Proposal</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">RPS</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Form Integrasi</a>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+
+                                            <button class="dropdown-item dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Download
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                <a class="dropdown-item" href="#">Proposal</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="#">RPS</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="#">Form Integrasi</a>
+                                            </div>
+                                            <button class="dropdown-item" type="button">Tahapan Pelaksanaan</button>
                                         </div>
-                                        <button class="dropdown-item" type="button">Tahapan Pelaksanaan</button>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>

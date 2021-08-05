@@ -26,8 +26,20 @@ class Operator extends CI_Controller
 		$this->load->view('templates/auth_header');
 		$this->load->view('operator/menu');
 		$this->load->view('templates/topbar');
-		$this->load->view('operator/penelitian/daftarusulanpenelitian');
+		$this->load->view('operator/penelitian/daftarusulanpenelitian', $data);
 		$this->load->view('templates/auth_footer');
+	}
+
+	public function changestat_penelitian() {
+		$id_penelitian = $this->input->post("id_penelitian", TRUE);
+		$check = $this->penelitian_m->get_by_id($id_penelitian);
+		$newstat = $check->id_status==1?2:1;
+		$data = array(
+			'id_status' => $newstat
+		);
+		$this->penelitian_m->update($id_penelitian, $data);
+		$res['msg']="Status Pengabdian Masyarakat dengan judul penelitian ". $check->judul_penelitian." telah berhasil di update";
+		echo json_encode($res);
 	}
 
 
@@ -42,7 +54,7 @@ class Operator extends CI_Controller
 		$this->load->view('templates/auth_footer');
 	}
 
-	public function changestat() {
+	public function changestat_pengabmas() {
 		$id_pengabmas = $this->input->post("id_pengabmas", TRUE);
 		$check = $this->pengabmas_m->get_by_id($id_pengabmas);
 		$newstat = $check->id_status==1?2:1;
