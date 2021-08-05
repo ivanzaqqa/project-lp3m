@@ -44,13 +44,8 @@ class Operator extends CI_Controller
 
 	public function changestat() {
 		$id_pengabmas = $this->input->post("id_pengabmas", TRUE);
-		//die($id_pengabmas);
-		// print_r($this->pengabmas_m->get_pengabmas($id_pengabmas));die();
 		$check = $this->pengabmas_m->get_by_id($id_pengabmas);
 		$newstat = $check->id_status==1?2:1;
-		// $newstat = $check->id_status==1 && $check->id_status==2?3:1;
-		// $newstat = $check->id_status>0?1:1;
-		// ==1?2:1
 		$data = array(
 			'id_status' => $newstat
 		);
