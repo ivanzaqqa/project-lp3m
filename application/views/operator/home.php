@@ -71,7 +71,7 @@
                 </div>
                 <div class="card-body">
                     <p class="card-text text-white">Menu kelola data dosen</p>
-                    <a href="<?= base_url('operator/keloladata') ?>" class="btn btn-primary">Kunjungi</a>
+                    <a href="<?= base_url('operator/datadosen') ?>" class="btn btn-primary">Kunjungi</a>
                 </div>
             </div>
         </div>
