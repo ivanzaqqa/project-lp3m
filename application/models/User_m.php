@@ -50,12 +50,7 @@ class User_m extends CI_Model
             $config['allowed_types'] = 'jpg|png|jpeg';
 
             $this->load->library('upload', $config);
-            if (!$this->upload->do_upload('image')) {
-                echo "Upload Image Gagal!!";
-                die();
-            } else {
                 $params['image'] = $this->upload->data('file_name');
-            }
         }
         $params['jk'] = $post['jk'];
         $params['program_studi'] = $post['programstudi'];

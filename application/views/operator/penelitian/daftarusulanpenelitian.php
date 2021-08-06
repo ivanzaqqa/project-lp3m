@@ -1,7 +1,8 @@
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Daftar Penelitian</h6>
+            <h6 class="font-weight-bold text-primary" style="position: absolute; margin-top: 10px;">Daftar Penelitian</h6>
+            <button class="btn btn-dark" type="button" style="margin-left: 1050px;"><a href="<?php echo base_url('operator/exportexcel_penelitian') ?>" style="color: white;">Export</a></button>
         </div>
         <div class="card-body">
             <div class="table-responsive table-striped">
@@ -30,7 +31,7 @@
                                 <td>
                                     <?php 
                                         echo form_dropdown('id_status'.$data->id_penelitian,
-                                        array(1=>"Didanai", 2=>"Ditolak", 3=>"Direview"),
+                                        array(1=>"Didanai", 2=>"Ditolak", 3=>"-- Pilih --"),
                                         $data->id_status,
                                         array('class'=>"btn btn-md btn-primary dropdown-toggle",
                                         'onchange' => "changeStat($data->id_penelitian)"

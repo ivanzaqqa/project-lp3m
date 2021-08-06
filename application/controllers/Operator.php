@@ -64,6 +64,53 @@ class Operator extends CI_Controller
 		force_download($file, NULL);
 	}
 
+	// FOR EXPORT EXCEL USULAN PENELITIAN
+	public function exportexcel_penelitian() {
+		$data['row'] = $this->penelitian_m->get_penelitian()->result();
+		require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel.php');
+		require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel/Writer/Excel2007.php');
+
+		$object = new PHPExcel();
+		$object->getProperties()->setCreator("LP3M");
+		$object->getProperties()->setLastModifiedBy("LP3M");
+		$object->getProperties()->setTitle("JURNAL PENELITIAN LP3M");
+
+		$object->setActiveSheetIndex(0);
+		$object->getActiveSheet()->setCellValue('A1','No');
+		$object->getActiveSheet()->setCellValue('B1','Judul Penelitian');
+		$object->getActiveSheet()->setCellValue('C1','Periode Pengajuan');
+		$object->getActiveSheet()->setCellValue('D1','Tanggal Submit');
+		$object->getActiveSheet()->setCellValue('E1','Mahasiswa Yang Dilibatkan');
+		$object->getActiveSheet()->setCellValue('F1','Status');
+
+		$baris = 2;
+		$no = 1;
+
+		foreach ($data['row'] as $data) {
+			$object->getActiveSheet()->setCellValue('A'.$baris, $no++);
+			$object->getActiveSheet()->setCellValue('B'.$baris, $data->judul_penelitian);
+			$object->getActiveSheet()->setCellValue('C'.$baris, $data->tahun_periode);
+			$object->getActiveSheet()->setCellValue('D'.$baris, date('d-m-Y', strtotime($data->tgl_submit)));
+			$object->getActiveSheet()->setCellValue('E'.$baris, $data->mhs_terlibat);
+			$object->getActiveSheet()->setCellValue('F'.$baris, $data->status);
+
+			$baris++;
+		}
+
+		$filename="Daftar Usulan Penelitian".".xlsx";
+		$object->getActiveSheet()->setTitle("LP3M");
+
+		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+		header('Content-Disposition: attachment;filename="'.$filename.'"');
+		header('Cache-Control: max-age=0');
+
+		$writer=PHPExcel_IOFactory::createwriter($object, 'Excel2007');
+		$writer->save('php://output');
+
+		exit;
+	}
+
+
 
 	// PENGABDIAN MASYARAKAT
 	public function pengabdian_masyarakat()
@@ -108,6 +155,59 @@ class Operator extends CI_Controller
 		$fileinfo = $this->pengabmas_m->download($id);
 		$file = 'upload/pengabdian_masyarakat/'.$fileinfo['form_integrasi'];
 		force_download($file, NULL);
+	}
+
+	// FOR EXPORT EXCEL PENGABDIAN MASYARAKAT
+	public function exportexcel_pengabmas() {
+		$data['row'] = $this->pengabmas_m->get_pengabmas()->result();
+		require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel.php');
+		require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel/Writer/Excel2007.php');
+
+		$object = new PHPExcel();
+		$object->getProperties()->setCreator("LP3M");
+		$object->getProperties()->setLastModifiedBy("LP3M");
+		$object->getProperties()->setTitle("PENGABDIAN MASYARAKAT LP3M");
+
+		$object->setActiveSheetIndex(0);
+		$object->getActiveSheet()->setCellValue('A1','No');
+		$object->getActiveSheet()->setCellValue('B1','Nama');
+		$object->getActiveSheet()->setCellValue('C1','Judul Penelitian');
+		$object->getActiveSheet()->setCellValue('D1','Periode Pengajuan');
+		$object->getActiveSheet()->setCellValue('E1','Matkul Diampu');
+		$object->getActiveSheet()->setCellValue('F1','Tanggal Submit');
+		$object->getActiveSheet()->setCellValue('G1','Mahasiswa Yang Dilibatkan');
+		$object->getActiveSheet()->setCellValue('H1','Kelompok Riset');
+		$object->getActiveSheet()->setCellValue('I1','Status');
+
+		$baris = 2;
+		$no = 1;
+
+		foreach ($data['row'] as $data) {
+			$object->getActiveSheet()->setCellValue('A'.$baris, $no++);
+			$object->getActiveSheet()->setCellValue('B'.$baris, $data->name);
+			$object->getActiveSheet()->setCellValue('C'.$baris, $data->judul_penelitian);
+			$object->getActiveSheet()->setCellValue('D'.$baris, $data->tahun_periode);
+			$object->getActiveSheet()->setCellValue('E'.$baris, $data->matkul_diampu);
+			$object->getActiveSheet()->setCellValue('F'.$baris, date('d-m-Y', strtotime($data->tgl_submit)));
+			$object->getActiveSheet()->setCellValue('G'.$baris, $data->mhs_terlibat);
+			$object->getActiveSheet()->setCellValue('H'.$baris, $data->kelompok_riset);
+			$object->getActiveSheet()->setCellValue('I'.$baris, $data->status);
+
+			$baris++;
+		}
+
+		$filename="Pengabdian Masyarakat".".xlsx";
+		$object->getActiveSheet()->setTitle("LP3M");
+
+		ob_end_clean();
+		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+		header('Content-Disposition: attachment;filename="'.$filename.'"');
+		header('Cache-Control: max-age=0');
+
+		$writer=PHPExcel_IOFactory::createwriter($object, 'Excel2007');
+		$writer->save('php://output');
+
+		exit;
 	}
 
 
