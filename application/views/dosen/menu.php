@@ -62,9 +62,9 @@
         </li>
         <hr class="sidebar-divider d-none d-md-block">
         <li class="nav-item">
-            <a class="nav-link active" href="<?= base_url('dosen/editprofile') ?>">
+            <a class="nav-link active" href="<?= base_url('dosen/profiledos/') ?>">
                 <i class="fas fa-fw fa-user-edit"></i>
-                <span>Edit Profile</span></a>
+                <span>Profile</span></a>
         </li>
 
         <!-- Divider -->
