@@ -124,7 +124,7 @@ class Dosen extends CI_Controller
 	
 	public function arsippenelitian()
 	{
-		$arsip['row'] = $this->penelitian_m->get_penelitian();
+		$arsip['row'] = $this->penelitian_m->get_penelitian_by_id();
 		$this->load->view('templates/auth_header');
 		$this->load->view('dosen/menu');
 		$this->load->view('templates/topbar');
@@ -237,7 +237,7 @@ class Dosen extends CI_Controller
 
 	public function arsippengabdian()
 	{
-		$arsip['row'] = $this->pengabmas_m->get_pengabmas();
+		$arsip['row'] = $this->pengabmas_m->get_pengabmas_by_id();
 		$this->load->view('templates/auth_header');
 		$this->load->view('dosen/menu');
 		$this->load->view('templates/topbar');

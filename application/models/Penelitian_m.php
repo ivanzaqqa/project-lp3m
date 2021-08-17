@@ -11,7 +11,19 @@ class Penelitian_m extends CI_Model {
         return $query;
     }
 
-    public function get_penelitian() {
+    public function get_penelitian($id = null) {
+        $this->db->from('tbl_penelitian');
+        $this->db->join('users', 'users.id = tbl_penelitian.id');
+        $this->db->join('periode_pengajuan', 'periode_pengajuan.id_periode = tbl_penelitian.id_periode');
+        $this->db->join('status', 'status.id_status = tbl_penelitian.id_status');
+        if ($id != null) {
+            $this->db->where('id_penelitian', $id);
+        }
+        $query = $this->db->get();
+        return $query;
+    }
+
+    public function get_penelitian_by_id() {
 
         $this->db->from('tbl_penelitian');
         $this->db->join('users', 'users.id = tbl_penelitian.id');
