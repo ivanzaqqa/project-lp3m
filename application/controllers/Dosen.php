@@ -39,7 +39,7 @@ class Dosen extends CI_Controller
 			$this->form_validation->set_rules('matkul_diampu', 'Matkul Yang Diampu', 'required');
 			$this->form_validation->set_rules('kelompok_riset', 'Kelompok Riset', 'required');
 			$this->form_validation->set_rules('mhs_terlibat', 'Mahasiswa Yang Dilibatkan', 'required');
-		
+
 			$this->form_validation->set_message('required', '%s Masih Kosong!!');
 			$this->form_validation->set_error_delimiters('<span class="help-block text-danger">', '</span>');
 
@@ -101,27 +101,30 @@ class Dosen extends CI_Controller
 	}
 
 	// FOR DOWNLOAD FILE PDF USULAN PENELITIAN
-	public function download_dpu_proposal($id){
+	public function download_dpu_proposal($id)
+	{
 		$this->load->helper('download');
 		$fileinfo = $this->penelitian_m->download($id);
-		$file = 'upload/penelitian/'.$fileinfo['file_proposal'];
+		$file = 'upload/penelitian/' . $fileinfo['file_proposal'];
 		force_download($file, NULL);
 	}
 
-	public function download_dpu_rps($id){
+	public function download_dpu_rps($id)
+	{
 		$this->load->helper('download');
 		$fileinfo = $this->penelitian_m->download($id);
-		$file = 'upload/penelitian/'.$fileinfo['file_rps'];
+		$file = 'upload/penelitian/' . $fileinfo['file_rps'];
 		force_download($file, NULL);
 	}
 
-	public function download_dpu_form($id){
+	public function download_dpu_form($id)
+	{
 		$this->load->helper('download');
 		$fileinfo = $this->penelitian_m->download($id);
-		$file = 'upload/penelitian/'.$fileinfo['form_integrasi'];
+		$file = 'upload/penelitian/' . $fileinfo['form_integrasi'];
 		force_download($file, NULL);
 	}
-	
+
 	public function arsippenelitian()
 	{
 		$arsip['row'] = $this->penelitian_m->get_penelitian_by_id();
@@ -214,24 +217,27 @@ class Dosen extends CI_Controller
 	}
 
 	// FOR DOWNLOAD FILE PDF PENGABDIAN MASYARAKAT
-	public function downloadpengabmasproposal($id){
+	public function downloadpengabmasproposal($id)
+	{
 		$this->load->helper('download');
 		$fileinfo = $this->pengabmas_m->download($id);
-		$file = 'upload/pengabdian_masyarakat/'.$fileinfo['file_proposal'];
+		$file = 'upload/pengabdian_masyarakat/' . $fileinfo['file_proposal'];
 		force_download($file, NULL);
 	}
 
-	public function downloadpengabmasrps($id){
+	public function downloadpengabmasrps($id)
+	{
 		$this->load->helper('download');
 		$fileinfo = $this->pengabmas_m->download($id);
-		$file = 'upload/pengabdian_masyarakat/'.$fileinfo['file_rps'];
+		$file = 'upload/pengabdian_masyarakat/' . $fileinfo['file_rps'];
 		force_download($file, NULL);
 	}
 
-	public function downloadpengabmasform($id){
+	public function downloadpengabmasform($id)
+	{
 		$this->load->helper('download');
 		$fileinfo = $this->pengabmas_m->download($id);
-		$file = 'upload/pengabdian_masyarakat/'.$fileinfo['form_integrasi'];
+		$file = 'upload/pengabdian_masyarakat/' . $fileinfo['form_integrasi'];
 		force_download($file, NULL);
 	}
 
@@ -245,13 +251,21 @@ class Dosen extends CI_Controller
 		$this->load->view('templates/auth_footer');
 	}
 
-	public function editprofile()
+	public function profiledos()
 	{
-
 		$this->load->view('templates/auth_header');
 		$this->load->view('dosen/menu');
 		$this->load->view('templates/topbar');
-		$this->load->view('dosen/editprofile');
+		$this->load->view('profile/profiledos');
+		$this->load->view('templates/auth_footer');
+	}
+
+	public function editprofile()
+	{
+		$this->load->view('templates/auth_header');
+		$this->load->view('dosen/menu');
+		$this->load->view('templates/topbar');
+		$this->load->view('profile/editprofile');
 		$this->load->view('templates/auth_footer');
 	}
 }
