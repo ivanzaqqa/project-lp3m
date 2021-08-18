@@ -8,7 +8,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-6 offset-3">
-                    <form action="">
+                    <form action="" method="" enctype="multipart/form-data">
                         <div class="form-group">
                             <label class="font-weight-bold" for="nidn">NIDN</label>
                             <input type="hidden" name="id" value="">

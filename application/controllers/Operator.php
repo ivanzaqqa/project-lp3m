@@ -30,45 +30,50 @@ class Operator extends CI_Controller
 		$this->load->view('templates/auth_footer');
 	}
 
-	public function changestat_penelitian() {
+	public function changestat_penelitian()
+	{
 		$id_penelitian = $this->input->post("id_penelitian", TRUE);
 		$check = $this->penelitian_m->get_by_id($id_penelitian);
-		$newstat = $check->id_status==1?2:1;
+		$newstat = $check->id_status == 1 ? 2 : 1;
 		$data = array(
 			'id_status' => $newstat
 		);
 		$this->penelitian_m->update($id_penelitian, $data);
-		$res['msg']="Status Pengabdian Masyarakat dengan judul penelitian ". $check->judul_penelitian." telah berhasil di update";
+		$res['msg'] = "Status Pengabdian Masyarakat dengan judul penelitian " . $check->judul_penelitian . " telah berhasil di update";
 		echo json_encode($res);
 	}
 
 	// FOR DOWNLOAD FILE PDF USULAN PENELITIAN
-	public function download_dpu_proposal($id){
+	public function download_dpu_proposal($id)
+	{
 		$this->load->helper('download');
 		$fileinfo = $this->penelitian_m->download($id);
-		$file = 'upload/penelitian/'.$fileinfo['file_proposal'];
+		$file = 'upload/penelitian/' . $fileinfo['file_proposal'];
 		force_download($file, NULL);
 	}
 
-	public function download_dpu_rps($id){
+	public function download_dpu_rps($id)
+	{
 		$this->load->helper('download');
 		$fileinfo = $this->penelitian_m->download($id);
-		$file = 'upload/penelitian/'.$fileinfo['file_rps'];
+		$file = 'upload/penelitian/' . $fileinfo['file_rps'];
 		force_download($file, NULL);
 	}
 
-	public function download_dpu_form($id){
+	public function download_dpu_form($id)
+	{
 		$this->load->helper('download');
 		$fileinfo = $this->penelitian_m->download($id);
-		$file = 'upload/penelitian/'.$fileinfo['form_integrasi'];
+		$file = 'upload/penelitian/' . $fileinfo['form_integrasi'];
 		force_download($file, NULL);
 	}
 
 	// FOR EXPORT EXCEL USULAN PENELITIAN
-	public function exportexcel_penelitian() {
+	public function exportexcel_penelitian()
+	{
 		$data['row'] = $this->penelitian_m->get_penelitian()->result();
-		require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel.php');
-		require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel/Writer/Excel2007.php');
+		require(APPPATH . 'PHPExcel-1.8/Classes/PHPExcel.php');
+		require(APPPATH . 'PHPExcel-1.8/Classes/PHPExcel/Writer/Excel2007.php');
 
 		$object = new PHPExcel();
 		$object->getProperties()->setCreator("LP3M");
@@ -76,35 +81,35 @@ class Operator extends CI_Controller
 		$object->getProperties()->setTitle("JURNAL PENELITIAN LP3M");
 
 		$object->setActiveSheetIndex(0);
-		$object->getActiveSheet()->setCellValue('A1','No');
-		$object->getActiveSheet()->setCellValue('B1','Judul Penelitian');
-		$object->getActiveSheet()->setCellValue('C1','Periode Pengajuan');
-		$object->getActiveSheet()->setCellValue('D1','Tanggal Submit');
-		$object->getActiveSheet()->setCellValue('E1','Mahasiswa Yang Dilibatkan');
-		$object->getActiveSheet()->setCellValue('F1','Status');
+		$object->getActiveSheet()->setCellValue('A1', 'No');
+		$object->getActiveSheet()->setCellValue('B1', 'Judul Penelitian');
+		$object->getActiveSheet()->setCellValue('C1', 'Periode Pengajuan');
+		$object->getActiveSheet()->setCellValue('D1', 'Tanggal Submit');
+		$object->getActiveSheet()->setCellValue('E1', 'Mahasiswa Yang Dilibatkan');
+		$object->getActiveSheet()->setCellValue('F1', 'Status');
 
 		$baris = 2;
 		$no = 1;
 
 		foreach ($data['row'] as $data) {
-			$object->getActiveSheet()->setCellValue('A'.$baris, $no++);
-			$object->getActiveSheet()->setCellValue('B'.$baris, $data->judul_penelitian);
-			$object->getActiveSheet()->setCellValue('C'.$baris, $data->tahun_periode);
-			$object->getActiveSheet()->setCellValue('D'.$baris, date('d-m-Y', strtotime($data->tgl_submit)));
-			$object->getActiveSheet()->setCellValue('E'.$baris, $data->mhs_terlibat);
-			$object->getActiveSheet()->setCellValue('F'.$baris, $data->status);
+			$object->getActiveSheet()->setCellValue('A' . $baris, $no++);
+			$object->getActiveSheet()->setCellValue('B' . $baris, $data->judul_penelitian);
+			$object->getActiveSheet()->setCellValue('C' . $baris, $data->tahun_periode);
+			$object->getActiveSheet()->setCellValue('D' . $baris, date('d-m-Y', strtotime($data->tgl_submit)));
+			$object->getActiveSheet()->setCellValue('E' . $baris, $data->mhs_terlibat);
+			$object->getActiveSheet()->setCellValue('F' . $baris, $data->status);
 
 			$baris++;
 		}
 
-		$filename="Daftar Usulan Penelitian".".xlsx";
+		$filename = "Daftar Usulan Penelitian" . ".xlsx";
 		$object->getActiveSheet()->setTitle("LP3M");
 
 		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-		header('Content-Disposition: attachment;filename="'.$filename.'"');
+		header('Content-Disposition: attachment;filename="' . $filename . '"');
 		header('Cache-Control: max-age=0');
 
-		$writer=PHPExcel_IOFactory::createwriter($object, 'Excel2007');
+		$writer = PHPExcel_IOFactory::createwriter($object, 'Excel2007');
 		$writer->save('php://output');
 
 		exit;
@@ -123,45 +128,50 @@ class Operator extends CI_Controller
 		$this->load->view('templates/auth_footer');
 	}
 
-	public function changestat_pengabmas() {
+	public function changestat_pengabmas()
+	{
 		$id_pengabmas = $this->input->post("id_pengabmas", TRUE);
 		$check = $this->pengabmas_m->get_by_id($id_pengabmas);
-		$newstat = $check->id_status==1?2:1;
+		$newstat = $check->id_status == 1 ? 2 : 1;
 		$data = array(
 			'id_status' => $newstat
 		);
 		$this->pengabmas_m->update($id_pengabmas, $data);
-		$res['msg']="Status Pengabdian Masyarakat dengan judul penelitian ". $check->judul_pengabmas." telah berhasil di update";
+		$res['msg'] = "Status Pengabdian Masyarakat dengan judul penelitian " . $check->judul_pengabmas . " telah berhasil di update";
 		echo json_encode($res);
 	}
 
 	// FOR DOWNLOAD FILE PDF PENGABDIAN MASYARAKAT
-	public function downloadpengabmasproposal($id){
+	public function downloadpengabmasproposal($id)
+	{
 		$this->load->helper('download');
 		$fileinfo = $this->pengabmas_m->download($id);
-		$file = 'upload/pengabdian_masyarakat/'.$fileinfo['file_proposal'];
+		$file = 'upload/pengabdian_masyarakat/' . $fileinfo['file_proposal'];
 		force_download($file, NULL);
 	}
 
-	public function downloadpengabmasrps($id){
+	public function downloadpengabmasrps($id)
+	{
 		$this->load->helper('download');
 		$fileinfo = $this->pengabmas_m->download($id);
-		$file = 'upload/pengabdian_masyarakat/'.$fileinfo['file_rps'];
+		$file = 'upload/pengabdian_masyarakat/' . $fileinfo['file_rps'];
 		force_download($file, NULL);
 	}
 
-	public function downloadpengabmasform($id){
+	public function downloadpengabmasform($id)
+	{
 		$this->load->helper('download');
 		$fileinfo = $this->pengabmas_m->download($id);
-		$file = 'upload/pengabdian_masyarakat/'.$fileinfo['form_integrasi'];
+		$file = 'upload/pengabdian_masyarakat/' . $fileinfo['form_integrasi'];
 		force_download($file, NULL);
 	}
 
 	// FOR EXPORT EXCEL PENGABDIAN MASYARAKAT
-	public function exportexcel_pengabmas() {
+	public function exportexcel_pengabmas()
+	{
 		$data['row'] = $this->pengabmas_m->get_pengabmas()->result();
-		require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel.php');
-		require(APPPATH. 'PHPExcel-1.8/Classes/PHPExcel/Writer/Excel2007.php');
+		require(APPPATH . 'PHPExcel-1.8/Classes/PHPExcel.php');
+		require(APPPATH . 'PHPExcel-1.8/Classes/PHPExcel/Writer/Excel2007.php');
 
 		$object = new PHPExcel();
 		$object->getProperties()->setCreator("LP3M");
@@ -169,42 +179,42 @@ class Operator extends CI_Controller
 		$object->getProperties()->setTitle("PENGABDIAN MASYARAKAT LP3M");
 
 		$object->setActiveSheetIndex(0);
-		$object->getActiveSheet()->setCellValue('A1','No');
-		$object->getActiveSheet()->setCellValue('B1','Nama');
-		$object->getActiveSheet()->setCellValue('C1','Judul Penelitian');
-		$object->getActiveSheet()->setCellValue('D1','Periode Pengajuan');
-		$object->getActiveSheet()->setCellValue('E1','Matkul Diampu');
-		$object->getActiveSheet()->setCellValue('F1','Tanggal Submit');
-		$object->getActiveSheet()->setCellValue('G1','Mahasiswa Yang Dilibatkan');
-		$object->getActiveSheet()->setCellValue('H1','Kelompok Riset');
-		$object->getActiveSheet()->setCellValue('I1','Status');
+		$object->getActiveSheet()->setCellValue('A1', 'No');
+		$object->getActiveSheet()->setCellValue('B1', 'Nama');
+		$object->getActiveSheet()->setCellValue('C1', 'Judul Penelitian');
+		$object->getActiveSheet()->setCellValue('D1', 'Periode Pengajuan');
+		$object->getActiveSheet()->setCellValue('E1', 'Matkul Diampu');
+		$object->getActiveSheet()->setCellValue('F1', 'Tanggal Submit');
+		$object->getActiveSheet()->setCellValue('G1', 'Mahasiswa Yang Dilibatkan');
+		$object->getActiveSheet()->setCellValue('H1', 'Kelompok Riset');
+		$object->getActiveSheet()->setCellValue('I1', 'Status');
 
 		$baris = 2;
 		$no = 1;
 
 		foreach ($data['row'] as $data) {
-			$object->getActiveSheet()->setCellValue('A'.$baris, $no++);
-			$object->getActiveSheet()->setCellValue('B'.$baris, $data->name);
-			$object->getActiveSheet()->setCellValue('C'.$baris, $data->judul_penelitian);
-			$object->getActiveSheet()->setCellValue('D'.$baris, $data->tahun_periode);
-			$object->getActiveSheet()->setCellValue('E'.$baris, $data->matkul_diampu);
-			$object->getActiveSheet()->setCellValue('F'.$baris, date('d-m-Y', strtotime($data->tgl_submit)));
-			$object->getActiveSheet()->setCellValue('G'.$baris, $data->mhs_terlibat);
-			$object->getActiveSheet()->setCellValue('H'.$baris, $data->kelompok_riset);
-			$object->getActiveSheet()->setCellValue('I'.$baris, $data->status);
+			$object->getActiveSheet()->setCellValue('A' . $baris, $no++);
+			$object->getActiveSheet()->setCellValue('B' . $baris, $data->name);
+			$object->getActiveSheet()->setCellValue('C' . $baris, $data->judul_penelitian);
+			$object->getActiveSheet()->setCellValue('D' . $baris, $data->tahun_periode);
+			$object->getActiveSheet()->setCellValue('E' . $baris, $data->matkul_diampu);
+			$object->getActiveSheet()->setCellValue('F' . $baris, date('d-m-Y', strtotime($data->tgl_submit)));
+			$object->getActiveSheet()->setCellValue('G' . $baris, $data->mhs_terlibat);
+			$object->getActiveSheet()->setCellValue('H' . $baris, $data->kelompok_riset);
+			$object->getActiveSheet()->setCellValue('I' . $baris, $data->status);
 
 			$baris++;
 		}
 
-		$filename="Pengabdian Masyarakat".".xlsx";
+		$filename = "Pengabdian Masyarakat" . ".xlsx";
 		$object->getActiveSheet()->setTitle("LP3M");
 
 		ob_end_clean();
 		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-		header('Content-Disposition: attachment;filename="'.$filename.'"');
+		header('Content-Disposition: attachment;filename="' . $filename . '"');
 		header('Cache-Control: max-age=0');
 
-		$writer=PHPExcel_IOFactory::createwriter($object, 'Excel2007');
+		$writer = PHPExcel_IOFactory::createwriter($object, 'Excel2007');
 		$writer->save('php://output');
 
 		exit;
@@ -270,8 +280,8 @@ class Operator extends CI_Controller
 			echo "<script>window.location='" . base_url('operator/datadosen') . "';</script>";
 		}
 	}
-	
-	public function editdos($user_id)
+
+	public function edituser($user_id)
 	{
 		$query = $this->user_m->get($user_id);
 		if ($query->num_rows() > 0) {

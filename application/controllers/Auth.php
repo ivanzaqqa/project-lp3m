@@ -3,7 +3,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Auth extends CI_Controller
 {
-    public function index() {
+    public function index()
+    {
         check_already_login_dosen();
         check_already_login_operator();
         $this->load->view('templates/auth_header');
@@ -11,7 +12,8 @@ class Auth extends CI_Controller
         $this->load->view('templates/auth_footer');
     }
 
-    public function process() {
+    public function process()
+    {
         $post = $this->input->post(null, TRUE);
 
         if (isset($post['login'])) {
@@ -30,7 +32,7 @@ class Auth extends CI_Controller
                     redirect('operator');
                 }
             } else {
-                echo "<script>alert('gagal login'); window.location='".site_url('auth')."';</script>";
+                echo "<script>alert('gagal login'); window.location='" . site_url('auth') . "';</script>";
             }
         }
     }
@@ -43,5 +45,4 @@ class Auth extends CI_Controller
         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Anda berhasil logout!</div>');
         redirect('auth');
     }
-
 }
