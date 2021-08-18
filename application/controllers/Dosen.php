@@ -262,10 +262,59 @@ class Dosen extends CI_Controller
 
 	public function editprofile()
 	{
-		$this->load->view('templates/auth_header');
-		$this->load->view('dosen/menu');
-		$this->load->view('templates/topbar');
-		$this->load->view('profile/editprofile');
-		$this->load->view('templates/auth_footer');
+		$query = $this->user_m->get();
+		if ($query->num_rows() > 0) {
+			$user = $query->row();
+			$data = array(
+				'page' => 'submit_edit',
+				'row' => $user,
+			);
+			$this->load->view('templates/auth_header');
+			$this->load->view('dosen/menu');
+			$this->load->view('templates/topbar');
+			$this->load->view('profile/editprofile', $data);
+			$this->load->view('templates/auth_footer');
+		} else {
+			echo "<script>alert(Data tidak ditemukan!);";
+			echo "window.location='" . site_url('dosen/editprofile') . "';</script>";
+		}
+	}
+
+	public function proses()
+	{
+		$config['upload_path']          = './assest/users/';
+		$config['allowed_types']        = 'jpg|png|jpeg';
+		$this->load->library('upload', $config);
+
+		$post = $this->input->post(null, TRUE);
+		if (isset($_POST['submit_edit'])) {
+			$this->user_m->edit_profile($post);
+			if (@$_FILES['image']['name'] != null) {
+				if ($this->upload->do_upload('image')) {
+					$user_image = $this->user_m->get($post['id'])->row();
+					if ($user_image->image !=  null) {
+						$target_file = './assest/users/' . $user_image->image;
+						unlink($target_file);
+					}
+					$post['image'] = $this->upload->data('file_name');
+					$this->user_m->edit_profile($post);
+					if ($this->db->affected_rows() > 0) {
+						$this->session->set_flashdata('msg', 'Data Berhasil disimpan');
+					}
+					redirect('dosen/profiledos');
+				} else {
+					$error = $this->upload->display_errors();
+					$this->session->set_flashdata('msg', $error);
+					redirect('dosen/editprofile');
+				}
+			} else {
+				$post['image'] = null;
+				$this->user_m->edit_profile($post);
+				if ($this->db->affected_rows() > 0) {
+					$this->session->set_flashdata('msg', 'Data Berhasil disimpan');
+				}
+				redirect('dosen/profiledos');
+			}
+		}
 	}
 }

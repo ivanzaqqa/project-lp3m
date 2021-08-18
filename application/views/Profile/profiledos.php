@@ -13,7 +13,7 @@
         </ul>
         <div class="card-body">
             <button href="#" class="btn btn-primary">Detail</button>
-            <a href="<?= base_url('dosen/editprofile/') ?>" class="btn btn-warning">Update Data</a>
+            <a href="<?= site_url('dosen/editprofile/') ?>" class="btn btn-warning">Update Data</a>
         </div>
     </div>
 

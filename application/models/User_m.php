@@ -50,7 +50,7 @@ class User_m extends CI_Model
             $config['allowed_types'] = 'jpg|png|jpeg';
 
             $this->load->library('upload', $config);
-                $params['image'] = $this->upload->data('file_name');
+            $params['image'] = $this->upload->data('file_name');
         }
         $params['jk'] = $post['jk'];
         $params['program_studi'] = $post['programstudi'];
@@ -70,7 +70,8 @@ class User_m extends CI_Model
         return true;
     }
 
-    function edit_dosen($post) {
+    function edit_dosen($post)
+    {
         $params = [
             'nidn' => $post['nidn'],
             'id_sinta' => $post['id_sinta'],
@@ -94,4 +95,24 @@ class User_m extends CI_Model
         $this->db->update('users', $params);
     }
 
+    function edit_profile($post)
+    {
+        $params = [
+            'nidn' => $post['nidn'],
+            'id_sinta' => $post['id_sinta'],
+            'username' => $post['username'],
+            'name' => $post['nama'],
+            'email' => $post['email'],
+            'jk' => $post['jk'],
+            'program_studi' => $post['programstudi'],
+            'fakultas' => $post['fakultas'],
+            'alamat' => $post['alamat'],
+            'no_hp' => $post['nohp'],
+        ];
+        if ($post['image'] != null) {
+            $params['image'] = $post['image'];
+        }
+        $this->db->where('id', $post['id']);
+        $this->db->update('users', $params);
+    }
 }

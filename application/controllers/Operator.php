@@ -281,9 +281,9 @@ class Operator extends CI_Controller
 		}
 	}
 
-	public function edituser($user_id)
+	public function editdos()
 	{
-		$query = $this->user_m->get($user_id);
+		$query = $this->user_m->get();
 		if ($query->num_rows() > 0) {
 			$user = $query->row();
 			$query_role = $this->user_m->get_role();
