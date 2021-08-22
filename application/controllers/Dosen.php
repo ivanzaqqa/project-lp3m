@@ -18,7 +18,6 @@ class Dosen extends CI_Controller
 		$this->load->view('templates/auth_footer');
 	}
 
-
 	// DAFTAR USULAN PENELITIAN
 	public function daftarusulanpenelitian()
 	{
@@ -278,6 +277,15 @@ class Dosen extends CI_Controller
 			echo "<script>alert(Data tidak ditemukan!);";
 			echo "window.location='" . site_url('dosen/editprofile') . "';</script>";
 		}
+	}
+
+	public function detail_profiledos()
+	{
+		$this->load->view('templates/auth_header');
+		$this->load->view('dosen/menu');
+		$this->load->view('templates/topbar');
+		$this->load->view('profile/detail_profile');
+		$this->load->view('templates/auth_footer');
 	}
 
 	public function proses()

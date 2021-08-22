@@ -12,8 +12,9 @@
             <li class="list-group-item"><b>Nama Lengkap</b>: <?= $this->fungsi->user_login()->name; ?></li>
         </ul>
         <div class="card-body">
-            <button href="#" class="btn btn-primary">Detail</button>
-            <a href="<?= site_url('dosen/editprofile/') ?>" class="btn btn-warning">Update Data</a>
+            <a href="<?= base_url('dosen/detail_profiledos') ?>" class="btn btn-sm btn-primary">Detail</a>
+            <a href="<?= site_url('dosen/editprofile/') ?>" class="btn btn-sm btn-warning">Update</a>
+            <a href="<?= site_url('') ?>" class="btn btn-sm btn-primary">Ganti Password</a>
         </div>
     </div>
 
