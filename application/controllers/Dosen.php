@@ -325,4 +325,82 @@ class Dosen extends CI_Controller
 			}
 		}
 	}
+
+	public function insentif_publikasi()
+	{
+		$this->load->view('templates/auth_header');
+		$this->load->view('dosen/menu');
+		$this->load->view('templates/topbar');
+		$this->load->view('dosen/insentif_publikasi/index');
+		$this->load->view('templates/auth_footer');
+	}
+
+	public function submit_jurnal_prosiding()
+	{
+		$this->load->view('templates/auth_header');
+		$this->load->view('dosen/menu');
+		$this->load->view('templates/topbar');
+		$this->load->view('dosen/insentif_publikasi/submit_prosiding');
+		$this->load->view('templates/auth_footer');
+	}
+
+	public function arsip_jurnal_prosiding()
+	{
+		$this->load->view('templates/auth_header');
+		$this->load->view('dosen/menu');
+		$this->load->view('templates/topbar');
+		$this->load->view('dosen/insentif_publikasi/arsip_prosiding');
+		$this->load->view('templates/auth_footer');
+	}
+
+	public function edit_jurnal_prosiding()
+	{
+		$this->load->view('templates/auth_header');
+		$this->load->view('dosen/menu');
+		$this->load->view('templates/topbar');
+		$this->load->view('dosen/insentif_publikasi/edit_prosiding');
+		$this->load->view('templates/auth_footer');
+	}
+
+	public function detail_jurnal_prosiding()
+	{
+		$this->load->view('templates/auth_header');
+		$this->load->view('dosen/menu');
+		$this->load->view('templates/topbar');
+		$this->load->view('dosen/insentif_publikasi/detail_prosiding');
+		$this->load->view('templates/auth_footer');
+	}
+
+	public function submit_spesial_scopus()
+	{
+		$this->load->view('templates/auth_header');
+		$this->load->view('dosen/menu');
+		$this->load->view('templates/topbar');
+		$this->load->view('dosen/insentif_publikasi/submit_spesial_scopus');
+		$this->load->view('templates/auth_footer');
+	}
+	public function arsip_spesial_scopus()
+	{
+		$this->load->view('templates/auth_header');
+		$this->load->view('dosen/menu');
+		$this->load->view('templates/topbar');
+		$this->load->view('dosen/insentif_publikasi/arsip_spesial_scopus');
+		$this->load->view('templates/auth_footer');
+	}
+	public function edit_spesial_scopus()
+	{
+		$this->load->view('templates/auth_header');
+		$this->load->view('dosen/menu');
+		$this->load->view('templates/topbar');
+		$this->load->view('dosen/insentif_publikasi/edit_spesial_scopus');
+		$this->load->view('templates/auth_footer');
+	}
+	public function detail_spesial_scopus()
+	{
+		$this->load->view('templates/auth_header');
+		$this->load->view('dosen/menu');
+		$this->load->view('templates/topbar');
+		$this->load->view('dosen/insentif_publikasi/detail_spesial_scopus');
+		$this->load->view('templates/auth_footer');
+	}
 }

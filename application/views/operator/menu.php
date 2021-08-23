@@ -54,9 +54,18 @@
         </li> -->
         <hr class="sidebar-divider d-none d-md-block">
         <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('operator/daftarusulanpenelitian') ?>">
-                <i class="fas fa-fw fa-search-plus"></i>
-                <span>Insentif Publikasi</span></a>
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse4" aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Insentif Publikasi</span>
+            </a>
+            <div id="collapse4" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Jurnal / Prosiding</h6>
+                    <a class="collapse-item" href="<?= base_url('operator/arsip_jurnal_prosiding') ?>">Arsip</a>
+                    <h6 class="collapse-header">Spesial Scopus</h6>
+                    <a class="collapse-item" href="<?= base_url('operator/arsip_spesial_scopus') ?>">Arsip</a>
+                </div>
+            </div>
         </li>
         <hr class=" sidebar-divider d-none d-md-block">
         <li class="nav-item">

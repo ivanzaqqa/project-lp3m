@@ -60,7 +60,7 @@
                 </div>
                 <div class="card-body">
                     <p class="card-text text-white">Menu insentif publikasi</p>
-                    <button href="#" class="btn btn-primary">Kunjungi</button>
+                    <a href="<?= base_url('dosen/insentif_publikasi/') ?>" class="btn btn-primary">Kunjungi</a>
                 </div>
             </div>
         </div>

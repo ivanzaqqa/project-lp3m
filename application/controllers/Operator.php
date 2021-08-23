@@ -367,4 +367,49 @@ class Operator extends CI_Controller
 	}
 	// End Kelola Data
 
+	//insentif publikasi
+	public function insentif_publikasi()
+	{
+		$this->load->view('templates/auth_header');
+		$this->load->view('operator/menu');
+		$this->load->view('templates/topbar');
+		$this->load->view('operator/insentif_publikasi/index');
+		$this->load->view('templates/auth_footer');
+	}
+
+	public function arsip_jurnal_prosiding()
+	{
+		$this->load->view('templates/auth_header');
+		$this->load->view('operator/menu');
+		$this->load->view('templates/topbar');
+		$this->load->view('operator/insentif_publikasi/arsip_prosiding');
+		$this->load->view('templates/auth_footer');
+	}
+
+	public function detail_jurnal_prosiding()
+	{
+		$this->load->view('templates/auth_header');
+		$this->load->view('operator/menu');
+		$this->load->view('templates/topbar');
+		$this->load->view('operator/insentif_publikasi/detail_prosiding');
+		$this->load->view('templates/auth_footer');
+	}
+
+	public function arsip_spesial_scopus()
+	{
+		$this->load->view('templates/auth_header');
+		$this->load->view('operator/menu');
+		$this->load->view('templates/topbar');
+		$this->load->view('operator/insentif_publikasi/arsip_spesial_scopus');
+		$this->load->view('templates/auth_footer');
+	}
+
+	public function detail_spesial_scopus()
+	{
+		$this->load->view('templates/auth_header');
+		$this->load->view('operator/menu');
+		$this->load->view('templates/topbar');
+		$this->load->view('operator/insentif_publikasi/detail_spesial_scopus');
+		$this->load->view('templates/auth_footer');
+	}
 }
