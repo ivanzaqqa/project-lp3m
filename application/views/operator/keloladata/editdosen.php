@@ -62,7 +62,7 @@
                         <?php
                         if ($page == 'submit_edit') {
                             if ($row->image != null) { ?>
-                                <img name="image" src="<?= base_url('assets/users/' . $row->image) ?>" width="200"><br>
+                                <img name="image" src="<?= base_url('assets/users/') . $row->image ?>" width="200"><br>
                         <?php }
                         } ?>
                         <input type="file" name="image" class="form-control form-control-md" id="image">

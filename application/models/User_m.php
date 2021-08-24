@@ -43,14 +43,20 @@ class User_m extends CI_Model
         $params['name'] = $post['nama'];
         $params['email'] = $post['email'];
         $params['password'] = sha1($post['password']);
-        $params['image'] = $_FILES['image'];
-        if ($params['image'] = null) {
-        } else {
-            $config['upload_path'] = './assets/users';
-            $config['allowed_types'] = 'jpg|png|jpeg';
+        $params['image'] = $_FILES['image']['name'];
+        if ($params['image']) {
+            $config['upload_path']        = './assets/users/';
+            $config['allowed_types']     = 'jpg|png|jpeg';
+            $config['max_size']            = 2048;
 
             $this->load->library('upload', $config);
-            $params['image'] = $this->upload->data('file_name');
+
+            if ($this->upload->do_upload('image')) {
+                $new_image = $this->upload->data('file_name');
+                $this->db->set('image', $new_image);
+            } else {
+                echo $this->upload->display_errors();
+            }
         }
         $params['jk'] = $post['jk'];
         $params['program_studi'] = $post['programstudi'];

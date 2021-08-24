@@ -12,6 +12,7 @@
         </div>
         <div class="card-body">
             <?= $this->session->flashdata('successdel') ?>
+            <?= $this->session->flashdata('successadd') ?>
             <table class="table table-striped table-responsive-md display" id="dataTable" width="100%">
                 <thead class="text-white" style="background-color: #670099;">
                     <tr>

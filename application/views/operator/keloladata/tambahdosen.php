@@ -7,6 +7,7 @@
             <div class="row">
                 <div class="col-md-6 offset-3">
                     <?= form_open_multipart('operator/tambah_dosen'); ?>
+                    <!-- <?= $this->session->flashdata('msg'); ?> -->
                     <div class="form-group <?= form_error('nidn') ? 'has-error' : null ?> <?= form_error('nidn') ? 'has-error' : null ?> ">
                         <label class="font-weight-bold" for="nidn">NIDN <span class="text-danger">*</span></label>
                         <input type="hidden" name="id" value="id">
@@ -71,8 +72,8 @@
                         <input type="number" name="nohp" value="<?= set_value('nohp') ?>" class="form-control form-control-md" id="nohp" placeholder="Masukkan No Handphone">
                     </div>
                     <div class="form-group">
-                        <label class="font-weight-bold" for="profile">Image </label>
-                        <input type="file" name="image" class="form-control form-control-md" id="profile">
+                        <label class="font-weight-bold" for="image">Image </label>
+                        <input type="file" name="image" class="form-control form-control-md" id="image">
                     </div>
                     <div class="form-group <?= form_error('role') ? 'has-error' : null ?>">
                         <label class="font-weight-bold" for="level">Role <span class="text-danger">*</span></label>
