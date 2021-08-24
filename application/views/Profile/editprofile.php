@@ -7,8 +7,8 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-6 offset-3">
-                    <?= form_open_multipart('dosen/proses'); ?>
-                    <!-- <?= $this->session->flashdata('msg'); ?> -->
+                    <?= form_open_multipart('dosen/proseseditprofile'); ?>
+                    <?= $this->session->flashdata('erroredit'); ?>
                     <div class="form-group">
                         <label class="font-weight-bold" for="nidn">NIDN</label>
                         <input type="hidden" name="id" value="<?= $row->id; ?>">
@@ -39,8 +39,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="font-weight-bold" for="program_studi">Program Studi</label>
-                        <input type="text" name="program_studi" value="<?= $row->program_studi; ?>" class="form-control form-control-md" id="program_studi" placeholder="Masukkan Program Studi">
+                        <label class="font-weight-bold" for="programstudi">Program Studi</label>
+                        <input type="text" name="programstudi" value="<?= $row->program_studi; ?>" class="form-control form-control-md" id="programstudi" placeholder="Masukkan Program Studi">
                     </div>
                     <div class="form-group">
                         <label class="font-weight-bold" for="fakultas">Fakultas </label>

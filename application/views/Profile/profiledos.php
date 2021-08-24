@@ -1,5 +1,6 @@
 <div class="container-fluid">
     <h5 class=" mb-3 text-gray-800">My Profile</h5>
+    <?= $this->session->flashdata('successedit') ?>
     <div class="card mb-2 shadow-lg" style="width: 20rem;">
         <img class="card-img-top" src="<?= base_url('assets/img/users/') . $this->fungsi->user_login()->image; ?>" alt="Card image cap">
         <!-- <div class="card-body">

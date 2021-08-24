@@ -294,15 +294,10 @@ class Operator extends CI_Controller
 		$this->form_validation->set_rules('username', 'Username', 'required');
 		$this->form_validation->set_rules('nama', 'Nama', 'required');
 		$this->form_validation->set_rules('email', 'Email', 'required');
-		$this->form_validation->set_rules('password', 'Password', 'required');
-		$this->form_validation->set_rules('passconf', 'Konfirmasi Password', 'required|matches[password]');
 		$this->form_validation->set_rules('jk', 'Jenis Kelamin', 'required');
 		$this->form_validation->set_rules('programstudi', 'Program Studi', 'required');
 		$this->form_validation->set_rules('fakultas', 'Fakultas', 'required');
 		$this->form_validation->set_rules('role', 'Role', 'required');
-
-		$this->form_validation->set_message('matches', '%s Tidak sesuai dengan password, harap ulangi!');
-		$this->form_validation->set_message('required', '%s Masih Kosong!!');
 		$this->form_validation->set_error_delimiters('<span class="help-block text-danger">', '</span>');
 
 		if ($this->form_validation->run() == FALSE) {

@@ -259,26 +259,6 @@ class Dosen extends CI_Controller
 		$this->load->view('templates/auth_footer');
 	}
 
-	public function editprofile()
-	{
-		$query = $this->user_m->get();
-		if ($query->num_rows() > 0) {
-			$user = $query->row();
-			$data = array(
-				'page' => 'submit_edit',
-				'row' => $user,
-			);
-			$this->load->view('templates/auth_header');
-			$this->load->view('dosen/menu');
-			$this->load->view('templates/topbar');
-			$this->load->view('profile/editprofile', $data);
-			$this->load->view('templates/auth_footer');
-		} else {
-			echo "<script>alert(Data tidak ditemukan!);";
-			echo "window.location='" . site_url('dosen/editprofile') . "';</script>";
-		}
-	}
-
 	public function detail_profiledos()
 	{
 		$this->load->view('templates/auth_header');
@@ -288,38 +268,83 @@ class Dosen extends CI_Controller
 		$this->load->view('templates/auth_footer');
 	}
 
-	public function proses()
+	public function editprofile()
 	{
-		$config['upload_path']          = './assest/users/';
-		$config['allowed_types']        = 'jpg|png|jpeg';
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('nidn', 'Nidn', 'required');
+		$this->form_validation->set_rules('id_sinta', 'ID sinta', 'required');
+		$this->form_validation->set_rules('nama', 'Nama', 'required');
+		$this->form_validation->set_rules('email', 'Email', 'required');
+		$this->form_validation->set_rules('jk', 'Jenis Kelamin', 'required');
+		$this->form_validation->set_rules('programstudi', 'Program Studi', 'required');
+		$this->form_validation->set_rules('fakultas', 'Fakultas', 'required');
+		$this->form_validation->set_error_delimiters('<span class="help-block text-danger">', '</span>');
+
+		if ($this->form_validation->run() == FALSE) {
+			$query = $this->user_m->get();
+			if ($query->num_rows() > 0) {
+				$user = $query->row();
+				$data = array(
+					'page' => 'submit_edit',
+					'row' => $user,
+				);
+				$this->load->view('templates/auth_header');
+				$this->load->view('dosen/menu');
+				$this->load->view('templates/topbar');
+				$this->load->view('profile/editprofile', $data);
+				$this->load->view('templates/auth_footer');
+			}
+		} else {
+			echo "<script>alert(Data tidak ditemukan!);";
+			echo "window.location='" . site_url('dosen/editprofile') . "';</script>";
+		}
+	}
+
+	public function proseseditprofile()
+	{
+		$config['upload_path']        = './assets/users/';
+		$config['allowed_types']     = 'jpg|png|jpeg';
+		$config['max_size']            = 2048;
+
 		$this->load->library('upload', $config);
 
 		$post = $this->input->post(null, TRUE);
 		if (isset($_POST['submit_edit'])) {
-			$this->user_m->edit_profile($post);
 			if (@$_FILES['image']['name'] != null) {
 				if ($this->upload->do_upload('image')) {
-					$user_image = $this->user_m->get($post['id'])->row();
-					if ($user_image->image !=  null) {
-						$target_file = './assest/users/' . $user_image->image;
+
+					$dosen = $this->fungsi->user_login()->image;
+					if ($dosen->image != null) {
+						$target_file = './assets/users/' . $dosen->image;
 						unlink($target_file);
 					}
+
 					$post['image'] = $this->upload->data('file_name');
 					$this->user_m->edit_profile($post);
 					if ($this->db->affected_rows() > 0) {
-						$this->session->set_flashdata('msg', 'Data Berhasil disimpan');
+						$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+				<strong>Data anda berhasil diupdate.</strong>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>');
 					}
 					redirect('dosen/profiledos');
 				} else {
 					$error = $this->upload->display_errors();
-					$this->session->set_flashdata('msg', $error);
+					$this->session->set_flashdata('erroredit', $error);
 					redirect('dosen/editprofile');
 				}
 			} else {
 				$post['image'] = null;
 				$this->user_m->edit_profile($post);
 				if ($this->db->affected_rows() > 0) {
-					$this->session->set_flashdata('msg', 'Data Berhasil disimpan');
+					$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+				<strong>Data anda berhasil diupdate.</strong>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>');
 				}
 				redirect('dosen/profiledos');
 			}
