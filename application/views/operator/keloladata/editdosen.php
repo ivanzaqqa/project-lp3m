@@ -6,8 +6,8 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-6 offset-3">
-                    <?php echo form_open_multipart('operator/proses'); ?>
-                    <!-- <?= $this->session->flashdata('msg'); ?> -->
+                    <?php echo form_open_multipart('operator/prosesedit'); ?>
+                    <?= $this->session->flashdata('erroredit'); ?>
                     <div class="form-group">
                         <label class="font-weight-bold" for="nidn">NIDN</label>
                         <input type="hidden" name="id" value="<?= $row->id; ?>">

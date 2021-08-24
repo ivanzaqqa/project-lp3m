@@ -76,7 +76,7 @@ class User_m extends CI_Model
         return true;
     }
 
-    function edit_dosen($post)
+    public function edit_dosen($post)
     {
         $params = [
             'nidn' => $post['nidn'],

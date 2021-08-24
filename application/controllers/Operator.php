@@ -276,7 +276,7 @@ class Operator extends CI_Controller
 			$this->user_m->tambah_dosen($post);
 			if ($this->db->affected_rows() > 0) {
 				$this->session->set_flashdata('successadd', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-				<strong>Data Dosen Berhasil Ditambah.</strong>
+				<strong>Data dosen berhasil ditambahkan.</strong>
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 				<span aria-hidden="true">&times;</span>
 				</button>
@@ -286,30 +286,100 @@ class Operator extends CI_Controller
 		}
 	}
 
-	public function editdos()
+	public function editdosen($id)
 	{
-		$query = $this->user_m->get();
-		if ($query->num_rows() > 0) {
-			$user = $query->row();
-			$query_role = $this->user_m->get_role();
-			$role[null] = '- Pilih -';
-			foreach ($query_role->result() as $roleid) {
-				$role[$roleid->id_role] = $roleid->role;
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('nidn', 'Nidn', 'required');
+		$this->form_validation->set_rules('id_sinta', 'ID sinta', 'required');
+		$this->form_validation->set_rules('username', 'Username', 'required');
+		$this->form_validation->set_rules('nama', 'Nama', 'required');
+		$this->form_validation->set_rules('email', 'Email', 'required');
+		$this->form_validation->set_rules('password', 'Password', 'required');
+		$this->form_validation->set_rules('passconf', 'Konfirmasi Password', 'required|matches[password]');
+		$this->form_validation->set_rules('jk', 'Jenis Kelamin', 'required');
+		$this->form_validation->set_rules('programstudi', 'Program Studi', 'required');
+		$this->form_validation->set_rules('fakultas', 'Fakultas', 'required');
+		$this->form_validation->set_rules('role', 'Role', 'required');
+
+		$this->form_validation->set_message('matches', '%s Tidak sesuai dengan password, harap ulangi!');
+		$this->form_validation->set_message('required', '%s Masih Kosong!!');
+		$this->form_validation->set_error_delimiters('<span class="help-block text-danger">', '</span>');
+
+		if ($this->form_validation->run() == FALSE) {
+			$query = $this->user_m->get($id);
+			if ($query->num_rows() > 0) {
+				$user = $query->row();
+				$query_role = $this->user_m->get_role();
+				$role[null] = '- Pilih -';
+				foreach ($query_role->result() as $roleid) {
+					$role[$roleid->id_role] = $roleid->role;
+				}
+				$data = array(
+					'page' => 'submit_edit',
+					'row' => $user,
+					'role' => $query_role,
+					'user_role' => $role, 'selectedrole' => $user->id_role,
+				);
+				$this->load->view('templates/auth_header');
+				$this->load->view('operator/menu');
+				$this->load->view('templates/topbar');
+				$this->load->view('operator/keloladata/editdosen', $data);
+				$this->load->view('templates/auth_footer');
 			}
-			$data = array(
-				'page' => 'submit_edit',
-				'row' => $user,
-				'role' => $query_role,
-				'user_role' => $role, 'selectedrole' => $user->id_role,
-			);
-			$this->load->view('templates/auth_header');
-			$this->load->view('operator/menu');
-			$this->load->view('templates/topbar');
-			$this->load->view('operator/keloladata/editdosen', $data);
-			$this->load->view('templates/auth_footer');
 		} else {
-			echo "<script>alert(Data tidak ditemukan!);";
-			echo "window.location='" . site_url('operator/editdos') . "';</script>";
+			echo "<script>alert('Data tidak ditemukan');";
+			echo "window.location='" . site_url('operator/datadosen') . "';</script>";
+		}
+	}
+
+	public function prosesedit()
+	{
+		$config['upload_path']        = './assets/users/';
+		$config['allowed_types']     = 'jpg|png|jpeg';
+		$config['max_size']            = 2048;
+
+		$this->load->library('upload', $config);
+
+		$post = $this->input->post(null, TRUE);
+		if (isset($_POST['submit_edit'])) {
+			if (@$_FILES['image']['name'] != null) {
+				if ($this->upload->do_upload('image')) {
+
+					$dosen = $this->user_m->get($post['id'])->row();
+					if ($dosen->image != null) {
+						$target_file = './assets/users/' . $dosen->image;
+						unlink($target_file);
+					}
+
+					$post['image'] = $this->upload->data('file_name');
+					$this->user_m->edit_dosen($post);
+					if ($this->db->affected_rows() > 0) {
+						$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+				<strong>Data dosen berhasil diupdate.</strong>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>');
+					}
+					redirect('operator/datadosen');
+				} else {
+					$error = $this->upload->display_errors();
+					$this->session->set_flashdata('erroredit', $error);
+					redirect('operator/editdosen');
+				}
+			} else {
+				$post['image'] = null;
+				$this->user_m->edit_dosen($post);
+				if ($this->db->affected_rows() > 0) {
+					$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+				<strong>Data dosen berhasil diupdate.</strong>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>');
+				}
+				redirect('operator/datadosen');
+			}
 		}
 	}
 
