@@ -4,6 +4,7 @@
             <h6 class="m-0 font-weight-bold text-primary">Arsip Pengabdian</h6>
         </div>
         <div class="card-body">
+            <?= $this->session->flashdata('successdel') ?>
             <div class="table-responsive table-striped">
                 <table class="table" id="dataTable" width="100%" cellspacing="0">
                     <thead class="bg-sidebar text-white">
@@ -18,36 +19,36 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <?php $no = 1;
-                        foreach($row->result() as $key => $arsip) { ?>
-                        <tr>
-                            <td><?=$no++?>.</td>
-                            <td><?=$arsip->judul_pengabmas?></td>
-                            <td><?= $arsip->tahun_periode?></td>
-                            <td><?=date('d-m-Y', strtotime($arsip->tgl_submit))?></td>
-                            <td><?=$arsip->mhs_terlibat?></td>
-                            <td><?=$arsip->status?></td>
-                            <td>
-                                <div class="dropdown">
-                                    <button class="btn btn-sm btn-warning dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Pilih Action
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                        <button class="dropdown-item dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Download
+                        <?php $no = 1;
+                        foreach ($row->result() as $key => $arsip) { ?>
+                            <tr>
+                                <td><?= $no++ ?>.</td>
+                                <td><?= $arsip->judul_pengabmas ?></td>
+                                <td><?= $arsip->tahun_periode ?></td>
+                                <td><?= date('d-m-Y', strtotime($arsip->tgl_submit)) ?></td>
+                                <td><?= $arsip->mhs_terlibat ?></td>
+                                <td><?= $arsip->status ?></td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-warning dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Pilih Action
                                         </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                            <a class="dropdown-item" href="<?php echo base_url().'upload/pengabdian_masyarakat/'.$arsip->file_proposal; ?>" download>Proposal</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="<?php echo base_url().'upload/pengabdian_masyarakat/'.$arsip->file_rps; ?>">RPS</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="<?php echo base_url().'upload/pengabdian_masyarakat/'.$arsip->form_integrasi; ?>">Form Integrasi</a>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                            <button class="dropdown-item dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Download
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                <a class="dropdown-item" href="<?php echo base_url() . 'upload/pengabdian_masyarakat/' . $arsip->file_proposal; ?>" download>Proposal</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="<?php echo base_url() . 'upload/pengabdian_masyarakat/' . $arsip->file_rps; ?>">RPS</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="<?php echo base_url() . 'upload/pengabdian_masyarakat/' . $arsip->form_integrasi; ?>">Form Integrasi</a>
+                                            </div>
+                                            <button class="dropdown-item" type="button">Tahapan Pelaksanaan</button>
                                         </div>
-                                        <button class="dropdown-item" type="button">Tahapan Pelaksanaan</button>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
                         <?php } ?>
                     </tbody>
                 </table>

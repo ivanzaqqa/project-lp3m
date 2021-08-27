@@ -47,21 +47,7 @@ class Dosen extends CI_Controller
 			$config['max_size']            = 2048;
 			$config['encrypt_name']         = TRUE;
 			$this->load->library('upload', $config);
-			if (!empty($_FILES['file_proposal']['name'])) {
-				$this->upload->do_upload('file_proposal');
-				$file_proposal = $this->upload->data();
-				$file_proposal = $file_proposal['file_name'];
-			}
-			if (!empty($_FILES['file_rps']['name'])) {
-				$this->upload->do_upload('file_rps');
-				$file_rps = $this->upload->data();
-				$file_rps = $file_rps['file_name'];
-			}
-			if (!empty($_FILES['form_integrasi']['name'])) {
-				$this->upload->do_upload('form_integrasi');
-				$form_integrasi = $this->upload->data();
-				$form_integrasi = $form_integrasi['file_name'];
-			}
+
 			if ($this->form_validation->run()) {
 				$id = $this->input->post('id');
 				$id_periode = $this->input->post('periodepengajuan');
@@ -69,6 +55,21 @@ class Dosen extends CI_Controller
 				$matkul_diampu = $this->input->post('matkul_diampu', TRUE);
 				$kelompok_riset = $this->input->post('kelompok_riset', TRUE);
 				$mhs_terlibat = $this->input->post('mhs_terlibat', TRUE);
+				if (!empty($_FILES['file_proposal']['name'])) {
+					$this->upload->do_upload('file_proposal');
+					$file_proposal = $this->upload->data();
+					$file_proposal = $file_proposal['file_name'];
+				}
+				if (!empty($_FILES['file_rps']['name'])) {
+					$this->upload->do_upload('file_rps');
+					$file_rps = $this->upload->data();
+					$file_rps = $file_rps['file_name'];
+				}
+				if (!empty($_FILES['form_integrasi']['name'])) {
+					$this->upload->do_upload('form_integrasi');
+					$form_integrasi = $this->upload->data();
+					$form_integrasi = $form_integrasi['file_name'];
+				}
 				$data = [
 					'id' => $id,
 					'id_periode' => $id_periode,
@@ -79,7 +80,7 @@ class Dosen extends CI_Controller
 					'id_status' => "3",
 					'file_proposal' => $file_proposal,
 					'file_rps' => $file_rps,
-					'form_integrasi' => $form_integrasi
+					'form_integrasi' => $form_integrasi,
 				];
 				$insert = $this->db->insert('tbl_penelitian', $data);
 				if ($insert) {
@@ -349,6 +350,46 @@ class Dosen extends CI_Controller
 				redirect('dosen/profiledos');
 			}
 		}
+	}
+
+	public function delpenelitian($id)
+	{
+		// $this->load->helper('download');
+		// $fileinfo = $this->penelitian_m->download($id);
+		// $file = 'upload/penelitian/' . $fileinfo['file_proposal'];
+		// force_download($file, NULL);
+
+		$fileinfo = $this->penelitian_m->download($id);
+		if ($fileinfo->file_proposal != null) {
+			$file = 'upload/penelitian/' . $fileinfo['file_proposal'];
+			unlink($file);
+		}
+		if ($fileinfo->file_rps != null) {
+			$file = 'upload/penelitian/' . $fileinfo['file_rps'];
+			unlink($file);
+		}
+		if ($fileinfo->form_integrasi != null) {
+			$file = 'upload/penelitian/' . $fileinfo['form_integrasi'];
+			unlink($file);
+		}
+
+		$this->penelitian_m->delete($id);
+		if ($this->db->affected_rows() > 0) {
+			$this->session->set_flashdata('successdel', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+				<strong>Data anda berhasil dihapus.</strong>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>');
+		} else {
+			$this->session->set_flashdata('errordel', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+				<strong>Data anda gagal dihapus.</strong>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>');
+		}
+		redirect('dosen/arsippenelitian');
 	}
 
 	public function insentif_publikasi()

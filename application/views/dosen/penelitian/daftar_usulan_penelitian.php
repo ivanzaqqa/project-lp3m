@@ -5,6 +5,7 @@
         </div>
         <div class="card-body">
             <?= $this->session->flashdata('successalert') ?>
+            <?= $this->session->flashdata('error_maxsize') ?>
             <div class="row">
                 <div class="col-sm">
                     <?= form_open_multipart('dosen/proses_daftarusulanpenelitian'); ?>
