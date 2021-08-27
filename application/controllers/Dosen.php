@@ -428,4 +428,13 @@ class Dosen extends CI_Controller
 		$this->load->view('dosen/insentif_publikasi/detail_spesial_scopus');
 		$this->load->view('templates/auth_footer');
 	}
+
+	public function ganti_password()
+	{
+		$this->load->view('templates/auth_header');
+		$this->load->view('dosen/menu');
+		$this->load->view('templates/topbar');
+		$this->load->view('profile/ganti_pass');
+		$this->load->view('templates/auth_footer');
+	}
 }
