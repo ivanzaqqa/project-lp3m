@@ -164,22 +164,23 @@ class Dosen extends CI_Controller
 			$config['max_size']            = 2048;
 			$config['encrypt_name']         = TRUE;
 			$this->load->library('upload', $config);
-			if (!empty($_FILES['file_proposal']['name'])) {
-				$this->upload->do_upload('file_proposal');
-				$file_proposal = $this->upload->data();
-				$file_proposal = $file_proposal['file_name'];
-			}
-			if (!empty($_FILES['file_rps']['name'])) {
-				$this->upload->do_upload('file_rps');
-				$file_rps = $this->upload->data();
-				$file_rps = $file_rps['file_name'];
-			}
-			if (!empty($_FILES['form_integrasi']['name'])) {
-				$this->upload->do_upload('form_integrasi');
-				$form_integrasi = $this->upload->data();
-				$form_integrasi = $form_integrasi['file_name'];
-			}
+
 			if ($this->form_validation->run()) {
+				if (!empty($_FILES['file_proposal']['name'])) {
+					$this->upload->do_upload('file_proposal');
+					$file_proposal = $this->upload->data();
+					$file_proposal = $file_proposal['file_name'];
+				}
+				if (!empty($_FILES['file_rps']['name'])) {
+					$this->upload->do_upload('file_rps');
+					$file_rps = $this->upload->data();
+					$file_rps = $file_rps['file_name'];
+				}
+				if (!empty($_FILES['form_integrasi']['name'])) {
+					$this->upload->do_upload('form_integrasi');
+					$form_integrasi = $this->upload->data();
+					$form_integrasi = $form_integrasi['file_name'];
+				}
 				$id = $this->input->post('id');
 				$id_periode = $this->input->post('periodepengajuan');
 				$judul_pengabmas = $this->input->post('judul_pengabmas', TRUE);
