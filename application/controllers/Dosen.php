@@ -10,6 +10,8 @@ class Dosen extends CI_Controller
 		check_not_login();
 		check_operator();
 		$this->load->model('penelitian_m');
+		$this->load->model('pengabmas_m');
+		$this->load->model('jurpros_m');
 	}
 	public function index()
 	{
@@ -100,7 +102,7 @@ class Dosen extends CI_Controller
 		}
 	}
 
-	// FOR DOWNLOAD FILE PDF USULAN PENELITIAN
+	// DOWNLOAD FILE PDF USULAN PENELITIAN
 	public function download_dpu_proposal($id)
 	{
 		$this->load->helper('download');
@@ -217,7 +219,7 @@ class Dosen extends CI_Controller
 		}
 	}
 
-	// FOR DOWNLOAD FILE PDF PENGABDIAN MASYARAKAT
+	// DOWNLOAD FILE PDF PENGABDIAN MASYARAKAT
 	public function downloadpengabmasproposal($id)
 	{
 		$this->load->helper('download');
@@ -393,6 +395,8 @@ class Dosen extends CI_Controller
 		redirect('dosen/arsippenelitian');
 	}
 
+
+	// INSENTIF PUBLIKASI
 	public function insentif_publikasi()
 	{
 		$this->load->view('templates/auth_header');
@@ -404,19 +408,82 @@ class Dosen extends CI_Controller
 
 	public function submit_jurnal_prosiding()
 	{
+		$pilih_jurpros['row'] = $this->jurpros_m->get_pilih_jurpros();
 		$this->load->view('templates/auth_header');
 		$this->load->view('dosen/menu');
 		$this->load->view('templates/topbar');
-		$this->load->view('dosen/insentif_publikasi/submit_prosiding');
+		$this->load->view('dosen/insentif_publikasi/submit_prosiding', $pilih_jurpros);
 		$this->load->view('templates/auth_footer');
+	}
+
+	public function proses_submit_jurnal_pros()
+	{
+		if (isset($_POST['submit'])) {
+			$this->load->library('form_validation');
+			$this->form_validation->set_rules('judul_artikel', 'Periode Pengajuan', 'required');
+			$this->form_validation->set_rules('url_artikel', 'Judul Penelitian', 'required');
+
+			$this->form_validation->set_message('required', '%s Masih Kosong!!');
+			$this->form_validation->set_error_delimiters('<span class="help-block text-danger">', '</span>');
+
+			$config['upload_path']          = './upload/insentif_publikasi/jurnal_prosiding/';
+			$config['allowed_types']        = 'pdf';
+			$config['max_size']            = 2048;
+			$config['encrypt_name']         = TRUE;
+			$this->load->library('upload', $config);
+
+			if ($this->form_validation->run()) {
+				$id = $this->input->post('id');
+				$id_jurnal_pros = $this->input->post('pilih_jurnal_prosiding');
+				$judul_artikel = $this->input->post('judul_artikel', TRUE);
+				$url_artikel = $this->input->post('url_artikel', TRUE);
+				if (!empty($_FILES['file_publikasi']['name'])) {
+					$this->upload->do_upload('file_publikasi');
+					$file_publikasi = $this->upload->data();
+					$file_publikasi = $file_publikasi['file_name'];
+				}
+				$data = [
+					'id' => $id,
+					'id_jurnal_pros' => $id_jurnal_pros,
+					'judul_artikel' => $judul_artikel,
+					'url_artikel' => $url_artikel,
+					'id_status' => "3",
+					'file_publikasi' => $file_publikasi,
+				];
+				$insert = $this->db->insert('insentif_jurpros', $data);
+				if ($insert) {
+					$this->session->set_flashdata('successalert', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Data Insentif Jurnal Prosiding Berhasil Disubmit.</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>');
+					redirect('dosen/submit_jurnal_prosiding');
+				}
+			} else {
+				$this->submit_jurnal_prosiding();
+			}
+		} else {
+			$this->submit_jurnal_prosiding();
+		}
+	}
+
+	// DOWNLOAD FILE PDF USULAN PENELITIAN
+	public function download_dpu_publikasi($id)
+	{
+		$this->load->helper('download');
+		$fileinfo = $this->jurpros_m->download($id);
+		$file = './upload/insentif_publikasi/jurnal_prosiding/' . $fileinfo['file_publikasi'];
+		force_download($file, NULL);
 	}
 
 	public function arsip_jurnal_prosiding()
 	{
+		$arsip['row'] = $this->jurpros_m->get_jurpros_by_id();
 		$this->load->view('templates/auth_header');
 		$this->load->view('dosen/menu');
 		$this->load->view('templates/topbar');
-		$this->load->view('dosen/insentif_publikasi/arsip_prosiding');
+		$this->load->view('dosen/insentif_publikasi/arsip_prosiding', $arsip);
 		$this->load->view('templates/auth_footer');
 	}
 
