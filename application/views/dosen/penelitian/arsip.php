@@ -25,10 +25,10 @@
                             <tr>
                                 <td><?= $no++ ?>.</td>
                                 <td><?= $arsip->judul_penelitian ?></td>
-                                <td><?= $arsip->tahun_periode; ?></td>
+                                <td><?= $arsip->tahun_periode ?></td>
                                 <td><?= date('d-m-Y', strtotime($arsip->tgl_submit)) ?></td>
                                 <td><?= $arsip->mhs_terlibat ?></td>
-                                <td><?= $arsip->status; ?></td>
+                                <td><?= $arsip->status ?></td>
                                 <td>
                                     <div class="dropdown">
                                         <button class="btn btn-sm btn-warning dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -48,7 +48,7 @@
                                             <button class="dropdown-item" type="button">Tahapan Pelaksanaan</button>
                                         </div>
                                         <!-- <a href="<?= site_url('dosen/delpenelitian/' . $arsip->id) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data penelitian ini?')" type="button" class="btn btn-warning btn-sm ml-1 text-white"> <i class="fa fa-trash"></i> Hapus</a> -->
-                                        <a class="btn btn-danger btn-sm rounded-0" href="<?= site_url('dosen/delpenelitian/' . $arsip->id) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data penelitian ini?')" type="button" data-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></a>
+                                        <a class="btn btn-danger btn-sm rounded-0" href="<?= site_url('dosen/delpenelitian/' . $arsip->id_penelitian) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data penelitian ini?')" type="button" data-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></a>
                                     </div>
                                 </td>
                             </tr>
