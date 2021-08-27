@@ -47,7 +47,6 @@
                                             </div>
                                             <button class="dropdown-item" type="button">Tahapan Pelaksanaan</button>
                                         </div>
-                                        <!-- <a href="<?= site_url('dosen/delpenelitian/' . $arsip->id) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data penelitian ini?')" type="button" class="btn btn-warning btn-sm ml-1 text-white"> <i class="fa fa-trash"></i> Hapus</a> -->
                                         <a class="btn btn-danger btn-sm rounded-0" href="<?= site_url('dosen/delpenelitian/' . $arsip->id_penelitian) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data penelitian ini?')" type="button" data-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></a>
                                     </div>
                                 </td>

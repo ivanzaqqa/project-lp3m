@@ -473,7 +473,7 @@ class Dosen extends CI_Controller
 	{
 		$this->load->helper('download');
 		$fileinfo = $this->jurpros_m->download($id);
-		$file = './upload/insentif_publikasi/jurnal_prosiding/' . $fileinfo['file_publikasi'];
+		$file = '/upload/insentif_publikasi/jurnal_prosiding/' . $fileinfo['file_publikasi'];
 		force_download($file, NULL);
 	}
 
