@@ -15,7 +15,7 @@
         <div class="card-body">
             <a href="<?= base_url('dosen/detail_profiledos') ?>" class="btn btn-sm btn-primary">Detail</a>
             <a href="<?= site_url('dosen/editprofile/') ?>" class="btn btn-sm btn-warning">Update</a>
-            <a href="<?= site_url('') ?>" class="btn btn-sm btn-primary">Ganti Password</a>
+            <a href="<?= site_url('dosen/ganti_password') ?>" class="btn btn-sm btn-primary">Ganti Password</a>
         </div>
     </div>
 

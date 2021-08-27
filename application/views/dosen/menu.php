@@ -77,7 +77,12 @@
                 <i class="fas fa-fw fa-user-edit"></i>
                 <span>Profile</span></a>
         </li>
-
         <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
+        <hr class="sidebar-divider d-none d-md-block"><br><br>
+        <li class="nav-item">
+            <img class="logo ml-3" style="width: 190px;" src="<?= base_url() ?>/assets/img/default/lp3m.jpeg" alt="logo lp3m">
+        </li>
+
+
+
     </ul>
