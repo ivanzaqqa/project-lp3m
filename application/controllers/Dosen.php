@@ -442,7 +442,7 @@ class Dosen extends CI_Controller
 
 			if ($this->form_validation->run()) {
 				$id = $this->input->post('id');
-				$id_jurnal_pros = $this->input->post('pilih_jurnal_prosiding');
+				$id_jurnal_pros = $this->input->post('pilih_jurpros');
 				$judul_artikel = $this->input->post('judul_artikel', TRUE);
 				$url_artikel = $this->input->post('url_artikel', TRUE);
 				if (!empty($_FILES['file_publikasi']['name'])) {
@@ -487,7 +487,7 @@ class Dosen extends CI_Controller
 
 	public function arsip_jurnal_prosiding()
 	{
-		$arsip['row'] = $this->jurpros_m->get_jurpros_by_id();
+		$arsip['row'] = $this->jurpros_m->get_jurpros();
 		$this->load->view('templates/auth_header');
 		$this->load->view('dosen/menu');
 		$this->load->view('templates/topbar');
@@ -508,8 +508,8 @@ class Dosen extends CI_Controller
 			$data = array(
 				'page' => 'edit',
 				'row' => $insentif_jurpros,
-				'pilih_jurpros' => $query_pilih_jurpros,
-				'jurpros' => $jurpros, 'selectedjurpros' => $insentif_jurpros->id_jurnal_pros,
+				'jurpros' => $query_pilih_jurpros,
+				'user_jurpros' => $jurpros, 'selectedjurpros' => $insentif_jurpros->id_jurnal_pros,
 			);
 			$this->load->view('templates/auth_header');
 			$this->load->view('dosen/menu');
@@ -537,7 +537,7 @@ class Dosen extends CI_Controller
 
 			if ($this->form_validation->run()) {
 				$id = $this->input->post('id');
-				$id_jurnal_pros = $this->input->post('pilih_jurnal_prosiding');
+				$id_jurnal_pros = $this->input->post('pilih_jurpros');
 				$judul_artikel = $this->input->post('judul_artikel', TRUE);
 				$url_artikel = $this->input->post('url_artikel', TRUE);
 				if (!empty($_FILES['file_publikasi']['name'])) {
@@ -550,8 +550,10 @@ class Dosen extends CI_Controller
 					'id_jurnal_pros' => $id_jurnal_pros,
 					'judul_artikel' => $judul_artikel,
 					'url_artikel' => $url_artikel,
-					'file_publikasi' => $file_publikasi,
 				];
+				if ($file_publikasi != null) {
+					$data['file_publikasi'] = $file_publikasi;
+				}
 				$update = $this->db->update('insentif_jurpros', $data);
 				if ($update) {
 					$this->session->set_flashdata('successalert', '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -585,9 +587,9 @@ class Dosen extends CI_Controller
 
 	public function del_jurnal_prosiding($id)
 	{
-		$fileinfo = $this->jurpros_m->download($id);
+		$fileinfo = $this->jurpros_m->get_jurpros_by_id($id);
 		if ($fileinfo->file_publikasi != null) {
-			$file = 'upload/insentif_publikasi/jurnal_prosiding/' . $fileinfo['file_publikasi'];
+			$file = './upload/insentif_publikasi/jurnal_prosiding/' . $fileinfo['file_publikasi'];
 			unlink($file);
 		}
 
@@ -775,7 +777,7 @@ class Dosen extends CI_Controller
 				'page' => 'edit',
 				'row' => $specscop,
 				'scopus' => $query_pilih_scopus,
-				'user_scopus' => $scopus, 'selectedjurpros' => $specscop->id_scopus,
+				'user_scopus' => $scopus, 'selectedscopus' => $specscop->id_scopus,
 			);
 			$this->load->view('templates/auth_header');
 			$this->load->view('dosen/menu');
@@ -845,15 +847,25 @@ class Dosen extends CI_Controller
 					'judul_artikel' => $judul_artikel,
 					'impact_factor_jurnal' => $impact_factor_jurnal,
 					'url_artikel' => $url_artikel,
-					'file_luaran' => $file_luaran,
-					'file_proposal_penelitian' => $file_proposal_penelitian,
-					'file_dokumentasi_catatan' => $file_dokumentasi_catatan,
-					'file_laporan_akhir' => $file_laporan_akhir,
-					'file_rpp_rps' => $file_rpp_rps,
 					'matkul_diampu' => $matkul_diampu,
 					'kelompok_riset' => $kelompok_riset,
 					'mhs_terlibat' => $mhs_terlibat,
 				];
+				if ($file_luaran != null) {
+					$data['file_luaran'] = $file_luaran;
+				}
+				if ($file_proposal_penelitian != null) {
+					$data['file_proposal_penelitian'] = $file_proposal_penelitian;
+				}
+				if ($file_dokumentasi_catatan != null) {
+					$data['file_dokumentasi_catatan'] = $file_dokumentasi_catatan;
+				}
+				if ($file_laporan_akhir != null) {
+					$data['file_laporan_akhir'] = $file_laporan_akhir;
+				}
+				if ($file_rpp_rps != null) {
+					$data['file_rpp_rps'] = $file_rpp_rps;
+				}
 				$update = $this->db->update('insentif_specscop', $data);
 				if ($update) {
 					$this->session->set_flashdata('successalert', '<div class="alert alert-success alert-dismissible fade show" role="alert">

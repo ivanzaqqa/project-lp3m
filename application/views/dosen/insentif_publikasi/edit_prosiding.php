@@ -15,7 +15,7 @@
                             <div class="input-group mb-3">
                                 <select class="form-control" name="pilih_jurpros" id="pilih_jurpros">
                                     <option value="">- Pilih -</option>
-                                    <?php foreach ($pilih_jurpros->result() as $key => $data) { ?>
+                                    <?php foreach ($jurpros->result() as $key => $data) { ?>
                                         <option value="<?= $data->id_jurnal_pros ?>" <?= $data->id_jurnal_pros == $row->id_jurnal_pros ? "selected" : null ?>><?= $data->nama_jurnal ?></option>;
                                     <?php } ?>
                                 </select>
@@ -47,7 +47,7 @@
                             } ?>
                             <input type="file" name="file_publikasi" class="form-control form-control-sm bg-light" id="file_publikasi">
                         </td>
-                    </tr>
+
                     <tr>
                         <td><a href="<?= base_url('dosen/arsip_jurnal_prosiding') ?>" type="button" class="btn btn-sm text-white" style="background-color: #670099;"> <i class="fa fa-chevron-circle-left"></i>
                                 Kembali</a>

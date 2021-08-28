@@ -12,14 +12,14 @@
                         <td class="font-weight-bold">Pilihan Jurnal atau Prosiding</td>
                         <td>:</td>
                         <td>
-                            <div class="input-group mb-3 <?= form_error('pilih_jurnal_prosiding') ? 'has-error' : null ?>">
-                                <select class="form-control form-control-sm bg-light" name="pilih_jurnal_prosiding" id="pilih_jurnal_prosiding">
+                            <div class="input-group mb-3 <?= form_error('pilih_jurpros') ? 'has-error' : null ?>">
+                                <select class="form-control form-control-sm bg-light" name="pilih_jurpros" id="pilih_jurpros">
                                     <option value="">- Pilih -</option>
                                     <?php foreach ($row->result() as $key => $data) { ?>
                                         <option value="<?= $data->id_jurnal_pros; ?>"><?= $data->nama_jurnal; ?></option>
                                     <?php } ?>
                                 </select>
-                                <?= form_error('pilih_jurnal_prosiding') ?>
+                                <?= form_error('pilih_jurpros') ?>
                             </div>
                         </td>
                     </tr>
