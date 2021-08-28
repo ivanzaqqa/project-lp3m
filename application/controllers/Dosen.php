@@ -719,7 +719,7 @@ class Dosen extends CI_Controller
 		}
 	}
 
-	// DOWNLOAD FILE PDF JURNAL ATAU PROSIDING
+	// DOWNLOAD FILE PDF SPECIAL SCOPUS
 	public function download_file_luaran($id)
 	{
 		$this->load->helper('download');
@@ -762,7 +762,7 @@ class Dosen extends CI_Controller
 
 	public function arsip_special_scopus()
 	{
-		$arsip['row'] = $this->specscop_m->get_scopus_by_id();
+		$arsip['row'] = $this->specscop_m->get_scopus();
 		$this->load->view('templates/auth_header');
 		$this->load->view('dosen/menu');
 		$this->load->view('templates/topbar');

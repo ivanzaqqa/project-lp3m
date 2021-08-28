@@ -21,7 +21,7 @@ class Specscop_m extends CI_Model
         $this->db->join('pilih_scopus', 'pilih_scopus.id_scopus = insentif_specscop.id_scopus');
         $this->db->join('status_insentif', 'status_insentif.id_status = insentif_specscop.id_status');
         if ($id != null) {
-            $this->db->where('id_insentif_specscop', $id);
+            $this->db->where('id_insentif_scopus', $id);
         }
         $query = $this->db->get();
         return $query;
@@ -40,7 +40,7 @@ class Specscop_m extends CI_Model
 
     public function get_by_id($id)
     {
-        $this->db->where("id_insentif_specscop", $id);
+        $this->db->where("id_insentif_scopus", $id);
         return $this->db->get('insentif_specscop')->row();
     }
 
@@ -70,26 +70,26 @@ class Specscop_m extends CI_Model
         if ($post['file_rpp_rps'] != null) {
             $params['file_rpp_rps'] = sha1($post['file_rpp_rps']);
         }
-        $this->db->where('id_insentif_specscop', $post['id_insentif_specscop']);
+        $this->db->where('id_insentif_scopus', $post['id_insentif_scopus']);
         $this->db->update('insentif_specscop', $params);
     }
 
     public function update($id, $post)
     {
-        $this->db->where('id_insentif_specscop', $id);
+        $this->db->where('id_insentif_scopus', $id);
         $this->db->update('insentif_specscop', $post);
     }
 
     function delete($id)
     {
-        $this->db->where('id_insentif_specscop', $id);
+        $this->db->where('id_insentif_scopus', $id);
         $this->db->delete('insentif_specscop');
         return true;
     }
 
     public function download($id)
     {
-        $query = $this->db->get_where('insentif_specscop', array('id_insentif_specscop' => $id));
+        $query = $this->db->get_where('insentif_specscop', array('id_insentif_scopus' => $id));
         return $query->row_array();
     }
 }
