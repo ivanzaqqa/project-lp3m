@@ -568,12 +568,14 @@ class Dosen extends CI_Controller
 		}
 	}
 
-	public function detail_jurnal_prosiding()
+	public function detail_jurnal_prosiding($id)
 	{
+		$detail['row'] = $this->jurpros_m->get_jurpros($id);
+
 		$this->load->view('templates/auth_header');
 		$this->load->view('dosen/menu');
 		$this->load->view('templates/topbar');
-		$this->load->view('dosen/insentif_publikasi/detail_prosiding');
+		$this->load->view('dosen/insentif_publikasi/detail_prosiding', $detail);
 		$this->load->view('templates/auth_footer');
 	}
 
