@@ -26,7 +26,7 @@
                     Arsip Spesial Scopus
                 </div>
                 <div class="card-body">
-                    <a href="<?= base_url('dosen/arsip_spesial_scopus') ?>" class="btn btn-primary">Kunjungi</a>
+                    <a href="<?= base_url('dosen/arsip_special_scopus') ?>" class="btn btn-primary">Kunjungi</a>
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
                     Submit Spisial Scopus
                 </div>
                 <div class="card-body">
-                    <a href="<?= base_url('dosen/submit_spesial_scopus') ?>" class="btn btn-primary">Kunjungi</a>
+                    <a href="<?= base_url('dosen/submit_special_scopus') ?>" class="btn btn-primary">Kunjungi</a>
                 </div>
             </div>
         </div>

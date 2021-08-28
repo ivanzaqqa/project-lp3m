@@ -65,9 +65,9 @@
                     <h6 class="collapse-header">Jurnal / Prosiding</h6>
                     <a class="collapse-item" href="<?= base_url('dosen/arsip_jurnal_prosiding') ?>">Arsip</a>
                     <a class=" collapse-item" href="<?= base_url('dosen/submit_jurnal_prosiding') ?>">Submit</a>
-                    <h6 class="collapse-header">Spesial Scopus</h6>
-                    <a class="collapse-item" href="<?= base_url('dosen/arsip_spesial_scopus') ?>">Arsip</a>
-                    <a class=" collapse-item" href="<?= base_url('dosen/submit_spesial_scopus') ?>">Submit</a>
+                    <h6 class="collapse-header">Special Scopus</h6>
+                    <a class="collapse-item" href="<?= base_url('dosen/arsip_special_scopus') ?>">Arsip</a>
+                    <a class=" collapse-item" href="<?= base_url('dosen/submit_special_scopus') ?>">Submit</a>
                 </div>
             </div>
         </li>

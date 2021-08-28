@@ -12,6 +12,7 @@ class Dosen extends CI_Controller
 		$this->load->model('penelitian_m');
 		$this->load->model('pengabmas_m');
 		$this->load->model('jurpros_m');
+		$this->load->model('specscop_m');
 	}
 	public function index()
 	{
@@ -391,6 +392,15 @@ class Dosen extends CI_Controller
 		}
 	}
 
+	public function ganti_password()
+	{
+		$this->load->view('templates/auth_header');
+		$this->load->view('dosen/menu');
+		$this->load->view('templates/topbar');
+		$this->load->view('profile/ganti_pass');
+		$this->load->view('templates/auth_footer');
+	}
+
 
 	// INSENTIF PUBLIKASI
 	public function insentif_publikasi()
@@ -593,14 +603,14 @@ class Dosen extends CI_Controller
 		$this->jurpros_m->delete($id);
 		if ($this->db->affected_rows() > 0) {
 			$this->session->set_flashdata('successdel', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Data anda berhasil dihapus.</strong>
+                <strong>Data jurnal atau prosiding berhasil dihapus.</strong>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>');
 		} else {
 			$this->session->set_flashdata('errordel', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Data anda gagal dihapus.</strong>
+                <strong>Data jurnal atau prosiding gagal dihapus.</strong>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -611,45 +621,224 @@ class Dosen extends CI_Controller
 
 
 	// SPECIAL SCOPUS
-	public function submit_spesial_scopus()
+	public function submit_special_scopus()
 	{
+		$pilih_scopus['row'] = $this->specscop_m->get_pilih_scopus();
 		$this->load->view('templates/auth_header');
 		$this->load->view('dosen/menu');
 		$this->load->view('templates/topbar');
-		$this->load->view('dosen/insentif_publikasi/submit_spesial_scopus');
-		$this->load->view('templates/auth_footer');
-	}
-	public function arsip_spesial_scopus()
-	{
-		$this->load->view('templates/auth_header');
-		$this->load->view('dosen/menu');
-		$this->load->view('templates/topbar');
-		$this->load->view('dosen/insentif_publikasi/arsip_spesial_scopus');
-		$this->load->view('templates/auth_footer');
-	}
-	public function edit_spesial_scopus()
-	{
-		$this->load->view('templates/auth_header');
-		$this->load->view('dosen/menu');
-		$this->load->view('templates/topbar');
-		$this->load->view('dosen/insentif_publikasi/edit_spesial_scopus');
-		$this->load->view('templates/auth_footer');
-	}
-	public function detail_spesial_scopus()
-	{
-		$this->load->view('templates/auth_header');
-		$this->load->view('dosen/menu');
-		$this->load->view('templates/topbar');
-		$this->load->view('dosen/insentif_publikasi/detail_spesial_scopus');
+		$this->load->view('dosen/insentif_publikasi/submit_special_scopus', $pilih_scopus);
 		$this->load->view('templates/auth_footer');
 	}
 
-	public function ganti_password()
+	public function proses_submit_special_scopus()
 	{
+		if (isset($_POST['submit'])) {
+			$this->load->library('form_validation');
+			$this->form_validation->set_rules('judul_artikel', 'Periode Pengajuan', 'required');
+			$this->form_validation->set_rules('impact_factor_jurnal', 'Impact Factor Jurnal', 'required');
+			$this->form_validation->set_rules('url_artikel', 'URL Artikel', 'required');
+			$this->form_validation->set_rules('matkul_diampu', 'Mata Kuliah Diampu', 'required');
+			$this->form_validation->set_rules('kelompok_riset', 'Kelompok Riset', 'required');
+			$this->form_validation->set_rules('mhs_terlibat', 'Mahasiswa Yang Terlibat', 'required');
+
+			$this->form_validation->set_message('required', '%s Masih Kosong!!');
+			$this->form_validation->set_error_delimiters('<span class="help-block text-danger">', '</span>');
+
+			$config['upload_path']          = './upload/insentif_publikasi/special_scopus/';
+			$config['allowed_types']        = 'pdf';
+			$config['max_size']            = 2048;
+			$config['encrypt_name']         = TRUE;
+			$this->load->library('upload', $config);
+
+			if ($this->form_validation->run()) {
+				$id = $this->input->post('id');
+				$id_scopus = $this->input->post('pilih_scopus');
+				$judul_artikel = $this->input->post('judul_artikel', TRUE);
+				$impact_factor_jurnal = $this->input->post('impact_factor_jurnal', TRUE);
+				$url_artikel = $this->input->post('url_artikel', TRUE);
+				if (!empty($_FILES['file_luaran']['name'])) {
+					$this->upload->do_upload('file_luaran');
+					$file_luaran = $this->upload->data();
+					$file_luaran = $file_luaran['file_name'];
+				}
+				if (!empty($_FILES['file_dokumentasi_catatan']['name'])) {
+					$this->upload->do_upload('file_dokumentasi_catatan');
+					$file_dokumentasi_catatan = $this->upload->data();
+					$file_dokumentasi_catatan = $file_dokumentasi_catatan['file_name'];
+				}
+				if (!empty($_FILES['file_laporan_akhir']['name'])) {
+					$this->upload->do_upload('file_laporan_akhir');
+					$file_laporan_akhir = $this->upload->data();
+					$file_laporan_akhir = $file_laporan_akhir['file_name'];
+				}
+				if (!empty($_FILES['file_rpp_rps']['name'])) {
+					$this->upload->do_upload('file_rpp_rps');
+					$file_rpp_rps = $this->upload->data();
+					$file_rpp_rps = $file_rpp_rps['file_name'];
+				}
+				$matkul_diampu = $this->input->post('matkul_diampu', TRUE);
+				$kelompok_riset = $this->input->post('kelompok_riset', TRUE);
+				$mhs_terlibat = $this->input->post('mhs_terlibat', TRUE);
+				$data = [
+					'id' => $id,
+					'id_scopus' => $id_scopus,
+					'id_status' => "3",
+					'judul_artikel' => $judul_artikel,
+					'impact_factor_jurnal' => $impact_factor_jurnal,
+					'url_artikel' => $url_artikel,
+					'file_luaran' => $file_luaran,
+					'file_dokumentasi_catatan' => $file_dokumentasi_catatan,
+					'file_laporan_akhir' => $file_laporan_akhir,
+					'file_rpp_rps' => $file_rpp_rps,
+					'matkul_diampu' => $matkul_diampu,
+					'kelompok_riset' => $kelompok_riset,
+					'mhs_terlibat' => $mhs_terlibat,
+				];
+				$insert = $this->db->insert('insentif_scopus', $data);
+				if ($insert) {
+					$this->session->set_flashdata('successalert', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Data Insentif Special Scopus Berhasil Disubmit.</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>');
+					redirect('dosen/submit_special_scopus');
+				}
+			} else {
+				$this->submit_special_scopus();
+			}
+		} else {
+			$this->submit_special_scopus();
+		}
+	}
+
+	// DOWNLOAD FILE PDF JURNAL ATAU PROSIDING
+	public function download_file_luaran($id)
+	{
+		$this->load->helper('download');
+		$fileinfo = $this->specscop_m->download($id);
+		$file = '/upload/insentif_publikasi/special_scopus/' . $fileinfo['file_luaran'];
+		force_download($file, NULL);
+	}
+
+	public function download_file_dokumentasi_catatan($id)
+	{
+		$this->load->helper('download');
+		$fileinfo = $this->specscop_m->download($id);
+		$file = '/upload/insentif_publikasi/special_scopus/' . $fileinfo['file_dokumentasi_catatan'];
+		force_download($file, NULL);
+	}
+
+	public function download_file_laporan_akhir($id)
+	{
+		$this->load->helper('download');
+		$fileinfo = $this->specscop_m->download($id);
+		$file = '/upload/insentif_publikasi/special_scopus/' . $fileinfo['file_laporan_akhir'];
+		force_download($file, NULL);
+	}
+
+	public function download_file_rpp_rps($id)
+	{
+		$this->load->helper('download');
+		$fileinfo = $this->specscop_m->download($id);
+		$file = '/upload/insentif_publikasi/special_scopus/' . $fileinfo['file_rpp_rps'];
+		force_download($file, NULL);
+	}
+
+	public function arsip_special_scopus()
+	{
+		$arsip['row'] = $this->specscop_m->get_scopus_by_id();
 		$this->load->view('templates/auth_header');
 		$this->load->view('dosen/menu');
 		$this->load->view('templates/topbar');
-		$this->load->view('profile/ganti_pass');
+		$this->load->view('dosen/insentif_publikasi/arsip_special_scopus', $arsip);
 		$this->load->view('templates/auth_footer');
+	}
+
+	public function edit_special_scopus($id)
+	{
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('judul_artikel', 'Periode Pengajuan', 'required');
+		$this->form_validation->set_rules('impact_factor_jurnal', 'Impact Factor Jurnal', 'required');
+		$this->form_validation->set_rules('url_artikel', 'URL Artikel', 'required');
+		$this->form_validation->set_rules('matkul_diampu', 'Mata Kuliah Diampu', 'required');
+		$this->form_validation->set_rules('kelompok_riset', 'Kelompok Riset', 'required');
+		$this->form_validation->set_rules('mhs_terlibat', 'Mahasiswa Yang Terlibat', 'required');
+		$this->form_validation->set_error_delimiters('<span class="help-block text-danger">', '</span>');
+
+		if ($this->form_validation->run() == FALSE) {
+			$query = $this->specscop_m->get_scopus($id);
+			if ($query->num_rows() > 0) {
+				$specscop = $query->row();
+				$query_pilih_scopus = $this->specscop_m->get_pilih_scopus();
+				$scopus[null] = '- Pilih -';
+				foreach ($query_pilih_scopus->result() as $scopus_id) {
+					$scopus[$scopus_id->id_scopus] = $scopus_id->nama_scopus;
+				}
+				$data = array(
+					'page' => 'edit',
+					'row' => $specscop,
+					'scopus' => $query_pilih_scopus,
+					'user_scopus' => $scopus, 'selectedjurpros' => $specscop->id_scopus,
+				);
+				$this->load->view('templates/auth_header');
+				$this->load->view('dosen/menu');
+				$this->load->view('templates/topbar');
+				$this->load->view('dosen/insentif_publikasi/edit_special_scopus', $data);
+				$this->load->view('templates/auth_footer');
+			}
+		} else {
+			echo "<script>alert('Data tidak ditemukan');";
+			echo "window.location='" . site_url('dosen/arsip_special_scopus') . "';</script>";
+		}
+	}
+	public function detail_special_scopus($id)
+	{
+		$detail['row'] = $this->specscop_m->get_scopus($id);
+		$this->load->view('templates/auth_header');
+		$this->load->view('dosen/menu');
+		$this->load->view('templates/topbar');
+		$this->load->view('dosen/insentif_publikasi/detail_special_scopus', $detail);
+		$this->load->view('templates/auth_footer');
+	}
+
+	public function del_special_scopus($id)
+	{
+		$fileinfo = $this->specscop_m->download($id);
+		if ($fileinfo->file_luaran != null) {
+			$file = 'upload/insentif_publikasi/special_scopus/' . $fileinfo['file_luaran'];
+			unlink($file);
+		}
+		if ($fileinfo->file_dokumentasi_catatan != null) {
+			$file = 'upload/insentif_publikasi/special_scopus/' . $fileinfo['file_dokumentasi_catatan'];
+			unlink($file);
+		}
+		if ($fileinfo->file_laporan_akhir != null) {
+			$file = 'upload/insentif_publikasi/special_scopus/' . $fileinfo['file_laporan_akhir'];
+			unlink($file);
+		}
+		if ($fileinfo->file_rpp_rps != null) {
+			$file = 'upload/insentif_publikasi/special_scopus/' . $fileinfo['file_rpp_rps'];
+			unlink($file);
+		}
+
+		$this->specscop_m->delete($id);
+		if ($this->db->affected_rows() > 0) {
+			$this->session->set_flashdata('successdel', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Data special scopus berhasil dihapus.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+		} else {
+			$this->session->set_flashdata('errordel', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Data special scopus gagal dihapus.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+		}
+		redirect('dosen/arsip_special_scopus');
 	}
 }
