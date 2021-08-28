@@ -402,6 +402,8 @@ class Dosen extends CI_Controller
 		$this->load->view('templates/auth_footer');
 	}
 
+
+	// JURNAL ATAU PROSIDING
 	public function submit_jurnal_prosiding()
 	{
 		$pilih_jurpros['row'] = $this->jurpros_m->get_pilih_jurpros();
