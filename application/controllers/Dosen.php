@@ -532,10 +532,10 @@ class Dosen extends CI_Controller
 
 	public function proses_edit_jurnal_prosiding()
 	{
-		$config['upload_path']          = './upload/insentif_publikasi/jurnal_prosiding/';
-		$config['allowed_types']        = 'pdf';
-		$config['max_size']            = 2048;
-		$config['encrypt_name']         = TRUE;
+		$config['upload_path']		= './upload/insentif_publikasi/jurnal_prosiding/';
+		$config['allowed_types']	= 'pdf';
+		$config['max_size']			= 2048;
+		$config['encrypt_name']		= TRUE;
 		$this->load->library('upload', $config);
 
 		$post = $this->input->post(null, TRUE);
@@ -645,10 +645,10 @@ class Dosen extends CI_Controller
 			$this->form_validation->set_message('required', '%s Masih Kosong!!');
 			$this->form_validation->set_error_delimiters('<span class="help-block text-danger">', '</span>');
 
-			$config['upload_path']          = './upload/insentif_publikasi/special_scopus/';
-			$config['allowed_types']        = 'pdf';
-			$config['max_size']            = 2048;
-			$config['encrypt_name']         = TRUE;
+			$config['upload_path']		= './upload/insentif_publikasi/special_scopus/';
+			$config['allowed_types']	= 'pdf';
+			$config['max_size']			= 2048;
+			$config['encrypt_name']		= TRUE;
 			$this->load->library('upload', $config);
 
 			if ($this->form_validation->run()) {
