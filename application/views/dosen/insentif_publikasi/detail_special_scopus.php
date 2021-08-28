@@ -77,7 +77,7 @@
                     <td><button class="btn btn-sm btn-warning">Download</button></td>
                 </tr>
                 <tr>
-                    <td><a href="<?= base_url('dosen/arsip_spesial_scopus') ?>" type="button" class="btn btn-sm text-white" style="background-color: #670099;"> <i class="fa fa-chevron-circle-left"></i>
+                    <td><a href="<?= base_url('dosen/arsip_special_scopus') ?>" type="button" class="btn btn-sm text-white" style="background-color: #670099;"> <i class="fa fa-chevron-circle-left"></i>
                             Kembali</a></td>
                 </tr>
             </table>

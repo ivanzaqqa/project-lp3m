@@ -21,7 +21,7 @@ class Specscop_m extends CI_Model
         $this->db->join('pilih_scopus', 'pilih_scopus.id_scopus = insentif_specscop.id_scopus');
         $this->db->join('status_insentif', 'status_insentif.id_status = insentif_specscop.id_status');
         if ($id != null) {
-            $this->db->where('id_insentif_scopus', $id);
+            $this->db->where('id_insentif_specscop', $id);
         }
         $query = $this->db->get();
         return $query;
@@ -40,7 +40,7 @@ class Specscop_m extends CI_Model
 
     public function get_by_id($id)
     {
-        $this->db->where("id_insentif_scopus", $id);
+        $this->db->where("id_insentif_specscop", $id);
         return $this->db->get('insentif_specscop')->row();
     }
 
@@ -58,6 +58,9 @@ class Specscop_m extends CI_Model
         if ($post['file_luaran'] != null) {
             $params['file_luaran'] = sha1($post['file_luaran']);
         }
+        if ($post['file_proposal_penelitian'] != null) {
+            $params['file_proposal_penelitian'] = sha1($post['file_proposal_penelitian']);
+        }
         if ($post['file_dokumentasi_catatan'] != null) {
             $params['file_dokumentasi_catatan'] = sha1($post['file_dokumentasi_catatan']);
         }
@@ -67,26 +70,26 @@ class Specscop_m extends CI_Model
         if ($post['file_rpp_rps'] != null) {
             $params['file_rpp_rps'] = sha1($post['file_rpp_rps']);
         }
-        $this->db->where('id_insentif_scopus', $post['id_insentif_scopus']);
+        $this->db->where('id_insentif_specscop', $post['id_insentif_specscop']);
         $this->db->update('insentif_specscop', $params);
     }
 
     public function update($id, $post)
     {
-        $this->db->where('id_insentif_scopus', $id);
+        $this->db->where('id_insentif_specscop', $id);
         $this->db->update('insentif_specscop', $post);
     }
 
     function delete($id)
     {
-        $this->db->where('id_insentif_scopus', $id);
+        $this->db->where('id_insentif_specscop', $id);
         $this->db->delete('insentif_specscop');
         return true;
     }
 
     public function download($id)
     {
-        $query = $this->db->get_where('insentif_specscop', array('id_insentif_scopus' => $id));
+        $query = $this->db->get_where('insentif_specscop', array('id_insentif_specscop' => $id));
         return $query->row_array();
     }
 }

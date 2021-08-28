@@ -23,7 +23,7 @@
         <div class="col-sm-3">
             <div class="card border-left-warning border-bottom-warning" style=" width: 17rem; height:8rem; background-color: #670099;">
                 <div class=" card-header">
-                    Arsip Spesial Scopus
+                    Arsip special Scopus
                 </div>
                 <div class="card-body">
                     <a href="<?= base_url('dosen/arsip_special_scopus') ?>" class="btn btn-primary">Kunjungi</a>

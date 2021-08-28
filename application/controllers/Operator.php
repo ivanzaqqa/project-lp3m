@@ -426,21 +426,21 @@ class Operator extends CI_Controller
 		$this->load->view('templates/auth_footer');
 	}
 
-	public function arsip_spesial_scopus()
+	public function arsip__scopus()
 	{
 		$this->load->view('templates/auth_header');
 		$this->load->view('operator/menu');
 		$this->load->view('templates/topbar');
-		$this->load->view('operator/insentif_publikasi/arsip_spesial_scopus');
+		$this->load->view('operator/insentif_publikasi/arsip_special_scopus');
 		$this->load->view('templates/auth_footer');
 	}
 
-	public function detail_spesial_scopus()
+	public function detail_special_scopus()
 	{
 		$this->load->view('templates/auth_header');
 		$this->load->view('operator/menu');
 		$this->load->view('templates/topbar');
-		$this->load->view('operator/insentif_publikasi/detail_spesial_scopus');
+		$this->load->view('operator/insentif_publikasi/detail_special_scopus');
 		$this->load->view('templates/auth_footer');
 	}
 }

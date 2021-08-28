@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="card shadow mb-2">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-secondary">Arsip Insentif Publikasi Spesial Scopus </h6>
+            <h6 class="m-0 font-weight-bold text-secondary">Arsip Insentif Publikasi special Scopus </h6>
         </div>
         <div class="card-body">
             <table class="table" id="dataTable" width="100%" cellspacing="0">
@@ -31,7 +31,7 @@
                         </td>
                         <td><button class="btn btn-sm btn-warning">Upload</button></td>
                         <td>
-                            <a href="<?= base_url('operator/detail_spesial_scopus') ?>" class="btn btn-sm text-white" style="background-color: #670099;">Detail</a>
+                            <a href="<?= base_url('operator/detail_special_scopus') ?>" class="btn btn-sm text-white" style="background-color: #670099;">Detail</a>
                         </td>
                     </tr>
                 </tbody>

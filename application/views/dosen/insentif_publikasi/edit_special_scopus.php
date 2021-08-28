@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="card shadow mb-2">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-secondary">Edit Insentif Publikasi Spesial Scopus</h6>
+            <h6 class="m-0 font-weight-bold text-secondary">Edit Insentif Publikasi special Scopus</h6>
         </div>
         <div class="card-body">
             <div class="row pl-2">
@@ -75,7 +75,7 @@
                             <td><input type="text" name="impact_jurnal" class="form-control form-control-sm bg-light" id="url_artikel"></td>
                         </tr>
                         <tr>
-                            <td><a href="<?= base_url('dosen/arsip_spesial_scopus') ?>" type="button" class="btn btn-sm text-white" style="background-color: #670099;"> <i class="fa fa-chevron-circle-left"></i>
+                            <td><a href="<?= base_url('dosen/arsip_special_scopus') ?>" type="button" class="btn btn-sm text-white" style="background-color: #670099;"> <i class="fa fa-chevron-circle-left"></i>
                                     Kembali</a>
                                 <button class="ml-2 btn btn-sm btn-warning">Update</button>
                             </td>

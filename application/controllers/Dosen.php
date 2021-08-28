@@ -662,6 +662,11 @@ class Dosen extends CI_Controller
 					$file_luaran = $this->upload->data();
 					$file_luaran = $file_luaran['file_name'];
 				}
+				if (!empty($_FILES['file_proposal_penelitian']['name'])) {
+					$this->upload->do_upload('file_proposal_penelitian');
+					$file_proposal_penelitian = $this->upload->data();
+					$file_proposal_penelitian = $file_proposal_penelitian['file_name'];
+				}
 				if (!empty($_FILES['file_dokumentasi_catatan']['name'])) {
 					$this->upload->do_upload('file_dokumentasi_catatan');
 					$file_dokumentasi_catatan = $this->upload->data();
@@ -688,6 +693,7 @@ class Dosen extends CI_Controller
 					'impact_factor_jurnal' => $impact_factor_jurnal,
 					'url_artikel' => $url_artikel,
 					'file_luaran' => $file_luaran,
+					'file_proposal_penelitian' => $file_proposal_penelitian,
 					'file_dokumentasi_catatan' => $file_dokumentasi_catatan,
 					'file_laporan_akhir' => $file_laporan_akhir,
 					'file_rpp_rps' => $file_rpp_rps,
@@ -695,7 +701,7 @@ class Dosen extends CI_Controller
 					'kelompok_riset' => $kelompok_riset,
 					'mhs_terlibat' => $mhs_terlibat,
 				];
-				$insert = $this->db->insert('insentif_scopus', $data);
+				$insert = $this->db->insert('insentif_specscop', $data);
 				if ($insert) {
 					$this->session->set_flashdata('successalert', '<div class="alert alert-success alert-dismissible fade show" role="alert">
                         <strong>Data Insentif Special Scopus Berhasil Disubmit.</strong>
@@ -719,6 +725,14 @@ class Dosen extends CI_Controller
 		$this->load->helper('download');
 		$fileinfo = $this->specscop_m->download($id);
 		$file = '/upload/insentif_publikasi/special_scopus/' . $fileinfo['file_luaran'];
+		force_download($file, NULL);
+	}
+
+	public function download_file_proposal_penelitian($id)
+	{
+		$this->load->helper('download');
+		$fileinfo = $this->specscop_m->download($id);
+		$file = '/upload/insentif_publikasi/special_scopus/' . $fileinfo['file_proposal_penelitian'];
 		force_download($file, NULL);
 	}
 
@@ -808,6 +822,10 @@ class Dosen extends CI_Controller
 		$fileinfo = $this->specscop_m->download($id);
 		if ($fileinfo->file_luaran != null) {
 			$file = 'upload/insentif_publikasi/special_scopus/' . $fileinfo['file_luaran'];
+			unlink($file);
+		}
+		if ($fileinfo->file_proposal_penelitian != null) {
+			$file = 'upload/insentif_publikasi/special_scopus/' . $fileinfo['file_proposal_penelitian'];
 			unlink($file);
 		}
 		if ($fileinfo->file_dokumentasi_catatan != null) {

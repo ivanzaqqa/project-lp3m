@@ -13,10 +13,10 @@
         <div class="col-sm-3">
             <div class="card border-left-primary border-bottom-primary bg-warning" style=" width: 17rem; height:8rem;">
                 <div class=" card-header">
-                    Arsip Spesial Scopus
+                    Arsip special Scopus
                 </div>
                 <div class="card-body">
-                    <a href="<?= base_url('operator/arsip_spesial_scopus') ?>" class="btn btn-primary">Kunjungi</a>
+                    <a href="<?= base_url('operator/arsip_special_scopus') ?>" class="btn btn-primary">Kunjungi</a>
                 </div>
             </div>
         </div>

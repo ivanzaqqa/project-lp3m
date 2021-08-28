@@ -62,8 +62,8 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Jurnal / Prosiding</h6>
                     <a class="collapse-item" href="<?= base_url('operator/arsip_jurnal_prosiding') ?>">Arsip</a>
-                    <h6 class="collapse-header">Spesial Scopus</h6>
-                    <a class="collapse-item" href="<?= base_url('operator/arsip_spesial_scopus') ?>">Arsip</a>
+                    <h6 class="collapse-header">special Scopus</h6>
+                    <a class="collapse-item" href="<?= base_url('operator/arsip_special_scopus') ?>">Arsip</a>
                 </div>
             </div>
         </li>
