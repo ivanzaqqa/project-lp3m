@@ -44,6 +44,20 @@ class Jurpros_m extends CI_Model
         return $this->db->get('insentif_jurpros')->row();
     }
 
+    public function edit($post)
+    {
+        $params = [
+            'id_jurnal_pros' => $post['nama_jurnal'],
+            'judul_artikel' => $post['judul_artikel'],
+            'url_artikel' => $post['url_artikel'],
+        ];
+        if ($post['file_publikasi'] != null) {
+            $params['file_publikasi'] = sha1($post['file_publikasi']);
+        }
+        $this->db->where('id_insentif_jurpros', $post['id_insentif_jurpros']);
+        $this->db->update('insentif_jurpros', $params);
+    }
+
     public function update($id, $post)
     {
         $this->db->where('id_insentif_jurpros', $id);

@@ -357,11 +357,6 @@ class Dosen extends CI_Controller
 
 	public function delpenelitian($id)
 	{
-		// $this->load->helper('download');
-		// $fileinfo = $this->penelitian_m->download($id);
-		// $file = 'upload/penelitian/' . $fileinfo['file_proposal'];
-		// force_download($file, NULL);
-
 		$fileinfo = $this->penelitian_m->download($id);
 		if ($fileinfo->file_proposal != null) {
 			$file = 'upload/penelitian/' . $fileinfo['file_proposal'];
@@ -487,13 +482,90 @@ class Dosen extends CI_Controller
 		$this->load->view('templates/auth_footer');
 	}
 
-	public function edit_jurnal_prosiding()
+	public function edit_jurnal_prosiding($id)
 	{
-		$this->load->view('templates/auth_header');
-		$this->load->view('dosen/menu');
-		$this->load->view('templates/topbar');
-		$this->load->view('dosen/insentif_publikasi/edit_prosiding');
-		$this->load->view('templates/auth_footer');
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('pilih_jurpros', 'Pilih Jurpros', 'required');
+		$this->form_validation->set_rules('judul_artikel', 'Judul Artikel', 'required');
+		$this->form_validation->set_rules('url_artikel', 'URL Artikel', 'required');
+		$this->form_validation->set_error_delimiters('<span class="help-block text-danger">', '</span>');
+
+		if ($this->form_validation->run() == FALSE) {
+			$query = $this->jurpros_m->get_jurpros($id);
+			if ($query->num_rows() > 0) {
+				$jurpros = $query->row();
+				$query_pilih_jurpros = $this->jurpros_m->get_pilih_jurpros();
+				$pilih_jurpros[null] = '- Pilih -';
+				foreach ($query_pilih_jurpros->result() as $jurnal_pros_id) {
+					$pilih_jurpros[$jurnal_pros_id->id_jurnal_pros] = $jurnal_pros_id->nama_jurnal;
+				}
+				$data = array(
+					'page' => 'edit',
+					'row' => $jurpros,
+					'pilih_jurpros' => $query_pilih_jurpros,
+					'jurpros' => $pilih_jurpros, 'selectedjurpros' => $jurpros->id_jurnal_pros,
+				);
+				$this->load->view('templates/auth_header');
+				$this->load->view('dosen/menu');
+				$this->load->view('templates/topbar');
+				$this->load->view('dosen/insentif_publikasi/edit_prosiding', $data);
+				$this->load->view('templates/auth_footer');
+			}
+		} else {
+			echo "<script>alert('Data tidak ditemukan');";
+			echo "window.location='" . site_url('dosen/arsip_jurnal_prosiding') . "';</script>";
+		}
+	}
+
+	public function proses_edit_jurnal_prosiding()
+	{
+		$config['upload_path']          = './upload/insentif_publikasi/jurnal_prosiding/';
+		$config['allowed_types']        = 'pdf';
+		$config['max_size']            = 2048;
+		$config['encrypt_name']         = TRUE;
+		$this->load->library('upload', $config);
+
+		$post = $this->input->post(null, TRUE);
+		if (isset($_POST['edit'])) {
+			if (@$_FILES['file_publikasi']['name'] != null) {
+				if ($this->upload->do_upload('file_publikasi')) {
+
+					$jurpros = $this->jurpros_m->get_jurpros($post['id_insentif_jurpros'])->row();
+					if ($jurpros->file_publikasi != null) {
+						$target_file = './upload/insentif_publikasi/jurnal_prosiding/' . $jurpros->file_publikasi;
+						unlink($target_file);
+					}
+
+					$post['file_publikasi'] = $this->upload->data('file_name');
+					$this->jurpros_m->edit($post);
+					if ($this->db->affected_rows() > 0) {
+						$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+				<strong>Data insentif jurnal atau prosiding berhasil diupdate.</strong>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>');
+					}
+					redirect('dosen/arsip_jurnal_prosiding');
+				} else {
+					$error = $this->upload->display_errors();
+					$this->session->set_flashdata('erroredit', $error);
+					redirect('dosen/edit_jurnal_prosiding');
+				}
+			} else {
+				$post['file_publikasi'] = null;
+				$this->jurpros_m->edit($post);
+				if ($this->db->affected_rows() > 0) {
+					$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+				<strong>Data insentif jurnal atau prosiding berhasil diupdate.</strong>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>');
+				}
+				redirect('dosen/arsip_jurnal_prosiding');
+			}
+		}
 	}
 
 	public function detail_jurnal_prosiding()

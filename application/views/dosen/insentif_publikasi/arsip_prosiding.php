@@ -4,6 +4,7 @@
             <h6 class="m-0 font-weight-bold text-secondary">Arsip Insentif Publikasi Jurnal atau Prosiding</h6>
         </div>
         <div class="card-body">
+            <?= $this->session->flashdata('successedit') ?>
             <?= $this->session->flashdata('successdel') ?>
             <?= $this->session->flashdata('errordel') ?>
             <table class="table" id="dataTable" width="100%" cellspacing="0">
