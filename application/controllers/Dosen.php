@@ -137,6 +137,41 @@ class Dosen extends CI_Controller
 		$this->load->view('templates/auth_footer');
 	}
 
+	public function delpenelitian($id)
+	{
+		$fileinfo = $this->penelitian_m->download($id);
+		if ($fileinfo->file_proposal != null) {
+			$file = 'upload/penelitian/' . $fileinfo['file_proposal'];
+			unlink($file);
+		}
+		if ($fileinfo->file_rps != null) {
+			$file = 'upload/penelitian/' . $fileinfo['file_rps'];
+			unlink($file);
+		}
+		if ($fileinfo->form_integrasi != null) {
+			$file = 'upload/penelitian/' . $fileinfo['form_integrasi'];
+			unlink($file);
+		}
+
+		$this->penelitian_m->delete($id);
+		if ($this->db->affected_rows() > 0) {
+			$this->session->set_flashdata('successdel', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+				<strong>Data anda berhasil dihapus.</strong>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>');
+		} else {
+			$this->session->set_flashdata('errordel', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+				<strong>Data anda gagal dihapus.</strong>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>');
+		}
+		redirect('dosen/arsippenelitian');
+	}
+
 
 	// PENGABDIAN MASYARAKAT
 	public function daftarusulanpengabdian()
@@ -254,6 +289,7 @@ class Dosen extends CI_Controller
 		$this->load->view('templates/auth_footer');
 	}
 
+	// PROFILE DOSEN
 	public function profiledos()
 	{
 		$this->load->view('templates/auth_header');
@@ -355,41 +391,6 @@ class Dosen extends CI_Controller
 		}
 	}
 
-	public function delpenelitian($id)
-	{
-		$fileinfo = $this->penelitian_m->download($id);
-		if ($fileinfo->file_proposal != null) {
-			$file = 'upload/penelitian/' . $fileinfo['file_proposal'];
-			unlink($file);
-		}
-		if ($fileinfo->file_rps != null) {
-			$file = 'upload/penelitian/' . $fileinfo['file_rps'];
-			unlink($file);
-		}
-		if ($fileinfo->form_integrasi != null) {
-			$file = 'upload/penelitian/' . $fileinfo['form_integrasi'];
-			unlink($file);
-		}
-
-		$this->penelitian_m->delete($id);
-		if ($this->db->affected_rows() > 0) {
-			$this->session->set_flashdata('successdel', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-				<strong>Data anda berhasil dihapus.</strong>
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-				</button>
-			</div>');
-		} else {
-			$this->session->set_flashdata('errordel', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-				<strong>Data anda gagal dihapus.</strong>
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-				</button>
-			</div>');
-		}
-		redirect('dosen/arsippenelitian');
-	}
-
 
 	// INSENTIF PUBLIKASI
 	public function insentif_publikasi()
@@ -463,7 +464,7 @@ class Dosen extends CI_Controller
 		}
 	}
 
-	// DOWNLOAD FILE PDF USULAN PENELITIAN
+	// DOWNLOAD FILE PDF JURNAL ATAU PROSIDING
 	public function download_dpu_publikasi($id)
 	{
 		$this->load->helper('download');
@@ -579,6 +580,35 @@ class Dosen extends CI_Controller
 		$this->load->view('templates/auth_footer');
 	}
 
+	public function del_jurnal_prosiding($id)
+	{
+		$fileinfo = $this->jurpros_m->download($id);
+		if ($fileinfo->file_publikasi != null) {
+			$file = 'upload/insentif_publikasi/jurnal_prosiding/' . $fileinfo['file_publikasi'];
+			unlink($file);
+		}
+
+		$this->jurpros_m->delete($id);
+		if ($this->db->affected_rows() > 0) {
+			$this->session->set_flashdata('successdel', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Data anda berhasil dihapus.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+		} else {
+			$this->session->set_flashdata('errordel', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Data anda gagal dihapus.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+		}
+		redirect('dosen/arsip_jurnal_prosiding');
+	}
+
+
+	// SPECIAL SCOPUS
 	public function submit_spesial_scopus()
 	{
 		$this->load->view('templates/auth_header');
