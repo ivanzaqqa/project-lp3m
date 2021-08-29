@@ -16,24 +16,47 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Judul 1</td>
-                        <td>Judul 1</td>
-                        <td>
-                            <div class="input-group" size="20">
-                                <select class="custom-select" id="inputGroupSelect01">
-                                    <option selected>- Pilih Status -</option>
-                                    <option value="">Didanai</option>
-                                    <option value="">Ditolak</option>
-                                </select>
-                            </div>
-                        </td>
-                        <td><button class="btn btn-sm btn-warning">Upload</button></td>
-                        <td>
-                            <a href="<?= base_url('operator/detail_special_scopus') ?>" class="btn btn-sm text-white" style="background-color: #670099;">Detail</a>
-                        </td>
-                    </tr>
+                    <?php
+                    $no = 1;
+                    foreach ($row->result() as $key => $data) { ?>
+                        <tr>
+                            <td><?= $no++ ?></td>
+                            <td><?= $data->judul_artikel; ?></td>
+                            <td><?= $data->nama_jurnal; ?></td>
+                            <td>
+                                <?php
+                                echo form_dropdown(
+                                    'id_status' . $data->id_insentif_scopus,
+                                    array(1 => "Disetujui", 2 => "Ditolak", 3 => "-- Pilih --"),
+                                    $data->id_status,
+                                    array(
+                                        'class' => "btn btn-md btn-primary dropdown-toggle",
+                                        'onchange' => "changeStat($data->id_insentif_scopus)"
+                                    )
+                                ); ?>
+
+                                <script type="text/javascript">
+                                    function changeStat(id_insentif_scopus) {
+                                        $.ajax({
+                                            url: "<?= base_url() ?>operator/changestat_scopus",
+                                            type: "POST",
+                                            dataType: "json",
+                                            data: {
+                                                id_insentif_scopus: id_insentif_scopus
+                                            },
+                                            success: function(data) {
+                                                alert(data.msg);
+                                            }
+                                        })
+                                    }
+                                </script>
+                            </td>
+                            <td><button class="btn btn-sm btn-warning">Upload</button></td>
+                            <td>
+                                <a href="<?= base_url('operator/detail_special_scopus') ?>" class="btn btn-sm text-white" style="background-color: #670099;">Detail</a>
+                            </td>
+                        </tr>
+                    <?php } ?>
                 </tbody>
             </table>
 

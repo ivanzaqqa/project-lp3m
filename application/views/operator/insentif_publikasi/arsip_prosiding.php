@@ -16,24 +16,47 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Judul 1</td>
-                        <td>Judul 1</td>
-                        <td>
-                            <div class="input-group" size="20">
-                                <select class="custom-select" id="inputGroupSelect01">
-                                    <option selected>- Pilih Status -</option>
-                                    <option value="">Didanai</option>
-                                    <option value="">Ditolak</option>
-                                </select>
-                            </div>
-                        </td>
-                        <td><button class="btn btn-sm btn-warning">Upload</button></td>
-                        <td>
-                            <a href="<?= base_url('operator/detail_jurnal_prosiding') ?>" class="btn btn-sm text-white" style="background-color: #670099;">Detail</a>
-                        </td>
-                    </tr>
+                    <?php
+                    $no = 1;
+                    foreach ($row->result() as $key => $data) { ?>
+                        <tr>
+                            <td><?= $no++ ?></td>
+                            <td><?= $data->judul_artikel; ?></td>
+                            <td><?= $data->nama_jurnal; ?></td>
+                            <td>
+                                <?php
+                                echo form_dropdown(
+                                    'id_status' . $data->id_insentif_jurpros,
+                                    array(1 => "Disetujui", 2 => "Ditolak", 3 => "-- Pilih --"),
+                                    $data->id_status,
+                                    array(
+                                        'class' => "btn btn-md btn-primary dropdown-toggle",
+                                        'onchange' => "changeStat($data->id_insentif_jurpros)"
+                                    )
+                                ); ?>
+
+                                <script type="text/javascript">
+                                    function changeStat(id_insentif_jurpros) {
+                                        $.ajax({
+                                            url: "<?= base_url() ?>operator/changestat_jurpros",
+                                            type: "POST",
+                                            dataType: "json",
+                                            data: {
+                                                id_insentif_jurpros: id_insentif_jurpros
+                                            },
+                                            success: function(data) {
+                                                alert(data.msg);
+                                            }
+                                        })
+                                    }
+                                </script>
+                            </td>
+                            <td><button class="btn btn-sm btn-warning">Upload</button></td>
+                            <td>
+                                <a href="<?= base_url('operator/detail_jurnal_prosiding/' . $data->id_insentif_jurpros) ?>" class="btn btn-sm text-white" style="background-color: #670099;">Detail</a>
+                            </td>
+                        </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>

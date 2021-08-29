@@ -11,6 +11,8 @@ class Operator extends CI_Controller
 		check_dosen();
 		$this->load->model('user_m');
 		$this->load->model('pengabmas_m');
+		$this->load->model('jurpros_m');
+		$this->load->model('specscop_m');
 	}
 	public function index()
 	{
@@ -396,9 +398,9 @@ class Operator extends CI_Controller
 		}
 		redirect('operator/datadosen');
 	}
-	// End Kelola Data
 
-	//insentif publikasi
+
+	//INSENTIF PUBLIKASI
 	public function insentif_publikasi()
 	{
 		$this->load->view('templates/auth_header');
@@ -408,39 +410,74 @@ class Operator extends CI_Controller
 		$this->load->view('templates/auth_footer');
 	}
 
+	// JURNAL ATAU PROSIDING
 	public function arsip_jurnal_prosiding()
 	{
+		$data['row'] = $this->jurpros_m->get_jurpros();
 		$this->load->view('templates/auth_header');
 		$this->load->view('operator/menu');
 		$this->load->view('templates/topbar');
-		$this->load->view('operator/insentif_publikasi/arsip_prosiding');
+		$this->load->view('operator/insentif_publikasi/arsip_prosiding', $data);
 		$this->load->view('templates/auth_footer');
 	}
 
-	public function detail_jurnal_prosiding()
+	public function changestat_jurpros()
 	{
+		$id_insentif_jurpros = $this->input->post("id_insentif_jurpros", TRUE);
+		$check = $this->jurpros_m->get_by_id($id_insentif_jurpros);
+		$newstat = $check->id_status == 1 ? 2 : 1;
+		$data = array(
+			'id_insentif_jurpros' => $newstat
+		);
+		$this->jurpros_m->update($id_insentif_jurpros, $data);
+		$res['msg'] = "Status Jurnal atau Prosiding dengan judul " . $check->judul_artikel . " telah berhasil di update";
+		echo json_encode($res);
+	}
+
+	public function detail_jurnal_prosiding($id)
+	{
+		$detail['row'] = $this->jurpros_m->get_jurpros($id);
+
 		$this->load->view('templates/auth_header');
 		$this->load->view('operator/menu');
 		$this->load->view('templates/topbar');
-		$this->load->view('operator/insentif_publikasi/detail_prosiding');
+		$this->load->view('operator/insentif_publikasi/detail_prosiding', $detail);
 		$this->load->view('templates/auth_footer');
 	}
 
-	public function arsip__scopus()
+
+	// SPECIAL SCOPUS
+	public function arsip_special_scopus()
 	{
+		$data['row'] = $this->specscop_m->get_scopus();
 		$this->load->view('templates/auth_header');
 		$this->load->view('operator/menu');
 		$this->load->view('templates/topbar');
-		$this->load->view('operator/insentif_publikasi/arsip_special_scopus');
+		$this->load->view('operator/insentif_publikasi/arsip_special_scopus', $data);
 		$this->load->view('templates/auth_footer');
 	}
 
-	public function detail_special_scopus()
+	public function changestat_scopus()
 	{
+		$id_insentif_scopus = $this->input->post("id_insentif_scopus", TRUE);
+		$check = $this->specscop_m->get_by_id($id_insentif_scopus);
+		$newstat = $check->id_status == 1 ? 2 : 1;
+		$data = array(
+			'id_insentif_scopus' => $newstat
+		);
+		$this->specscop_m->update($id_insentif_scopus, $data);
+		$res['msg'] = "Status special scopus dengan judul " . $check->judul_artikel . " telah berhasil di update";
+		echo json_encode($res);
+	}
+
+	public function detail_special_scopus($id)
+	{
+		$detail['row'] = $this->specscop_m->get_scopus($id);
+
 		$this->load->view('templates/auth_header');
 		$this->load->view('operator/menu');
 		$this->load->view('templates/topbar');
-		$this->load->view('operator/insentif_publikasi/detail_special_scopus');
+		$this->load->view('operator/insentif_publikasi/detail_special_scopus', $detail);
 		$this->load->view('templates/auth_footer');
 	}
 }
