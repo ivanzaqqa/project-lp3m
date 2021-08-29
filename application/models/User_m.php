@@ -121,4 +121,13 @@ class User_m extends CI_Model
         $this->db->where('id', $post['id']);
         $this->db->update('users', $params);
     }
+
+    function ganti_password($post)
+    {
+        if (!empty($post['password'])) {
+            $params['password'] = sha1($post['password']);
+        }
+        $this->db->where('id', $post['id']);
+        $this->db->insert('users', $params);
+    }
 }

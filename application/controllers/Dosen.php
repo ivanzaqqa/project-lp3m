@@ -394,11 +394,54 @@ class Dosen extends CI_Controller
 
 	public function ganti_password()
 	{
-		$this->load->view('templates/auth_header');
-		$this->load->view('dosen/menu');
-		$this->load->view('templates/topbar');
-		$this->load->view('profile/ganti_pass');
-		$this->load->view('templates/auth_footer');
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('password', 'Password', 'required');
+		$this->form_validation->set_rules('passconf', 'Konfirmasi Password', 'required|matches[password]');
+		$this->form_validation->set_error_delimiters('<span class="help-block text-danger">', '</span>');
+
+		if ($this->form_validation->run() == FALSE) {
+			$query = $this->user_m->get();
+			if ($query->num_rows() > 0) {
+				$user = $query->row();
+				$data = array(
+					'page' => 'edit',
+					'row' => $user,
+				);
+				$this->load->view('templates/auth_header');
+				$this->load->view('dosen/menu');
+				$this->load->view('templates/topbar');
+				$this->load->view('profile/ganti_pass', $data);
+				$this->load->view('templates/auth_footer');
+			}
+		} else {
+			echo "<script>alert('Data tidak ditemukan');";
+			echo "window.location='" . site_url('dosen/profiledos') . "';</script>";
+		}
+	}
+
+	public function proses_ganti_password()
+	{
+		$post = $this->input->post(null, TRUE);
+		if (isset($_POST['edit'])) {
+			$this->user_m->ganti_password($post);
+			if ($this->db->affected_rows() > 0) {
+				$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Data dosen berhasil diupdate.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+			}
+			redirect('dosen/profiledos');
+		} else {
+			$this->session->set_flashdata('erroredit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+				<strong>Password anda gagal diupdate.</strong>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>');
+		}
+		redirect('dosen/profiledos');
 	}
 
 
