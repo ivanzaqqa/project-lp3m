@@ -427,7 +427,7 @@ class Operator extends CI_Controller
 		$check = $this->jurpros_m->get_by_id($id_insentif_jurpros);
 		$newstat = $check->id_status == 1 ? 2 : 1;
 		$data = array(
-			'id_insentif_jurpros' => $newstat
+			'id_status' => $newstat
 		);
 		$this->jurpros_m->update($id_insentif_jurpros, $data);
 		$res['msg'] = "Status Jurnal atau Prosiding dengan judul " . $check->judul_artikel . " telah berhasil di update";
@@ -464,7 +464,7 @@ class Operator extends CI_Controller
 		$check = $this->specscop_m->get_by_id($id_insentif_scopus);
 		$newstat = $check->id_status == 1 ? 2 : 1;
 		$data = array(
-			'id_insentif_scopus' => $newstat
+			'id_status' => $newstat
 		);
 		$this->specscop_m->update($id_insentif_scopus, $data);
 		$res['msg'] = "Status special scopus dengan judul " . $check->judul_artikel . " telah berhasil di update";

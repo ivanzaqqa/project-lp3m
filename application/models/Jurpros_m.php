@@ -38,9 +38,9 @@ class Jurpros_m extends CI_Model
         return $query;
     }
 
-    public function get_by_id($id)
+    public function get_by_id($id_insentif_jurpros)
     {
-        $this->db->where("id_insentif_jurpros", $id);
+        $this->db->where("id_insentif_jurpros", $id_insentif_jurpros);
         return $this->db->get('insentif_jurpros')->row();
     }
 
@@ -58,9 +58,9 @@ class Jurpros_m extends CI_Model
         $this->db->update('insentif_jurpros', $params);
     }
 
-    public function update($id, $post)
+    public function update($id_insentif_jurpros, $post)
     {
-        $this->db->where('id_insentif_jurpros', $id);
+        $this->db->where('id_insentif_jurpros', $id_insentif_jurpros);
         $this->db->update('insentif_jurpros', $post);
     }
 
