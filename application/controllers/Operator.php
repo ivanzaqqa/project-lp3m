@@ -450,6 +450,7 @@ class Operator extends CI_Controller
 	public function arsip_special_scopus()
 	{
 		$data['row'] = $this->specscop_m->get_scopus();
+
 		$this->load->view('templates/auth_header');
 		$this->load->view('operator/menu');
 		$this->load->view('templates/topbar');
