@@ -26,24 +26,7 @@
                             <td><?= $arsip->judul_artikel ?></td>
                             <td><?= $arsip->nama_scopus ?></td>
                             <td><?= $arsip->status ?></td>
-                            <td>
-                                <button class="dropdown-toggle btn btn-sm btn-warning" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Download
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                    <a class="dropdown-item" href="<?php echo base_url() . '/upload/insentif_publikasi/special_scopus/' . $arsip->file_luaran; ?>">Download File Luaran</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="<?php echo base_url() . '/upload/insentif_publikasi/special_scopus/' . $arsip->file_proposal_penelitian; ?>">Download File Proposal Penelitian</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="<?php echo base_url() . '/upload/insentif_publikasi/special_scopus/' . $arsip->file_dokumentasi_catatan; ?>">Download File Dokumentasi Catatan</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="<?php echo base_url() . '/upload/insentif_publikasi/special_scopus/' . $arsip->file_laporan_akhir; ?>">Download File Laporan Akhir</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="<?php echo base_url() . '/upload/insentif_publikasi/special_scopus/' . $arsip->file_rpp_rps; ?>">Download File RPP Dan RPS</a>
-                                </div>
-
-
-                            </td>
+                            <td><button class="btn btn-sm btn-warning"><a style="color: white;" href="<?php echo base_url() . '/upload/insentif_publikasi/file_berita_acara/' . $arsip->file_berita_acara; ?>">Download</a></button></td>
                             <td>
                                 <a href="<?= base_url('dosen/edit_special_scopus/' . $arsip->id_insentif_scopus) ?>" class="btn btn-sm btn-warning">Edit</a>
                                 <a href="<?= base_url('dosen/detail_special_scopus/' . $arsip->id_insentif_scopus) ?>" class="btn btn-sm text-white" style="background-color: #670099;">Detail</a>

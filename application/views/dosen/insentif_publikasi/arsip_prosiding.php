@@ -26,7 +26,7 @@
                             <td><?= $arsip->judul_artikel ?></td>
                             <td><?= $arsip->nama_jurnal ?></td>
                             <td><?= $arsip->status ?></td>
-                            <td><button class="btn btn-sm btn-warning"><a style="color: white;" href="<?php echo base_url() . '/upload/insentif_publikasi/jurnal_prosiding/' . $arsip->file_publikasi; ?>">Download</a></button></td>
+                            <td><button class="btn btn-sm btn-warning"><a style="color: white;" href="<?php echo base_url() . '/upload/insentif_publikasi/file_berita_acara/' . $arsip->file_berita_acara; ?>">Download</a></button></td>
                             <td>
                                 <a href="<?= base_url('dosen/edit_jurnal_prosiding/' . $arsip->id_insentif_jurpros) ?>" class="btn btn-sm btn-warning">Edit</a>
                                 <a href="<?= base_url('dosen/detail_jurnal_prosiding/' . $arsip->id_insentif_jurpros) ?>" class="btn btn-sm text-white" style="background-color: #670099;">Detail</a>
