@@ -76,7 +76,13 @@
                     <tr>
                         <td class="font-weight-bold">File Berita Acara</td>
                         <td>:</td>
-                        <td><button class="btn btn-sm btn-warning"><a style="color: white;" href="<?php echo base_url() . '/upload/insentif_publikasi/file_berita_acara/' . $data->file_berita_acara; ?>">Download</a></button></td>
+                        <td>
+                            <?php if ($data->file_berita_acara != null) { ?>
+                                <button class="btn btn-sm btn-warning"><a style="color: white;" href="<?php echo base_url() . '/upload/insentif_publikasi/file_berita_acara/' . $data->file_berita_acara; ?>">Download</a></button>
+                            <?php } else { ?>
+                                <button class="btn btn-sm btn-warning" disabled>Download</button>
+                            <?php } ?>
+                        </td>
                     </tr>
                     <tr>
                         <td><a href="<?= base_url('dosen/arsip_special_scopus') ?>" type="button" class="btn btn-sm text-white" style="background-color: #670099;"> <i class="fa fa-chevron-circle-left"></i>

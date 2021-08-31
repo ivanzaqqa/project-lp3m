@@ -26,7 +26,13 @@
                             <td><?= $arsip->judul_artikel ?></td>
                             <td><?= $arsip->nama_scopus ?></td>
                             <td><?= $arsip->status ?></td>
-                            <td><button class="btn btn-sm btn-warning"><a style="color: white;" href="<?php echo base_url() . '/upload/insentif_publikasi/file_berita_acara/' . $arsip->file_berita_acara; ?>">Download</a></button></td>
+                            <td>
+                                <?php if ($arsip->file_berita_acara != null) { ?>
+                                    <button class="btn btn-sm btn-warning"><a style="color: white;" href="<?php echo base_url() . '/upload/insentif_publikasi/file_berita_acara/' . $arsip->file_berita_acara; ?>">Download</a></button>
+                                <?php } else { ?>
+                                    <button class="btn btn-sm btn-warning" disabled>Download</button>
+                                <?php } ?>
+                            </td>
                             <td>
                                 <a href="<?= base_url('dosen/edit_special_scopus/' . $arsip->id_insentif_scopus) ?>" class="btn btn-sm btn-warning">Edit</a>
                                 <a href="<?= base_url('dosen/detail_special_scopus/' . $arsip->id_insentif_scopus) ?>" class="btn btn-sm text-white" style="background-color: #670099;">Detail</a>
