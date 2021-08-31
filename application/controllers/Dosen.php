@@ -500,6 +500,7 @@ class Dosen extends CI_Controller
 					'url_artikel' => $url_artikel,
 					'id_status' => "3",
 					'file_publikasi' => $file_publikasi,
+					'file_berita_acara' => "NULL",
 				];
 				$insert = $this->db->insert('insentif_jurpros', $data);
 				if ($insert) {
@@ -733,6 +734,7 @@ class Dosen extends CI_Controller
 					'file_dokumentasi_catatan' => $file_dokumentasi_catatan,
 					'file_laporan_akhir' => $file_laporan_akhir,
 					'file_rpp_rps' => $file_rpp_rps,
+					'file_berita_acara' => "NULL",
 					'matkul_diampu' => $matkul_diampu,
 					'kelompok_riset' => $kelompok_riset,
 					'mhs_terlibat' => $mhs_terlibat,
