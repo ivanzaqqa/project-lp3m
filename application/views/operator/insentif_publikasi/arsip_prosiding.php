@@ -30,7 +30,7 @@
                                     array(1 => "Disetujui", 2 => "Ditolak", 3 => "-- Pilih --"),
                                     $data->id_status,
                                     array(
-                                        'class' => "btn btn-md btn-primary dropdown-toggle",
+                                        'class' => "btn btn-sm btn-primary dropdown-toggle",
                                         'onchange' => "changeStat($data->id_insentif_jurpros)"
                                     )
                                 ); ?>
@@ -51,7 +51,9 @@
                                     }
                                 </script>
                             </td>
-                            <td><button class="btn btn-sm btn-warning">Upload</button></td>
+                            <td>
+                                <a class="btn btn-sm btn-warning" href="<?= base_url('operator/upload_file_berita_acara_jurpros/' . $data->id_insentif_jurpros) ?>" class="btn btn-sm btn-warning">Upload</a>
+                            </td>
                             <td>
                                 <a href="<?= base_url('operator/detail_jurnal_prosiding/' . $data->id_insentif_jurpros) ?>" class="btn btn-sm text-white" style="background-color: #670099;">Detail</a>
                             </td>

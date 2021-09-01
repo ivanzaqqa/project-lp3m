@@ -434,6 +434,71 @@ class Operator extends CI_Controller
 		echo json_encode($res);
 	}
 
+	public function upload_file_berita_acara_jurpros($id)
+	{
+		$query = $this->jurpros_m->get_jurpros($id);
+		if ($query->num_rows() > 0) {
+			$insentif_jurpros = $query->row();
+			$data = array(
+				'page' => 'edit',
+				'row' => $insentif_jurpros,
+			);
+			$this->load->view('templates/auth_header');
+			$this->load->view('operator/menu');
+			$this->load->view('templates/topbar');
+			$this->load->view('operator/insentif_publikasi/file_berita_acara_jurpros', $data);
+			$this->load->view('templates/auth_footer');
+		}
+	}
+
+	public function proses_upload_file_berita_acara_jurpros()
+	{
+		if (isset($_POST['edit'])) {
+			$this->load->library('form_validation');
+			$this->form_validation->set_rules('file_berita_acara', 'File Berita Acara', 'required');
+
+			$this->form_validation->set_message('required', '%s Masih Kosong!!');
+			$this->form_validation->set_error_delimiters('<span class="help-block text-danger">', '</span>');
+
+			$config['upload_path']          = './upload/insentif_publikasi/file_berita_acara_jurnal_prosiding/';
+			$config['allowed_types']        = 'pdf';
+			$config['max_size']            = 2048;
+			$config['encrypt_name']         = TRUE;
+			$this->load->library('upload', $config);
+
+			if ($this->form_validation->run()) {
+				$id = $this->input->post('id');
+				if (!empty($_FILES['file_berita_acara']['name'])) {
+					$this->upload->do_upload('file_berita_acara');
+					$file_berita_acara = $this->upload->data();
+					$file_berita_acara = $file_berita_acara['file_name'];
+				}
+				$data = [
+					'id' => $id,
+				];
+				if ($file_berita_acara != null) {
+					$data['file_berita_acara'] = $file_berita_acara;
+				}
+				$update = $this->db->update('insentif_jurpros', $data);
+				if ($update) {
+					$this->session->set_flashdata('successalert', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Data Insentif Jurnal Prosiding Berhasil Diupdate.</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>');
+					redirect('operator/arsip_jurnal_prosiding');
+				}
+			} else {
+				$id = $this->jurpros_m->get_by_id();
+				$this->upload_file_berita_acara_jurpros($id);
+			}
+		} else {
+			$id = $this->jurpros_m->get_by_id();
+			$this->upload_file_berita_acara_jurpros($id);
+		}
+	}
+
 	public function detail_jurnal_prosiding($id)
 	{
 		$detail['row'] = $this->jurpros_m->get_jurpros($id);
