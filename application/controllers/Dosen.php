@@ -570,7 +570,7 @@ class Dosen extends CI_Controller
 			}
 		} else {
 			echo "<script>alert('Data tidak ditemukan');";
-			echo "window.location='" . site_url('dosen/arsip_prosiding') . "';</script>";
+			echo "window.location='" . site_url('dosen/arsip_jurnal_prosiding') . "';</script>";
 		}
 	}
 

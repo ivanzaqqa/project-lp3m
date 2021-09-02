@@ -436,66 +436,80 @@ class Operator extends CI_Controller
 
 	public function upload_file_berita_acara_jurpros($id)
 	{
-		$query = $this->jurpros_m->get_jurpros($id);
-		if ($query->num_rows() > 0) {
-			$insentif_jurpros = $query->row();
-			$data = array(
-				'page' => 'edit',
-				'row' => $insentif_jurpros,
-			);
-			$this->load->view('templates/auth_header');
-			$this->load->view('operator/menu');
-			$this->load->view('templates/topbar');
-			$this->load->view('operator/insentif_publikasi/file_berita_acara_jurpros', $data);
-			$this->load->view('templates/auth_footer');
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('file_berita_acara', 'File Berita Acara', 'required');
+
+		$this->form_validation->set_error_delimiters('<span class="help-block text-danger">', '</span>');
+
+		if ($this->form_validation->run() == FALSE) {
+			$query = $this->jurpros_m->get_jurpros($id);
+			if ($query->num_rows() > 0) {
+				$jurpros = $query->row();
+				$data = array(
+					'page' => 'edit',
+					'row' => $jurpros,
+				);
+				$this->load->view('templates/auth_header');
+				$this->load->view('operator/menu');
+				$this->load->view('templates/topbar');
+				$this->load->view('operator/insentif_publikasi/file_berita_acara_jurpros', $data);
+				$this->load->view('templates/auth_footer');
+			}
+		} else {
+			echo "<script>alert('Data tidak ditemukan');";
+			echo "window.location='" . site_url('operator/arsip_jurnal_prosiding') . "';</script>";
 		}
 	}
 
 	public function proses_upload_file_berita_acara_jurpros()
 	{
+		$config['upload_path']          = './upload/insentif_publikasi/file_berita_acara_jurnal_prosiding/';
+		$config['allowed_types']        = 'pdf';
+		$config['max_size']            = 5000;
+		$config['encrypt_name']         = TRUE;
+
+		$this->load->library('upload', $config);
+
+		$post = $this->input->post(null, TRUE);
 		if (isset($_POST['edit'])) {
-			$this->load->library('form_validation');
-			$this->form_validation->set_rules('file_berita_acara', 'File Berita Acara', 'required');
+			if (@$_FILES['file_berita_acara']['name'] != null) {
+				if ($this->upload->do_upload('file_berita_acara')) {
 
-			$this->form_validation->set_message('required', '%s Masih Kosong!!');
-			$this->form_validation->set_error_delimiters('<span class="help-block text-danger">', '</span>');
+					$jurpros = $this->jurpros_m->get_jurpros($post['id_insentif_jurpros'])->row();
+					if ($jurpros->file_berita_acara != null) {
+						$target_file = './upload/insentif_publikasi/file_berita_acara_jurnal_prosiding/' . $jurpros->file_berita_acara;
+						unlink($target_file);
+					}
 
-			$config['upload_path']          = './upload/insentif_publikasi/file_berita_acara_jurnal_prosiding/';
-			$config['allowed_types']        = 'pdf';
-			$config['max_size']            = 2048;
-			$config['encrypt_name']         = TRUE;
-			$this->load->library('upload', $config);
-
-			if ($this->form_validation->run()) {
-				$id = $this->input->post('id');
-				if (!empty($_FILES['file_berita_acara']['name'])) {
-					$this->upload->do_upload('file_berita_acara');
-					$file_berita_acara = $this->upload->data();
-					$file_berita_acara = $file_berita_acara['file_name'];
-				}
-				$data = [
-					'id' => $id,
-				];
-				if ($file_berita_acara != null) {
-					$data['file_berita_acara'] = $file_berita_acara;
-				}
-				$update = $this->db->update('insentif_jurpros', $data);
-				if ($update) {
-					$this->session->set_flashdata('successalert', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>Data Insentif Jurnal Prosiding Berhasil Diupdate.</strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>');
+					$post['file_berita_acara'] = $this->upload->data('file_name');
+					$this->jurpros_m->upload_file_berita_acara($post);
+					if ($this->db->affected_rows() > 0) {
+						$this->session->set_flashdata('successupload', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>File Berita Acara Berhasil di Upload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+					}
+					redirect('operator/arsip_jurnal_prosiding');
+				} else {
+					$error = $this->upload->display_errors();
+					$this->session->set_flashdata('error_upload', $error);
 					redirect('operator/arsip_jurnal_prosiding');
 				}
 			} else {
-				$id = $this->jurpros_m->get_by_id();
-				$this->upload_file_berita_acara_jurpros($id);
+				$post['file_berita_acara'] = null;
+				$this->jurpros_m->upload_file_berita_acara($post);
+				if ($this->db->affected_rows() > 0) {
+					$this->session->set_flashdata('notyetupload', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>File Berita Acara belum di upload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+				}
+				redirect('operator/arsip_jurnal_prosiding');
 			}
-		} else {
-			$id = $this->jurpros_m->get_by_id();
-			$this->upload_file_berita_acara_jurpros($id);
 		}
 	}
 
@@ -535,6 +549,86 @@ class Operator extends CI_Controller
 		$res['msg'] = "Status special scopus dengan judul " . $check->judul_artikel . " telah berhasil di update";
 		echo json_encode($res);
 	}
+
+	public function upload_file_berita_acara_scopus($id)
+	{
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('file_berita_acara', 'File Berita Acara', 'required');
+
+		$this->form_validation->set_error_delimiters('<span class="help-block text-danger">', '</span>');
+
+		if ($this->form_validation->run() == FALSE) {
+			$query = $this->specscop_m->get_scopus($id);
+			if ($query->num_rows() > 0) {
+				$scopus = $query->row();
+				$data = array(
+					'page' => 'edit',
+					'row' => $scopus,
+				);
+				$this->load->view('templates/auth_header');
+				$this->load->view('operator/menu');
+				$this->load->view('templates/topbar');
+				$this->load->view('operator/insentif_publikasi/file_berita_acara_scopus', $data);
+				$this->load->view('templates/auth_footer');
+			}
+		} else {
+			echo "<script>alert('Data tidak ditemukan');";
+			echo "window.location='" . site_url('operator/arsip_special_scopus') . "';</script>";
+		}
+	}
+
+	public function proses_upload_file_berita_acara_scopus()
+	{
+		$config['upload_path']          = './upload/insentif_publikasi/file_berita_acara_special_scopus/';
+		$config['allowed_types']        = 'pdf';
+		$config['max_size']            = 5000;
+		$config['encrypt_name']         = TRUE;
+
+		$this->load->library('upload', $config);
+
+		$post = $this->input->post(null, TRUE);
+		if (isset($_POST['edit'])) {
+			if (@$_FILES['file_berita_acara']['name'] != null) {
+				if ($this->upload->do_upload('file_berita_acara')) {
+
+					$scopus = $this->specscop_m->get_scopus($post['id_insentif_scopus'])->row();
+					if ($scopus->file_berita_acara != null) {
+						$target_file = './upload/insentif_publikasi/file_berita_acara_special_scopus/' . $scopus->file_berita_acara;
+						unlink($target_file);
+					}
+
+					$post['file_berita_acara'] = $this->upload->data('file_name');
+					$this->specscop_m->upload_file_berita_acara($post);
+					if ($this->db->affected_rows() > 0) {
+						$this->session->set_flashdata('successupload', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>File Berita Acara Berhasil di Upload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+					}
+					redirect('operator/arsip_special_scopus');
+				} else {
+					$error = $this->upload->display_errors();
+					$this->session->set_flashdata('error_upload', $error);
+					redirect('operator/arsip_special_scopus');
+				}
+			} else {
+				$post['file_berita_acara'] = null;
+				$this->specscop_m->upload_file_berita_acara($post);
+				if ($this->db->affected_rows() > 0) {
+					$this->session->set_flashdata('notyetupload', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>File Berita Acara belum di upload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+				}
+				redirect('operator/arsip_special_scopus');
+			}
+		}
+	}
+
 
 	public function detail_special_scopus($id)
 	{

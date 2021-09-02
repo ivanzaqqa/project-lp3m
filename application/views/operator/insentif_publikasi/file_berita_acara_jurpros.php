@@ -18,7 +18,7 @@
                                     <?= $row->file_berita_acara; ?>
                             <?php }
                             } ?>
-                            <input type="hidden" name="id" id="id" value="<?= $row->id ?>">
+                            <input type="hidden" name="id_insentif_jurpros" id="id_insentif_jurpros" value="<?= $row->id_insentif_jurpros ?>">
                             <input type="file" name="file_berita_acara" class="form-control form-control-sm bg-light" id="file_berita_acara">
                         </td>
 

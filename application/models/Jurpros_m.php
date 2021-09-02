@@ -58,6 +58,15 @@ class Jurpros_m extends CI_Model
         $this->db->update('insentif_jurpros', $params);
     }
 
+    public function upload_file_berita_acara($post)
+    {
+        if ($post['file_berita_acara'] != null) {
+            $params['file_berita_acara'] = $post['file_berita_acara'];
+        }
+        $this->db->where('id_insentif_jurpros', $post['id_insentif_jurpros']);
+        $this->db->update('insentif_jurpros', $params);
+    }
+
     public function update($id_insentif_jurpros, $post)
     {
         $this->db->where('id_insentif_jurpros', $id_insentif_jurpros);

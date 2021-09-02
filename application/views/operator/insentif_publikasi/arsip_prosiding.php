@@ -4,6 +4,9 @@
             <h6 class="m-0 font-weight-bold text-secondary">Arsip Insentif Publikasi Jurnal atau Prosiding</h6>
         </div>
         <div class="card-body">
+            <?= $this->session->flashdata('successupload') ?>
+            <?= $this->session->flashdata('errorupload') ?>
+            <?= $this->session->flashdata('notyetupload') ?>
             <table class="table" id="dataTable" width="100%" cellspacing="0">
                 <thead class="bg-sidebar text-white">
                     <tr>
@@ -52,7 +55,11 @@
                                 </script>
                             </td>
                             <td>
-                                <a class="btn btn-sm btn-warning" href="<?= base_url('operator/upload_file_berita_acara_jurpros/' . $data->id_insentif_jurpros) ?>" class="btn btn-sm btn-warning">Upload</a>
+                                <?php if ($data->file_berita_acara != null) { ?>
+                                    <button class="btn btn-sm btn-warning" disabled>Sudah di Upload</button>
+                                <?php } else { ?>
+                                    <a class="btn btn-sm btn-warning" href="<?= base_url('operator/upload_file_berita_acara_jurpros/' . $data->id_insentif_jurpros) ?>" class="btn btn-sm btn-warning">Upload</a>
+                                <?php } ?>
                             </td>
                             <td>
                                 <a href="<?= base_url('operator/detail_jurnal_prosiding/' . $data->id_insentif_jurpros) ?>" class="btn btn-sm text-white" style="background-color: #670099;">Detail</a>
