@@ -140,18 +140,22 @@ class Dosen extends CI_Controller
 
 	public function delpenelitian($id)
 	{
-		$fileinfo = $this->penelitian_m->download($id);
-		if ($fileinfo->file_proposal != null) {
-			$file = 'upload/penelitian/' . $fileinfo['file_proposal'];
-			unlink($file);
+		$file_proposal = $this->penelitian_m->get_penelitian($id)->row();
+		if ($file_proposal->file_proposal != null) {
+			$target_file = './upload/penelitian/' . $file_proposal->file_proposal;
+			unlink($target_file);
 		}
-		if ($fileinfo->file_rps != null) {
-			$file = 'upload/penelitian/' . $fileinfo['file_rps'];
-			unlink($file);
+
+		$file_rps = $this->penelitian_m->get_penelitian($id)->row();
+		if ($file_rps->file_rps != null) {
+			$target_file = './upload/penelitian/' . $file_rps->file_rps;
+			unlink($target_file);
 		}
-		if ($fileinfo->form_integrasi != null) {
-			$file = 'upload/penelitian/' . $fileinfo['form_integrasi'];
-			unlink($file);
+
+		$form_integrasi = $this->penelitian_m->get_penelitian($id)->row();
+		if ($form_integrasi->form_integrasi != null) {
+			$target_file = './upload/penelitian/' . $form_integrasi->form_integrasi;
+			unlink($target_file);
 		}
 
 		$this->penelitian_m->delete($id);
@@ -292,18 +296,22 @@ class Dosen extends CI_Controller
 
 	public function delpengabmas($id)
 	{
-		$fileinfo = $this->pengabmas_m->download($id);
-		if ($fileinfo->file_proposal != null) {
-			$file = 'upload/pengabdian_masyarakat/' . $fileinfo['file_proposal'];
-			unlink($file);
+		$file_proposal = $this->pengabmas_m->get_pengabmas($id)->row();
+		if ($file_proposal->file_proposal != null) {
+			$target_file = './upload/pengabdian_masyarakat/' . $file_proposal->file_proposal;
+			unlink($target_file);
 		}
-		if ($fileinfo->file_rps != null) {
-			$file = 'upload/pengabdian_masyarakat/' . $fileinfo['file_rps'];
-			unlink($file);
+
+		$file_rps = $this->pengabmas_m->get_pengabmas($id)->row();
+		if ($file_rps->file_rps != null) {
+			$target_file = './upload/pengabdian_masyarakat/' . $file_rps->file_rps;
+			unlink($target_file);
 		}
-		if ($fileinfo->form_integrasi != null) {
-			$file = 'upload/pengabdian_masyarakat/' . $fileinfo['form_integrasi'];
-			unlink($file);
+
+		$form_integrasi = $this->pengabmas_m->get_pengabmas($id)->row();
+		if ($form_integrasi->form_integrasi != null) {
+			$target_file = './upload/pengabdian_masyarakat/' . $form_integrasi->form_integrasi;
+			unlink($target_file);
 		}
 
 		$this->pengabmas_m->delete($id);
