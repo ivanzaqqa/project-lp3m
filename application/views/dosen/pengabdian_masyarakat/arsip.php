@@ -5,6 +5,7 @@
         </div>
         <div class="card-body">
             <?= $this->session->flashdata('successdel') ?>
+            <?= $this->session->flashdata('errordel') ?>
             <div class="table-responsive table-striped">
                 <table class="table" id="dataTable" width="100%" cellspacing="0">
                     <thead class="bg-sidebar text-white">
@@ -45,6 +46,7 @@
                                                 <a class="dropdown-item" href="<?php echo base_url() . 'upload/pengabdian_masyarakat/' . $arsip->form_integrasi; ?>">Form Integrasi</a>
                                             </div>
                                             <button class="dropdown-item" type="button">Tahapan Pelaksanaan</button>
+                                            <a class="dropdown-item" href="<?= site_url('dosen/delpengabmas/' . $arsip->id_pengabmas) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data pengabdian masyarakat ini?')" type="button">Hapus Data</a>
                                         </div>
                                     </div>
                                 </td>

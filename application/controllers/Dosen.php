@@ -290,6 +290,41 @@ class Dosen extends CI_Controller
 		$this->load->view('templates/auth_footer');
 	}
 
+	public function delpengabmas($id)
+	{
+		$fileinfo = $this->pengabmas_m->download($id);
+		if ($fileinfo->file_proposal != null) {
+			$file = 'upload/pengabdian_masyarakat/' . $fileinfo['file_proposal'];
+			unlink($file);
+		}
+		if ($fileinfo->file_rps != null) {
+			$file = 'upload/pengabdian_masyarakat/' . $fileinfo['file_rps'];
+			unlink($file);
+		}
+		if ($fileinfo->form_integrasi != null) {
+			$file = 'upload/pengabdian_masyarakat/' . $fileinfo['form_integrasi'];
+			unlink($file);
+		}
+
+		$this->pengabmas_m->delete($id);
+		if ($this->db->affected_rows() > 0) {
+			$this->session->set_flashdata('successdel', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+				<strong>Data anda berhasil dihapus.</strong>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>');
+		} else {
+			$this->session->set_flashdata('errordel', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+				<strong>Data anda gagal dihapus.</strong>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>');
+		}
+		redirect('dosen/arsippengabdian');
+	}
+
 	// PROFILE DOSEN
 	public function profiledos()
 	{

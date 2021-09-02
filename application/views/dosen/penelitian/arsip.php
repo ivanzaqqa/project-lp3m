@@ -46,8 +46,8 @@
                                                 <a class="dropdown-item" href="<?php echo base_url() . 'upload/penelitian/' . $arsip->form_integrasi; ?>">Form Integrasi</a>
                                             </div>
                                             <button class="dropdown-item" type="button">Tahapan Pelaksanaan</button>
+                                            <a class="dropdown-item" href="<?= site_url('dosen/delpenelitian/' . $arsip->id_penelitian) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data penelitian ini?')" type="button">Hapus Data</a>
                                         </div>
-                                        <a class="btn btn-danger btn-sm rounded-0" href="<?= site_url('dosen/delpenelitian/' . $arsip->id_penelitian) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data penelitian ini?')" type="button" data-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></a>
                                     </div>
                                 </td>
                             </tr>
