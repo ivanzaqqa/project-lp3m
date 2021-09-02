@@ -22,7 +22,7 @@
                         <tr>
                             <td><?= $no++ ?></td>
                             <td><?= $data->judul_artikel; ?></td>
-                            <td><?= $data->nama_jurnal; ?></td>
+                            <td><?= $data->nama_scopus; ?></td>
                             <td>
                                 <?php
                                 echo form_dropdown(
