@@ -47,7 +47,7 @@ class Specscop_m extends CI_Model
     public function edit($post)
     {
         $params = [
-            'id_scopus' => $post['nama_jurnal'],
+            'id_scopus' => $post['nama_scopus'],
             'judul_artikel' => $post['judul_artikel'],
             'impact_factor_jurnal' => $post['impact_factor_jurnal'],
             'url_artikel' => $post['url_artikel'],
@@ -56,19 +56,19 @@ class Specscop_m extends CI_Model
             'mhs_terlibat' => $post['mhs_terlibat'],
         ];
         if ($post['file_luaran'] != null) {
-            $params['file_luaran'] = sha1($post['file_luaran']);
+            $params['file_luaran'] = $post['file_luaran'];
         }
         if ($post['file_proposal_penelitian'] != null) {
-            $params['file_proposal_penelitian'] = sha1($post['file_proposal_penelitian']);
+            $params['file_proposal_penelitian'] = $post['file_proposal_penelitian'];
         }
         if ($post['file_dokumentasi_catatan'] != null) {
-            $params['file_dokumentasi_catatan'] = sha1($post['file_dokumentasi_catatan']);
+            $params['file_dokumentasi_catatan'] = $post['file_dokumentasi_catatan'];
         }
         if ($post['file_laporan_akhir'] != null) {
-            $params['file_laporan_akhir'] = sha1($post['file_laporan_akhir']);
+            $params['file_laporan_akhir'] = $post['file_laporan_akhir'];
         }
         if ($post['file_rpp_rps'] != null) {
-            $params['file_rpp_rps'] = sha1($post['file_rpp_rps']);
+            $params['file_rpp_rps'] = $post['file_rpp_rps'];
         }
         $this->db->where('id_insentif_scopus', $post['id_insentif_scopus']);
         $this->db->update('insentif_specscop', $params);

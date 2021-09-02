@@ -9,13 +9,13 @@
                 <?= $this->session->flashdata('erroredit'); ?>
                 <table class="table table-responsive">
                     <tr>
-                        <td class="font-weight-bold">Pilihan Scopus</td>
+                        <td class="font-weight-bold">Update Insentif Publikasi Pilihan Special Scopus</td>
                         <td>:</td>
                         <td>
                             <div class="input-group mb-3">
-                                <select class="form-control" name="pilih_scopus" id="pilih_scopus">
+                                <select class="form-control" name="nama_scopus" id="nama_scopus">
                                     <option value="">- Pilih -</option>
-                                    <?php foreach ($scopus->result() as $key => $data) { ?>
+                                    <?php foreach ($nama_scopus->result() as $key => $data) { ?>
                                         <option value="<?= $data->id_scopus ?>" <?= $data->id_scopus == $row->id_scopus ? "selected" : null ?>><?= $data->nama_scopus ?></option>;
                                     <?php } ?>
                                 </select>
@@ -26,7 +26,7 @@
                         <td class="font-weight-bold">Judul Artikel</td>
                         <td>:</td>
                         <td>
-                            <input type="hidden" name="id" id="id" value="<?= $this->fungsi->user_login()->id ?>">
+                            <input type="hidden" name="id_insentif_scopus" id="id_insentif_scopus" value="<?= $row->id_insentif_scopus ?>">
                             <input type="text" value="<?= $row->judul_artikel; ?>" name="judul_artikel" class="form-control form-control-sm bg-light" id="judul_artikel">
                         </td>
                     </tr>

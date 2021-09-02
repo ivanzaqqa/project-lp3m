@@ -5,7 +5,7 @@
         </div>
         <div class="card-body">
             <div class="row pl-2">
-                <?php echo form_open_multipart('dosen/proses_edit_jurnal_prosiding'); ?>
+                <?php echo form_open_multipart('dosen/proses_edit_jurnal_prosiding/'); ?>
                 <?= $this->session->flashdata('erroredit'); ?>
                 <table class="table table-responsive">
                     <tr>
@@ -13,9 +13,9 @@
                         <td>:</td>
                         <td>
                             <div class="input-group mb-3">
-                                <select class="form-control" name="pilih_jurpros" id="pilih_jurpros">
+                                <select class="form-control" name="nama_jurnal" id="nama_jurnal">
                                     <option value="">- Pilih -</option>
-                                    <?php foreach ($jurpros->result() as $key => $data) { ?>
+                                    <?php foreach ($nama_jurnal->result() as $key => $data) { ?>
                                         <option value="<?= $data->id_jurnal_pros ?>" <?= $data->id_jurnal_pros == $row->id_jurnal_pros ? "selected" : null ?>><?= $data->nama_jurnal ?></option>;
                                     <?php } ?>
                                 </select>
@@ -26,7 +26,7 @@
                         <td class="font-weight-bold">Judul Artikel</td>
                         <td>:</td>
                         <td>
-                            <input type="hidden" name="id" id="id" value="<?= $this->fungsi->user_login()->id ?>">
+                            <input type="hidden" name="id_insentif_jurpros" id="id_insentif_jurpros" value="<?= $row->id_insentif_jurpros ?>">
                             <input type="text" value="<?= $row->judul_artikel; ?>" name="judul_artikel" class="form-control form-control-sm bg-light" id="judul_artikel">
                         </td>
                     </tr>
