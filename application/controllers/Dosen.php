@@ -683,10 +683,16 @@ class Dosen extends CI_Controller
 
 	public function del_jurnal_prosiding($id)
 	{
-		$fileinfo = $this->jurpros_m->get_jurpros_by_id($id);
-		if ($fileinfo->file_publikasi != null) {
-			$file = './upload/insentif_publikasi/jurnal_prosiding/' . $fileinfo['file_publikasi'];
-			unlink($file);
+		$file_publikasi = $this->jurpros_m->get_jurpros($id)->row();
+		if ($file_publikasi->file_publikasi != null) {
+			$target_file = './upload/insentif_publikasi/jurnal_prosiding/' . $file_publikasi->file_publikasi;
+			unlink($target_file);
+		}
+
+		$file_berita_acara = $this->jurpros_m->get_jurpros($id)->row();
+		if ($file_berita_acara->file_berita_acara != null) {
+			$target_file = './upload/insentif_publikasi/file_berita_acara_jurnal_prosiding/' . $file_berita_acara->file_berita_acara;
+			unlink($target_file);
 		}
 
 		$this->jurpros_m->delete($id);
@@ -1121,30 +1127,40 @@ class Dosen extends CI_Controller
 
 	public function del_special_scopus($id)
 	{
-		$fileinfo = $this->specscop_m->download($id);
-		if ($fileinfo->file_luaran != null) {
-			$file = 'upload/insentif_publikasi/special_scopus/' . $fileinfo['file_luaran'];
-			unlink($file);
+		$file_luaran = $this->specscop_m->get_scopus($id)->row();
+		if ($file_luaran->file_luaran != null) {
+			$target_file = './upload/insentif_publikasi/special_scopus/' . $file_luaran->file_luaran;
+			unlink($target_file);
 		}
 
-		if ($fileinfo->file_proposal_penelitian != null) {
-			$file = 'upload/insentif_publikasi/special_scopus/' . $fileinfo['file_proposal_penelitian'];
-			unlink($file);
+		$file_proposal_penelitian = $this->specscop_m->get_scopus($id)->row();
+		if ($file_proposal_penelitian->file_proposal_penelitian != null) {
+			$target_file = './upload/insentif_publikasi/special_scopus/' . $file_proposal_penelitian->file_proposal_penelitian;
+			unlink($target_file);
 		}
 
-		if ($fileinfo->file_dokumentasi_catatan != null) {
-			$file = 'upload/insentif_publikasi/special_scopus/' . $fileinfo['file_dokumentasi_catatan'];
-			unlink($file);
+		$file_dokumentasi_catatan = $this->specscop_m->get_scopus($id)->row();
+		if ($file_dokumentasi_catatan->file_dokumentasi_catatan != null) {
+			$target_file = './upload/insentif_publikasi/special_scopus/' . $file_dokumentasi_catatan->file_dokumentasi_catatan;
+			unlink($target_file);
 		}
 
-		if ($fileinfo->file_laporan_akhir != null) {
-			$file = 'upload/insentif_publikasi/special_scopus/' . $fileinfo['file_laporan_akhir'];
-			unlink($file);
+		$file_laporan_akhir = $this->specscop_m->get_scopus($id)->row();
+		if ($file_laporan_akhir->file_laporan_akhir != null) {
+			$target_file = './upload/insentif_publikasi/special_scopus/' . $file_laporan_akhir->file_laporan_akhir;
+			unlink($target_file);
 		}
 
-		if ($fileinfo->file_rpp_rps != null) {
-			$file = 'upload/insentif_publikasi/special_scopus/' . $fileinfo['file_rpp_rps'];
-			unlink($file);
+		$file_rpp_rps = $this->specscop_m->get_scopus($id)->row();
+		if ($file_rpp_rps->file_rpp_rps != null) {
+			$target_file = './upload/insentif_publikasi/special_scopus/' . $file_rpp_rps->file_rpp_rps;
+			unlink($target_file);
+		}
+
+		$file_berita_acara = $this->specscop_m->get_scopus($id)->row();
+		if ($file_berita_acara->file_berita_acara != null) {
+			$target_file = './upload/insentif_publikasi/file_berita_acara_special_scopus/' . $file_berita_acara->file_berita_acara;
+			unlink($target_file);
 		}
 
 		$this->specscop_m->delete($id);
