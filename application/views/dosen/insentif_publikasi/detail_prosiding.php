@@ -27,7 +27,7 @@
                         <td>:</td>
                         <td>
                             <?php if ($data->file_berita_acara != null) { ?>
-                                <button class="btn btn-sm btn-warning"><a style="color: white;" href="<?php echo base_url() . '/upload/insentif_publikasi/file_berita_acara/' . $data->file_berita_acara; ?>">Download</a></button>
+                                <button class="btn btn-sm btn-warning"><a style="color: white;" href="<?php echo base_url() . '/upload/insentif_publikasi/file_berita_acara_jurnal_prosiding/' . $data->file_berita_acara; ?>">Download</a></button>
                             <?php } else { ?>
                                 <button class="btn btn-sm btn-warning" disabled>Download</button>
                             <?php } ?>
