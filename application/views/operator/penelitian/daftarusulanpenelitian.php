@@ -10,6 +10,7 @@
                     <thead class="bg-sidebar text-white">
                         <tr style="font-size: small;">
                             <th>No</th>
+                            <th>Nama</th>
                             <th>Judul Penelitian</th>
                             <th>Periode Pengajuan</th>
                             <th>Tanggal Submit</th>
@@ -24,6 +25,7 @@
                         foreach ($row->result() as $key => $data) { ?>
                             <tr>
                                 <td><?= $no++ ?></td>
+                                <td><?= $data->name; ?></td>
                                 <td><?= $data->judul_penelitian; ?></td>
                                 <td><?= $data->tahun_periode; ?></td>
                                 <td><?= date('d-m-Y', strtotime($data->tgl_submit)) ?></td>
