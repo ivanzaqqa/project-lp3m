@@ -11,7 +11,7 @@
                 <?= $this->session->flashdata('erroredit'); ?>
                 <div class="form-group">
                     <label class="font-weight-bold" for="nidn">Password Baru</label>
-                    <input type="hidden" name="id" value="">
+                    <input type="hidden" name="id" value="<?= $row->id ?>">
                     <input type="password" name="password" value="" class="form-control form-control-md" id="password" placeholder="Masukkan Password Baru">
                 </div>
                 <div class="form-group  ">

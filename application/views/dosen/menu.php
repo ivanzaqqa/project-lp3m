@@ -73,7 +73,7 @@
         </li>
         <hr class="sidebar-divider d-none d-md-block">
         <li class="nav-item">
-            <a class="nav-link active" href="<?= base_url('dosen/profiledos/') ?>">
+            <a class="nav-link active" href="<?= base_url('dosen/profiledos/' . $this->fungsi->user_login()->id) ?>">
                 <i class="fas fa-fw fa-user-edit"></i>
                 <span>Profile</span></a>
         </li>

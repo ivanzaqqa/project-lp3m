@@ -24,6 +24,16 @@ class User_m extends CI_Model
         return $query;
     }
 
+    public function get_by_id($user_id = null)
+    {
+        $this->db->from('users');
+        if ($user_id != null) {
+            $this->db->where('id', $user_id);
+        }
+        $query = $this->db->get();
+        return $query;
+    }
+
     public function get_role($id = null)
     {
         $this->db->from('user_role');
@@ -128,6 +138,6 @@ class User_m extends CI_Model
             $params['password'] = sha1($post['password']);
         }
         $this->db->where('id', $post['id']);
-        $this->db->insert('users', $params);
+        $this->db->update('users', $params);
     }
 }

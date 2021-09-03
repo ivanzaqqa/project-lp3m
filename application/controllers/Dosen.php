@@ -334,25 +334,27 @@ class Dosen extends CI_Controller
 	}
 
 	// PROFILE DOSEN
-	public function profiledos()
+	public function profiledos($id)
 	{
+		$data['row'] = $this->user_m->get($id);
 		$this->load->view('templates/auth_header');
 		$this->load->view('dosen/menu');
 		$this->load->view('templates/topbar');
-		$this->load->view('profile/profiledos');
+		$this->load->view('profile/profiledos', $data);
 		$this->load->view('templates/auth_footer');
 	}
 
-	public function detail_profiledos()
+	public function detail_profiledos($id)
 	{
+		$data['row'] = $this->user_m->get($id);
 		$this->load->view('templates/auth_header');
 		$this->load->view('dosen/menu');
 		$this->load->view('templates/topbar');
-		$this->load->view('profile/detail_profile');
+		$this->load->view('profile/detail_profile', $data);
 		$this->load->view('templates/auth_footer');
 	}
 
-	public function editprofile()
+	public function editprofile($id)
 	{
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('nidn', 'Nidn', 'required');
@@ -365,7 +367,7 @@ class Dosen extends CI_Controller
 		$this->form_validation->set_error_delimiters('<span class="help-block text-danger">', '</span>');
 
 		if ($this->form_validation->run() == FALSE) {
-			$query = $this->user_m->get();
+			$query = $this->user_m->get($id);
 			if ($query->num_rows() > 0) {
 				$user = $query->row();
 				$data = array(
@@ -413,11 +415,13 @@ class Dosen extends CI_Controller
 				</button>
 			</div>');
 					}
-					redirect('dosen/profiledos');
+					$id = $this->fungsi->user_login()->id;
+					redirect('dosen/profiledos/' . $id);
 				} else {
+					$id = $this->fungsi->user_login()->id;
 					$error = $this->upload->display_errors();
 					$this->session->set_flashdata('erroredit', $error);
-					redirect('dosen/editprofile');
+					redirect('dosen/editprofile/' . $id);
 				}
 			} else {
 				$post['image'] = null;
@@ -430,12 +434,13 @@ class Dosen extends CI_Controller
 				</button>
 			</div>');
 				}
-				redirect('dosen/profiledos');
+				$id = $this->fungsi->user_login()->id;
+				redirect('dosen/profiledos/' . $id);
 			}
 		}
 	}
 
-	public function ganti_password()
+	public function ganti_password($id)
 	{
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('password', 'Password', 'required');
@@ -443,7 +448,7 @@ class Dosen extends CI_Controller
 		$this->form_validation->set_error_delimiters('<span class="help-block text-danger">', '</span>');
 
 		if ($this->form_validation->run() == FALSE) {
-			$query = $this->user_m->get();
+			$query = $this->user_m->get_by_id($id);
 			if ($query->num_rows() > 0) {
 				$user = $query->row();
 				$data = array(
@@ -475,7 +480,8 @@ class Dosen extends CI_Controller
                 </button>
             </div>');
 			}
-			redirect('dosen/profiledos');
+			$id = $this->fungsi->user_login()->id;
+			redirect('dosen/profiledos/' . $id);
 		} else {
 			$this->session->set_flashdata('erroredit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
 				<strong>Password anda gagal diupdate.</strong>
@@ -484,7 +490,8 @@ class Dosen extends CI_Controller
 				</button>
 			</div>');
 		}
-		redirect('dosen/profiledos');
+		$id = $this->fungsi->user_login()->id;
+		redirect('dosen/profiledos/' . $id);
 	}
 
 

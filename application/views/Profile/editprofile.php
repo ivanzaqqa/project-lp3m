@@ -68,7 +68,7 @@
                         <button type="submit" name="<?= $page; ?>" class="btn btn-sm text-white" style="background-color: #670099;">
                             <i class="fa fa-paper-plane"></i> Simpan
                         </button>
-                        <a href="<?= base_url('dosen/profiledos') ?>" type="button" class="btn btn-sm btn-warning text-white">
+                        <a href="<?= base_url('dosen/profiledos/' . $row->id) ?>" type="button" class="btn btn-sm btn-warning text-white">
                             <i class="fa fa-undo"></i> Batal
                         </a>
                     </div>
