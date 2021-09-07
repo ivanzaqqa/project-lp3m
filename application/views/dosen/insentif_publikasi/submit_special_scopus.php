@@ -86,7 +86,7 @@
                     </tr>
                     <tr>
                         <div class="<?= form_error('file_rpp_rps') ? 'has-error' : null ?>">
-                            <td class="font-weight-bold">File RPP dan RPS(PDF)</td>
+                            <td class="font-weight-bold">File RPS & Bahan Ajar(PDF)</td>
                             <td>:</td>
                             <?= form_error('file_rpp_rps') ?>
                             <td><input type="file" name="file_rpp_rps" value="<?= set_value('file_rpp_rps') ?>" class="form-control form-control-sm bg-light" id="file_rpp_rps" accept="application/pdf"></td>

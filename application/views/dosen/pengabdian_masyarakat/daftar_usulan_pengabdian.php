@@ -39,7 +39,7 @@
                 </div>
                 <div class="col-sm">
                     <div class="form-group <?= form_error('judul_pengabmas') ? 'has-error' : null ?> ">
-                        <label for="judul_pengabmas">Judul Penelitian</label>
+                        <label for="judul_pengabmas">Judul Pengabdian Masyarakat</label>
                         <input type="text" name="judul_pengabmas" value="<?= set_value('judul_pengabmas') ?>" class="form-control form-control-sm bg-light" id="judul_penelitian" placeholder="Masukkan Judul Penelitian">
                         <?= form_error('judul_pengabmas') ?>
                     </div>
