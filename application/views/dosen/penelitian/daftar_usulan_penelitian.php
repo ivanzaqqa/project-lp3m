@@ -70,7 +70,7 @@
                     <div class="form-group <?= form_error('file_rps') ? 'has-error' : null ?>">
                         <span for="file_rps">Upload RPS "PDF"</span> <br>
                         <?= form_error('file_rps') ?>
-                        <input type="file" name="file_rps" value="<?= set_value('file_rps') ?>" class="form-control-file form-control-sm" id="filerps" accept="application/pdf">
+                        <input type="file" name="file_rps" value="<?= set_value('file_rps') ?>" class="form-control-file form-control-sm" id="file_rps" accept="application/pdf">
                     </div>
                     <div class="form-group <?= form_error('form_integrasi') ? 'has-error' : null ?>">
                         <span for="form_integrasi">Upload Form Integrasi " PDF"</span><br>

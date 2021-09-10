@@ -47,7 +47,7 @@ class Dosen extends CI_Controller
 
 			$config['upload_path']          = './upload/penelitian';
 			$config['allowed_types']        = 'pdf';
-			$config['max_size']            = 2048;
+			$config['max_size']            = 5000;
 			$config['encrypt_name']         = TRUE;
 			$this->load->library('upload', $config);
 
@@ -58,6 +58,11 @@ class Dosen extends CI_Controller
 				$matkul_diampu = $this->input->post('matkul_diampu', TRUE);
 				$kelompok_riset = $this->input->post('kelompok_riset', TRUE);
 				$mhs_terlibat = $this->input->post('mhs_terlibat', TRUE);
+				// if (@$_FILES['file_proposal']['name']) {
+				// 	if ($this->upload->do_upload('file_proposal')) {
+				// 		$post['file_proposal'] = $this->upload->data('file_name');
+				// 	}
+				// }
 				if (!empty($_FILES['file_proposal']['name'])) {
 					$this->upload->do_upload('file_proposal');
 					$file_proposal = $this->upload->data();
@@ -80,10 +85,10 @@ class Dosen extends CI_Controller
 					'matkul_diampu' => $matkul_diampu,
 					'kelompok_riset' => $kelompok_riset,
 					'mhs_terlibat' => $mhs_terlibat,
-					'id_status' => "3",
 					'file_proposal' => $file_proposal,
 					'file_rps' => $file_rps,
 					'form_integrasi' => $form_integrasi,
+					'id_status' => "3",
 				];
 				$insert = $this->db->insert('tbl_penelitian', $data);
 				if ($insert) {
@@ -181,7 +186,7 @@ class Dosen extends CI_Controller
 	// PENGABDIAN MASYARAKAT
 	public function daftarusulanpengabdian()
 	{
-		$periode['row'] = $this->penelitian_m->get_periode();
+		$periode['row'] = $this->pengabmas_m->get_periode();
 		$this->load->view('templates/auth_header');
 		$this->load->view('dosen/menu');
 		$this->load->view('templates/topbar');
@@ -198,16 +203,23 @@ class Dosen extends CI_Controller
 			$this->form_validation->set_rules('matkul_diampu', 'Matkul Yang Diampu', 'required');
 			$this->form_validation->set_rules('kelompok_riset', 'Kelompok Riset', 'required');
 			$this->form_validation->set_rules('mhs_terlibat', 'Mahasiswa Yang Dilibatkan', 'required');
+
 			$this->form_validation->set_message('required', '%s Masih Kosong!!');
 			$this->form_validation->set_error_delimiters('<span class="help-block text-danger">', '</span>');
 
 			$config['upload_path']          = './upload/pengabdian_masyarakat';
 			$config['allowed_types']        = 'pdf';
-			$config['max_size']            = 2048;
+			$config['max_size']            = 5000;
 			$config['encrypt_name']         = TRUE;
 			$this->load->library('upload', $config);
 
 			if ($this->form_validation->run()) {
+				$id = $this->input->post('id');
+				$id_periode = $this->input->post('periodepengajuan');
+				$judul_pengabmas = $this->input->post('judul_pengabmas', TRUE);
+				$matkul_diampu = $this->input->post('matkul_diampu', TRUE);
+				$kelompok_riset = $this->input->post('kelompok_riset', TRUE);
+				$mhs_terlibat = $this->input->post('mhs_terlibat', TRUE);
 				if (!empty($_FILES['file_proposal']['name'])) {
 					$this->upload->do_upload('file_proposal');
 					$file_proposal = $this->upload->data();
@@ -223,12 +235,6 @@ class Dosen extends CI_Controller
 					$form_integrasi = $this->upload->data();
 					$form_integrasi = $form_integrasi['file_name'];
 				}
-				$id = $this->input->post('id');
-				$id_periode = $this->input->post('periodepengajuan');
-				$judul_pengabmas = $this->input->post('judul_pengabmas', TRUE);
-				$matkul_diampu = $this->input->post('matkul_diampu', TRUE);
-				$kelompok_riset = $this->input->post('kelompok_riset', TRUE);
-				$mhs_terlibat = $this->input->post('mhs_terlibat', TRUE);
 				$data = [
 					'id' => $id,
 					'id_periode' => $id_periode,
@@ -243,19 +249,19 @@ class Dosen extends CI_Controller
 				];
 				$insert = $this->db->insert('tbl_pengabmas', $data);
 				if ($insert) {
-					$this->session->set_flashdata('successalert', '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+					$this->session->set_flashdata('successalert', '<div class="alert alert-success alert-dismissible fade show" role="alert">
 						<strong>Data Pendaftaran Pangabdian Masyarakat Berhasil Disubmit.</strong>
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 						</button>
 					</div>');
-					redirect('dosen/daftarusulanpenelitian');
+					redirect('dosen/daftarusulanpengabdian');
 				}
 			} else {
-				$this->daftarusulanpenelitian();
+				$this->daftarusulanpengabdian();
 			}
 		} else {
-			$this->daftarusulanpenelitian();
+			$this->daftarusulanpengabdian();
 		}
 	}
 

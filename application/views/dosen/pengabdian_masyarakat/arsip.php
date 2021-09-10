@@ -39,7 +39,7 @@
                                                 Download
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                                <a class="dropdown-item" href="<?php echo base_url() . 'upload/pengabdian_masyarakat/' . $arsip->file_proposal; ?>" download>Proposal</a>
+                                                <a class="dropdown-item" href="<?php echo base_url() . 'upload/pengabdian_masyarakat/' . $arsip->file_proposal; ?>">Proposal</a>
                                                 <div class="dropdown-divider"></div>
                                                 <a class="dropdown-item" href="<?php echo base_url() . 'upload/pengabdian_masyarakat/' . $arsip->file_rps; ?>">RPS</a>
                                                 <div class="dropdown-divider"></div>

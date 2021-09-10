@@ -2,6 +2,16 @@
 
 class Pengabmas_m extends CI_Model
 {
+    public function get_periode($id_periode = null)
+    {
+        $this->db->from('periode_pengajuan', $id_periode);
+        if ($id_periode != null) {
+            $this->db->where('id_periode', $id_periode);
+        }
+        $query = $this->db->get();
+        return $query;
+    }
+
     public function get_pengabmas($id = null)
     {
         $this->db->from('tbl_pengabmas');
@@ -26,18 +36,28 @@ class Pengabmas_m extends CI_Model
         return $query;
     }
 
-    public function get_by_id($id_pengabmas) {
+    public function get_by_id($id_pengabmas)
+    {
         $this->db->where("id_pengabmas", $id_pengabmas);
         return $this->db->get('tbl_pengabmas')->row();
     }
 
-    public function update($id,$post) {
+    public function update($id, $post)
+    {
         $this->db->where('id_pengabmas', $id);
         $this->db->update('tbl_pengabmas', $post);
     }
 
-    public function download($id){
-        $query = $this->db->get_where('tbl_pengabmas',array('id_pengabmas'=>$id));
+    function delete($id)
+    {
+        $this->db->where('id_pengabmas', $id);
+        $this->db->delete('tbl_pengabmas');
+        return true;
+    }
+
+    public function download($id)
+    {
+        $query = $this->db->get_where('tbl_pengabmas', array('id_pengabmas' => $id));
         return $query->row_array();
-       }
+    }
 }
