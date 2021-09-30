@@ -70,7 +70,7 @@
                     </tr>
                     <tr>
                         <div class="<?= form_error('file_dokumentasi_catatan') ? 'has-error' : null ?>">
-                            <td class="font-weight-bold">File Dokumentasi Catatan(PDF)</td>
+                            <td class="font-weight-bold">File Dokumentasi Kegiatan / Catatan Penelitian (PDF)</td>
                             <td>:</td>
                             <?= form_error('file_dokumentasi_catatan') ?>
                             <td><input type="file" name="file_dokumentasi_catatan" value="<?= set_value('file_dokumentasi_catatan') ?>" class="form-control form-control-sm bg-light" id="file_dokumentasi_catatan" accept="application/pdf"></td>
