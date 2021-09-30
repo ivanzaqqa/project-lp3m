@@ -14,6 +14,7 @@
                             <th>Judul Penelitian</th>
                             <th>Periode Pengajuan</th>
                             <th>Tanggal Submit</th>
+                            <th>Matkul Diampu</th>
                             <th>Mahasiswa Yang Dilibatkan</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -29,6 +30,7 @@
                                 <td><?= $data->judul_penelitian; ?></td>
                                 <td><?= $data->tahun_periode; ?></td>
                                 <td><?= date('d-m-Y', strtotime($data->tgl_submit)) ?></td>
+                                <td><?= $data->matkul_diampu; ?></td>
                                 <td><?= $data->mhs_terlibat; ?></td>
                                 <td>
                                     <?php
