@@ -45,7 +45,7 @@
                                                 <div class="dropdown-divider"></div>
                                                 <a class="dropdown-item" href="<?php echo base_url() . 'upload/penelitian/' . $arsip->form_integrasi; ?>">Form Integrasi</a>
                                             </div>
-                                            <button class="dropdown-item" type="button">Tahapan Pelaksanaan</button>
+                                            <a class="dropdown-item" href="<?= site_url('dosen/tahapan_pelaksanaan_penelitian') ?>" type="button">Tahapan Pelaksanaan</a>
                                             <a class="dropdown-item" href="<?= site_url('dosen/delpenelitian/' . $arsip->id_penelitian) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data penelitian ini?')" type="button">Hapus Data</a>
                                         </div>
                                     </div>

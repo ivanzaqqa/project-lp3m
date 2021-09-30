@@ -182,6 +182,16 @@ class Dosen extends CI_Controller
 		redirect('dosen/arsippenelitian');
 	}
 
+	public function tahapan_pelaksanaan_penelitian()
+	{
+		$data['data'] = "Tahapan Pelaksanaan Penelitian";
+		$this->load->view('templates/auth_header');
+		$this->load->view('templates/topbar');
+		$this->load->view('dosen/penelitian/tahapan_pelaksanaan', $data);
+		$this->load->view('templates/auth_footer');
+	}
+
+	// End Penelitian
 
 	// PENGABDIAN MASYARAKAT
 	public function daftarusulanpengabdian()
@@ -337,6 +347,15 @@ class Dosen extends CI_Controller
 			</div>');
 		}
 		redirect('dosen/arsippengabdian');
+	}
+
+	public function tahapan_pelaksanaan_pengabdian()
+	{
+		$data['data'] = "Tahapan Pelaksanaan Pengabdian Masyarakat";
+		$this->load->view('templates/auth_header');
+		$this->load->view('templates/topbar');
+		$this->load->view('dosen/pengabdian_masyarakat/tahapan_pelaksanaan', $data);
+		$this->load->view('templates/auth_footer');
 	}
 
 	// PROFILE DOSEN
