@@ -34,6 +34,17 @@
                         </td>
                     </tr>
                     <tr>
+                        <td class="font-weight-bold">File Publikasi</td>
+                        <td>:</td>
+                        <td>
+                            <?php if ($data->file_publikasi != null) { ?>
+                                <button class="btn btn-sm btn-warning"><a style="color: white;" href="<?php echo base_url() . '/upload/insentif_publikasi/jurnal_prosiding/' . $data->file_publikasi; ?>">Download</a></button>
+                            <?php } else { ?>
+                                <button class="btn btn-sm btn-warning" disabled>Download</button>
+                            <?php } ?>
+                        </td>
+                    </tr>
+                    <tr>
                         <td><a href="<?= base_url('dosen/arsip_jurnal_prosiding') ?>" type="button" class="btn btn-sm text-white" style="background-color: #670099;"> <i class="fa fa-chevron-circle-left"></i>
                                 Kembali</a></td>
                     </tr>
