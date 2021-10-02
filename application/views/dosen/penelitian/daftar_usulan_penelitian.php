@@ -89,10 +89,3 @@
 </div>
 <!-- /.container-fluid -->
 </div>
-<footer class="sticky-footer bg-sidebar">
-    <div class="container my-auto">
-        <div class="text-center copyright my-auto">
-            <span style="font-size: 13px;">Copyright &copy; Sistem Management Hibah Internal Universitas Kadiri</span>
-        </div>
-    </div>
-</footer>
