@@ -77,10 +77,3 @@
         </div>
     </div>
 </div>
-<footer class="footer-login sticky-footer bg-sidebar" style="position: absolute; bottom: 0; width:100%;">
-    <div class="container-fluid">
-        <div class="copyright text-center text-white">
-            <span>Copyright &copy; Sistem Management Hibah Internal Universitas Kadiri</span>
-        </div>
-    </div>
-</footer>
