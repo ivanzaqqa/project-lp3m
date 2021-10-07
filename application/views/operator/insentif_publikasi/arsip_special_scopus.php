@@ -1,7 +1,10 @@
 <div class="container-fluid">
     <div class="card shadow mb-2">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-secondary">Arsip Insentif Publikasi special Scopus </h6>
+            <h6 class="m-0 font-weight-bold text-secondary">Arsip Insentif Publikasi special Scopus
+                <button class="btn btn-success btn-sm" type="button"><a href="<?php echo base_url('operator/exportexcel_scopus') ?>" style="color: white;">Export Data</a></button>
+            </h6>
+
         </div>
         <div class="card-body">
             <?= $this->session->flashdata('successupload') ?>

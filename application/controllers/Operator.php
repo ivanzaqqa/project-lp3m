@@ -105,8 +105,9 @@ class Operator extends CI_Controller
 		}
 
 		$filename = "Daftar Usulan Penelitian" . ".xlsx";
-		$object->getActiveSheet()->setTitle("LP3M");
+		$object->getActiveSheet()->setTitle("Daftar Usulan Penelitian");
 
+		ob_end_clean();
 		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 		header('Content-Disposition: attachment;filename="' . $filename . '"');
 		header('Cache-Control: max-age=0');
@@ -209,7 +210,7 @@ class Operator extends CI_Controller
 		}
 
 		$filename = "Pengabdian Masyarakat" . ".xlsx";
-		$object->getActiveSheet()->setTitle("LP3M");
+		$object->getActiveSheet()->setTitle("Pengabdian Masyarakat");
 
 		ob_end_clean();
 		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -524,6 +525,52 @@ class Operator extends CI_Controller
 		$this->load->view('templates/auth_footer');
 	}
 
+	// FOR EXPORT EXCEL JURNAl ATAU PROSIDING
+	public function exportexcel_prosiding()
+	{
+		$data['row'] = $this->jurpros_m->get_jurpros()->result();
+		require(APPPATH . 'PHPExcel-1.8/Classes/PHPExcel.php');
+		require(APPPATH . 'PHPExcel-1.8/Classes/PHPExcel/Writer/Excel2007.php');
+
+		$object = new PHPExcel();
+		$object->getProperties()->setCreator("LP3M");
+		$object->getProperties()->setLastModifiedBy("LP3M");
+		$object->getProperties()->setTitle("JURNAL ATAU PROSIDING LP3M");
+
+		$object->setActiveSheetIndex(0);
+		$object->getActiveSheet()->setCellValue('A1', 'No');
+		$object->getActiveSheet()->setCellValue('B1', 'Judul Artikel');
+		$object->getActiveSheet()->setCellValue('C1', 'Jenis Insentif');
+		$object->getActiveSheet()->setCellValue('D1', 'URL Artikel');
+		$object->getActiveSheet()->setCellValue('F1', 'Status');
+
+		$baris = 2;
+		$no = 1;
+
+		foreach ($data['row'] as $data) {
+			$object->getActiveSheet()->setCellValue('A' . $baris, $no++);
+			$object->getActiveSheet()->setCellValue('B' . $baris, $data->judul_penelitian);
+			$object->getActiveSheet()->setCellValue('C' . $baris, $data->nama_jurnal);
+			$object->getActiveSheet()->setCellValue('E' . $baris, $data->url_artikel);
+			$object->getActiveSheet()->setCellValue('F' . $baris, $data->status);
+
+			$baris++;
+		}
+
+		$filename = "Daftar Jurnal Atau Prosiding" . ".xlsx";
+		$object->getActiveSheet()->setTitle("Daftar Jurnal Atau Prosiding");
+
+		ob_end_clean();
+		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+		header('Content-Disposition: attachment;filename="' . $filename . '"');
+		header('Cache-Control: max-age=0');
+
+		$writer = PHPExcel_IOFactory::createwriter($object, 'Excel2007');
+		$writer->save('php://output');
+
+		exit;
+	}
+
 
 	// SPECIAL SCOPUS
 	public function arsip_special_scopus()
@@ -639,5 +686,58 @@ class Operator extends CI_Controller
 		$this->load->view('templates/topbar');
 		$this->load->view('operator/insentif_publikasi/detail_special_scopus', $detail);
 		$this->load->view('templates/auth_footer');
+	}
+
+	// FOR EXPORT EXCEL JURNAl ATAU PROSIDING
+	public function exportexcel_scopus()
+	{
+		$data['row'] = $this->specscop_m->get_scopus()->result();
+		require(APPPATH . 'PHPExcel-1.8/Classes/PHPExcel.php');
+		require(APPPATH . 'PHPExcel-1.8/Classes/PHPExcel/Writer/Excel2007.php');
+
+		$object = new PHPExcel();
+		$object->getProperties()->setCreator("LP3M");
+		$object->getProperties()->setLastModifiedBy("LP3M");
+		$object->getProperties()->setTitle("SPECIAL SCOPUS LP3M");
+
+		$object->setActiveSheetIndex(0);
+		$object->getActiveSheet()->setCellValue('A1', 'No');
+		$object->getActiveSheet()->setCellValue('B1', 'Judul Artikel');
+		$object->getActiveSheet()->setCellValue('C1', 'Jenis Insentif');
+		$object->getActiveSheet()->setCellValue('D1', 'Impact Factor Jurnal');
+		$object->getActiveSheet()->setCellValue('E1', 'URL Artikel');
+		$object->getActiveSheet()->setCellValue('F1', 'Mata Kuliah Yang Diampu');
+		$object->getActiveSheet()->setCellValue('G1', 'Kelompok Riset');
+		$object->getActiveSheet()->setCellValue('H1', 'Mahasiswa Yang Terlibat');
+		$object->getActiveSheet()->setCellValue('I1', 'Status');
+
+		$baris = 2;
+		$no = 1;
+
+		foreach ($data['row'] as $data) {
+			$object->getActiveSheet()->setCellValue('A' . $baris, $no++);
+			$object->getActiveSheet()->setCellValue('B' . $baris, $data->judul_artikel);
+			$object->getActiveSheet()->setCellValue('C' . $baris, $data->impact_factor_jurnal);
+			$object->getActiveSheet()->setCellValue('D' . $baris, $data->url_artikel);
+			$object->getActiveSheet()->setCellValue('E' . $baris, $data->matkul_diampu);
+			$object->getActiveSheet()->setCellValue('F' . $baris, $data->kelompok_riset);
+			$object->getActiveSheet()->setCellValue('G' . $baris, $data->mhs_terlibat);
+			$object->getActiveSheet()->setCellValue('H' . $baris, $data->status);
+
+			$baris++;
+		}
+
+		$filename = "Daftar Special Scopus" . ".xlsx";
+		$object->getActiveSheet()->setTitle("Daftar Special Scopus");
+
+		ob_end_clean();
+		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+		header('Content-Disposition: attachment;filename="' . $filename . '"');
+		header('Cache-Control: max-age=0');
+
+		$writer = PHPExcel_IOFactory::createwriter($object, 'Excel2007');
+		$writer->save('php://output');
+
+		exit;
 	}
 }

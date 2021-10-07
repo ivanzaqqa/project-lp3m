@@ -1,7 +1,9 @@
 <div class="container-fluid">
     <div class="card shadow mb-2">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-secondary">Arsip Insentif Publikasi Jurnal atau Prosiding</h6>
+            <h6 class="m-0 font-weight-bold text-secondary">Arsip Insentif Publikasi Jurnal atau Prosiding
+                <button class="btn btn-success mt-1 btn-sm" type="button"><a href="<?php echo base_url('operator/exportexcel_prosiding') ?>" style="color: white;">Export Data</a></button>
+            </h6>
         </div>
         <div class="card-body">
             <?= $this->session->flashdata('successupload') ?>
