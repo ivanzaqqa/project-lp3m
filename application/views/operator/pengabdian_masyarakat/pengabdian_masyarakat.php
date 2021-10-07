@@ -86,13 +86,14 @@
                                     <a href="" class="btn btn-sm btn-secondary mt-1" data-toggle="modal" data-target="#surattugas" style="font-size: 13px;">Surat Tugas</a>
                                     <a href="" class="btn btn-sm btn-secondary mt-1" data-toggle="modal" data-target="#hasilmonev" style="font-size: 13px;">Hasil Monev Internal</a>
                                     <a href="" class="btn btn-sm btn-secondary mt-1" data-toggle="modal" data-target="#beritaacarainsentif" style="font-size: 13px;">Berita Acara Insentif Publikasi</a>
-                                    <a href="" class="btn btn-sm btn-secondary mt-1" data-toggle="modal" data-target="#sertifikathaki" style="font-size: 13px;">Sertifikan HAKI</a>
+
                                 </td>
                                 <td>
                                     <a href="" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#logbook" style="font-size: 13px;">Log Book</a>
                                     <a href="" class="btn btn-sm btn-danger mt-1" data-toggle="modal" data-target="#laporanakhir" style="font-size: 13px;">Laporan Akhir</a>
                                     <a href="" class="btn btn-sm btn-danger mt-1" data-toggle="modal" data-target="#laporankeuangan" style="font-size: 13px;">Laporan Keuangan</a>
                                     <a href="" class="btn btn-sm btn-danger mt-1" data-toggle="modal" data-target="#artikelilmiah" style="font-size: 13px;">Artikel Ilmiah</a>
+                                    <a href="" class="btn btn-sm btn-danger mt-1" data-toggle="modal" data-target="#sertifikathaki" style="font-size: 13px;">Sertifikan HAKI</a>
                                     <a href="" class="btn btn-sm btn-danger mt-1" data-toggle="modal" data-target="#url" style="font-size: 13px;">URL</a>
                                     <a href="" class="btn btn-sm btn-danger mt-1" data-toggle="modal" data-target="#detail" style="font-size: 13px;">Detail</a>
                                 </td>
@@ -296,7 +297,27 @@
         </div>
     </div>
 </div>
-<!-- End Sertifikat HAKI-->
+<!-- End Hasil monev-->
+
+<!-- Berita acara insentif -->
+<div id="beritaacarainsentif" class="modal fade shadow-lg" role="dialog">
+    <div class="modal-dialog">
+        <!-- konten modal-->
+        <div class="modal-content">
+            <!-- heading modal -->
+            <div class="modal-header">
+                <small class="modal-title font-weight-bold">Upload Berita Acara Insentif</small>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- body modal -->
+            <div class="modal-body">
+                <p> <input type="file" name="berita_acara_insentif" class="form-control form-control-sm bg-light" id="hasil_monev_internal"></p>
+                <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End Berita acara insentif-->
 
 <!-- Detail -->
 <div id="detail" class="modal fade shadow-lg" role="dialog">

@@ -1,11 +1,12 @@
 <div class="container">
-    <h3 class="text-center font-weight-bold"><?= $data; ?></h3>
-    <hr>
+    <h3 class="text-center"><?= $data; ?></h3><br>
+    <h2 class="text-center font-weight-bold">Judul Penelitian</h2>
+    <h4 class="text-center">Author</h4>
+    <a href="<?= site_url('dosen/arsippengabdian') ?>" class="btn btn-md btn-primary mb-3"><i class="fas fa-chevron-circle-left"></i> Kembali</a>
     <div class="row mb-3">
         <div class="col-sm-6">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <h5 class="card-title ml-2">Nama dan Judul Pengabdian</h5>
                     <table class="table table-responsive border-0">
                         <tr>
                             <td class="font-weight-bold">Hasil Review Proposal</td>
@@ -15,7 +16,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="font-weight-bold">Surat Tugas Pengabdian Masyarakat</td>
+                            <td class="font-weight-bold">Surat Tugas Penelitian</td>
                             <td>:</td>
                             <td>
                                 <button class="btn-sm btn-primary">Download</button>
@@ -24,13 +25,6 @@
                     </table>
                     <h5 class="card-title ml-2">Log Book</h5>
                     <table class="table table-responsive border-0">
-                        <tr>
-                            <td class="font-weight-bold">Submit Log Book</td>
-                            <td>:</td>
-                            <td>
-                                <input type="text" name="log_book" class="form-control form-control-sm bg-light">
-                            </td>
-                        </tr>
                         <tr>
                             <td class="font-weight-bold">Tanggal Kegiatan</td>
                             <td>:</td>
@@ -44,7 +38,15 @@
                             <td>
                                 <textarea class="form-control form-control-sm bg-light" name="uraian_kegiatan" id="" cols="30" rows="5"></textarea>
                             </td>
-
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold">Dokumentasi</td>
+                            <td>:</td>
+                            <td>
+                                <input type="file" name="dokumentasilogbook" class="form-control form-control-sm bg-light">
+                                <small>*Dokumentasi Tidak Wajib Diisi (File Gambar, Word, PDF) atau (Semua File) Ukuran Maks (10 MB)
+                                </small>
+                            </td>
                         </tr>
                     </table>
                     <button type="submit" name="submit" class="ml-2 btn btn-md btn-warning">Simpan</button>
@@ -62,17 +64,14 @@
                         <tbody>
                             <tr>
                                 <th scope="row">1</th>
-                                <td>Mark</td>
+                                <td>27-11-99</td>
                                 <td>Otto</td>
                                 <td>
-                                    <a type="button" href="" class="btn btn-sm btn-primary">File Dokumentasi</a>
+                                    <a type="button" href="" class="btn btn-sm btn-primary">Download</a>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <span>*Dokumentasi Tidak Wajib Diisi (File Gambar, Word, PDF) atau (Semua File) Ukuran Maks (10 MB)
-                    </span><br>
-                    <span>*Tanggal Kegiatan tidak otomatis, Dosen menginputkan sendiri</span>
                 </div>
             </div>
         </div>
@@ -91,7 +90,9 @@
                             <td class="font-weight-bold">Submit Laporan Akhir</td>
                             <td>:</td>
                             <td> <input type="file" name="file_laporan_akhir" class="form-control form-control-sm bg-light" id="file_laporan_akhir">
-
+                            </td>
+                            <td>
+                                <a href="" class="btn btn-sm btn-primary" type="button">Upload</a>
                             </td>
                         </tr>
                         <tr>
@@ -106,6 +107,9 @@
                             <td>:</td>
                             <td> <input type="file" name="file_laporan_keuangan" class="form-control form-control-sm bg-light" id="file_laporan_keuangan">
                             </td>
+                            <td>
+                                <a href="" class="btn btn-sm btn-primary" type="button">Upload</a>
+                            </td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold">Artikel Ilmiah</td>
@@ -118,6 +122,9 @@
                             <td class="font-weight-bold">Submit Artikel Ilmiah</td>
                             <td>:</td>
                             <td> <input type="file" name="file_artikel_ilmiah" class="form-control form-control-sm bg-light" id="file_artikel_ilmiah">
+                            </td>
+                            <td>
+                                <a href="" class="btn btn-sm btn-primary" type="button">Upload</a>
                             </td>
                         </tr>
                         <tr>
@@ -132,6 +139,9 @@
                             <td>:</td>
                             <td> <input type="text" name="url_artikel_ilmiah" class="form-control form-control-sm bg-light" id="url_artikel_ilmiah">
                             </td>
+                            <td>
+                                <a href="" class="btn btn-sm btn-primary" type="button">Simpan</a>
+                            </td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold">Sertifikat HKI</td>
@@ -144,6 +154,9 @@
                             <td class="font-weight-bold">Submit Sertifikat HKI (Jika Ada)</td>
                             <td>:</td>
                             <td> <input type="file" name="file_sertifikat_hki" class="form-control form-control-sm bg-light" id="file_sertifikat_hki">
+                            </td>
+                            <td>
+                                <a href="" class="btn btn-sm btn-primary" type="button">Upload</a>
                             </td>
                         </tr>
                         <tr>
@@ -165,7 +178,6 @@
             </div>
         </div>
     </div>
-
 </div>
 <!-- /.container-fluid -->
 </div>
