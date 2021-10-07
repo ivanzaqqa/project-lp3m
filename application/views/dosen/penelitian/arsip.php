@@ -45,7 +45,11 @@
                                                 <div class="dropdown-divider"></div>
                                                 <a class="dropdown-item" href="<?php echo base_url() . 'upload/penelitian/' . $arsip->form_integrasi; ?>">Form Integrasi</a>
                                             </div>
-                                            <a class="dropdown-item" href="<?= site_url('dosen/tahapan_pelaksanaan_penelitian') ?>" type="button">Tahapan Pelaksanaan</a>
+                                            <?php if ($arsip->status == 1) { ?>
+                                                <a class="dropdown-item" href="<?= site_url('dosen/tahapan_pelaksanaan_penelitian') ?>" type="button">Tahapan Pelaksanaan</a>
+                                            <?php } else { ?>
+                                                <a class="dropdown-item" href="" type="button" style="pointer-events:none; cursor:default;color:grey;">Tahapan Pelaksanaan</a>
+                                            <?php } ?>
                                             <a class="dropdown-item" href="<?= site_url('dosen/delpenelitian/' . $arsip->id_penelitian) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data penelitian ini?')" type="button">Hapus Data</a>
                                         </div>
                                     </div>
