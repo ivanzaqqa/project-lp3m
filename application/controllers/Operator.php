@@ -93,16 +93,16 @@ class Operator extends CI_Controller
 		$baris = 2;
 		$no = 1;
 
-		foreach ($data['row'] as $data) {
-			$object->getActiveSheet()->setCellValue('A' . $baris, $no++);
-			$object->getActiveSheet()->setCellValue('B' . $baris, $data->judul_penelitian);
-			$object->getActiveSheet()->setCellValue('C' . $baris, $data->tahun_periode);
-			$object->getActiveSheet()->setCellValue('D' . $baris, date('d-m-Y', strtotime($data->tgl_submit)));
-			$object->getActiveSheet()->setCellValue('E' . $baris, $data->mhs_terlibat);
-			$object->getActiveSheet()->setCellValue('F' . $baris, $data->status);
+		foreach ($data['row'] as $data) [
+			$object->getActiveSheet()->setCellValue('A' . $baris, $no++),
+			$object->getActiveSheet()->setCellValue('B' . $baris, $data->judul_penelitian),
+			$object->getActiveSheet()->setCellValue('C' . $baris, $data->tahun_periode),
+			$object->getActiveSheet()->setCellValue('D' . $baris, date('d-m-Y', strtotime($data->tgl_submit))),
+			$object->getActiveSheet()->setCellValue('E' . $baris, $data->mhs_terlibat),
+			$object->getActiveSheet()->setCellValue('F' . $baris, $data->status),
 
-			$baris++;
-		}
+			$baris++,
+		];
 
 		$filename = "Daftar Usulan Penelitian" . ".xlsx";
 		$object->getActiveSheet()->setTitle("Daftar Usulan Penelitian");
@@ -195,19 +195,19 @@ class Operator extends CI_Controller
 		$baris = 2;
 		$no = 1;
 
-		foreach ($data['row'] as $data) {
-			$object->getActiveSheet()->setCellValue('A' . $baris, $no++);
-			$object->getActiveSheet()->setCellValue('B' . $baris, $data->name);
-			$object->getActiveSheet()->setCellValue('C' . $baris, $data->judul_penelitian);
-			$object->getActiveSheet()->setCellValue('D' . $baris, $data->tahun_periode);
-			$object->getActiveSheet()->setCellValue('E' . $baris, $data->matkul_diampu);
-			$object->getActiveSheet()->setCellValue('F' . $baris, date('d-m-Y', strtotime($data->tgl_submit)));
-			$object->getActiveSheet()->setCellValue('G' . $baris, $data->mhs_terlibat);
-			$object->getActiveSheet()->setCellValue('H' . $baris, $data->kelompok_riset);
-			$object->getActiveSheet()->setCellValue('I' . $baris, $data->status);
+		foreach ($data['row'] as $data) [
+			$object->getActiveSheet()->setCellValue('A' . $baris, $no++),
+			$object->getActiveSheet()->setCellValue('B' . $baris, $data->name),
+			$object->getActiveSheet()->setCellValue('C' . $baris, $data->judul_penelitian),
+			$object->getActiveSheet()->setCellValue('D' . $baris, $data->tahun_periode),
+			$object->getActiveSheet()->setCellValue('E' . $baris, $data->matkul_diampu),
+			$object->getActiveSheet()->setCellValue('F' . $baris, date('d-m-Y', strtotime($data->tgl_submit))),
+			$object->getActiveSheet()->setCellValue('G' . $baris, $data->mhs_terlibat),
+			$object->getActiveSheet()->setCellValue('H' . $baris, $data->kelompok_riset),
+			$object->getActiveSheet()->setCellValue('I' . $baris, $data->status),
 
-			$baris++;
-		}
+			$baris++,
+		];
 
 		$filename = "Pengabdian Masyarakat" . ".xlsx";
 		$object->getActiveSheet()->setTitle("Pengabdian Masyarakat");
@@ -547,15 +547,15 @@ class Operator extends CI_Controller
 		$baris = 2;
 		$no = 1;
 
-		foreach ($data['row'] as $data) {
-			$object->getActiveSheet()->setCellValue('A' . $baris, $no++);
-			$object->getActiveSheet()->setCellValue('B' . $baris, $data->judul_penelitian);
-			$object->getActiveSheet()->setCellValue('C' . $baris, $data->nama_jurnal);
-			$object->getActiveSheet()->setCellValue('E' . $baris, $data->url_artikel);
-			$object->getActiveSheet()->setCellValue('F' . $baris, $data->status);
+		foreach ($data['row'] as $data) [
+			$object->getActiveSheet()->setCellValue('A' . $baris, $no++),
+			$object->getActiveSheet()->setCellValue('B' . $baris, $data->judul_penelitian),
+			$object->getActiveSheet()->setCellValue('C' . $baris, $data->nama_jurnal),
+			$object->getActiveSheet()->setCellValue('E' . $baris, $data->url_artikel),
+			$object->getActiveSheet()->setCellValue('F' . $baris, $data->status),
 
-			$baris++;
-		}
+			$baris++,
+		];
 
 		$filename = "Daftar Jurnal Atau Prosiding" . ".xlsx";
 		$object->getActiveSheet()->setTitle("Daftar Jurnal Atau Prosiding");
@@ -688,7 +688,7 @@ class Operator extends CI_Controller
 		$this->load->view('templates/auth_footer');
 	}
 
-	// FOR EXPORT EXCEL JURNAl ATAU PROSIDING
+	// FOR EXPORT EXCEL SPECIAL SCOPUS
 	public function exportexcel_scopus()
 	{
 		$data['row'] = $this->specscop_m->get_scopus()->result();
@@ -714,18 +714,18 @@ class Operator extends CI_Controller
 		$baris = 2;
 		$no = 1;
 
-		foreach ($data['row'] as $data) {
-			$object->getActiveSheet()->setCellValue('A' . $baris, $no++);
-			$object->getActiveSheet()->setCellValue('B' . $baris, $data->judul_artikel);
-			$object->getActiveSheet()->setCellValue('C' . $baris, $data->impact_factor_jurnal);
-			$object->getActiveSheet()->setCellValue('D' . $baris, $data->url_artikel);
-			$object->getActiveSheet()->setCellValue('E' . $baris, $data->matkul_diampu);
-			$object->getActiveSheet()->setCellValue('F' . $baris, $data->kelompok_riset);
-			$object->getActiveSheet()->setCellValue('G' . $baris, $data->mhs_terlibat);
-			$object->getActiveSheet()->setCellValue('H' . $baris, $data->status);
+		foreach ($data['row'] as $data) [
+			$object->getActiveSheet()->setCellValue('A' . $baris, $no++),
+			$object->getActiveSheet()->setCellValue('B' . $baris, $data->judul_artikel),
+			$object->getActiveSheet()->setCellValue('C' . $baris, $data->impact_factor_jurnal),
+			$object->getActiveSheet()->setCellValue('D' . $baris, $data->url_artikel),
+			$object->getActiveSheet()->setCellValue('E' . $baris, $data->matkul_diampu),
+			$object->getActiveSheet()->setCellValue('F' . $baris, $data->kelompok_riset),
+			$object->getActiveSheet()->setCellValue('G' . $baris, $data->mhs_terlibat),
+			$object->getActiveSheet()->setCellValue('H' . $baris, $data->status),
 
-			$baris++;
-		}
+			$baris++,
+		];
 
 		$filename = "Daftar Special Scopus" . ".xlsx";
 		$object->getActiveSheet()->setTitle("Daftar Special Scopus");
