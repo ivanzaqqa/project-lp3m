@@ -18,7 +18,7 @@ class Penelitian_m extends CI_Model
         $this->db->from('tbl_penelitian');
         $this->db->join('users', 'users.id = tbl_penelitian.id');
         $this->db->join('periode_pengajuan', 'periode_pengajuan.id_periode = tbl_penelitian.id_periode');
-        $this->db->join('status', 'status.id_status = tbl_penelitian.id_status');
+        $this->db->join('status_penelitian_pengabdian', 'status_penelitian_pengabdian.id_status = tbl_penelitian.id_status');
         if ($id != null) {
             $this->db->where('id_penelitian', $id);
         }
@@ -31,7 +31,7 @@ class Penelitian_m extends CI_Model
         $this->db->from('tbl_penelitian');
         $this->db->join('users', 'users.id = tbl_penelitian.id');
         $this->db->join('periode_pengajuan', 'periode_pengajuan.id_periode = tbl_penelitian.id_periode');
-        $this->db->join('status', 'status.id_status = tbl_penelitian.id_status');
+        $this->db->join('status_penelitian_pengabdian', 'status_penelitian_pengabdian.id_status = tbl_penelitian.id_status');
         $this->db->where('tbl_penelitian.id', $this->session->userdata('id'));
         $query = $this->db->get();
         return $query;

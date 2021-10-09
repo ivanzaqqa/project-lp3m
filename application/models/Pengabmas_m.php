@@ -17,7 +17,7 @@ class Pengabmas_m extends CI_Model
         $this->db->from('tbl_pengabmas');
         $this->db->join('users', 'users.id = tbl_pengabmas.id');
         $this->db->join('periode_pengajuan', 'periode_pengajuan.id_periode = tbl_pengabmas.id_periode');
-        $this->db->join('status', 'status.id_status = tbl_pengabmas.id_status');
+        $this->db->join('status_penelitian_pengabdian', 'status_penelitian_pengabdian.id_status = tbl_pengabmas.id_status');
         if ($id != null) {
             $this->db->where('id_pengabmas', $id);
         }
@@ -30,7 +30,7 @@ class Pengabmas_m extends CI_Model
         $this->db->from('tbl_pengabmas');
         $this->db->join('users', 'users.id = tbl_pengabmas.id');
         $this->db->join('periode_pengajuan', 'periode_pengajuan.id_periode = tbl_pengabmas.id_periode');
-        $this->db->join('status', 'status.id_status = tbl_pengabmas.id_status');
+        $this->db->join('status_penelitian_pengabdian', 'status_penelitian_pengabdian.id_status = tbl_pengabmas.id_status');
         $this->db->where('tbl_pengabmas.id', $this->session->userdata('id'));
         $query = $this->db->get();
         return $query;

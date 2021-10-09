@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 02, 2021 at 05:17 AM
+-- Generation Time: Oct 09, 2021 at 02:18 AM
 -- Server version: 5.7.35
--- PHP Version: 7.3.29
+-- PHP Version: 7.3.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -77,7 +77,8 @@ CREATE TABLE `insentif_specscop` (
 
 INSERT INTO `insentif_specscop` (`id_insentif_scopus`, `id`, `id_scopus`, `id_status`, `judul_artikel`, `impact_factor_jurnal`, `url_artikel`, `file_luaran`, `file_proposal_penelitian`, `file_dokumentasi_catatan`, `file_laporan_akhir`, `file_rpp_rps`, `file_berita_acara`, `matkul_diampu`, `kelompok_riset`, `mhs_terlibat`) VALUES
 (2, 1, 2, 1, 'Holy fucking shit', 'sh!t', 'www.continue.com', 'd5fe8d730bf1eff9597eb07accf62561.pdf', 'fdc32d410310b02654b655bcd0315b2d.pdf', 'f63cfa3daf6dee5b5e26219aeb6731e7.pdf', '7ed053fd73af3f10db36a9034541a3e5.pdf', '836b8ba89eeda59112738b16ddfc3ea8.pdf', 'd56445148e20de625928d4a0eec69573.pdf', 'Manajemen', 'Meteorit', 'Bagas (19317321)'),
-(4, 1, 1, 2, 'Straight to your fucking head', 'Slut', 'www.slight.com', 'c6681539daff0a048e333c17a75f487b.pdf', 'cc69d36c2d42f8dfa93675a6c5b159c6.pdf', 'd37d9ec10007d6cdfeacc1db3435fe0e.pdf', '7e8c06d65d6ecd1212dfe144f14c7256.pdf', '1142fcb41c00793af6933cf36d865346.pdf', NULL, 'Ekonomi', 'Geofisika', 'Andik (123928)');
+(4, 1, 1, 2, 'Straight to your fucking head', 'Slut', 'www.slight.com', 'c6681539daff0a048e333c17a75f487b.pdf', 'cc69d36c2d42f8dfa93675a6c5b159c6.pdf', 'd37d9ec10007d6cdfeacc1db3435fe0e.pdf', '7e8c06d65d6ecd1212dfe144f14c7256.pdf', '1142fcb41c00793af6933cf36d865346.pdf', NULL, 'Ekonomi', 'Geofisika', 'Andik (123928)'),
+(5, 1, 1, 3, 'asddsadsad', 'asdasd', 'asdsadsadd', '1066a3b4abd485e66c8f3290b13f4926.pdf', 'f439d00992a30fac9fa58d1f98dda413.pdf', '7e0a2713c1f562bb2010f7a11c8de7b1.pdf', 'e36c6d7bf69cf3119dfea23bb7fac2b3.pdf', '8fd51f1ee0d4cd1de9ce39014328af9f.pdf', NULL, 'asdasdssa', 'adasdsd', 'asdadd');
 
 -- --------------------------------------------------------
 
@@ -155,26 +156,6 @@ INSERT INTO `pilih_scopus` (`id_scopus`, `nama_scopus`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `status`
---
-
-CREATE TABLE `status` (
-  `id_status` int(11) NOT NULL,
-  `status` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `status`
---
-
-INSERT INTO `status` (`id_status`, `status`) VALUES
-(1, 'Didanai'),
-(2, 'Ditolak'),
-(3, 'Sedang Direview');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `status_insentif`
 --
 
@@ -191,6 +172,26 @@ INSERT INTO `status_insentif` (`id_status`, `status`) VALUES
 (1, 'Disetujui'),
 (2, 'Ditolak'),
 (3, 'Sedang Diverifikasi');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `status_penelitian_pengabdian`
+--
+
+CREATE TABLE `status_penelitian_pengabdian` (
+  `id_status` int(11) NOT NULL,
+  `status` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `status_penelitian_pengabdian`
+--
+
+INSERT INTO `status_penelitian_pengabdian` (`id_status`, `status`) VALUES
+(1, 'Didanai'),
+(2, 'Ditolak'),
+(3, 'Sedang Direview');
 
 -- --------------------------------------------------------
 
@@ -218,7 +219,8 @@ CREATE TABLE `tbl_penelitian` (
 --
 
 INSERT INTO `tbl_penelitian` (`id_penelitian`, `id`, `id_periode`, `judul_penelitian`, `matkul_diampu`, `kelompok_riset`, `mhs_terlibat`, `file_proposal`, `file_rps`, `form_integrasi`, `id_status`, `tgl_submit`) VALUES
-(24, 1, 1, 'Bangun Tanah Persegi', 'Jaringan', 'Surya Kencana', 'Ipip (12993922)', 'fb559a1fc65ebbd26741a7d2b1568414.pdf', 'a0340b853a64cbd08b559871e9ca5a95.pdf', '3e7ab5e0eb0aeb8befd09777806da8ce.pdf', 3, '2021-09-02 12:11:38');
+(24, 1, 1, 'Bangun Tanah Persegi', 'Jaringan', 'Surya Kencana', 'Ipip (12993922)', 'fb559a1fc65ebbd26741a7d2b1568414.pdf', 'a0340b853a64cbd08b559871e9ca5a95.pdf', '3e7ab5e0eb0aeb8befd09777806da8ce.pdf', 3, '2021-09-02 12:11:38'),
+(44, 1, 1, 'Fucking bitch motherfuckers', 'Jaringan', 'Surya 12', 'Tatit Mahendra', '8c168c5066d87ce2a12a945503542068.pdf', '2bd1bb445b57f92abe95d3044c86e4c3.pdf', '6024f31752053500f751315c759b07bb.pdf', 1, '2021-09-10 11:40:52');
 
 -- --------------------------------------------------------
 
@@ -247,7 +249,7 @@ CREATE TABLE `tbl_pengabmas` (
 
 INSERT INTO `tbl_pengabmas` (`id_pengabmas`, `id`, `id_periode`, `judul_pengabmas`, `matkul_diampu`, `kelompok_riset`, `mhs_terlibat`, `file_proposal`, `file_rps`, `form_integrasi`, `id_status`, `tgl_submit`) VALUES
 (2, 1, 2, 'Mengabdi kepada para penghuni', 'Manajemen', 'Masykulin', 'Bagas (19317321)', '15ab7a6f477320baf38551802e4ce8ce.pdf', '890051a3a2f70dcb5dfeca438a91a3c1.pdf', '72a6196073d80e1f617135b66159bd30.pdf', 3, '2021-08-03 20:46:10'),
-(3, 1, 1, 'Sultan Nih Bos', 'Jaringan', 'Efek', 'Andik (1233139)', '3d3a534ec9c0dae4b8aafe0c634bc55e.pdf', '6ec6320834d0114d35bb38d838418624.pdf', '0f58c2c436795db24037011913d79378.pdf', 3, '2021-08-03 20:49:39');
+(3, 1, 1, 'Sultan Nih Bos', 'Jaringan', 'Efek', 'Andik (1233139)', '3d3a534ec9c0dae4b8aafe0c634bc55e.pdf', '6ec6320834d0114d35bb38d838418624.pdf', '0f58c2c436795db24037011913d79378.pdf', 1, '2021-08-03 20:49:39');
 
 -- --------------------------------------------------------
 
@@ -280,7 +282,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `nidn`, `id_sinta`, `username`, `name`, `email`, `password`, `image`, `jk`, `program_studi`, `fakultas`, `alamat`, `no_hp`, `id_role`, `created_at`) VALUES
 (1, 2147483, 1931701, 'dikaipip', 'Mahardika Ipip', 'dikaipip@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', '2de211e8-60c8-4d59-9b50-a6e6b87c587a.jpg', 'L', 'Matematika', 'Teknik', 'jygjggjgyg', 822913422, 1, '2021-07-02 03:12:11'),
 (2, 123231222, 1232112, 'erickkirek', 'Erick Kusuma W', 'erickkirek@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'erickkirek1.jpg', 'L', 'Teknik Sipil', 'Teknik', 'Gondanglegi', 2147483647, 2, NULL),
-(14, 123456782, 123456, 'ivanzaqqa', 'Ivan Zaqqa', 'jausdla@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', '', 'L', 'Akuntan', 'Teknik', 'Desa Tegaron', 2147483647, 1, NULL),
+(14, 123456782, 123456, 'ivanzaqqa', 'Ivan Zaqqa', 'jausdla@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'download.jpeg', 'L', 'Akuntan', 'Teknik', 'Desa Prambon', 2147483647, 1, NULL),
 (17, 9798798, 980980, 'satrioutomo', 'Satrio Utomo', 'satrioutomo@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', '', 'L', 'Manajemen', 'Ekonomi', 'Prambon', 2147483647, 1, NULL),
 (29, 98123493, 1924029, 'bgsrmdhni', 'Bagas Ramadhani', 'bagasramadhani@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'f64cbd54-782b-4f71-9b19-dc2142c2acfb.jpg', 'L', 'Fisika', 'IPA', 'Kayen Kidul', 827172837, 2, NULL);
 
@@ -345,17 +347,17 @@ ALTER TABLE `pilih_scopus`
   ADD KEY `nama` (`nama_scopus`);
 
 --
--- Indexes for table `status`
---
-ALTER TABLE `status`
-  ADD PRIMARY KEY (`id_status`);
-
---
 -- Indexes for table `status_insentif`
 --
 ALTER TABLE `status_insentif`
   ADD PRIMARY KEY (`id_status`),
   ADD KEY `status` (`status`);
+
+--
+-- Indexes for table `status_penelitian_pengabdian`
+--
+ALTER TABLE `status_penelitian_pengabdian`
+  ADD PRIMARY KEY (`id_status`);
 
 --
 -- Indexes for table `tbl_penelitian`
@@ -405,7 +407,7 @@ ALTER TABLE `insentif_jurpros`
 -- AUTO_INCREMENT for table `insentif_specscop`
 --
 ALTER TABLE `insentif_specscop`
-  MODIFY `id_insentif_scopus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_insentif_scopus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `periode_pengajuan`
@@ -426,22 +428,22 @@ ALTER TABLE `pilih_scopus`
   MODIFY `id_scopus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `status`
---
-ALTER TABLE `status`
-  MODIFY `id_status` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
 -- AUTO_INCREMENT for table `status_insentif`
 --
 ALTER TABLE `status_insentif`
   MODIFY `id_status` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `status_penelitian_pengabdian`
+--
+ALTER TABLE `status_penelitian_pengabdian`
+  MODIFY `id_status` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `tbl_penelitian`
 --
 ALTER TABLE `tbl_penelitian`
-  MODIFY `id_penelitian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_penelitian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `tbl_pengabmas`
@@ -487,7 +489,7 @@ ALTER TABLE `insentif_specscop`
 ALTER TABLE `tbl_penelitian`
   ADD CONSTRAINT `tbl_penelitian_ibfk_1` FOREIGN KEY (`id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `tbl_penelitian_ibfk_2` FOREIGN KEY (`id_periode`) REFERENCES `periode_pengajuan` (`id_periode`),
-  ADD CONSTRAINT `tbl_penelitian_ibfk_3` FOREIGN KEY (`id_status`) REFERENCES `status` (`id_status`);
+  ADD CONSTRAINT `tbl_penelitian_ibfk_3` FOREIGN KEY (`id_status`) REFERENCES `status_penelitian_pengabdian` (`id_status`);
 
 --
 -- Constraints for table `tbl_pengabmas`
@@ -495,7 +497,7 @@ ALTER TABLE `tbl_penelitian`
 ALTER TABLE `tbl_pengabmas`
   ADD CONSTRAINT `tbl_pengabmas_ibfk_1` FOREIGN KEY (`id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `tbl_pengabmas_ibfk_2` FOREIGN KEY (`id_periode`) REFERENCES `periode_pengajuan` (`id_periode`),
-  ADD CONSTRAINT `tbl_pengabmas_ibfk_3` FOREIGN KEY (`id_status`) REFERENCES `status` (`id_status`);
+  ADD CONSTRAINT `tbl_pengabmas_ibfk_3` FOREIGN KEY (`id_status`) REFERENCES `status_penelitian_pengabdian` (`id_status`);
 
 --
 -- Constraints for table `users`
