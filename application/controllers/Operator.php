@@ -13,6 +13,7 @@ class Operator extends CI_Controller
 		$this->load->model('pengabmas_m');
 		$this->load->model('jurpros_m');
 		$this->load->model('specscop_m');
+		$this->load->model('pelaksanaanPenelitian_m');
 	}
 	public function index()
 	{
@@ -25,6 +26,7 @@ class Operator extends CI_Controller
 	public function penelitian()
 	{
 		$data['row'] = $this->penelitian_m->get_penelitian();
+		$data['pelaksanaan'] = $this->pelaksanaanPenelitian_m->get_pelpenelitian();
 		$this->load->view('templates/auth_header');
 		$this->load->view('operator/menu');
 		$this->load->view('templates/topbar');

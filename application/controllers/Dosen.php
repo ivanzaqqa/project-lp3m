@@ -182,9 +182,9 @@ class Dosen extends CI_Controller
 		redirect('dosen/arsippenelitian');
 	}
 
-	public function tahapan_pelaksanaan_penelitian()
+	public function tahapan_pelaksanaan_penelitian($id)
 	{
-		$data['data'] = "Tahapan Pelaksanaan Penelitian";
+		$data['row'] = $this->penelitian_m->get_penelitian($id);
 		$this->load->view('templates/auth_header');
 		$this->load->view('templates/topbar');
 		$this->load->view('dosen/penelitian/tahapan_pelaksanaan', $data);
