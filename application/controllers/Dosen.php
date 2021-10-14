@@ -184,11 +184,193 @@ class Dosen extends CI_Controller
 
 	public function tahapan_pelaksanaan_penelitian($id)
 	{
-		$data['row'] = $this->penelitian_m->get_penelitian($id);
-		$this->load->view('templates/auth_header');
-		$this->load->view('templates/topbar');
-		$this->load->view('dosen/penelitian/tahapan_pelaksanaan', $data);
-		$this->load->view('templates/auth_footer');
+		$query = $this->penelitian_m->get_penelitian($id);
+		if ($query->num_rows() > 0) {
+			$penelitian = $query->row();
+			$data = array(
+				'page' => 'edit',
+				'row' => $penelitian,
+			);
+			$this->load->view('templates/auth_header');
+			$this->load->view('templates/topbar');
+			$this->load->view('dosen/penelitian/tahapan_pelaksanaan', $data);
+			$this->load->view('templates/auth_footer');
+		}
+	}
+
+	public function proses_tahapan_pelaksanaan_penelitian($id)
+	{
+		$config['upload_path']          = './upload/tahapan_pelaksanaan/';
+		$config['allowed_types']        = 'pdf';
+		$config['max_size']            = 5000;
+		$config['encrypt_name']         = TRUE;
+
+		$this->load->library('upload', $config);
+
+		$post = $this->input->post(null, TRUE);
+		if (isset($_POST['edit_laporan_akhir'])) {
+			if (@$_FILES['laporan_akhir']['name'] != null) {
+				if ($this->upload->do_upload('laporan_akhir')) {
+
+					$penelitian = $this->penelitian_m->get_penelitian($post['id_penelitian'])->row();
+					if ($penelitian->laporan_akhir != null) {
+						$target_file = './upload/tahapan_pelaksanaan/' . $penelitian->laporan_akhir;
+						unlink($target_file);
+					}
+
+					$post['laporan_akhir'] = $this->upload->data('file_name');
+					$this->penelitian_m->edit($post);
+					if ($this->db->affected_rows() > 0) {
+						$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>PDF laporan akhir tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+					}
+					redirect('dosen/tahapan_pelaksanaan_penelitian/' . $id);
+				} else {
+					$error = $this->upload->display_errors();
+					$this->session->set_flashdata('erroredit', $error);
+					redirect('dosen/tahapan_pelaksanaan_penelitian');
+				}
+			} else {
+				$post['laporan_akhir'] = null;
+				$this->penelitian_m->edit($post);
+				if ($this->db->affected_rows() > 0) {
+					$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>PDF laporan akhir tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+				}
+				redirect('dosen/tahapan_pelaksanaan_penelitian/' . $id);
+			}
+		}
+
+		if (isset($_POST['edit_laporan_keuangan'])) {
+			if (@$_FILES['laporan_keuangan']['name'] != null) {
+				if ($this->upload->do_upload('laporan_keuangan')) {
+
+					$penelitian = $this->penelitian_m->get_penelitian($post['id_penelitian'])->row();
+					if ($penelitian->laporan_keuangan != null) {
+						$target_file = './upload/tahapan_pelaksanaan/' . $penelitian->laporan_keuangan;
+						unlink($target_file);
+					}
+
+					$post['laporan_keuangan'] = $this->upload->data('file_name');
+					$this->penelitian_m->edit($post);
+					if ($this->db->affected_rows() > 0) {
+						$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>PDF laporan akhir tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+					}
+					redirect('dosen/tahapan_pelaksanaan_penelitian/' . $id);
+				} else {
+					$error = $this->upload->display_errors();
+					$this->session->set_flashdata('erroredit', $error);
+					redirect('dosen/tahapan_pelaksanaan_penelitian');
+				}
+			} else {
+				$post['laporan_keuangan'] = null;
+				$this->penelitian_m->edit($post);
+				if ($this->db->affected_rows() > 0) {
+					$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>PDF laporan akhir tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+				}
+				redirect('dosen/tahapan_pelaksanaan_penelitian/' . $id);
+			}
+		}
+
+		if (isset($_POST['edit_artikel_ilmiah'])) {
+			if (@$_FILES['artikel_ilmiah']['name'] != null) {
+				if ($this->upload->do_upload('artikel_ilmiah')) {
+
+					$penelitian = $this->penelitian_m->get_penelitian($post['id_penelitian'])->row();
+					if ($penelitian->artikel_ilmiah != null) {
+						$target_file = './upload/tahapan_pelaksanaan/' . $penelitian->artikel_ilmiah;
+						unlink($target_file);
+					}
+
+					$post['artikel_ilmiah'] = $this->upload->data('file_name');
+					$this->penelitian_m->edit($post);
+					if ($this->db->affected_rows() > 0) {
+						$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>PDF laporan akhir tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+					}
+					redirect('dosen/tahapan_pelaksanaan_penelitian/' . $id);
+				} else {
+					$error = $this->upload->display_errors();
+					$this->session->set_flashdata('erroredit', $error);
+					redirect('dosen/tahapan_pelaksanaan_penelitian');
+				}
+			} else {
+				$post['artikel_ilmiah'] = null;
+				$this->penelitian_m->edit($post);
+				if ($this->db->affected_rows() > 0) {
+					$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>PDF laporan akhir tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+				}
+				redirect('dosen/tahapan_pelaksanaan_penelitian/' . $id);
+			}
+		}
+
+		if (isset($_POST['edit_sertifikat_hki'])) {
+			if (@$_FILES['sertifikat_hki']['name'] != null) {
+				if ($this->upload->do_upload('sertifikat_hki')) {
+
+					$penelitian = $this->penelitian_m->get_penelitian($post['id_penelitian'])->row();
+					if ($penelitian->sertifikat_hki != null) {
+						$target_file = './upload/tahapan_pelaksanaan/' . $penelitian->sertifikat_hki;
+						unlink($target_file);
+					}
+
+					$post['sertifikat_hki'] = $this->upload->data('file_name');
+					$this->penelitian_m->edit($post);
+					if ($this->db->affected_rows() > 0) {
+						$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>PDF laporan akhir tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+					}
+					redirect('dosen/tahapan_pelaksanaan_penelitian/' . $id);
+				} else {
+					$error = $this->upload->display_errors();
+					$this->session->set_flashdata('erroredit', $error);
+					redirect('dosen/tahapan_pelaksanaan_penelitian');
+				}
+			} else {
+				$post['sertifikat_hki'] = null;
+				$this->penelitian_m->edit($post);
+				if ($this->db->affected_rows() > 0) {
+					$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>PDF laporan akhir tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+				}
+				redirect('dosen/tahapan_pelaksanaan_penelitian/' . $id);
+			}
+		}
 	}
 
 	// End Penelitian
