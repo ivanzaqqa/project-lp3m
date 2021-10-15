@@ -78,29 +78,48 @@
                                         </div>
                                     </div>
                                 </td>
+                                <td>
+                                    <a href="" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#hasilreview" style="font-size: 13px;">Hasil Review</a>
+                                    <a href="" class="btn btn-sm btn-secondary mt-1" data-toggle="modal" data-target="#surattugas" style="font-size: 13px;">Surat Tugas</a>
+                                    <a href="" class="btn btn-sm btn-secondary mt-1" data-toggle="modal" data-target="#hasilmonev" style="font-size: 13px;">Hasil Monev Internal</a>
+                                    <a href="" class="btn btn-sm btn-secondary mt-1" data-toggle="modal" data-target="#beritaacarainsentif" style="font-size: 13px;">Berita Acara Insentif Publikasi</a>
+                                </td>
+                                <td>
+                                    <a href="" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#logbook" style="font-size: 13px;">Log Book</a>
+                                    <?php if ($data->laporan_akhir != null) { ?>
+                                        <button class="btn btn-sm btn-danger mt-1" data-toggle="modal" data-target="#laporanakhir<?= $data->id_penelitian; ?>" style="font-size: 13px;">Laporan Akhir</button>
+                                    <?php } else { ?>
+                                        <button class="btn btn-sm btn-danger mt-1" disabled>Laporan Akhir</button>
+                                    <?php } ?>
 
+                                    <?php if ($data->laporan_keuangan != null) { ?>
+                                        <button class="btn btn-sm btn-danger mt-1" data-toggle="modal" data-target="#laporankeuangan<?= $data->id_penelitian; ?>" style="font-size: 13px;">Laporan Keuangan</button>
+                                    <?php } else { ?>
+                                        <button class="btn btn-sm btn-danger mt-1" disabled>Laporan Keuangan</button>
+                                    <?php } ?>
 
-                                <?php
-                                foreach ($pelaksanaan->result() as $key => $pelpen) { ?>
-                                    <td>
-                                        <a href="" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#hasilreview" style="font-size: 13px;">Hasil Review</a>
-                                        <a href="" class="btn btn-sm btn-secondary mt-1" data-toggle="modal" data-target="#surattugas" style="font-size: 13px;">Surat Tugas</a>
-                                        <a href="" class="btn btn-sm btn-secondary mt-1" data-toggle="modal" data-target="#hasilmonev" style="font-size: 13px;">Hasil Monev Internal</a>
-                                        <a href="" class="btn btn-sm btn-secondary mt-1" data-toggle="modal" data-target="#beritaacarainsentif" style="font-size: 13px;">Berita Acara Insentif Publikasi</a>
-                                    </td>
-                                    <td>
-                                        <a href="" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#logbook" style="font-size: 13px;">Log Book</a>
-                                        <a href="" class="btn btn-sm btn-danger mt-1" data-toggle="modal" data-target="#laporanakhir" style="font-size: 13px;">Laporan Akhir</a>
-                                        <a href="" class="btn btn-sm btn-danger mt-1" data-toggle="modal" data-target="#laporankeuangan" style="font-size: 13px;">Laporan Keuangan</a>
-                                        <a href="" class="btn btn-sm btn-danger mt-1" data-toggle="modal" data-target="#artikelilmiah" style="font-size: 13px;">Artikel Ilmiah</a>
-                                        <a href="" class="btn btn-sm btn-danger mt-1" data-toggle="modal" data-target="#sertifikathaki" style="font-size: 13px;">Sertifikan HAKI</a>
-                                        <a href="" class="btn btn-sm btn-danger mt-1" data-toggle="modal" data-target="#url" style="font-size: 13px;">URL</a>
-                                        <a href="" class="btn btn-sm btn-danger mt-1" data-toggle="modal" data-target="#detail" style="font-size: 13px;">Detail</a>
-                                    </td>
+                                    <?php if ($data->artikel_ilmiah != null) { ?>
+                                        <button class="btn btn-sm btn-danger mt-1" data-toggle="modal" data-target="#artikelilmiah<?= $data->id_penelitian; ?>" style="font-size: 13px;">Artikel Ilmiah</button>
+                                    <?php } else { ?>
+                                        <button class="btn btn-sm btn-danger mt-1" disabled>Artikel Ilmiah</button>
+                                    <?php } ?>
+
+                                    <?php if ($data->sertifikat_hki != null) { ?>
+                                        <button class="btn btn-sm btn-danger mt-1" data-toggle="modal" data-target="#sertifikathaki<?= $data->id_penelitian; ?>" style="font-size: 13px;">Sertifikat HAKI</button>
+                                    <?php } else { ?>
+                                        <button class="btn btn-sm btn-danger mt-1" disabled>Sertifikat HAKI</button>
+                                    <?php } ?>
+
+                                    <?php if ($data->url_artikel_ilmiah != null) { ?>
+                                        <button class="btn btn-sm btn-danger mt-1" data-toggle="modal" data-target="#url<?= $data->id_penelitian; ?>" style="font-size: 13px;">URL</button>
+                                    <?php } else { ?>
+                                        <button class="btn btn-sm btn-danger mt-1" disabled>URL</button>
+                                    <?php } ?>
+
+                                    <a href="" class="btn btn-sm btn-danger mt-1" data-toggle="modal" data-target="#detail" style="font-size: 13px;">Detail</a>
+                                </td>
                             </tr>
                         <?php } ?>
-
-                    <?php } ?>
                     </tbody>
                 </table>
             </div>
@@ -183,99 +202,107 @@
     <!-- End Log Book -->
 
     <!-- Laporan Akhir -->
-    <div id="laporanakhir" class="modal fade shadow-lg" role="dialog">
-        <div class="modal-dialog">
-            <!-- konten modal-->
-            <div class="modal-content">
-                <!-- heading modal -->
-                <div class="modal-header">
-                    <small class="modal-title font-weight-bold">Download Laporan Akhir</small>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <!-- body modal -->
-                <div class="modal-body">
-                    <a href="" type="button" class="btn btn-sm btn-primary">Download</a>
+    <?php
+    $no = 0;
+    foreach ($row->result() as $key => $data) { ?>
+        <div id="laporanakhir<?= $data->id_penelitian; ?>" class="modal fade shadow-lg" role="dialog">
+            <div class="modal-dialog">
+                <!-- konten modal-->
+                <div class="modal-content">
+                    <!-- heading modal -->
+                    <div class="modal-header">
+                        <small class="modal-title font-weight-bold">Download Laporan Akhir</small>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- body modal -->
+                    <div class="modal-body">
+                        <a href="<?php echo base_url() . 'upload/tahapan_pelaksanaan/' . $data->laporan_akhir; ?>" type="button" class="btn btn-sm btn-primary">Download</a>
+                        <span><?= $data->laporan_akhir ?></span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- End Laporan Akhir -->
+        <!-- End Laporan Akhir -->
 
-    <!-- Laporan Keuangan -->
-    <div id="laporankeuangan" class="modal fade shadow-lg" role="dialog">
-        <div class="modal-dialog">
-            <!-- konten modal-->
-            <div class="modal-content">
-                <!-- heading modal -->
-                <div class="modal-header">
-                    <small class="modal-title font-weight-bold">Download Laporan Keuangan</small>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <!-- body modal -->
-                <div class="modal-body">
-                    <a href="" type="button" class="btn btn-sm btn-primary">Download</a>
+        <!-- Laporan Keuangan -->
+        <div id="laporankeuangan<?= $data->id_penelitian; ?>" class="modal fade shadow-lg" role="dialog">
+            <div class="modal-dialog">
+                <!-- konten modal-->
+                <div class="modal-content">
+                    <!-- heading modal -->
+                    <div class="modal-header">
+                        <small class="modal-title font-weight-bold">Download Laporan Keuangan</small>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- body modal -->
+                    <div class="modal-body">
+                        <a href="<?php echo base_url() . 'upload/tahapan_pelaksanaan/' . $data->laporan_keuangan; ?>" type="button" class="btn btn-sm btn-primary">Download</a>
+                        <span><?= $data->laporan_keuangan ?></span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- End Laporan Keuangan -->
+        <!-- End Laporan Keuangan -->
 
-    <!-- Artikel Ilmiah -->
-    <div id="artikelilmiah" class="modal fade shadow-lg" role="dialog">
-        <div class="modal-dialog">
-            <!-- konten modal-->
-            <div class="modal-content">
-                <!-- heading modal -->
-                <div class="modal-header">
-                    <small class="modal-title font-weight-bold">Download Artikel Ilmiah</small>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <!-- body modal -->
-                <div class="modal-body">
-                    <a href="" type="button" class="btn btn-sm btn-primary">Download</a>
+        <!-- Artikel Ilmiah -->
+        <div id="artikelilmiah<?= $data->id_penelitian; ?>" class="modal fade shadow-lg" role="dialog">
+            <div class="modal-dialog">
+                <!-- konten modal-->
+                <div class="modal-content">
+                    <!-- heading modal -->
+                    <div class="modal-header">
+                        <small class="modal-title font-weight-bold">Download Artikel Ilmiah</small>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- body modal -->
+                    <div class="modal-body">
+                        <a href="<?php echo base_url() . 'upload/tahapan_pelaksanaan/' . $data->artikel_ilmiah; ?>" type="button" class="btn btn-sm btn-primary">Download</a>
+                        <span><?= $data->artikel_ilmiah ?></span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- End Artikel Ilmiah-->
+        <!-- End Artikel Ilmiah-->
 
-    <!-- URL -->
-    <div id="url" class="modal fade shadow-lg" role="dialog">
-        <div class="modal-dialog">
-            <!-- konten modal-->
-            <div class="modal-content">
-                <!-- heading modal -->
-                <div class="modal-header">
-                    <small class="modal-title font-weight-bold">URL Artikel Ilmiah</small>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <!-- body modal -->
-                <div class="modal-body">
-                    <h5>https://tratrata.co.id/jkdjdkk/djkdkdkdk/1234</h5>
+        <!-- Sertifikat HAKI -->
+        <div id="sertifikathaki<?= $data->id_penelitian; ?>" class="modal fade shadow-lg" role="dialog">
+            <div class="modal-dialog">
+                <!-- konten modal-->
+                <div class="modal-content">
+                    <!-- heading modal -->
+                    <div class="modal-header">
+                        <small class="modal-title font-weight-bold">Download Sertifikat HAKI</small>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- body modal -->
+                    <div class="modal-body">
+                        <a href="<?php echo base_url() . 'upload/tahapan_pelaksanaan/' . $data->sertifikat_hki; ?>" type="button" class="btn btn-sm btn-primary">Download</a>
+                        <span><?= $data->sertifikat_hki ?></span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+        <!-- End Sertifikat HAKI-->
+
+        <!-- URL -->
+        <div id="url<?= $data->id_penelitian; ?>" class="modal fade shadow-lg" role="dialog">
+            <div class="modal-dialog">
+                <!-- konten modal-->
+                <div class="modal-content">
+                    <!-- heading modal -->
+                    <div class="modal-header">
+                        <small class="modal-title font-weight-bold">URL Artikel Ilmiah</small>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- body modal -->
+                    <div class="modal-body">
+                        <span><a href="<?= $data->url_artikel_ilmiah ?>"><?= $data->url_artikel_ilmiah ?></a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
     <!-- End URL-->
-
-    <!-- Sertifikat HAKI -->
-    <div id="sertifikathaki" class="modal fade shadow-lg" role="dialog">
-        <div class="modal-dialog">
-            <!-- konten modal-->
-            <div class="modal-content">
-                <!-- heading modal -->
-                <div class="modal-header">
-                    <small class="modal-title font-weight-bold">Download Sertifikat HAKI</small>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <!-- body modal -->
-                <div class="modal-body">
-                    <a href="" type="button" class="btn btn-sm btn-primary">Download</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Sertifikat HAKI-->
 
     <!-- Hasil Monev Internal -->
     <div id="hasilmonev" class="modal fade shadow-lg" role="dialog">
@@ -365,7 +392,7 @@
                             <td class="font-weight-bold">URL</td>
                             <td>:</td>
                             <td>
-                                <p>https://tratata.co.id/ldldkdkdk</p>
+                                <p></p>
                             </td>
                         </tr>
                         <tr>

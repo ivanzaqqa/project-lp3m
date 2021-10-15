@@ -13,7 +13,6 @@ class Operator extends CI_Controller
 		$this->load->model('pengabmas_m');
 		$this->load->model('jurpros_m');
 		$this->load->model('specscop_m');
-		$this->load->model('pelaksanaanPenelitian_m');
 	}
 	public function index()
 	{
@@ -26,7 +25,6 @@ class Operator extends CI_Controller
 	public function penelitian()
 	{
 		$data['row'] = $this->penelitian_m->get_penelitian();
-		$data['pelaksanaan'] = $this->pelaksanaanPenelitian_m->get_pelpenelitian();
 		$this->load->view('templates/auth_header');
 		$this->load->view('operator/menu');
 		$this->load->view('templates/topbar');
@@ -53,6 +51,14 @@ class Operator extends CI_Controller
 		$this->load->helper('download');
 		$fileinfo = $this->penelitian_m->download($id);
 		$file = 'upload/penelitian/' . $fileinfo['file_proposal'];
+		force_download($file, NULL);
+	}
+
+	public function download_laporan_akhir($id)
+	{
+		$this->load->helper('download');
+		$fileinfo = $this->penelitian_m->download($id);
+		$file = 'upload/tahapan_pelaksanaan/' . $fileinfo['laporan_akhir'];
 		force_download($file, NULL);
 	}
 
