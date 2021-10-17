@@ -15,7 +15,7 @@
                             <td>:</td>
                             <td>
                                 <?php if ($row->hasil_review != null) { ?>
-                                    <button class="btn-sm btn-primary"><a style="color: white;" href="<?php echo base_url() . '/upload/tahapan_pelaksanaan/hasil_review/' . $data->hasil_review; ?>">Download</a></button>
+                                    <button class="btn-sm btn-primary"><a style="color: white;" href="<?php echo base_url() . '/upload/tahapan_pelaksanaan/' . $row->hasil_review; ?>">Download</a></button>
                                 <?php } else { ?>
                                     <button class="btn btn-sm btn-primary" disabled>Download</button>
                                 <?php } ?>
@@ -26,7 +26,7 @@
                             <td>:</td>
                             <td>
                                 <?php if ($row->surat_tugas != null) { ?>
-                                    <button class="btn-sm btn-primary"><a style="color: white;" href="<?php echo base_url() . '/upload/tahapan_pelaksanaan/surat_tugas/' . $data->surat_tugas; ?>">Download</a></button>
+                                    <button class="btn-sm btn-primary"><a style="color: white;" href="<?php echo base_url() . '/upload/tahapan_pelaksanaan/' . $row->surat_tugas; ?>">Download</a></button>
                                 <?php } else { ?>
                                     <button class="btn btn-sm btn-primary" disabled>Download</button>
                                 <?php } ?>
@@ -34,33 +34,38 @@
                         </tr>
                     </table>
 
+                    <?= form_open_multipart('dosen/proses_log_book_penelitian/' . $row->id_penelitian); ?>
                     <h5 class="card-title ml-2">Log Book</h5>
                     <table class="table table-responsive border-0">
                         <tr>
                             <td class="font-weight-bold">Tanggal Kegiatan</td>
                             <td>:</td>
                             <td>
-                                <input type="date" name="tgl_kegiatan" class="form-control form-control-sm bg-light">
+                                <input type="hidden" name="id_penelitian" id="id_penelitian" value="<?= $row->id_penelitian ?>">
+                                <input type="hidden" name="id" id="id" value="<?= $row->id ?>">
+                                <input type="date" name="tgl_kegiatan" id="tgl_kegiatan" class="form-control form-control-sm bg-light">
                             </td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold">Uraian Kegiatan</td>
                             <td>:</td>
                             <td>
-                                <textarea class="form-control form-control-sm bg-light" name="uraian_kegiatan" id="" cols="30" rows="5"></textarea>
+                                <textarea class="form-control form-control-sm bg-light" name="uraian_kegiatan" id="uraian_kegiatan" cols="30" rows="5"></textarea>
                             </td>
                         </tr>
                         <tr>
                             <td class="font-weight-bold">Dokumentasi</td>
                             <td>:</td>
                             <td>
-                                <input type="file" name="dokumentasilogbook" class="form-control form-control-sm bg-light">
+                                <input type="file" name="dokumentasi" id="dokumentasi" class="form-control form-control-sm bg-light">
                                 <small>*Dokumentasi Tidak Wajib Diisi (File Gambar, Word, PDF) atau (Semua File) Ukuran Maks (10 MB)
                                 </small>
                             </td>
                         </tr>
                     </table>
-                    <button type="submit" name="submit" class="ml-2 btn btn-md btn-warning">Simpan</button>
+                    <button type="submit" name="submit_log_book" class="ml-2 btn btn-md btn-warning">Simpan</button>
+                    <?php echo form_close() ?>
+
                     <hr>
                     <span>Dokumentasi Upload File</span>
                     <table class="mt-2 table table-bordered table-striped table-responsive">
@@ -73,14 +78,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>27-11-99</td>
-                                <td>Otto</td>
-                                <td>
-                                    <a type="button" href="" class="btn btn-sm btn-primary">Download</a>
-                                </td>
-                            </tr>
+                            <?php
+                            $no = 1;
+                            foreach ($logs->result() as $key => $data) { ?>
+                                <tr>
+                                    <th scope="row"><?= $no++; ?></th>
+                                    <td><?= $data->tgl_kegiatan; ?></td>
+                                    <td><?= $data->uraian_kegiatan; ?></td>
+                                    <td>
+                                        <a type="button" href="" class="btn btn-sm btn-primary">Download</a>
+                                    </td>
+                                </tr>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
@@ -219,7 +228,7 @@
                             <td>:</td>
                             <td>
                                 <?php if ($row->hasil_monev_internal != null) { ?>
-                                    <button class="btn-sm btn-primary"><a style="color: white;" href="<?php echo base_url() . '/upload/tahapan_pelaksanaan/hasil_monev_internal/' . $data->hasil_monev_internal; ?>">Download</a></button>
+                                    <button class="btn-sm btn-primary"><a style="color: white;" href="<?php echo base_url() . '/upload/tahapan_pelaksanaan/' . $row->hasil_monev_internal; ?>">Download</a></button>
                                 <?php } else { ?>
                                     <button class="btn btn-sm btn-primary" disabled>Download</button>
                                 <?php } ?>
@@ -230,7 +239,7 @@
                             <td>:</td>
                             <td>
                                 <?php if ($row->berita_acara_inspub != null) { ?>
-                                    <button class="btn-sm btn-primary"><a style="color: white;" href="<?php echo base_url() . '/upload/tahapan_pelaksanaan/berita_acara_inspub/' . $data->berita_acara_inspub; ?>">Download</a></button>
+                                    <button class="btn-sm btn-primary"><a style="color: white;" href="<?php echo base_url() . '/upload/tahapan_pelaksanaan/' . $row->berita_acara_inspub; ?>">Download</a></button>
                                 <?php } else { ?>
                                     <button class="btn btn-sm btn-primary" disabled>Download</button>
                                 <?php } ?>

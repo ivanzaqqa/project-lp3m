@@ -20,7 +20,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $no = 1;
+                        <?php
+                        $no = 1;
                         foreach ($row->result() as $key => $arsip) { ?>
                             <tr>
                                 <td><?= $no++ ?>.</td>

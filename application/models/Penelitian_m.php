@@ -2,13 +2,21 @@
 
 class Penelitian_m extends CI_Model
 {
-
     public function get_periode($id_periode = null)
     {
         $this->db->from('periode_pengajuan', $id_periode);
         if ($id_periode != null) {
             $this->db->where('id_periode', $id_periode);
         }
+        $query = $this->db->get();
+        return $query;
+    }
+
+    public function get_log_book($id)
+    {
+        $this->db->from('log_book_penelitian');
+        $this->db->order_by('id_log_book', 'asc');
+        $this->db->where('id_penelitian', $id);
         $query = $this->db->get();
         return $query;
     }

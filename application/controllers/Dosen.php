@@ -13,6 +13,7 @@ class Dosen extends CI_Controller
 		$this->load->model('pengabmas_m');
 		$this->load->model('jurpros_m');
 		$this->load->model('specscop_m');
+		$this->load->model('logpenelitian_m');
 	}
 	public function index()
 	{
@@ -58,11 +59,6 @@ class Dosen extends CI_Controller
 				$matkul_diampu = $this->input->post('matkul_diampu', TRUE);
 				$kelompok_riset = $this->input->post('kelompok_riset', TRUE);
 				$mhs_terlibat = $this->input->post('mhs_terlibat', TRUE);
-				// if (@$_FILES['file_proposal']['name']) {
-				// 	if ($this->upload->do_upload('file_proposal')) {
-				// 		$post['file_proposal'] = $this->upload->data('file_name');
-				// 	}
-				// }
 				if (!empty($_FILES['file_proposal']['name'])) {
 					$this->upload->do_upload('file_proposal');
 					$file_proposal = $this->upload->data();
@@ -185,11 +181,13 @@ class Dosen extends CI_Controller
 	public function tahapan_pelaksanaan_penelitian($id)
 	{
 		$query = $this->penelitian_m->get_penelitian($id);
+		$log = $this->penelitian_m->get_log_book($id);
 		if ($query->num_rows() > 0) {
 			$penelitian = $query->row();
 			$data = array(
 				'page' => 'edit',
 				'row' => $penelitian,
+				'logs' => $log
 			);
 			$this->load->view('templates/auth_header');
 			$this->load->view('templates/topbar');
@@ -363,6 +361,58 @@ class Dosen extends CI_Controller
 				if ($this->db->affected_rows() > 0) {
 					$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
                 <strong>PDF laporan akhir tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+				}
+				redirect('dosen/tahapan_pelaksanaan_penelitian/' . $id);
+			}
+		}
+	}
+
+	public function proses_log_book_penelitian($id)
+	{
+		$config['upload_path']          = './upload/dokumentasi/';
+		$config['allowed_types']        = 'pdf';
+		$config['max_size']            = 5000;
+		$config['encrypt_name']         = TRUE;
+
+		$this->load->library('upload', $config);
+
+		$post = $this->input->post(null, TRUE);
+		if (isset($_POST['submit_log_book'])) {
+			if (@$_FILES['dokumentasi']['name'] != null) {
+				if ($this->upload->do_upload('dokumentasi')) {
+
+					$logpenelitian = $this->logpenelitian_m->get_log_book($post['id_log_book'])->row();
+					if ($logpenelitian->dokumentasi != null) {
+						$target_file = './upload/dokumentasi/' . $logpenelitian->dokumentasi;
+						unlink($target_file);
+					}
+
+					$post['dokumentasi'] = $this->upload->data('file_name');
+					$this->logpenelitian_m->insert($post);
+					if ($this->db->affected_rows() > 0) {
+						$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Dokumentasi log book tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+					}
+					redirect('dosen/tahapan_pelaksanaan_penelitian/' . $id);
+				} else {
+					$error = $this->upload->display_errors();
+					$this->session->set_flashdata('erroredit', $error);
+					redirect('dosen/tahapan_pelaksanaan_penelitian');
+				}
+			} else {
+				$post['dokumentasi'] = null;
+				$this->logpenelitian_m->insert($post);
+				if ($this->db->affected_rows() > 0) {
+					$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Dokumentasi log book tahapan pelaksanaan berhasil diupload.</strong>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>

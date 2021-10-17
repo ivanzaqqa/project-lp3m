@@ -143,4 +143,5 @@ $autoload['model'] = array(
     'pengabmas_m',
     'jurpros_m',
     'specscop_m',
+    'logpenelitian_m',
 );
