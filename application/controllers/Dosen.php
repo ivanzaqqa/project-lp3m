@@ -220,7 +220,7 @@ class Dosen extends CI_Controller
 					$this->penelitian_m->edit($post);
 					if ($this->db->affected_rows() > 0) {
 						$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>PDF laporan akhir tahapan pelaksanaan berhasil diupload.</strong>
+                <strong>Laporan akhir tahapan pelaksanaan berhasil diupload.</strong>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -237,7 +237,7 @@ class Dosen extends CI_Controller
 				$this->penelitian_m->edit($post);
 				if ($this->db->affected_rows() > 0) {
 					$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>PDF laporan akhir tahapan pelaksanaan berhasil diupload.</strong>
+                <strong>Laporan akhir tahapan pelaksanaan berhasil diupload.</strong>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -261,7 +261,7 @@ class Dosen extends CI_Controller
 					$this->penelitian_m->edit($post);
 					if ($this->db->affected_rows() > 0) {
 						$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>PDF laporan akhir tahapan pelaksanaan berhasil diupload.</strong>
+                <strong>Laporan keuangan tahapan pelaksanaan berhasil diupload.</strong>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -278,7 +278,7 @@ class Dosen extends CI_Controller
 				$this->penelitian_m->edit($post);
 				if ($this->db->affected_rows() > 0) {
 					$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>PDF laporan akhir tahapan pelaksanaan berhasil diupload.</strong>
+                <strong>Laporan keuangan tahapan pelaksanaan berhasil diupload.</strong>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -302,7 +302,7 @@ class Dosen extends CI_Controller
 					$this->penelitian_m->edit($post);
 					if ($this->db->affected_rows() > 0) {
 						$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>PDF laporan akhir tahapan pelaksanaan berhasil diupload.</strong>
+                <strong>Artikel ilmiah tahapan pelaksanaan berhasil diupload.</strong>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -319,7 +319,7 @@ class Dosen extends CI_Controller
 				$this->penelitian_m->edit($post);
 				if ($this->db->affected_rows() > 0) {
 					$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>PDF laporan akhir tahapan pelaksanaan berhasil diupload.</strong>
+                <strong>Artikel ilmiah tahapan pelaksanaan berhasil diupload.</strong>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -343,7 +343,7 @@ class Dosen extends CI_Controller
 					$this->penelitian_m->edit($post);
 					if ($this->db->affected_rows() > 0) {
 						$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>PDF laporan akhir tahapan pelaksanaan berhasil diupload.</strong>
+                <strong>Sertifikat hki tahapan pelaksanaan berhasil diupload.</strong>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -360,7 +360,7 @@ class Dosen extends CI_Controller
 				$this->penelitian_m->edit($post);
 				if ($this->db->affected_rows() > 0) {
 					$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>PDF laporan akhir tahapan pelaksanaan berhasil diupload.</strong>
+                <strong>Sertifikat hki tahapan pelaksanaan berhasil diupload.</strong>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
