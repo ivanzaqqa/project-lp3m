@@ -126,7 +126,196 @@ class Operator extends CI_Controller
 		exit;
 	}
 
+	public function tahapan_pelaksanaan_penelitian()
+	{
+		$query = $this->penelitian_m->get_penelitian();
+		if ($query->num_rows() > 0) {
+			$penelitian = $query->row();
+			$data = array(
+				'page' => 'edit',
+				'tpp' => $penelitian,
+			);
+			$this->load->view('templates/auth_header');
+			$this->load->view('templates/topbar');
+			$this->load->view('operator/penelitian/daftarusulanpenelitian', $data);
+			$this->load->view('templates/auth_footer');
+		}
+	}
 
+	public function proses_tahapan_pelaksanaan_penelitian()
+	{
+		$config['upload_path']          = './upload/tahapan_pelaksanaan/';
+		$config['allowed_types']        = 'pdf';
+		$config['max_size']            = 5000;
+		$config['encrypt_name']         = TRUE;
+
+		$this->load->library('upload', $config);
+
+		$post = $this->input->post(null, TRUE);
+		if (isset($_POST['edit_hasil_review'])) {
+			if (@$_FILES['hasil_review']['name'] != null) {
+				if ($this->upload->do_upload('hasil_review')) {
+
+					$penelitian = $this->penelitian_m->get_penelitian($post['id_penelitian'])->row();
+					if ($penelitian->hasil_review != null) {
+						$target_file = './upload/tahapan_pelaksanaan/' . $penelitian->hasil_review;
+						unlink($target_file);
+					}
+
+					$post['hasil_review'] = $this->upload->data('file_name');
+					$this->penelitian_m->edit2($post);
+					if ($this->db->affected_rows() > 0) {
+						$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Hasil review tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+					}
+					redirect('operator/penelitian/');
+				} else {
+					$error = $this->upload->display_errors();
+					$this->session->set_flashdata('erroredit', $error);
+					redirect('operator/penelitian/');
+				}
+			} else {
+				$post['hasil_review'] = null;
+				$this->penelitian_m->edit2($post);
+				if ($this->db->affected_rows() > 0) {
+					$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Hasil review tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+				}
+				redirect('operator/penelitian/');
+			}
+		}
+
+		if (isset($_POST['edit_surat_tugas'])) {
+			if (@$_FILES['surat_tugas']['name'] != null) {
+				if ($this->upload->do_upload('surat_tugas')) {
+
+					$penelitian = $this->penelitian_m->get_penelitian($post['id_penelitian'])->row();
+					if ($penelitian->surat_tugas != null) {
+						$target_file = './upload/tahapan_pelaksanaan/' . $penelitian->surat_tugas;
+						unlink($target_file);
+					}
+
+					$post['surat_tugas'] = $this->upload->data('file_name');
+					$this->penelitian_m->edit2($post);
+					if ($this->db->affected_rows() > 0) {
+						$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Surat tugas tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+					}
+					redirect('operator/penelitian/');
+				} else {
+					$error = $this->upload->display_errors();
+					$this->session->set_flashdata('erroredit', $error);
+					redirect('operator/penelitian/');
+				}
+			} else {
+				$post['surat_tugas'] = null;
+				$this->penelitian_m->edit2($post);
+				if ($this->db->affected_rows() > 0) {
+					$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Surat tugas tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+				}
+				redirect('operator/penelitian/');
+			}
+		}
+
+		if (isset($_POST['edit_hasil_monev_internal'])) {
+			if (@$_FILES['hasil_monev_internal']['name'] != null) {
+				if ($this->upload->do_upload('hasil_monev_internal')) {
+
+					$penelitian = $this->penelitian_m->get_penelitian($post['id_penelitian'])->row();
+					if ($penelitian->hasil_monev_internal != null) {
+						$target_file = './upload/tahapan_pelaksanaan/' . $penelitian->hasil_monev_internal;
+						unlink($target_file);
+					}
+
+					$post['hasil_monev_internal'] = $this->upload->data('file_name');
+					$this->penelitian_m->edit2($post);
+					if ($this->db->affected_rows() > 0) {
+						$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Hasil monev internal tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+					}
+					redirect('operator/penelitian/');
+				} else {
+					$error = $this->upload->display_errors();
+					$this->session->set_flashdata('erroredit', $error);
+					redirect('operator/penelitian/');
+				}
+			} else {
+				$post['hasil_monev_internal'] = null;
+				$this->penelitian_m->edit2($post);
+				if ($this->db->affected_rows() > 0) {
+					$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Hasil monev internal tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+				}
+				redirect('operator/penelitian/');
+			}
+		}
+
+		if (isset($_POST['edit_berita_acara_inspub'])) {
+			if (@$_FILES['berita_acara_inspub']['name'] != null) {
+				if ($this->upload->do_upload('berita_acara_inspub')) {
+
+					$penelitian = $this->penelitian_m->get_penelitian($post['id_penelitian'])->row();
+					if ($penelitian->berita_acara_inspub != null) {
+						$target_file = './upload/tahapan_pelaksanaan/' . $penelitian->berita_acara_inspub;
+						unlink($target_file);
+					}
+
+					$post['berita_acara_inspub'] = $this->upload->data('file_name');
+					$this->penelitian_m->edit2($post);
+					if ($this->db->affected_rows() > 0) {
+						$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Berita acara insentif publikasi tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+					}
+					redirect('operator/penelitian/');
+				} else {
+					$error = $this->upload->display_errors();
+					$this->session->set_flashdata('erroredit', $error);
+					redirect('operator/penelitian/');
+				}
+			} else {
+				$post['berita_acara_inspub'] = null;
+				$this->penelitian_m->edit2($post);
+				if ($this->db->affected_rows() > 0) {
+					$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Berita acara insentif publikasi tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+				}
+				redirect('operator/penelitian/');
+			}
+		}
+	}
 
 	// PENGABDIAN MASYARAKAT
 	public function pengabdian_masyarakat()
