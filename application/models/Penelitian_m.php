@@ -64,6 +64,27 @@ class Penelitian_m extends CI_Model
         $this->db->update('tbl_penelitian', $params);
     }
 
+    public function edit2($post)
+    {
+        $params = [
+            'url_artikel_ilmiah' => $post['url_artikel_ilmiah'],
+        ];
+        if ($post['hasil_review'] != null) {
+            $params['hasil_review'] = $post['hasil_review'];
+        }
+        if ($post['surat_tugas'] != null) {
+            $params['surat_tugas'] = $post['surat_tugas'];
+        }
+        if ($post['hasil_monev_internal'] != null) {
+            $params['hasil_monev_internal'] = $post['hasil_monev_internal'];
+        }
+        if ($post['berita_acara_inspub'] != null) {
+            $params['berita_acara_inspub'] = $post['berita_acara_inspub'];
+        }
+        $this->db->where('id_penelitian', $post['id_penelitian']);
+        $this->db->update('tbl_penelitian', $params);
+    }
+
     public function update($id, $post)
     {
         $this->db->where('id_penelitian', $id);

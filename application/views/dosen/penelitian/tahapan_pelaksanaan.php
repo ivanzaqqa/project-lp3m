@@ -165,9 +165,7 @@
                                 <?php } ?>
                             </td>
                         </tr>
-                        <!-- <?php echo form_close() ?> -->
 
-                        <!-- <?= form_open_multipart('dosen/proses_tahapan_pelaksanaan_penelitian/' . $row->id_penelitian); ?> -->
                         <tr>
                             <td class="font-weight-bold">URL Artikel Ilmiah</td>
                             <td>:</td>
