@@ -11,6 +11,7 @@
                         <div class="p-5">
                             <div class="text-center">
                                 <img class="pb-3 logo-login" src="<?= base_url() ?>/assets/img/default/logo.png" alt="">
+                                <img class="pb-2" src="<?= base_url() ?>/assets/img/default/lp3m.jpeg" width="130px;" alt="">
                             </div>
                             <?= $this->session->flashdata('message'); ?>
                             <form method="post" action="<?= site_url('auth/process') ?>">
@@ -37,10 +38,3 @@
     </div>
 </div>
 </div>
-<footer class="footer-login sticky-footer bg-sidebar" style="position: absolute; bottom: 0; width:100%;">
-    <div class="container-fluid">
-        <div class="copyright text-center text-white">
-            <span>Copyright &copy; Sistem Management Hibah Internal Universitas Kadiri</span>
-        </div>
-    </div>
-</footer>

@@ -1445,4 +1445,21 @@ class Dosen extends CI_Controller
 		}
 		redirect('dosen/arsip_special_scopus');
 	}
+
+	public function tutorial()
+	{
+		$this->load->view('templates/auth_header');
+		$this->load->view('dosen/menu');
+		$this->load->view('templates/topbar');
+		$this->load->view('dosen/tutorial');
+		$this->load->view('templates/auth_footer');
+	}
+	public function template_lembar_pengesahan()
+	{
+		$this->load->view('templates/auth_header');
+		$this->load->view('dosen/menu');
+		$this->load->view('templates/topbar');
+		$this->load->view('dosen/template_lembar_pengesahan');
+		$this->load->view('templates/auth_footer');
+	}
 }

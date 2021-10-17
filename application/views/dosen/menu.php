@@ -67,6 +67,18 @@
                 <i class="fas fa-fw fa-user-edit"></i>
                 <span>Profile</span></a>
         </li>
+        <hr class="sidebar-divider d-none d-md-block">
+        <li class="nav-item">
+            <a class="nav-link active" href="<?= base_url('dosen/template_lembar_pengesahan') ?>">
+                <i class="fas fa-download"></i>
+                <span>Template</span></a>
+        </li>
+        <hr class="sidebar-divider d-none d-md-block">
+        <li class="nav-item">
+            <a class="nav-link active" href="<?= base_url('dosen/tutorial') ?>">
+                <i class="fab fa-youtube"></i>
+                <span>Tutorial</span></a>
+        </li>
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block"><br><br>
         <li class="nav-item">
