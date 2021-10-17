@@ -21,6 +21,16 @@ class Penelitian_m extends CI_Model
         return $query;
     }
 
+    public function log_book($id = null)
+    {
+        $this->db->from('log_book_penelitian', $id);
+        if ($id != null) {
+            $this->db->where('id_penelitian', $id);
+        }
+        $query = $this->db->get();
+        return $query;
+    }
+
     public function get_penelitian($id = null)
     {
         $this->db->from('tbl_penelitian');

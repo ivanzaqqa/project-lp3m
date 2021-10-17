@@ -25,6 +25,7 @@ class Operator extends CI_Controller
 	public function penelitian()
 	{
 		$data['row'] = $this->penelitian_m->get_penelitian();
+		$data['logs'] = $this->penelitian_m->log_book();
 		$this->load->view('templates/auth_header');
 		$this->load->view('operator/menu');
 		$this->load->view('templates/topbar');

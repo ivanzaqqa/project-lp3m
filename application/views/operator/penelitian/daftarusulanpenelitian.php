@@ -132,7 +132,12 @@
                                 </td>
 
                                 <td>
-                                    <a href="" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#logbook" style="font-size: 13px;">Log Book</a>
+                                    <?php if ($data->status != "Didanai") { ?>
+                                        <button class="btn btn-sm btn-danger mt-1" style="font-size: 13px;" disabled>Log Book</button>
+                                    <?php } else { ?>
+                                        <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#logbook<?= $data->id_penelitian; ?>" style="font-size: 13px;">Log Book</button>
+                                    <?php } ?>
+
                                     <?php if ($data->status != "Didanai") { ?>
                                         <button class="btn btn-sm btn-danger mt-1" style="font-size: 13px;" disabled>Laporan Akhir</button>
                                     <?php } else { ?>
@@ -233,38 +238,42 @@
     <?php } ?>
     <!-- End Surat Tugas -->
 
-    <!-- Log Book -->
-    <div id="logbook" class="modal fade shadow-lg" role="dialog">
-        <div class="modal-dialog">
-            <!-- konten modal-->
-            <div class="modal-content">
-                <!-- heading modal -->
-                <div class="modal-header">
-                    <small class="modal-title font-weight-bold">Detail Log Book</small>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <!-- body modal -->
-                <div class="modal-body">
-                    <table class="table table-responsive table-responsive-sm">
-                        <thead class="bg-sidebar text-white">
-                            <tr style="font-size: small;">
-                                <th>No</th>
-                                <th>Tanggal Kegiatan</th>
-                                <th>Uraian Kegiatan</th>
-                                <th>Dokumentasi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <th>1</th>
-                            <th>20-12-2021</th>
-                            <th>Test</th>
-                            <th><a href="" type="button" class="btn btn-sm btn-success">File Dokumentasi</a></th>
-                        </tbody>
-                    </table>
+    <?php
+    $no = 1;
+    foreach ($logs->result() as $key => $data) { ?>
+        <!-- Log Book -->
+        <div id="logbook<?= $data->id_penelitian; ?>" class="modal fade shadow-lg" role="dialog">
+            <div class="modal-dialog">
+                <!-- konten modal-->
+                <div class="modal-content">
+                    <!-- heading modal -->
+                    <div class="modal-header">
+                        <small class="modal-title font-weight-bold">Detail Log Book</small>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- body modal -->
+                    <div class="modal-body">
+                        <table class="table table-responsive table-responsive-sm">
+                            <thead class="bg-sidebar text-white">
+                                <tr style="font-size: small;">
+                                    <th>No</th>
+                                    <th>Tanggal Kegiatan</th>
+                                    <th>Uraian Kegiatan</th>
+                                    <th>Dokumentasi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <th><?= $no++; ?></th>
+                                <th><?= $data->tgl_kegiatan; ?></th>
+                                <th><?= $data->uraian_kegiatan; ?></th>
+                                <th><a href="" type="button" class="btn btn-sm btn-success" style="font-size: 12px;">File Dokumentasi</a></th>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    <?php } ?>
     <!-- End Log Book -->
 
     <!-- Laporan Akhir -->
@@ -469,7 +478,7 @@
                             <tr>
                                 <td class="font-weight-bold">Log Book</td>
                                 <td>:</td>
-                                <td><a href="" type="button" class="btn btn-sm btn-primary">Akses Log Book</a></td>
+                                <td><button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#logbook<?= $data->id_penelitian; ?>">Log Book</button></td>
                             </tr>
                             <tr>
                                 <td class="font-weight-bold">Laporan Akhir</td>
