@@ -3,6 +3,31 @@
         <div class="card-header py-3">
             <h6 class="font-weight-bold text-primary" style="position: absolute; margin-top: 10px;">Daftar Pengabdian Masyarakat</h6>
             <button class="btn btn-success mt-1 btn-sm" type="button" style="margin-left: 300px;"><a href="<?php echo base_url('operator/exportexcel_pengabmas') ?>" style="color: white;">Export Data</a></button>
+            <div class="row mt-2">
+                <div class="col-sm-2">
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Periode Pengajuan
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Genap 2021</a>
+                            <a class="dropdown-item" href="#">Ganjil 2021</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-10">
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Status
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Sedang Proses Review</a>
+                            <a class="dropdown-item" href="#">Didanai</a>
+                            <a class="dropdown-item" href="#">Ditolak</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="card-body">
             <div class="table-responsive table-striped">

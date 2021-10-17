@@ -67,6 +67,10 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Menu</h6>
                     <a class=" collapse-item" href="<?= base_url('operator/datadosen') ?>">Data Dosen</a>
+                    <a class=" collapse-item" href="<?= base_url('operator/periode_pengajuan') ?>">Periode Pengajuan</a>
+                    <h6 class="collapse-header">Menu Pembatasan</h6>
+                    <a class=" collapse-item" href="<?= base_url('operator/pembatasan_penelitian') ?>">Pembatasan Penelitian</a>
+                    <a class=" collapse-item" href="<?= base_url('operator/pembatasan_pengabdian') ?>">Pembatasan Pengabdian</a>
                 </div>
             </div>
         </li>
@@ -75,6 +79,12 @@
             <a class="nav-link active" href="<?= base_url('operator/editprofile') ?>">
                 <i class="fas fa-fw fa-user-edit"></i>
                 <span>Edit Profile</span></a>
+        </li>
+        <hr class="sidebar-divider d-none d-md-block">
+        <li class="nav-item">
+            <a class="nav-link active" href="<?= base_url('operator/upload_template') ?>">
+                <i class="fas fa-upload"></i>
+                <span>Upload Template</span></a>
         </li>
 
         <!-- Divider -->

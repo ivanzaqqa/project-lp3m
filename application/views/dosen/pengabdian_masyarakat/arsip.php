@@ -50,9 +50,9 @@
                                             <?php } else { ?>
                                                 <a class="dropdown-item" href="" type="button" style="pointer-events:none; cursor:default;color:grey;">Tahapan Pelaksanaan</a>
                                             <?php } ?>
-                                            <a class="dropdown-item" href="<?= site_url('dosen/delpengabmas/' . $arsip->id_pengabmas) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data pengabdian masyarakat ini?')" type="button">Hapus Data</a>
                                         </div>
                                     </div>
+                                    <a class="btn btn-sm btn-danger" href="<?= site_url('dosen/delpengabmas/' . $arsip->id_pengabmas) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data pengabdian masyarakat ini?')" type="button">Hapus Data</a>
                                 </td>
                             </tr>
                         <?php } ?>

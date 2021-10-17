@@ -15,6 +15,7 @@
                             <th>Periode Pengajuan</th>
                             <th>Tanggal Submit</th>
                             <th>Mahasiswa Yang Dilibatkan</th>
+                            <th>Target Jurnal</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -28,6 +29,7 @@
                                 <td><?= $arsip->tahun_periode ?></td>
                                 <td><?= date('d-m-Y', strtotime($arsip->tgl_submit)) ?></td>
                                 <td><?= $arsip->mhs_terlibat ?></td>
+                                <td>belum ada db</td>
                                 <td><?= $arsip->status ?></td>
                                 <td>
                                     <div class="dropdown">
@@ -50,8 +52,8 @@
                                             <?php } else { ?>
                                                 <a class="dropdown-item" href="" type="button" style="pointer-events:none; cursor:default;color:grey;">Tahapan Pelaksanaan</a>
                                             <?php } ?>
-                                            <a class="dropdown-item" href="<?= site_url('dosen/delpenelitian/' . $arsip->id_penelitian) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data penelitian ini?')" type="button">Hapus Data</a>
                                         </div>
+                                        <a class="btn btn-sm btn-danger" href="<?= site_url('dosen/delpenelitian/' . $arsip->id_penelitian) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data penelitian ini?')" type="button">Hapus Data</a>
                                     </div>
                                 </td>
                             </tr>

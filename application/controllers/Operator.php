@@ -408,6 +408,35 @@ class Operator extends CI_Controller
 		redirect('operator/datadosen');
 	}
 
+	public function periode_pengajuan()
+	{
+		$this->load->view('templates/auth_header');
+		$this->load->view('operator/menu');
+		$this->load->view('templates/topbar');
+		$this->load->view('operator/keloladata/periode_pengajuan');
+		$this->load->view('templates/auth_footer');
+	}
+
+	public function pembatasan_penelitian()
+	{
+		$this->load->view('templates/auth_header');
+		$this->load->view('operator/menu');
+		$this->load->view('templates/topbar');
+		$this->load->view('operator/keloladata/pembatasan_penelitian');
+		$this->load->view('templates/auth_footer');
+	}
+
+	public function pembatasan_pengabdian()
+	{
+		$this->load->view('templates/auth_header');
+		$this->load->view('operator/menu');
+		$this->load->view('templates/topbar');
+		$this->load->view('operator/keloladata/pembatasan_pengabdian');
+		$this->load->view('templates/auth_footer');
+	}
+
+
+	// End Kelola Data
 
 	//INSENTIF PUBLIKASI
 	public function insentif_publikasi()
@@ -747,5 +776,14 @@ class Operator extends CI_Controller
 		$writer->save('php://output');
 
 		exit;
+	}
+
+	public function upload_template()
+	{
+		$this->load->view('templates/auth_header');
+		$this->load->view('operator/menu');
+		$this->load->view('templates/topbar');
+		$this->load->view('operator/upload_template');
+		$this->load->view('templates/auth_footer');
 	}
 }
