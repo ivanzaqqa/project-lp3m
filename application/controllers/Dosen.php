@@ -42,6 +42,8 @@ class Dosen extends CI_Controller
 			$this->form_validation->set_rules('matkul_diampu', 'Matkul Yang Diampu', 'required');
 			$this->form_validation->set_rules('kelompok_riset', 'Kelompok Riset', 'required');
 			$this->form_validation->set_rules('mhs_terlibat', 'Mahasiswa Yang Dilibatkan', 'required');
+			$this->form_validation->set_rules('mhs_terlibat2', 'Mahasiswa Yang Dilibatkan', 'required');
+			$this->form_validation->set_rules('target_jurnal', 'Target Jurnal', 'required');
 
 			$this->form_validation->set_message('required', '%s Masih Kosong!!');
 			$this->form_validation->set_error_delimiters('<span class="help-block text-danger">', '</span>');
@@ -59,6 +61,8 @@ class Dosen extends CI_Controller
 				$matkul_diampu = $this->input->post('matkul_diampu', TRUE);
 				$kelompok_riset = $this->input->post('kelompok_riset', TRUE);
 				$mhs_terlibat = $this->input->post('mhs_terlibat', TRUE);
+				$mhs_terlibat2 = $this->input->post('mhs_terlibat2', TRUE);
+				$target_jurnal = $this->input->post('target_jurnal', TRUE);
 				if (!empty($_FILES['file_proposal']['name'])) {
 					$this->upload->do_upload('file_proposal');
 					$file_proposal = $this->upload->data();
@@ -81,10 +85,21 @@ class Dosen extends CI_Controller
 					'matkul_diampu' => $matkul_diampu,
 					'kelompok_riset' => $kelompok_riset,
 					'mhs_terlibat' => $mhs_terlibat,
+					'mhs_terlibat2' => $mhs_terlibat2,
+					'target_jurnal' => $target_jurnal,
 					'file_proposal' => $file_proposal,
 					'file_rps' => $file_rps,
 					'form_integrasi' => $form_integrasi,
 					'id_status' => "3",
+					'hasil_review' => null,
+					'surat_tugas' => null,
+					'laporan_akhir' => null,
+					'laporan_keuangan' => null,
+					'artikel_ilmiah' => null,
+					'url_artikel_ilmiah' => null,
+					'sertifikat_hki' => null,
+					'hasil_monev_internal' => null,
+					'berita_acara_inspub' => null,
 				];
 				$insert = $this->db->insert('tbl_penelitian', $data);
 				if ($insert) {
@@ -156,6 +171,54 @@ class Dosen extends CI_Controller
 		$form_integrasi = $this->penelitian_m->get_penelitian($id)->row();
 		if ($form_integrasi->form_integrasi != null) {
 			$target_file = './upload/penelitian/' . $form_integrasi->form_integrasi;
+			unlink($target_file);
+		}
+
+		$hasil_review = $this->penelitian_m->get_penelitian($id)->row();
+		if ($hasil_review->hasil_review != null) {
+			$target_file = './upload/tahapan_pelaksanaan/' . $hasil_review->hasil_review;
+			unlink($target_file);
+		}
+
+		$surat_tugas = $this->penelitian_m->get_penelitian($id)->row();
+		if ($surat_tugas->surat_tugas != null) {
+			$target_file = './upload/tahapan_pelaksanaan/' . $surat_tugas->surat_tugas;
+			unlink($target_file);
+		}
+
+		$laporan_akhir = $this->penelitian_m->get_penelitian($id)->row();
+		if ($laporan_akhir->laporan_akhir != null) {
+			$target_file = './upload/tahapan_pelaksanaan/' . $laporan_akhir->laporan_akhir;
+			unlink($target_file);
+		}
+
+		$laporan_keuangan = $this->penelitian_m->get_penelitian($id)->row();
+		if ($laporan_keuangan->laporan_keuangan != null) {
+			$target_file = './upload/tahapan_pelaksanaan/' . $laporan_keuangan->laporan_keuangan;
+			unlink($target_file);
+		}
+
+		$artikel_ilmiah = $this->penelitian_m->get_penelitian($id)->row();
+		if ($artikel_ilmiah->artikel_ilmiah != null) {
+			$target_file = './upload/tahapan_pelaksanaan/' . $artikel_ilmiah->artikel_ilmiah;
+			unlink($target_file);
+		}
+
+		$sertifikat_hki = $this->penelitian_m->get_penelitian($id)->row();
+		if ($sertifikat_hki->sertifikat_hki != null) {
+			$target_file = './upload/tahapan_pelaksanaan/' . $sertifikat_hki->sertifikat_hki;
+			unlink($target_file);
+		}
+
+		$hasil_monev_internal = $this->penelitian_m->get_penelitian($id)->row();
+		if ($hasil_monev_internal->hasil_monev_internal != null) {
+			$target_file = './upload/tahapan_pelaksanaan/' . $hasil_monev_internal->hasil_monev_internal;
+			unlink($target_file);
+		}
+
+		$berita_acara_inspub = $this->penelitian_m->get_penelitian($id)->row();
+		if ($berita_acara_inspub->berita_acara_inspub != null) {
+			$target_file = './upload/tahapan_pelaksanaan/' . $berita_acara_inspub->berita_acara_inspub;
 			unlink($target_file);
 		}
 

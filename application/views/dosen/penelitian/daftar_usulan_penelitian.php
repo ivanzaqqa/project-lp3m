@@ -59,13 +59,13 @@
                         <input type="text" name="mhs_terlibat" value="<?= set_value('mhs_terlibat') ?>" class="form-control form-control-sm bg-light" id="mhs_terlibat" placeholder="Masukkan Nama dan NIM Mahasiswa Yang Terlibat">
                         <?= form_error('mhs_terlibat') ?>
                     </div>
-                    <div class="form-group">
-                        <label for="mhs_terlibat">Mahasiswa Yang Dilibatkan "NIM"</label>
-                        <input type="text" name="mhs_terlibat" value="" class="form-control form-control-sm bg-light" id="mhs_terlibat" placeholder="Masukkan Nama dan NIM Mahasiswa Yang Terlibat">
+                    <div class="form-group <?= form_error('mhs_terlibat2') ? 'has-error' : null ?>">
+                        <label for="mhs_terlibat2">Mahasiswa Yang Dilibatkan "NIM"</label>
+                        <input type="text" name="mhs_terlibat2" value="<?= set_value('mhs_terlibat2') ?>" class="form-control form-control-sm bg-light" id="mhs_terlibat2" placeholder="Masukkan Nama dan NIM Mahasiswa Yang Terlibat">
                     </div>
-                    <div class="form-group">
-                        <label for="mhs_terlibat">Target Jurnal</label>
-                        <input type="text" name="target_jurnal" value="" class="form-control form-control-sm bg-light" id="target_jurnal" placeholder="Target Jurnal">
+                    <div class="form-group <?= form_error('target_jurnal') ? 'has-error' : null ?>">
+                        <label for="target_jurnal">Target Jurnal</label>
+                        <input type="text" name="target_jurnal" value="<?= set_value('target_jurnal') ?>" class="form-control form-control-sm bg-light" id="target_jurnal" placeholder="Target Jurnal">
                     </div>
                     <div class="form-group <?= form_error('file_proposal') ? 'has-error' : null ?>">
                         <span for="file_proposal">Upload File Proposal "PDF" </span><br>

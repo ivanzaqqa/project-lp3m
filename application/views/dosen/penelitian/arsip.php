@@ -29,8 +29,8 @@
                                 <td><?= $arsip->judul_penelitian ?></td>
                                 <td><?= $arsip->tahun_periode ?></td>
                                 <td><?= date('d-m-Y', strtotime($arsip->tgl_submit)) ?></td>
-                                <td><?= $arsip->mhs_terlibat ?></td>
-                                <td>belum ada db</td>
+                                <td>- <?= $arsip->mhs_terlibat ?> <br> - <?= $arsip->mhs_terlibat2 ?></td>
+                                <td><?= $arsip->target_jurnal ?></td>
                                 <td><?= $arsip->status ?></td>
                                 <td>
                                     <div class="dropdown">
