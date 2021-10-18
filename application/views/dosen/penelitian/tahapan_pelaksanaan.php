@@ -50,16 +50,28 @@
                             <td class="font-weight-bold">Uraian Kegiatan</td>
                             <td>:</td>
                             <td>
-                                <textarea class="form-control form-control-sm bg-light" name="uraian_kegiatan" id="uraian_kegiatan" cols="30" rows="5"></textarea>
+                                <textarea class="form-control form-control-sm bg-light" name="uraian_kegiatan" id="uraian_kegiatan" cols="30" rows="5" onkeyup="countChar(this)" maxlength="100"></textarea>
+                                <div id="charNum"></div>
                             </td>
                         </tr>
+
+                        <script type="text/javascript">
+                            function countChar(val) {
+                                var len = val.value.length;
+                                if (len >= 101) {
+                                    val.value = val.value.substring(0, 101);
+                                } else {
+                                    $('#charNum').text(100 - len + " (Maks. 100 Karakter!)");
+                                }
+                            };
+                        </script>
+
                         <tr>
                             <td class="font-weight-bold">Dokumentasi</td>
                             <td>:</td>
                             <td>
                                 <input type="file" name="dokumentasi" id="dokumentasi" class="form-control form-control-sm bg-light">
-                                <small>*Dokumentasi Tidak Wajib Diisi (File Gambar, Word, PDF) atau (Semua File) Ukuran Maks (10 MB)
-                                </small>
+                                <small>*Dokumentasi Tidak Wajib Diisi (File Gambar, Word, PDF) atau (Semua File) Ukuran Maks (10 MB)</small>
                             </td>
                         </tr>
                     </table>
