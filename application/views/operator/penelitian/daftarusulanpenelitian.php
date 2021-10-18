@@ -291,8 +291,12 @@
                     </div>
                     <!-- body modal -->
                     <div class="modal-body">
-                        <a href="<?php echo base_url() . 'upload/tahapan_pelaksanaan/' . $data->laporan_akhir; ?>" type="button" class="btn btn-sm btn-primary">Download</a>
-                        <span><?= $data->laporan_akhir ?></span>
+                        <?php if ($data->laporan_akhir != null) { ?>
+                            <a href="<?php echo base_url() . 'upload/tahapan_pelaksanaan/' . $data->laporan_akhir; ?>" type="button" class="btn btn-sm btn-primary">Download</a>
+                            <span><?= $data->laporan_akhir ?></span>
+                        <?php } else { ?>
+                            <span>Laporan akhir belum di upload</span>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -311,8 +315,12 @@
                     </div>
                     <!-- body modal -->
                     <div class="modal-body">
-                        <a href="<?php echo base_url() . 'upload/tahapan_pelaksanaan/' . $data->laporan_keuangan; ?>" type="button" class="btn btn-sm btn-primary">Download</a>
-                        <span><?= $data->laporan_keuangan ?></span>
+                        <?php if ($data->laporan_akhir != null) { ?>
+                            <a href="<?php echo base_url() . 'upload/tahapan_pelaksanaan/' . $data->laporan_keuangan; ?>" type="button" class="btn btn-sm btn-primary">Download</a>
+                            <span><?= $data->laporan_keuangan ?></span>
+                        <?php } else { ?>
+                            <span>Laporan keuangan belum di upload</span>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -331,8 +339,12 @@
                     </div>
                     <!-- body modal -->
                     <div class="modal-body">
-                        <a href="<?php echo base_url() . 'upload/tahapan_pelaksanaan/' . $data->artikel_ilmiah; ?>" type="button" class="btn btn-sm btn-primary">Download</a>
-                        <span><?= $data->artikel_ilmiah ?></span>
+                        <?php if ($data->laporan_akhir != null) { ?>
+                            <a href="<?php echo base_url() . 'upload/tahapan_pelaksanaan/' . $data->artikel_ilmiah; ?>" type="button" class="btn btn-sm btn-primary">Download</a>
+                            <span><?= $data->artikel_ilmiah ?></span>
+                        <?php } else { ?>
+                            <span>Artikel ilmiah belum di upload</span>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -351,8 +363,12 @@
                     </div>
                     <!-- body modal -->
                     <div class="modal-body">
-                        <a href="<?php echo base_url() . 'upload/tahapan_pelaksanaan/' . $data->sertifikat_hki; ?>" type="button" class="btn btn-sm btn-primary">Download</a>
-                        <span><?= $data->sertifikat_hki ?></span>
+                        <?php if ($data->laporan_akhir != null) { ?>
+                            <a href="<?php echo base_url() . 'upload/tahapan_pelaksanaan/' . $data->sertifikat_hki; ?>" type="button" class="btn btn-sm btn-primary">Download</a>
+                            <span><?= $data->sertifikat_hki ?></span>
+                        <?php } else { ?>
+                            <span>Sertifikat hki belum di upload</span>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -371,7 +387,11 @@
                     </div>
                     <!-- body modal -->
                     <div class="modal-body">
-                        <span><?= $data->url_artikel_ilmiah ?></span>
+                        <?php if ($data->laporan_akhir != null) { ?>
+                            <span><?= $data->url_artikel_ilmiah ?></span>
+                        <?php } else { ?>
+                            <span>URL belum ada</span>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -483,29 +503,57 @@
                             <tr>
                                 <td class="font-weight-bold">Laporan Akhir</td>
                                 <td>:</td>
-                                <td><a href="<?php echo base_url() . 'upload/tahapan_pelaksanaan/' . $data->laporan_akhir; ?>" type="button" class="btn btn-sm btn-primary">Download</a></td>
+                                <td>
+                                    <?php if ($data->laporan_akhir != null) { ?>
+                                        <a href="<?php echo base_url() . 'upload/tahapan_pelaksanaan/' . $data->laporan_akhir; ?>" type="button" class="btn btn-sm btn-primary">Download</a>
+                                    <?php } else { ?>
+                                        <button class="btn btn-sm btn-primary" disabled>Download</button>
+                                    <?php } ?>
+                                </td>
                             </tr>
                             <tr>
                                 <td class="font-weight-bold">Laporan Keuangan</td>
                                 <td>:</td>
-                                <td><a href="<?php echo base_url() . 'upload/tahapan_pelaksanaan/' . $data->laporan_keuangan; ?>" type="button" class="btn btn-sm btn-primary">Download</a></td>
+                                <td>
+                                    <?php if ($data->laporan_keuangan != null) { ?>
+                                        <a href="<?php echo base_url() . 'upload/tahapan_pelaksanaan/' . $data->laporan_keuangan; ?>" type="button" class="btn btn-sm btn-primary">Download</a>
+                                    <?php } else { ?>
+                                        <button class="btn btn-sm btn-primary" disabled>Download</button>
+                                    <?php } ?>
+                                </td>
                             </tr>
                             <tr>
                                 <td class="font-weight-bold">Artikel Ilmiah</td>
                                 <td>:</td>
-                                <td><a href="<?php echo base_url() . 'upload/tahapan_pelaksanaan/' . $data->artikel_ilmiah; ?>" type="button" class="btn btn-sm btn-primary">Download</a></td>
+                                <td>
+                                    <?php if ($data->artikel_ilmiah != null) { ?>
+                                        <a href="<?php echo base_url() . 'upload/tahapan_pelaksanaan/' . $data->artikel_ilmiah; ?>" type="button" class="btn btn-sm btn-primary">Download</a>
+                                    <?php } else { ?>
+                                        <button class="btn btn-sm btn-primary" disabled>Download</button>
+                                    <?php } ?>
+                                </td>
                             </tr>
                             <tr>
                                 <td class="font-weight-bold">URL</td>
                                 <td>:</td>
                                 <td>
-                                    <span><?= $data->url_artikel_ilmiah ?></span>
+                                    <?php if ($data->url_artikel_ilmiah != null) { ?>
+                                        <span><?= $data->url_artikel_ilmiah ?></span>
+                                    <?php } else { ?>
+                                        <span>Belum ada url</span>
+                                    <?php } ?>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="font-weight-bold">Sertifikat HAKI</td>
                                 <td>:</td>
-                                <td><a href="<?php echo base_url() . 'upload/tahapan_pelaksanaan/' . $data->sertifikat_hki; ?>" type="button" class="btn btn-sm btn-primary">Download</a></td>
+                                <td>
+                                    <?php if ($data->sertifikat_hki != null) { ?>
+                                        <a href="<?php echo base_url() . 'upload/tahapan_pelaksanaan/' . $data->sertifikat_hki; ?>" type="button" class="btn btn-sm btn-primary">Download</a>
+                                    <?php } else { ?>
+                                        <button class="btn btn-sm btn-primary" disabled>Download</button>
+                                    <?php } ?>
+                                </td>
                             </tr>
                             <tr>
                                 <?= form_open_multipart('operator/proses_tahapan_pelaksanaan_penelitian'); ?>

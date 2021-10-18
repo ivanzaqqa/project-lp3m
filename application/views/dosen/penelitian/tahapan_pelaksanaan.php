@@ -15,7 +15,7 @@
                             <td>:</td>
                             <td>
                                 <?php if ($row->hasil_review != null) { ?>
-                                    <button class="btn-sm btn-primary"><a style="color: white;" href="<?php echo base_url() . '/upload/tahapan_pelaksanaan/' . $row->hasil_review; ?>">Download</a></button>
+                                    <a class="btn-sm btn-primary" style="color: white;" href="<?php echo base_url() . '/upload/tahapan_pelaksanaan/' . $row->hasil_review; ?>">Download</a>
                                 <?php } else { ?>
                                     <button class="btn btn-sm btn-primary" disabled>Download</button>
                                 <?php } ?>
@@ -26,7 +26,7 @@
                             <td>:</td>
                             <td>
                                 <?php if ($row->surat_tugas != null) { ?>
-                                    <button class="btn-sm btn-primary"><a style="color: white;" href="<?php echo base_url() . '/upload/tahapan_pelaksanaan/' . $row->surat_tugas; ?>">Download</a></button>
+                                    <a class="btn-sm btn-primary" style="color: white;" href="<?php echo base_url() . '/upload/tahapan_pelaksanaan/' . $row->surat_tugas; ?>">Download</a>
                                 <?php } else { ?>
                                     <button class="btn btn-sm btn-primary" disabled>Download</button>
                                 <?php } ?>
@@ -86,7 +86,12 @@
                                     <td><?= $data->tgl_kegiatan; ?></td>
                                     <td><?= $data->uraian_kegiatan; ?></td>
                                     <td>
-                                        <a type="button" href="" class="btn btn-sm btn-primary">Download</a>
+                                        <?php if ($data->dokumentasi != null) { ?>
+                                            <a type="button" href="<?php echo base_url() . '/upload/dokumentasi/' . $data->dokumentasi; ?>" class="btn btn-sm btn-primary">Download</a>
+                                        <?php } else { ?>
+                                            <a>Tidak ada dokumentasi</a>
+                                        <?php } ?>
+
                                     </td>
                                 </tr>
                             <?php } ?>
@@ -114,6 +119,7 @@
                             <td>:</td>
                             <td>
                                 <input type="hidden" name="id_penelitian" id="id_penelitian" value="<?= $row->id_penelitian ?>">
+                                <input type="hidden" name="url_artikel_ilmiah" class="form-control form-control-sm bg-light" id="url_artikel_ilmiah" value="<?= $row->url_artikel_ilmiah ?>">
                                 <input type="file" name="laporan_akhir" class="form-control form-control-sm bg-light" id="laporan_akhir">
                             </td>
                             <td>
@@ -138,11 +144,13 @@
                         <tr>
                             <td class="font-weight-bold">Submit Laporan Keuangan</td>
                             <td>:</td>
-                            <input type="hidden" name="id_penelitian" id="id_penelitian" value="<?= $row->id_penelitian ?>">
-                            <td> <input type="file" name="laporan_keuangan" class="form-control form-control-sm bg-light" id="laporan_keuangan">
+                            <td>
+                                <input type="hidden" name="id_penelitian" id="id_penelitian" value="<?= $row->id_penelitian ?>">
+                                <input type="hidden" name="url_artikel_ilmiah" class="form-control form-control-sm bg-light" id="url_artikel_ilmiah" value="<?= $row->url_artikel_ilmiah ?>">
+                                <input type="file" name="laporan_keuangan" class="form-control form-control-sm bg-light" id="laporan_keuangan">
                             </td>
                             <td>
-                                <?php if ($row->laporan_akhir != null) { ?>
+                                <?php if ($row->laporan_keuangan != null) { ?>
                                     <button type="submit" name="edit_laporan_keuangan" onclick="return confirm('Apakah anda yakin ingin mengubah laporan keuangan ini?')" class="btn btn-sm btn-primary">Update</button>
                                 <?php } else { ?>
                                     <button type="submit" name="edit_laporan_keuangan" onclick="return confirm('Apakah anda yakin untuk upload laporan keuangan ini?')" class="btn btn-sm btn-primary">Upload</button>
@@ -163,18 +171,22 @@
                         <tr>
                             <td class="font-weight-bold">Submit Artikel Ilmiah</td>
                             <td>:</td>
-                            <input type="hidden" name="id_penelitian" id="id_penelitian" value="<?= $row->id_penelitian ?>">
-                            <td> <input type="file" name="artikel_ilmiah" class="form-control form-control-sm bg-light" id="artikel_ilmiah">
+                            <td>
+                                <input type="hidden" name="id_penelitian" id="id_penelitian" value="<?= $row->id_penelitian ?>">
+                                <input type="hidden" name="url_artikel_ilmiah" class="form-control form-control-sm bg-light" id="url_artikel_ilmiah" value="<?= $row->url_artikel_ilmiah ?>">
+                                <input type="file" name="artikel_ilmiah" class="form-control form-control-sm bg-light" id="artikel_ilmiah">
                             </td>
                             <td>
-                                <?php if ($row->laporan_akhir != null) { ?>
+                                <?php if ($row->artikel_ilmiah != null) { ?>
                                     <button type="submit" name="edit_artikel_ilmiah" onclick="return confirm('Apakah anda yakin ingin mengubah artikel ilmiah ini?')" class="btn btn-sm btn-primary">Update</button>
                                 <?php } else { ?>
                                     <button type="submit" name="edit_artikel_ilmiah" onclick="return confirm('Apakah anda yakin untuk upload artikel ilmiah ini?')" class="btn btn-sm btn-primary">Upload</button>
                                 <?php } ?>
                             </td>
                         </tr>
+                        <?php echo form_close() ?>
 
+                        <?= form_open_multipart('dosen/proses_tahapan_pelaksanaan_penelitian/' . $row->id_penelitian); ?>
                         <tr>
                             <td class="font-weight-bold">URL Artikel Ilmiah</td>
                             <td>:</td>
@@ -185,10 +197,13 @@
                         <tr>
                             <td class="font-weight-bold">Submit URL Artikel Ilmiah</td>
                             <td>:</td>
-                            <td> <input type="text" name="url_artikel_ilmiah" class="form-control form-control-sm bg-light" id="url_artikel_ilmiah">
+                            <td>
+                                <input type="hidden" name="id_penelitian" id="id_penelitian" value="<?= $row->id_penelitian ?>">
+                                <input type="hidden" name="url_artikel_ilmiah" class="form-control form-control-sm bg-light" id="url_artikel_ilmiah" value="<?= $row->url_artikel_ilmiah ?>">
+                                <input type="text" name="url_artikel_ilmiah" class="form-control form-control-sm bg-light" id="url_artikel_ilmiah">
                             </td>
                             <td>
-                                <?php if ($row->laporan_akhir != null) { ?>
+                                <?php if ($row->url_artikel_ilmiah != null) { ?>
                                     <button type="submit" name="edit_artikel_ilmiah" onclick="return confirm('Apakah anda yakin ingin mengubah url ini?')" class="btn btn-sm btn-primary">Update</button>
                                 <?php } else { ?>
                                     <button type="submit" name="edit_artikel_ilmiah" onclick="return confirm('Apakah anda yakin untuk submit url ini?')" class="btn btn-sm btn-primary">Submit</button>
@@ -209,11 +224,13 @@
                         <tr>
                             <td class="font-weight-bold">Submit Sertifikat HKI (Jika Ada)</td>
                             <td>:</td>
-                            <input type="hidden" name="id_penelitian" id="id_penelitian" value="<?= $row->id_penelitian ?>">
-                            <td> <input type="file" name="sertifikat_hki" class="form-control form-control-sm bg-light" id="sertifikat_hki">
+                            <td>
+                                <input type="hidden" name="id_penelitian" id="id_penelitian" value="<?= $row->id_penelitian ?>">
+                                <input type="hidden" name="url_artikel_ilmiah" class="form-control form-control-sm bg-light" id="url_artikel_ilmiah" value="<?= $row->url_artikel_ilmiah ?>">
+                                <input type="file" name="sertifikat_hki" class="form-control form-control-sm bg-light" id="sertifikat_hki">
                             </td>
                             <td>
-                                <?php if ($row->laporan_akhir != null) { ?>
+                                <?php if ($row->sertifikat_hki != null) { ?>
                                     <button type="submit" name="edit_sertifikat_hki" onclick="return confirm('Apakah anda yakin ingin mengubah sertifikat hki ini?')" class="btn btn-sm btn-primary">Update</button>
                                 <?php } else { ?>
                                     <button type="submit" name="edit_sertifikat_hki" onclick="return confirm('Apakah anda yakin untuk upload sertifikat hki ini?')" class="btn btn-sm btn-primary">Upload</button>
@@ -228,7 +245,7 @@
                             <td>:</td>
                             <td>
                                 <?php if ($row->hasil_monev_internal != null) { ?>
-                                    <button class="btn-sm btn-primary"><a style="color: white;" href="<?php echo base_url() . '/upload/tahapan_pelaksanaan/' . $row->hasil_monev_internal; ?>">Download</a></button>
+                                    <a class="btn-sm btn-primary" style="color: white;" href="<?php echo base_url() . '/upload/tahapan_pelaksanaan/' . $row->hasil_monev_internal; ?>">Download</a>
                                 <?php } else { ?>
                                     <button class="btn btn-sm btn-primary" disabled>Download</button>
                                 <?php } ?>
@@ -239,7 +256,7 @@
                             <td>:</td>
                             <td>
                                 <?php if ($row->berita_acara_inspub != null) { ?>
-                                    <button class="btn-sm btn-primary"><a style="color: white;" href="<?php echo base_url() . '/upload/tahapan_pelaksanaan/' . $row->berita_acara_inspub; ?>">Download</a></button>
+                                    <a class="btn-sm btn-primary" style="color: white;" href="<?php echo base_url() . '/upload/tahapan_pelaksanaan/' . $row->berita_acara_inspub; ?>">Download</a>
                                 <?php } else { ?>
                                     <button class="btn btn-sm btn-primary" disabled>Download</button>
                                 <?php } ?>

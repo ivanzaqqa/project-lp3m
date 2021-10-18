@@ -222,6 +222,12 @@ class Dosen extends CI_Controller
 			unlink($target_file);
 		}
 
+		$dokumentasi = $this->penelitian_m->get_log_book($id)->row();
+		if ($dokumentasi->dokumentasi != null) {
+			$target_file = './upload/dokumentasi/' . $dokumentasi->dokumentasi;
+			unlink($target_file);
+		}
+
 		$this->penelitian_m->delete($id);
 		if ($this->db->affected_rows() > 0) {
 			$this->session->set_flashdata('successdel', '<div class="alert alert-success alert-dismissible fade show" role="alert">

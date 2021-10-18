@@ -42,7 +42,7 @@ class Operator extends CI_Controller
 			'id_status' => $newstat
 		);
 		$this->penelitian_m->update($id_penelitian, $data);
-		$res['msg'] = "Status Pengabdian Masyarakat dengan judul penelitian " . $check->judul_penelitian . " telah berhasil di update";
+		$res['msg'] = "Status Usulan Penelitian dengan judul penelitian " . $check->judul_penelitian . " telah berhasil di update";
 		echo json_encode($res);
 	}
 

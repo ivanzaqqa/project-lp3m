@@ -111,9 +111,12 @@ class Penelitian_m extends CI_Model
 
     function delete($id)
     {
-        $this->db->where('id_penelitian', $id);
-        $this->db->delete('tbl_penelitian');
-        return true;
+        $sql = "DELETE tbl_penelitian,log_book_penelitian 
+        FROM tbl_penelitian,log_book_penelitian 
+        WHERE log_book_penelitian.id_penelitian=tbl_penelitian.id_penelitian
+        AND tbl_penelitian.id_penelitian= ?";
+
+        $this->db->query($sql, array($id));
     }
 
     public function download($id)
