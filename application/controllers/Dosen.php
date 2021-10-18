@@ -443,7 +443,7 @@ class Dosen extends CI_Controller
 	public function proses_log_book_penelitian($id)
 	{
 		$config['upload_path']          = './upload/dokumentasi/';
-		$config['allowed_types']        = 'pdf';
+		$config['allowed_types']        = 'pdf|png|jpg|jpeg|doc|docx|pptx|xlsx|xls';
 		$config['max_size']            = 5000;
 		$config['encrypt_name']         = TRUE;
 
