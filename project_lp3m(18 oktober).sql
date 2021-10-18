@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 14, 2021 at 01:49 PM
+-- Generation Time: Oct 18, 2021 at 04:21 AM
 -- Server version: 5.7.35
 -- PHP Version: 7.3.31
 
@@ -94,6 +94,15 @@ CREATE TABLE `log_book_penelitian` (
   `uraian_kegiatan` text NOT NULL,
   `dokumentasi` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `log_book_penelitian`
+--
+
+INSERT INTO `log_book_penelitian` (`id_log_book`, `id_penelitian`, `id`, `tgl_kegiatan`, `uraian_kegiatan`, `dokumentasi`) VALUES
+(2, 44, 1, '2312-12-12', 'asdsadasadasdsd', ''),
+(3, 44, 1, '2919-12-01', 'sdkjandlkdsalkdaljdsldj', ''),
+(5, 44, 1, '1231-12-31', 'dalksddaskjdalsdk', '');
 
 -- --------------------------------------------------------
 
@@ -222,6 +231,8 @@ CREATE TABLE `tbl_penelitian` (
   `matkul_diampu` varchar(150) NOT NULL,
   `kelompok_riset` varchar(150) NOT NULL,
   `mhs_terlibat` varchar(100) NOT NULL,
+  `mhs_terlibat2` varchar(100) NOT NULL,
+  `target_jurnal` varchar(100) NOT NULL,
   `file_proposal` varchar(300) NOT NULL,
   `file_rps` varchar(300) NOT NULL,
   `form_integrasi` varchar(300) NOT NULL,
@@ -242,9 +253,9 @@ CREATE TABLE `tbl_penelitian` (
 -- Dumping data for table `tbl_penelitian`
 --
 
-INSERT INTO `tbl_penelitian` (`id_penelitian`, `id`, `id_periode`, `judul_penelitian`, `matkul_diampu`, `kelompok_riset`, `mhs_terlibat`, `file_proposal`, `file_rps`, `form_integrasi`, `id_status`, `tgl_submit`, `hasil_review`, `surat_tugas`, `laporan_akhir`, `laporan_keuangan`, `artikel_ilmiah`, `url_artikel_ilmiah`, `sertifikat_hki`, `hasil_monev_internal`, `berita_acara_inspub`) VALUES
-(24, 1, 1, 'Bangun Tanah Persegi', 'Jaringan', 'Surya Kencana', 'Ipip (12993922)', 'fb559a1fc65ebbd26741a7d2b1568414.pdf', 'a0340b853a64cbd08b559871e9ca5a95.pdf', '3e7ab5e0eb0aeb8befd09777806da8ce.pdf', 3, '2021-09-02 12:11:38', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(44, 1, 1, 'Fucking bitch motherfuckers', 'Jaringan', 'Surya 12', 'Tatit Mahendra', '8c168c5066d87ce2a12a945503542068.pdf', '2bd1bb445b57f92abe95d3044c86e4c3.pdf', '6024f31752053500f751315c759b07bb.pdf', 1, '2021-09-10 11:40:52', NULL, NULL, '6502f1b7e4a1d91fd7fe6bbd670a40cc.pdf', '6da9008fc6f272ed08b851aa878b04c4.pdf', 'd3f130acf33bfe35429a7d876b256403.pdf', 'www.stupid.com', '11a85c16692a14fde5c78a41ed949cbd.pdf', NULL, NULL);
+INSERT INTO `tbl_penelitian` (`id_penelitian`, `id`, `id_periode`, `judul_penelitian`, `matkul_diampu`, `kelompok_riset`, `mhs_terlibat`, `mhs_terlibat2`, `target_jurnal`, `file_proposal`, `file_rps`, `form_integrasi`, `id_status`, `tgl_submit`, `hasil_review`, `surat_tugas`, `laporan_akhir`, `laporan_keuangan`, `artikel_ilmiah`, `url_artikel_ilmiah`, `sertifikat_hki`, `hasil_monev_internal`, `berita_acara_inspub`) VALUES
+(24, 1, 1, 'Bangun Tanah Persegi', 'Jaringan', 'Surya Kencana', 'Ipip (12993922)', 'Dika (2123123)', 'example_1', 'fb559a1fc65ebbd26741a7d2b1568414.pdf', 'a0340b853a64cbd08b559871e9ca5a95.pdf', '3e7ab5e0eb0aeb8befd09777806da8ce.pdf', 3, '2021-09-02 12:11:38', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(44, 1, 1, 'Fucking bitch motherfuckers', 'Jaringan', 'Surya 12', 'Tatit Mahendra (12391239)', 'Bagas (1238123)', 'example_2', '8c168c5066d87ce2a12a945503542068.pdf', '2bd1bb445b57f92abe95d3044c86e4c3.pdf', '6024f31752053500f751315c759b07bb.pdf', 1, '2021-09-10 11:40:52', 'cdf495cc2099620ba6f8b4f4dcffd175.pdf', '724b86c6e4f1e17fc1225b33d0f3d403.pdf', '6502f1b7e4a1d91fd7fe6bbd670a40cc.pdf', '6da9008fc6f272ed08b851aa878b04c4.pdf', 'd3f130acf33bfe35429a7d876b256403.pdf', 'www.bitch.com', '11a85c16692a14fde5c78a41ed949cbd.pdf', 'd5e17f48fc74d66ba1f6c60948a14137.pdf', '464d6f9df6840321a280abed077d7240.pdf');
 
 -- --------------------------------------------------------
 
@@ -445,7 +456,7 @@ ALTER TABLE `insentif_specscop`
 -- AUTO_INCREMENT for table `log_book_penelitian`
 --
 ALTER TABLE `log_book_penelitian`
-  MODIFY `id_log_book` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_log_book` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `periode_pengajuan`
@@ -481,7 +492,7 @@ ALTER TABLE `status_penelitian_pengabdian`
 -- AUTO_INCREMENT for table `tbl_penelitian`
 --
 ALTER TABLE `tbl_penelitian`
-  MODIFY `id_penelitian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id_penelitian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `tbl_pengabmas`
