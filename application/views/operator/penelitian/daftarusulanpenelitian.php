@@ -106,74 +106,99 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <?php if ($data->status != "Didanai") { ?>
-                                        <button class="btn btn-sm btn-secondary" style="font-size: 13px;" disabled>Hasil Review</button>
-                                    <?php } else { ?>
+                                    <!-- Hasil Review -->
+                                    <?php if ($data->status == "Didanai" && $data->hasil_review != null) { ?>
+                                        <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#hasilreview<?= $data->id_penelitian; ?>" style="font-size: 13px;">Hasil Review</button>
+                                    <?php } elseif ($data->status == "Didanai" && $data->hasil_review == null) { ?>
                                         <button class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#hasilreview<?= $data->id_penelitian; ?>" style="font-size: 13px;">Hasil Review</button>
-                                    <?php } ?>
-
-                                    <?php if ($data->status != "Didanai") { ?>
-                                        <button class="btn btn-sm btn-secondary mt-1" style="font-size: 13px;" disabled>Surat Tugas</button>
                                     <?php } else { ?>
+                                        <button class="btn btn-sm btn-secondary" style="font-size: 13px;" disabled>Hasil Review</button>
+                                    <?php } ?>
+                                    <!-- End Hasil Review -->
+
+                                    <!-- Surat Tugas -->
+                                    <?php if ($data->status == "Didanai" && $data->surat_tugas != null) { ?>
+                                        <button class="btn btn-sm btn-success mt-1" data-toggle="modal" data-target="#surattugas<?= $data->id_penelitian; ?>" style="font-size: 13px;">Surat Tugas</button>
+                                    <?php } elseif ($data->status == "Didanai" && $data->surat_tugas == null) { ?>
                                         <button class="btn btn-sm btn-secondary mt-1" data-toggle="modal" data-target="#surattugas<?= $data->id_penelitian; ?>" style="font-size: 13px;">Surat Tugas</button>
-                                    <?php } ?>
-
-                                    <?php if ($data->status != "Didanai") { ?>
-                                        <button class="btn btn-sm btn-secondary mt-1" style="font-size: 13px;" disabled>Hasil Monev Internal</button>
                                     <?php } else { ?>
+                                        <button class="btn btn-sm btn-secondary mt-1" style="font-size: 13px;" disabled>Surat Tugas</button>
+                                    <?php } ?>
+                                    <!-- End Surat Tugas -->
+
+                                    <!-- Hasil Monev Internal -->
+                                    <?php if ($data->status == "Didanai" && $data->hasil_monev_internal != null) { ?>
+                                        <button class="btn btn-sm btn-success mt-1" data-toggle="modal" data-target="#hasilmonev<?= $data->id_penelitian; ?>" style="font-size: 13px;">Hasil Monev Internal</button>
+                                    <?php } elseif ($data->status == "Didanai" && $data->hasil_monev_internal == null) { ?>
                                         <button class="btn btn-sm btn-secondary mt-1" data-toggle="modal" data-target="#hasilmonev<?= $data->id_penelitian; ?>" style="font-size: 13px;">Hasil Monev Internal</button>
-                                    <?php } ?>
-
-                                    <?php if ($data->status != "Didanai") { ?>
-                                        <button class="btn btn-sm btn-secondary mt-1" style="font-size: 13px;" disabled>Berita Acara Insentif Publikasi</button>
                                     <?php } else { ?>
-                                        <button class="btn btn-sm btn-secondary mt-1" data-toggle="modal" data-target="#beritaacarainsentif<?= $data->id_penelitian; ?>" style="font-size: 13px;">Berita Acara Insentif Publikasi</button>
+                                        <button class="btn btn-sm btn-secondary mt-1" style="font-size: 13px;" disabled>Hasil Monev Internal</button>
                                     <?php } ?>
+                                    <!-- End Hasil Monev Internal -->
+
+                                    <!-- Berita Acara Insentif Publikasi -->
+                                    <?php if ($data->status == "Didanai" && $data->berita_acara_inspub != null) { ?>
+                                        <button class="btn btn-sm btn-success mt-1" data-toggle="modal" data-target="#beritaacarainsentif<?= $data->id_penelitian; ?>" style="font-size: 13px;">Berita Acara Insentif Publikasi</button>
+                                    <?php } elseif ($data->status == "Didanai" && $data->berita_acara_inspub == null) { ?>
+                                        <button class="btn btn-sm btn-secondary mt-1" data-toggle="modal" data-target="#beritaacarainsentif<?= $data->id_penelitian; ?>" style="font-size: 13px;">Berita Acara Insentif Publikasi</button>
+                                    <?php } else { ?>
+                                        <button class="btn btn-sm btn-secondary mt-1" style="font-size: 13px;" disabled>Berita Acara Insentif Publikasi</button>
+                                    <?php } ?>
+                                    <!-- End Berita Acara Insentif Publikasi -->
                                 </td>
 
                                 <td>
-                                    <?php if ($data->status != "Didanai") { ?>
+                                    <?php if ($data->status == "Didanai") { ?>
+                                        <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#logbook<?= $data->id_penelitian; ?>" style="font-size: 13px;">Log Book</button>
+                                    <?php } else { ?>
                                         <button class="btn btn-sm btn-danger mt-1" style="font-size: 13px;" disabled>Log Book</button>
-                                    <?php } else { ?>
-                                        <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#logbook<?= $data->id_penelitian; ?>" style="font-size: 13px;">Log Book</button>
                                     <?php } ?>
 
-                                    <?php if ($data->status != "Didanai") { ?>
-                                        <button class="btn btn-sm btn-danger mt-1" style="font-size: 13px;" disabled>Laporan Akhir</button>
-                                    <?php } else { ?>
+                                    <?php if ($data->status == "Didanai" && $data->laporan_akhir != null) { ?>
+                                        <button class="btn btn-sm btn-success mt-1" data-toggle="modal" data-target="#laporanakhir<?= $data->id_penelitian; ?>" style="font-size: 13px;">Laporan Akhir</button>
+                                    <?php } elseif ($data->status == "Didanai" && $data->laporan_akhir == null) { ?>
                                         <button class="btn btn-sm btn-danger mt-1" data-toggle="modal" data-target="#laporanakhir<?= $data->id_penelitian; ?>" style="font-size: 13px;">Laporan Akhir</button>
+                                    <?php } else { ?>
+                                        <button class="btn btn-sm btn-danger mt-1" style="font-size: 13px;" disabled>Laporan Akhir</button>
                                     <?php } ?>
 
-                                    <?php if ($data->status != "Didanai") { ?>
-                                        <button class="btn btn-sm btn-danger mt-1" style="font-size: 13px;" disabled>Laporan Keuangan</button>
-                                    <?php } else { ?>
+                                    <?php if ($data->status == "Didanai" && $data->laporan_keuangan != null) { ?>
+                                        <button class="btn btn-sm btn-success mt-1" data-toggle="modal" data-target="#laporankeuangan<?= $data->id_penelitian; ?>" style="font-size: 13px;">Laporan Keuangan</button>
+                                    <?php } elseif ($data->status == "Didanai" && $data->laporan_keuangan == null) { ?>
                                         <button class="btn btn-sm btn-danger mt-1" data-toggle="modal" data-target="#laporankeuangan<?= $data->id_penelitian; ?>" style="font-size: 13px;">Laporan Keuangan</button>
+                                    <?php } else { ?>
+                                        <button class="btn btn-sm btn-danger mt-1" style="font-size: 13px;" disabled>Laporan Keuangan</button>
                                     <?php } ?>
 
-                                    <?php if ($data->status != "Didanai") { ?>
-                                        <button class="btn btn-sm btn-danger mt-1" style="font-size: 13px;" disabled>Artikel Ilmiah</button>
-                                    <?php } else { ?>
+                                    <?php if ($data->status == "Didanai" && $data->artikel_ilmiah != null) { ?>
+                                        <button class="btn btn-sm btn-success mt-1" data-toggle="modal" data-target="#artikelilmiah<?= $data->id_penelitian; ?>" style="font-size: 13px;">Artikel Ilmiah</button>
+                                    <?php } elseif ($data->status == "Didanai" && $data->artikel_ilmiah == null) { ?>
                                         <button class="btn btn-sm btn-danger mt-1" data-toggle="modal" data-target="#artikelilmiah<?= $data->id_penelitian; ?>" style="font-size: 13px;">Artikel Ilmiah</button>
+                                    <?php } else { ?>
+                                        <button class="btn btn-sm btn-danger mt-1" style="font-size: 13px;" disabled>Artikel Ilmiah</button>
                                     <?php } ?>
 
-                                    <?php if ($data->status != "Didanai") { ?>
-                                        <button class="btn btn-sm btn-danger mt-1" style="font-size: 13px;" disabled>Sertifikat HAKI</button>
-                                    <?php } else { ?>
+                                    <?php if ($data->status == "Didanai" && $data->sertifikat_hki != null) { ?>
+                                        <button class="btn btn-sm btn-success mt-1" data-toggle="modal" data-target="#sertifikathaki<?= $data->id_penelitian; ?>" style="font-size: 13px;">Sertifikat HAKI</button>
+                                    <?php } elseif ($data->status == "Didanai" && $data->sertifikat_hki == null) { ?>
                                         <button class="btn btn-sm btn-danger mt-1" data-toggle="modal" data-target="#sertifikathaki<?= $data->id_penelitian; ?>" style="font-size: 13px;">Sertifikat HAKI</button>
+                                    <?php } else { ?>
+                                        <button class="btn btn-sm btn-danger mt-1" style="font-size: 13px;" disabled>Sertifikat HAKI</button>
                                     <?php } ?>
 
-                                    <?php if ($data->status != "Didanai") { ?>
-                                        <button class="btn btn-sm btn-danger mt-1" style="font-size: 13px;" disabled>URL</button>
-                                    <?php } else { ?>
+                                    <?php if ($data->status == "Didanai" && $data->url_artikel_ilmiah != null) { ?>
+                                        <button class="btn btn-sm btn-success mt-1" data-toggle="modal" data-target="#url<?= $data->id_penelitian; ?>" style="font-size: 13px;">URL</button>
+                                    <?php } elseif ($data->status == "Didanai" && $data->url_artikel_ilmiah == null) { ?>
                                         <button class="btn btn-sm btn-danger mt-1" data-toggle="modal" data-target="#url<?= $data->id_penelitian; ?>" style="font-size: 13px;">URL</button>
+                                    <?php } else { ?>
+                                        <button class="btn btn-sm btn-danger mt-1" style="font-size: 13px;" disabled>URL</button>
                                     <?php } ?>
 
                                     <?php if ($data->status != "Didanai") { ?>
                                         <button class="btn btn-sm btn-danger mt-1" style="font-size: 13px;" disabled>Detail</button>
                                     <?php } else { ?>
-                                        <button class="btn btn-sm btn-danger mt-1" data-toggle="modal" data-target="#detail<?= $data->id_penelitian; ?>" style="font-size: 13px;">Detail</button>
+                                        <button class="btn btn-sm btn-info mt-1" data-toggle="modal" data-target="#detail<?= $data->id_penelitian; ?>" style="font-size: 13px;">Detail</button>
                                     <?php } ?>
-
                                 </td>
                             </tr>
                         <?php } ?>

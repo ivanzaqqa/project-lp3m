@@ -43,6 +43,7 @@
                             <td>
                                 <input type="hidden" name="id_penelitian" id="id_penelitian" value="<?= $row->id_penelitian ?>">
                                 <input type="hidden" name="id" id="id" value="<?= $row->id ?>">
+                                <input type="hidden" name="id_status" id="id_status" value="1">
                                 <input type="date" name="tgl_kegiatan" id="tgl_kegiatan" class="form-control form-control-sm bg-light">
                             </td>
                         </tr>
