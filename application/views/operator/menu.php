@@ -1,5 +1,5 @@
 <div id="wrapper" style="position: -webkit-sticky;
-	position: sticky; top: 0; padding: 0 0px; position: absolute; width: 100%; height: 100%;">
+	position: sticky; position:relative; width: 100%; height: 100%;">
     <!-- Sidebar -->
     <ul class="navbar-nav bg-sidebar sidebar sidebar-dark accordion" id="accordionSidebar">
         <!-- Sidebar - Brand -->
@@ -82,9 +82,9 @@
         </li>
         <hr class="sidebar-divider d-none d-md-block">
         <li class="nav-item">
-            <a class="nav-link active" href="<?= base_url('operator/upload_template') ?>">
-                <i class="fas fa-upload"></i>
-                <span>Upload Template</span></a>
+            <a class="nav-link" href="<?= site_url('operator/upload_template') ?>">
+                <i class="fas fa-upload"></i><span>Upload Template</span>
+            </a>
         </li>
 
         <!-- Divider -->
