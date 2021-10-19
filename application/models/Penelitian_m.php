@@ -105,9 +105,6 @@ class Penelitian_m extends CI_Model
 
     public function edit2($post)
     {
-        $params = [
-            'url_artikel_ilmiah' => $post['url_artikel_ilmiah'],
-        ];
         if ($post['hasil_review'] != null) {
             $params['hasil_review'] = $post['hasil_review'];
         }

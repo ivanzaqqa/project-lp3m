@@ -201,7 +201,6 @@
                     <div class="modal-body">
                         <?= form_open_multipart('operator/proses_tahapan_pelaksanaan_penelitian'); ?>
                         <input type="hidden" name="id_penelitian" id="id_penelitian" value="<?= $data->id_penelitian ?>">
-                        <input type="hidden" name="url_artikel_ilmiah" id="url_artikel_ilmiah" value="<?= $data->url_artikel_ilmiah ?>">
                         <p><input type="file" name="hasil_review" class="form-control form-control-sm bg-light" id="hasil_review"></p>
                         <button type="submit" name="edit_hasil_review" onclick="return confirm('Apakah anda yakin untuk upload hasil review ini?')" class="btn btn-sm btn-primary">Simpan</button>
                         <span><?= $data->hasil_review ?></span>
@@ -226,7 +225,6 @@
                     <div class="modal-body">
                         <?= form_open_multipart('operator/proses_tahapan_pelaksanaan_penelitian'); ?>
                         <input type="hidden" name="id_penelitian" id="id_penelitian" value="<?= $data->id_penelitian ?>">
-                        <input type="hidden" name="url_artikel_ilmiah" id="url_artikel_ilmiah" value="<?= $data->url_artikel_ilmiah ?>">
                         <p> <input type="file" name="surat_tugas" class="form-control form-control-sm bg-light" id="surat_tugas"></p>
                         <button type="submit" name="edit_surat_tugas" onclick="return confirm('Apakah anda yakin untuk upload surat tugas ini?')" class="btn btn-sm btn-primary">Simpan</button>
                         <span><?= $data->surat_tugas ?></span>
@@ -416,7 +414,6 @@
                     <div class="modal-body">
                         <?= form_open_multipart('operator/proses_tahapan_pelaksanaan_penelitian'); ?>
                         <input type="hidden" name="id_penelitian" id="id_penelitian" value="<?= $data->id_penelitian ?>">
-                        <input type="hidden" name="url_artikel_ilmiah" id="url_artikel_ilmiah" value="<?= $data->url_artikel_ilmiah ?>">
                         <p> <input type="file" name="hasil_monev_internal" class="form-control form-control-sm bg-light" id="hasil_monev_internal"></p>
                         <button type="submit" name="edit_hasil_monev_internal" onclick="return confirm('Apakah anda yakin untuk upload hasil monev internal  ini?')" class="btn btn-sm btn-primary">Simpan</button>
                         <span><?= $data->hasil_monev_internal ?></span>
@@ -441,7 +438,6 @@
                     <div class="modal-body">
                         <?= form_open_multipart('operator/proses_tahapan_pelaksanaan_penelitian'); ?>
                         <input type="hidden" name="id_penelitian" id="id_penelitian" value="<?= $data->id_penelitian ?>">
-                        <input type="hidden" name="url_artikel_ilmiah" id="url_artikel_ilmiah" value="<?= $data->url_artikel_ilmiah ?>">
                         <p><input type="file" name="berita_acara_inspub" class="form-control form-control-sm bg-light" id="berita_acara_inspub"></p>
                         <button type="submit" name="edit_berita_acara_inspub" onclick="return confirm('Apakah anda yakin untuk upload berita acara insentif publikasi ini?')" class="btn btn-sm btn-primary">Simpan</button>
                         <span><?= $data->berita_acara_inspub ?></span>
@@ -475,7 +471,6 @@
                                 <td>:</td>
                                 <td>
                                     <input type="hidden" name="id_penelitian" id="id_penelitian" value="<?= $data->id_penelitian ?>">
-                                    <input type="hidden" name="url_artikel_ilmiah" id="url_artikel_ilmiah" value="<?= $data->url_artikel_ilmiah ?>">
                                     <input type="file" name="hasil_review" class="form-control form-control-sm bg-light" id="hasil_review">
                                     <p><?= $data->hasil_review; ?></p>
                                 </td>
@@ -488,7 +483,6 @@
                                 <td>:</td>
                                 <td>
                                     <input type="hidden" name="id_penelitian" id="id_penelitian" value="<?= $data->id_penelitian ?>">
-                                    <input type="hidden" name="url_artikel_ilmiah" id="url_artikel_ilmiah" value="<?= $data->url_artikel_ilmiah ?>">
                                     <input type="file" name="surat_tugas" class="form-control form-control-sm bg-light" id="surat_tugas">
                                     <p><?= $data->surat_tugas; ?></p>
                                 </td>
@@ -561,7 +555,6 @@
                                 <td>:</td>
                                 <td>
                                     <input type="hidden" name="id_penelitian" id="id_penelitian" value="<?= $data->id_penelitian ?>">
-                                    <input type="hidden" name="url_artikel_ilmiah" id="url_artikel_ilmiah" value="<?= $data->url_artikel_ilmiah ?>">
                                     <input type="file" name="hasil_monev_internal" class="form-control form-control-sm bg-light" id="hasil_monev_internal">
                                     <p><?= $data->hasil_monev_internal; ?></p>
                                 </td>
@@ -574,7 +567,6 @@
                                 <td>:</td>
                                 <td>
                                     <input type="hidden" name="id_penelitian" id="id_penelitian" value="<?= $data->id_penelitian ?>">
-                                    <input type="hidden" name="url_artikel_ilmiah" id="url_artikel_ilmiah" value="<?= $data->url_artikel_ilmiah ?>">
                                     <input type="file" name="berita_acara_inspub" class="form-control form-control-sm bg-light" id="berita_acara_inspub">
                                     <p><?= $data->berita_acara_inspub; ?></p>
                                 </td>
