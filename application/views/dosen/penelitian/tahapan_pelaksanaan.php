@@ -123,7 +123,15 @@
                             <td>:</td>
                             <td>
                                 <!-- <span>Nama file laporan akhir.pdf (tanggal upload)</span> -->
-                                <span><?= $row->laporan_akhir ?></span>
+                                <span><?= $row->laporan_akhir ?>
+
+                                    <?php if ($row->tgl_upload_la != null) { ?>
+                                        <br> (<?= $row->tgl_upload_la ?>)
+                                    <?php } else { ?>
+
+                                    <?php } ?>
+
+                                </span>
                             </td>
                         </tr>
                         <tr>
@@ -131,7 +139,6 @@
                             <td>:</td>
                             <td>
                                 <input type="hidden" name="id_penelitian" id="id_penelitian" value="<?= $row->id_penelitian ?>">
-                                <input type="hidden" name="url_artikel_ilmiah" class="form-control form-control-sm bg-light" id="url_artikel_ilmiah" value="<?= $row->url_artikel_ilmiah ?>">
                                 <input type="file" name="laporan_akhir" class="form-control form-control-sm bg-light" id="laporan_akhir">
                             </td>
                             <td>
@@ -150,7 +157,15 @@
                             <td>:</td>
                             <td>
                                 <!-- <span>Nama file laporan Keuangan.pdf (tanggal upload)</span> -->
-                                <span><?= $row->laporan_keuangan ?></span>
+                                <span><?= $row->laporan_keuangan ?>
+
+                                    <?php if ($row->tgl_upload_lk != null) { ?>
+                                        <br> (<?= $row->tgl_upload_lk ?>)
+                                    <?php } else { ?>
+
+                                    <?php } ?>
+
+                                </span>
                             </td>
                         </tr>
                         <tr>
@@ -158,7 +173,6 @@
                             <td>:</td>
                             <td>
                                 <input type="hidden" name="id_penelitian" id="id_penelitian" value="<?= $row->id_penelitian ?>">
-                                <input type="hidden" name="url_artikel_ilmiah" class="form-control form-control-sm bg-light" id="url_artikel_ilmiah" value="<?= $row->url_artikel_ilmiah ?>">
                                 <input type="file" name="laporan_keuangan" class="form-control form-control-sm bg-light" id="laporan_keuangan">
                             </td>
                             <td>
@@ -177,7 +191,15 @@
                             <td>:</td>
                             <td>
                                 <!-- <span>Nama file laporan akhir.pdf (tanggal upload)</span> -->
-                                <span><?= $row->artikel_ilmiah ?></span>
+                                <span><?= $row->artikel_ilmiah ?>
+
+                                    <?php if ($row->tgl_upload_ai != null) { ?>
+                                        <br> (<?= $row->tgl_upload_ai ?>)
+                                    <?php } else { ?>
+
+                                    <?php } ?>
+
+                                </span>
                             </td>
                         </tr>
                         <tr>
@@ -185,7 +207,6 @@
                             <td>:</td>
                             <td>
                                 <input type="hidden" name="id_penelitian" id="id_penelitian" value="<?= $row->id_penelitian ?>">
-                                <input type="hidden" name="url_artikel_ilmiah" class="form-control form-control-sm bg-light" id="url_artikel_ilmiah" value="<?= $row->url_artikel_ilmiah ?>">
                                 <input type="file" name="artikel_ilmiah" class="form-control form-control-sm bg-light" id="artikel_ilmiah">
                             </td>
                             <td>
@@ -203,7 +224,7 @@
                             <td class="font-weight-bold">URL Artikel Ilmiah</td>
                             <td>:</td>
                             <td>
-                                <span><?= $row->url_artikel_ilmiah ?></span>
+                                <span>*https://<?= $row->url_artikel_ilmiah ?></span>
                             </td>
                         </tr>
                         <tr>
@@ -211,14 +232,13 @@
                             <td>:</td>
                             <td>
                                 <input type="hidden" name="id_penelitian" id="id_penelitian" value="<?= $row->id_penelitian ?>">
-                                <input type="hidden" name="url_artikel_ilmiah" class="form-control form-control-sm bg-light" id="url_artikel_ilmiah" value="<?= $row->url_artikel_ilmiah ?>">
                                 <input type="text" name="url_artikel_ilmiah" class="form-control form-control-sm bg-light" id="url_artikel_ilmiah">
                             </td>
                             <td>
                                 <?php if ($row->url_artikel_ilmiah != null) { ?>
-                                    <button type="submit" name="edit_artikel_ilmiah" onclick="return confirm('Apakah anda yakin ingin mengubah url ini?')" class="btn btn-sm btn-primary">Update</button>
+                                    <button type="submit" name="edit_url_artikel_ilmiah" onclick="return confirm('Apakah anda yakin ingin mengubah url ini?')" class="btn btn-sm btn-primary">Update</button>
                                 <?php } else { ?>
-                                    <button type="submit" name="edit_artikel_ilmiah" onclick="return confirm('Apakah anda yakin untuk submit url ini?')" class="btn btn-sm btn-primary">Submit</button>
+                                    <button type="submit" name="edit_url_artikel_ilmiah" onclick="return confirm('Apakah anda yakin untuk submit url ini?')" class="btn btn-sm btn-primary">Submit</button>
                                 <?php } ?>
                             </td>
                         </tr>
@@ -230,7 +250,15 @@
                             <td>:</td>
                             <td>
                                 <!-- <span>Nama file Sertifikat HKI.pdf (tanggal upload)</span> -->
-                                <span><?= $row->sertifikat_hki ?></span>
+                                <span><?= $row->sertifikat_hki ?>
+
+                                    <?php if ($row->tgl_upload_sh != null) { ?>
+                                        <br> (<?= $row->tgl_upload_sh ?>)
+                                    <?php } else { ?>
+
+                                    <?php } ?>
+
+                                </span>
                             </td>
                         </tr>
                         <tr>
@@ -238,7 +266,6 @@
                             <td>:</td>
                             <td>
                                 <input type="hidden" name="id_penelitian" id="id_penelitian" value="<?= $row->id_penelitian ?>">
-                                <input type="hidden" name="url_artikel_ilmiah" class="form-control form-control-sm bg-light" id="url_artikel_ilmiah" value="<?= $row->url_artikel_ilmiah ?>">
                                 <input type="file" name="sertifikat_hki" class="form-control form-control-sm bg-light" id="sertifikat_hki">
                             </td>
                             <td>
