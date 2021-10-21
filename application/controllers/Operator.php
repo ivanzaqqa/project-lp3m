@@ -26,6 +26,7 @@ class Operator extends CI_Controller
 	{
 		$data['row'] = $this->penelitian_m->get_penelitian();
 		$data['logs'] = $this->penelitian_m->log_book();
+		$data['periodes'] = $this->penelitian_m->get_periode();
 		$this->load->view('templates/auth_header');
 		$this->load->view('operator/menu');
 		$this->load->view('templates/topbar');

@@ -35,7 +35,6 @@ class Logpenelitian_m extends CI_Model
         $params = [
             'id_penelitian' => $post['id_penelitian'],
             'id' => $post['id'],
-            'id_status' => $post['id_status'],
             'tgl_kegiatan' => $post['tgl_kegiatan'],
             'uraian_kegiatan' => $post['uraian_kegiatan'],
         ];

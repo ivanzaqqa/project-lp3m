@@ -25,7 +25,7 @@ class Penelitian_m extends CI_Model
     {
         $this->db->from('log_book_penelitian', $id);
         if ($id != null) {
-            $this->db->where('id_penelitian', $id);
+            $this->db->where('id_log_book', $id);
         }
         $query = $this->db->get();
         return $query;

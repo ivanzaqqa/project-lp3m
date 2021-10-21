@@ -6,25 +6,22 @@
             <div class="row mt-2">
                 <div class="col-sm-2">
                     <div class="dropdown">
-                        <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Periode Pengajuan
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Genap</a>
-                            <a class="dropdown-item" href="#">Ganjil</a>
-                        </div>
+                        <select class="btn btn-sm btn-primary dropdown-toggle" name="periodepengajuan" id="PeriodePengajuan">
+                            <option>Pilih Periode Pengajuan</option>
+                            <?php foreach ($periodes->result() as $key => $data) { ?>
+                                <option value="<?= $data->id_periode; ?>"><?= $data->tahun_periode; ?></option>
+                            <?php } ?>
+                        </select>
                     </div>
                 </div>
                 <div class="col-sm-10">
                     <div class="dropdown">
-                        <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Status
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Sedang Proses Review</a>
-                            <a class="dropdown-item" href="#">Didanai</a>
-                            <a class="dropdown-item" href="#">Ditolak</a>
-                        </div>
+                        <select class="btn btn-sm btn-primary dropdown-toggle" name="status" id="status">
+                            <option>Status</option>
+                            <?php foreach ($row->result() as $key => $data) { ?>
+                                <option value="<?= $data->id_status; ?>"><?= $data->status; ?></option>
+                            <?php } ?>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -149,7 +146,7 @@
 
                                 <td>
                                     <?php if ($data->status == "Didanai") { ?>
-                                        <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#logbook<?= $data->id_penelitian; ?>" style="font-size: 13px;">Log Book</button>
+                                        <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#logbook<?= $data->id_penelitian; ?>" style="font-size: 13px;">Log Book</button>
                                     <?php } else { ?>
                                         <button class="btn btn-sm btn-danger mt-1" style="font-size: 13px;" disabled>Log Book</button>
                                     <?php } ?>
@@ -194,10 +191,10 @@
                                         <button class="btn btn-sm btn-danger mt-1" style="font-size: 13px;" disabled>URL</button>
                                     <?php } ?>
 
-                                    <?php if ($data->status != "Didanai") { ?>
-                                        <button class="btn btn-sm btn-danger mt-1" style="font-size: 13px;" disabled>Detail</button>
+                                    <?php if ($data->status == "Didanai") { ?>
+                                        <button class="btn btn-sm btn-success mt-1" data-toggle="modal" data-target="#detail<?= $data->id_penelitian; ?>" style="font-size: 13px;">Detail</button>
                                     <?php } else { ?>
-                                        <button class="btn btn-sm btn-info mt-1" data-toggle="modal" data-target="#detail<?= $data->id_penelitian; ?>" style="font-size: 13px;">Detail</button>
+                                        <button class="btn btn-sm btn-danger mt-1" style="font-size: 13px;" disabled>Detail</button>
                                     <?php } ?>
                                 </td>
                             </tr>
@@ -263,9 +260,9 @@
 
     <?php
     $no = 1;
-    foreach ($logs->result() as $key => $data) { ?>
+    foreach ($logs->result() as $key => $log) { ?>
         <!-- Log Book -->
-        <div id="logbook<?= $data->id_penelitian; ?>" class="modal fade shadow-lg" role="dialog">
+        <div id="logbook<?= $log->id_penelitian; ?>" class="modal fade shadow-lg" role="dialog">
             <div class="modal-dialog">
                 <!-- konten modal-->
                 <div class="modal-content">
@@ -287,8 +284,8 @@
                             </thead>
                             <tbody>
                                 <th><?= $no++; ?></th>
-                                <th><?= $data->tgl_kegiatan; ?></th>
-                                <th><?= $data->uraian_kegiatan; ?></th>
+                                <th><?= $log->tgl_kegiatan; ?></th>
+                                <th><?= $log->uraian_kegiatan; ?></th>
                                 <th><a href="" type="button" class="btn btn-sm btn-success" style="font-size: 12px;">File Dokumentasi</a></th>
                             </tbody>
                         </table>
