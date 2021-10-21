@@ -1,5 +1,5 @@
 <div id="wrapper" style="position: -webkit-sticky;
-	position: sticky; width: 100%; height: 100%;">
+	position: sticky; position:relative; width: 100%; height: 100%;">
     <!-- Sidebar -->
     <ul class="navbar-nav bg-sidebar sidebar sidebar-dark accordion" id="accordionSidebar">
         <!-- Sidebar - Brand -->

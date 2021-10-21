@@ -81,7 +81,7 @@
                 <span>Edit Profile</span></a>
         </li>
         <hr class="sidebar-divider d-none d-md-block">
-        <li class="nav-item">
+        <li class="nav-item" <?= $this->uri->segment(1) == 'operator' || $this->uri->segment(1) == '' ? 'class="border-left-warning"' : '' ?>>
             <a class="nav-link" href="<?= site_url('operator/upload_template') ?>">
                 <i class="fas fa-upload"></i><span>Upload Template</span>
             </a>
