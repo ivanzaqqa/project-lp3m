@@ -146,7 +146,7 @@
 
                                 <td>
                                     <?php if ($data->status == "Didanai") { ?>
-                                        <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#logbook<?= $data->id_penelitian; ?>" style="font-size: 13px;">Log Book</button>
+                                        <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#logbook<?= $data->id_penelitian ?>" style="font-size: 13px;">Log Book</button>
                                     <?php } else { ?>
                                         <button class="btn btn-sm btn-danger mt-1" style="font-size: 13px;" disabled>Log Book</button>
                                     <?php } ?>
@@ -258,11 +258,11 @@
     <?php } ?>
     <!-- End Surat Tugas -->
 
+    <!-- Log Book -->
     <?php
-    $no = 1;
-    foreach ($logs->result() as $key => $log) { ?>
-        <!-- Log Book -->
-        <div id="logbook<?= $log->id_penelitian; ?>" class="modal fade shadow-lg" role="dialog">
+    $no = 0;
+    foreach ($row->result() as $key => $data) { ?>
+        <div id="logbook<?= $data->id_penelitian ?>" class="modal fade shadow-lg" role="dialog">
             <div class="modal-dialog">
                 <!-- konten modal-->
                 <div class="modal-content">
@@ -283,10 +283,29 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <th><?= $no++; ?></th>
-                                <th><?= $log->tgl_kegiatan; ?></th>
-                                <th><?= $log->uraian_kegiatan; ?></th>
-                                <th><a href="" type="button" class="btn btn-sm btn-success" style="font-size: 12px;">File Dokumentasi</a></th>
+                                <?php
+                                $no = 1;
+                                foreach ($logs->result() as $key => $log) { ?>
+
+                                    <?php if ($log->id_penelitian == $data->id_penelitian) { ?>
+
+                                        <tr>
+                                            <th scope="row"><?= $no++; ?></th>
+                                            <td><?= $log->tgl_kegiatan; ?></td>
+                                            <td><?= $log->uraian_kegiatan; ?></td>
+                                            <td>
+                                                <?php if ($log->dokumentasi != null) { ?>
+                                                    <a type="button" href="<?php echo base_url() . '/upload/dokumentasi/' . $log->dokumentasi; ?>" class="btn btn-sm btn-primary">Download</a>
+                                                <?php } else { ?>
+                                                    <a>Tidak ada dokumentasi</a>
+                                                <?php } ?>
+
+                                            </td>
+                                        </tr>
+
+                                    <?php } ?>
+
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>

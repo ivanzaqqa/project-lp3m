@@ -12,25 +12,6 @@ class Penelitian_m extends CI_Model
         return $query;
     }
 
-    public function get_log_book($id)
-    {
-        $this->db->from('log_book_penelitian');
-        $this->db->order_by('id_log_book', 'asc');
-        $this->db->where('id_penelitian', $id);
-        $query = $this->db->get();
-        return $query;
-    }
-
-    public function log_book($id = null)
-    {
-        $this->db->from('log_book_penelitian', $id);
-        if ($id != null) {
-            $this->db->where('id_log_book', $id);
-        }
-        $query = $this->db->get();
-        return $query;
-    }
-
     public function get_penelitian($id = null)
     {
         $this->db->from('tbl_penelitian');
@@ -55,37 +36,61 @@ class Penelitian_m extends CI_Model
         return $query;
     }
 
-    public function get_by_id($id_penelitian)
+    public function get_by_id($id_penelitian = null)
     {
         $this->db->where("id_penelitian", $id_penelitian);
         return $this->db->get('tbl_penelitian')->row();
     }
 
-    public function edit($post)
+    public function edit_laporan_akhir($post)
     {
         if ($post['laporan_akhir'] != null) {
             $params['laporan_akhir'] = $post['laporan_akhir'];
         }
 
+        if ($post['laporan_akhir']) {
+            $this->db->set('tgl_upload_la', 'NOW()', FALSE);
+        }
+
+        $this->db->where('id_penelitian', $post['id_penelitian']);
+        $this->db->update('tbl_penelitian', $params);
+    }
+
+    public function edit_laporan_keuangan($post)
+    {
         if ($post['laporan_keuangan'] != null) {
             $params['laporan_keuangan'] = $post['laporan_keuangan'];
         }
 
+        if ($post['laporan_keuangan']) {
+            $this->db->set('tgl_upload_lk', 'NOW()', FALSE);
+        }
+
+        $this->db->where('id_penelitian', $post['id_penelitian']);
+        $this->db->update('tbl_penelitian', $params);
+    }
+
+    public function edit_artikel_ilmiah($post)
+    {
         if ($post['artikel_ilmiah'] != null) {
             $params['artikel_ilmiah'] = $post['artikel_ilmiah'];
         }
 
+        if ($post['artikel_ilmiah']) {
+            $this->db->set('tgl_upload_ai', 'NOW()', FALSE);
+        }
+
+        $this->db->where('id_penelitian', $post['id_penelitian']);
+        $this->db->update('tbl_penelitian', $params);
+    }
+
+    public function edit_sertifikat_hki($post)
+    {
         if ($post['sertifikat_hki'] != null) {
             $params['sertifikat_hki'] = $post['sertifikat_hki'];
         }
 
-        if ($post['laporan_akhir']) {
-            $this->db->set('tgl_upload_la', 'NOW()', FALSE);
-        } else if ($post['laporan_keuangan']) {
-            $this->db->set('tgl_upload_lk', 'NOW()', FALSE);
-        } else if ($post['artikel_ilmiah']) {
-            $this->db->set('tgl_upload_ai', 'NOW()', FALSE);
-        } else if ($post['sertifikat_hki']) {
+        if ($post['sertifikat_hki']) {
             $this->db->set('tgl_upload_sh', 'NOW()', FALSE);
         }
 
@@ -93,7 +98,7 @@ class Penelitian_m extends CI_Model
         $this->db->update('tbl_penelitian', $params);
     }
 
-    public function editurl($post)
+    public function edit_url_artikel_ilmiah($post)
     {
         $params = [
             'url_artikel_ilmiah' => $post['url_artikel_ilmiah'],

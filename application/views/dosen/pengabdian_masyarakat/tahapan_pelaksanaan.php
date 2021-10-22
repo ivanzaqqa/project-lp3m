@@ -1,5 +1,5 @@
 <div class="container">
-    <h3 class="text-center"><?= $data; ?></h3><br>
+    <h3 class="text-center">Tahapan Pelaksanaan Pengabdian Masyarakat</h3><br>
     <h2 class="text-center font-weight-bold">Judul Penelitian</h2>
     <h4 class="text-center">Author</h4>
     <a href="<?= site_url('dosen/arsippengabdian') ?>" class="btn btn-md btn-primary mb-3"><i class="fas fa-chevron-circle-left"></i> Kembali</a>

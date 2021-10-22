@@ -250,7 +250,7 @@ class Dosen extends CI_Controller
 	public function tahapan_pelaksanaan_penelitian($id)
 	{
 		$query = $this->penelitian_m->get_penelitian($id);
-		$log = $this->penelitian_m->get_log_book($id);
+		$log = $this->logpenelitian_m->get_log_book($id);
 		if ($query->num_rows() > 0) {
 			$penelitian = $query->row();
 			$data = array(
@@ -286,7 +286,7 @@ class Dosen extends CI_Controller
 					}
 
 					$post['laporan_akhir'] = $this->upload->data('file_name');
-					$this->penelitian_m->edit($post);
+					$this->penelitian_m->edit_laporan_akhir($post);
 					if ($this->db->affected_rows() > 0) {
 						$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
                 <strong>Laporan akhir tahapan pelaksanaan berhasil diupload.</strong>
@@ -303,7 +303,7 @@ class Dosen extends CI_Controller
 				}
 			} else {
 				$post['laporan_akhir'] = null;
-				$this->penelitian_m->edit($post);
+				$this->penelitian_m->edit_laporan_akhir($post);
 				if ($this->db->affected_rows() > 0) {
 					$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
                 <strong>Laporan akhir tahapan pelaksanaan berhasil diupload.</strong>
@@ -327,7 +327,7 @@ class Dosen extends CI_Controller
 					}
 
 					$post['laporan_keuangan'] = $this->upload->data('file_name');
-					$this->penelitian_m->edit($post);
+					$this->penelitian_m->edit_laporan_keuangan($post);
 					if ($this->db->affected_rows() > 0) {
 						$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
                 <strong>Laporan keuangan tahapan pelaksanaan berhasil diupload.</strong>
@@ -344,7 +344,7 @@ class Dosen extends CI_Controller
 				}
 			} else {
 				$post['laporan_keuangan'] = null;
-				$this->penelitian_m->edit($post);
+				$this->penelitian_m->edit_laporan_keuangan($post);
 				if ($this->db->affected_rows() > 0) {
 					$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
                 <strong>Laporan keuangan tahapan pelaksanaan berhasil diupload.</strong>
@@ -368,7 +368,7 @@ class Dosen extends CI_Controller
 					}
 
 					$post['artikel_ilmiah'] = $this->upload->data('file_name');
-					$this->penelitian_m->edit($post);
+					$this->penelitian_m->edit_artikel_ilmiah($post);
 					if ($this->db->affected_rows() > 0) {
 						$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
                 <strong>Artikel ilmiah tahapan pelaksanaan berhasil diupload.</strong>
@@ -385,7 +385,7 @@ class Dosen extends CI_Controller
 				}
 			} else {
 				$post['artikel_ilmiah'] = null;
-				$this->penelitian_m->edit($post);
+				$this->penelitian_m->edit_artikel_ilmiah($post);
 				if ($this->db->affected_rows() > 0) {
 					$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
                 <strong>Artikel ilmiah tahapan pelaksanaan berhasil diupload.</strong>
@@ -396,19 +396,6 @@ class Dosen extends CI_Controller
 				}
 				redirect('dosen/tahapan_pelaksanaan_penelitian/' . $id);
 			}
-		}
-
-		if (isset($_POST['edit_url_artikel_ilmiah'])) {
-			$this->penelitian_m->editurl($post);
-			if ($this->db->affected_rows() > 0) {
-				$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Url artikel ilmiah tahapan pelaksanaan berhasil diupload.</strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>');
-			}
-			redirect('dosen/tahapan_pelaksanaan_penelitian/' . $id);
 		}
 
 		if (isset($_POST['edit_sertifikat_hki'])) {
@@ -422,7 +409,7 @@ class Dosen extends CI_Controller
 					}
 
 					$post['sertifikat_hki'] = $this->upload->data('file_name');
-					$this->penelitian_m->edit($post);
+					$this->penelitian_m->edit_sertifikat_hki($post);
 					if ($this->db->affected_rows() > 0) {
 						$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
                 <strong>Sertifikat hki tahapan pelaksanaan berhasil diupload.</strong>
@@ -439,7 +426,7 @@ class Dosen extends CI_Controller
 				}
 			} else {
 				$post['sertifikat_hki'] = null;
-				$this->penelitian_m->edit($post);
+				$this->penelitian_m->edit_sertifikat_hki($post);
 				if ($this->db->affected_rows() > 0) {
 					$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
                 <strong>Sertifikat hki tahapan pelaksanaan berhasil diupload.</strong>
@@ -450,6 +437,19 @@ class Dosen extends CI_Controller
 				}
 				redirect('dosen/tahapan_pelaksanaan_penelitian/' . $id);
 			}
+		}
+
+		if (isset($_POST['edit_url_artikel_ilmiah'])) {
+			$this->penelitian_m->edit_url_artikel_ilmiah($post);
+			if ($this->db->affected_rows() > 0) {
+				$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Url artikel ilmiah tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+			}
+			redirect('dosen/tahapan_pelaksanaan_penelitian/' . $id);
 		}
 	}
 
@@ -663,13 +663,22 @@ class Dosen extends CI_Controller
 		redirect('dosen/arsippengabdian');
 	}
 
-	public function tahapan_pelaksanaan_pengabdian()
+	public function tahapan_pelaksanaan_pengabmas($id)
 	{
-		$data['data'] = "Tahapan Pelaksanaan Pengabdian Masyarakat";
-		$this->load->view('templates/auth_header');
-		$this->load->view('templates/topbar');
-		$this->load->view('dosen/pengabdian_masyarakat/tahapan_pelaksanaan', $data);
-		$this->load->view('templates/auth_footer');
+		$query = $this->pengabmas_m->get_pengabmas($id);
+		$log = $this->pengabmas_m->get_log_book($id);
+		if ($query->num_rows() > 0) {
+			$penelitian = $query->row();
+			$data = array(
+				'page' => 'edit',
+				'row' => $penelitian,
+				'logs' => $log
+			);
+			$this->load->view('templates/auth_header');
+			$this->load->view('templates/topbar');
+			$this->load->view('dosen/pengabdian_masyarakat/tahapan_pelaksanaan', $data);
+			$this->load->view('templates/auth_footer');
+		}
 	}
 
 	// PROFILE DOSEN

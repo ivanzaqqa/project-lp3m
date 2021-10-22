@@ -46,7 +46,7 @@
                                                 <a class="dropdown-item" href="<?php echo base_url() . 'upload/pengabdian_masyarakat/' . $arsip->form_integrasi; ?>">Form Integrasi</a>
                                             </div>
                                             <?php if ($arsip->status == "Didanai") { ?>
-                                                <a class="dropdown-item" href="<?= site_url('dosen/tahapan_pelaksanaan_pengabdian/' . $arsip->id_pengabmas) ?>" type="button">Tahapan Pelaksanaan</a>
+                                                <a class="dropdown-item" href="<?= site_url('dosen/tahapan_pelaksanaan_pengabmas/' . $arsip->id_pengabmas) ?>" type="button">Tahapan Pelaksanaan</a>
                                             <?php } else { ?>
                                                 <a class="dropdown-item" href="" type="button" style="pointer-events:none; cursor:default;color:grey;">Tahapan Pelaksanaan</a>
                                             <?php } ?>
