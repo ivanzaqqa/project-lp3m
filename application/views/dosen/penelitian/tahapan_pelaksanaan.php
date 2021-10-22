@@ -122,7 +122,6 @@
                             <td class="font-weight-bold">Laporan Akhir</td>
                             <td>:</td>
                             <td>
-                                <!-- <span>Nama file laporan akhir.pdf (tanggal upload)</span> -->
                                 <span><?= $row->laporan_akhir ?>
 
                                     <?php if ($row->tgl_upload_la != null) { ?>
@@ -156,7 +155,6 @@
                             <td class="font-weight-bold">Laporan Keuangan</td>
                             <td>:</td>
                             <td>
-                                <!-- <span>Nama file laporan Keuangan.pdf (tanggal upload)</span> -->
                                 <span><?= $row->laporan_keuangan ?>
 
                                     <?php if ($row->tgl_upload_lk != null) { ?>
@@ -190,7 +188,6 @@
                             <td class="font-weight-bold">Artikel Ilmiah</td>
                             <td>:</td>
                             <td>
-                                <!-- <span>Nama file laporan akhir.pdf (tanggal upload)</span> -->
                                 <span><?= $row->artikel_ilmiah ?>
 
                                     <?php if ($row->tgl_upload_ai != null) { ?>
@@ -249,7 +246,6 @@
                             <td class="font-weight-bold">Sertifikat HKI</td>
                             <td>:</td>
                             <td>
-                                <!-- <span>Nama file Sertifikat HKI.pdf (tanggal upload)</span> -->
                                 <span><?= $row->sertifikat_hki ?>
 
                                     <?php if ($row->tgl_upload_sh != null) { ?>
@@ -277,7 +273,6 @@
                             </td>
                         </tr>
                         <?php echo form_close() ?>
-
 
                         <tr>
                             <td class="font-weight-bold">Hasil Monev Internal</td>

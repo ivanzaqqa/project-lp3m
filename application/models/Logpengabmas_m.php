@@ -2,7 +2,7 @@
 
 class Logpengabmas_m extends CI_Model
 {
-    public function get_log_book($id)
+    public function get_log_book($id = null)
     {
         $this->db->from('log_book_pengabmas');
         $this->db->join('tbl_pengabmas', 'tbl_pengabmas.id_pengabmas = log_book_pengabmas.id_pengabmas');
@@ -10,6 +10,15 @@ class Logpengabmas_m extends CI_Model
         if ($id != null) {
             $this->db->where('id_pengabmas', $id);
         }
+        $query = $this->db->get();
+        return $query;
+    }
+
+    public function get_log_book_by_id($id)
+    {
+        $this->db->from('log_book_pengabmas');
+        $this->db->order_by('id_log_book', 'asc');
+        $this->db->where('id_pengabmas', $id);
         $query = $this->db->get();
         return $query;
     }

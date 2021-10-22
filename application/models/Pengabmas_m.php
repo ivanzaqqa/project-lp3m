@@ -42,6 +42,90 @@ class Pengabmas_m extends CI_Model
         return $this->db->get('tbl_pengabmas')->row();
     }
 
+    public function edit_laporan_akhir($post)
+    {
+        if ($post['laporan_akhir'] != null) {
+            $params['laporan_akhir'] = $post['laporan_akhir'];
+        }
+
+        if ($post['laporan_akhir']) {
+            $this->db->set('tgl_upload_la', 'NOW()', FALSE);
+        }
+
+        $this->db->where('id_pengabmas', $post['id_pengabmas']);
+        $this->db->update('tbl_pengabmas', $params);
+    }
+
+    public function edit_laporan_keuangan($post)
+    {
+        if ($post['laporan_keuangan'] != null) {
+            $params['laporan_keuangan'] = $post['laporan_keuangan'];
+        }
+
+        if ($post['laporan_keuangan']) {
+            $this->db->set('tgl_upload_lk', 'NOW()', FALSE);
+        }
+
+        $this->db->where('id_pengabmas', $post['id_pengabmas']);
+        $this->db->update('tbl_pengabmas', $params);
+    }
+
+    public function edit_artikel_ilmiah($post)
+    {
+        if ($post['artikel_ilmiah'] != null) {
+            $params['artikel_ilmiah'] = $post['artikel_ilmiah'];
+        }
+
+        if ($post['artikel_ilmiah']) {
+            $this->db->set('tgl_upload_ai', 'NOW()', FALSE);
+        }
+
+        $this->db->where('id_pengabmas', $post['id_pengabmas']);
+        $this->db->update('tbl_pengabmas', $params);
+    }
+
+    public function edit_sertifikat_hki($post)
+    {
+        if ($post['sertifikat_hki'] != null) {
+            $params['sertifikat_hki'] = $post['sertifikat_hki'];
+        }
+
+        if ($post['sertifikat_hki']) {
+            $this->db->set('tgl_upload_sh', 'NOW()', FALSE);
+        }
+
+        $this->db->where('id_pengabmas', $post['id_pengabmas']);
+        $this->db->update('tbl_pengabmas', $params);
+    }
+
+    public function edit_url_artikel_ilmiah($post)
+    {
+        $params = [
+            'url_artikel_ilmiah' => $post['url_artikel_ilmiah'],
+        ];
+
+        $this->db->where('id_pengabmas', $post['id_pengabmas']);
+        $this->db->update('tbl_pengabmas', $params);
+    }
+
+    public function edit2($post)
+    {
+        if ($post['hasil_review'] != null) {
+            $params['hasil_review'] = $post['hasil_review'];
+        }
+        if ($post['surat_tugas'] != null) {
+            $params['surat_tugas'] = $post['surat_tugas'];
+        }
+        if ($post['hasil_monev_internal'] != null) {
+            $params['hasil_monev_internal'] = $post['hasil_monev_internal'];
+        }
+        if ($post['berita_acara_inspub'] != null) {
+            $params['berita_acara_inspub'] = $post['berita_acara_inspub'];
+        }
+        $this->db->where('id_pengabmas', $post['id_pengabmas']);
+        $this->db->update('tbl_pengabmas', $params);
+    }
+
     public function update($id, $post)
     {
         $this->db->where('id_pengabmas', $id);

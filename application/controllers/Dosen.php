@@ -223,7 +223,7 @@ class Dosen extends CI_Controller
 			unlink($target_file);
 		}
 
-		$dokumentasi = $this->penelitian_m->get_log_book($id)->row();
+		$dokumentasi = $this->logpenelitian_m->get_log_book_by_id($id)->row();
 		if ($dokumentasi->dokumentasi != null) {
 			$target_file = './upload/dokumentasi/' . $dokumentasi->dokumentasi;
 			unlink($target_file);
@@ -251,7 +251,7 @@ class Dosen extends CI_Controller
 	public function tahapan_pelaksanaan_penelitian($id)
 	{
 		$query = $this->penelitian_m->get_penelitian($id);
-		$log = $this->logpenelitian_m->get_log_book($id);
+		$log = $this->logpenelitian_m->get_log_book_by_id($id);
 		if ($query->num_rows() > 0) {
 			$penelitian = $query->row();
 			$data = array(
@@ -570,7 +570,16 @@ class Dosen extends CI_Controller
 					'id_status' => "3",
 					'file_proposal' => $file_proposal,
 					'file_rps' => $file_rps,
-					'form_integrasi' => $form_integrasi
+					'form_integrasi' => $form_integrasi,
+					'hasil_review' => null,
+					'surat_tugas' => null,
+					'laporan_akhir' => null,
+					'laporan_keuangan' => null,
+					'artikel_ilmiah' => null,
+					'url_artikel_ilmiah' => null,
+					'sertifikat_hki' => null,
+					'hasil_monev_internal' => null,
+					'berita_acara_inspub' => null,
 				];
 				$insert = $this->db->insert('tbl_pengabmas', $data);
 				if ($insert) {
@@ -645,6 +654,60 @@ class Dosen extends CI_Controller
 			unlink($target_file);
 		}
 
+		$hasil_review = $this->pengabmas_m->get_pengabmas($id)->row();
+		if ($hasil_review->hasil_review != null) {
+			$target_file = './upload/tahapan_pelaksanaan/' . $hasil_review->hasil_review;
+			unlink($target_file);
+		}
+
+		$surat_tugas = $this->pengabmas_m->get_pengabmas($id)->row();
+		if ($surat_tugas->surat_tugas != null) {
+			$target_file = './upload/tahapan_pelaksanaan/' . $surat_tugas->surat_tugas;
+			unlink($target_file);
+		}
+
+		$laporan_akhir = $this->pengabmas_m->get_pengabmas($id)->row();
+		if ($laporan_akhir->laporan_akhir != null) {
+			$target_file = './upload/tahapan_pelaksanaan/' . $laporan_akhir->laporan_akhir;
+			unlink($target_file);
+		}
+
+		$laporan_keuangan = $this->pengabmas_m->get_pengabmas($id)->row();
+		if ($laporan_keuangan->laporan_keuangan != null) {
+			$target_file = './upload/tahapan_pelaksanaan/' . $laporan_keuangan->laporan_keuangan;
+			unlink($target_file);
+		}
+
+		$artikel_ilmiah = $this->pengabmas_m->get_pengabmas($id)->row();
+		if ($artikel_ilmiah->artikel_ilmiah != null) {
+			$target_file = './upload/tahapan_pelaksanaan/' . $artikel_ilmiah->artikel_ilmiah;
+			unlink($target_file);
+		}
+
+		$sertifikat_hki = $this->pengabmas_m->get_pengabmas($id)->row();
+		if ($sertifikat_hki->sertifikat_hki != null) {
+			$target_file = './upload/tahapan_pelaksanaan/' . $sertifikat_hki->sertifikat_hki;
+			unlink($target_file);
+		}
+
+		$hasil_monev_internal = $this->pengabmas_m->get_pengabmas($id)->row();
+		if ($hasil_monev_internal->hasil_monev_internal != null) {
+			$target_file = './upload/tahapan_pelaksanaan/' . $hasil_monev_internal->hasil_monev_internal;
+			unlink($target_file);
+		}
+
+		$berita_acara_inspub = $this->pengabmas_m->get_pengabmas($id)->row();
+		if ($berita_acara_inspub->berita_acara_inspub != null) {
+			$target_file = './upload/tahapan_pelaksanaan/' . $berita_acara_inspub->berita_acara_inspub;
+			unlink($target_file);
+		}
+
+		$dokumentasi = $this->logpengabmas_m->get_log_book_by_id($id)->row();
+		if ($dokumentasi->dokumentasi != null) {
+			$target_file = './upload/dokumentasi/' . $dokumentasi->dokumentasi;
+			unlink($target_file);
+		}
+
 		$this->pengabmas_m->delete($id);
 		if ($this->db->affected_rows() > 0) {
 			$this->session->set_flashdata('successdel', '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -667,12 +730,12 @@ class Dosen extends CI_Controller
 	public function tahapan_pelaksanaan_pengabmas($id)
 	{
 		$query = $this->pengabmas_m->get_pengabmas($id);
-		$log = $this->pengabmas_m->get_log_book($id);
+		$log = $this->logpengabmas_m->get_log_book_by_id($id);
 		if ($query->num_rows() > 0) {
-			$penelitian = $query->row();
+			$pengabmas = $query->row();
 			$data = array(
 				'page' => 'edit',
-				'row' => $penelitian,
+				'row' => $pengabmas,
 				'logs' => $log
 			);
 			$this->load->view('templates/auth_header');
@@ -681,6 +744,247 @@ class Dosen extends CI_Controller
 			$this->load->view('templates/auth_footer');
 		}
 	}
+
+	public function proses_tahapan_pelaksanaan_pengabmas($id)
+	{
+		$config['upload_path']          = './upload/tahapan_pelaksanaan/';
+		$config['allowed_types']        = 'pdf';
+		$config['max_size']            = 5000;
+		$config['encrypt_name']         = TRUE;
+
+		$this->load->library('upload', $config);
+
+		$post = $this->input->post(null, TRUE);
+		if (isset($_POST['edit_laporan_akhir'])) {
+			if (@$_FILES['laporan_akhir']['name'] != null) {
+				if ($this->upload->do_upload('laporan_akhir')) {
+
+					$pengabmas = $this->pengabmas_m->get_pengabmas($post['id_pengabmas'])->row();
+					if ($pengabmas->laporan_akhir != null) {
+						$target_file = './upload/tahapan_pelaksanaan/' . $pengabmas->laporan_akhir;
+						unlink($target_file);
+					}
+
+					$post['laporan_akhir'] = $this->upload->data('file_name');
+					$this->pengabmas_m->edit_laporan_akhir($post);
+					if ($this->db->affected_rows() > 0) {
+						$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Laporan akhir tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+					}
+					redirect('dosen/tahapan_pelaksanaan_pengabmas/' . $id);
+				} else {
+					$error = $this->upload->display_errors();
+					$this->session->set_flashdata('erroredit', $error);
+					redirect('dosen/tahapan_pelaksanaan_pengabmas');
+				}
+			} else {
+				$post['laporan_akhir'] = null;
+				$this->pengabmas_m->edit_laporan_akhir($post);
+				if ($this->db->affected_rows() > 0) {
+					$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Laporan akhir tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+				}
+				redirect('dosen/tahapan_pelaksanaan_pengabmas/' . $id);
+			}
+		}
+
+		if (isset($_POST['edit_laporan_keuangan'])) {
+			if (@$_FILES['laporan_keuangan']['name'] != null) {
+				if ($this->upload->do_upload('laporan_keuangan')) {
+
+					$pengabmas = $this->pengabmas_m->get_pengabmas($post['id_pengabmas'])->row();
+					if ($pengabmas->laporan_keuangan != null) {
+						$target_file = './upload/tahapan_pelaksanaan/' . $pengabmas->laporan_keuangan;
+						unlink($target_file);
+					}
+
+					$post['laporan_keuangan'] = $this->upload->data('file_name');
+					$this->pengabmas_m->edit_laporan_keuangan($post);
+					if ($this->db->affected_rows() > 0) {
+						$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Laporan keuangan tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+					}
+					redirect('dosen/tahapan_pelaksanaan_pengabmas/' . $id);
+				} else {
+					$error = $this->upload->display_errors();
+					$this->session->set_flashdata('erroredit', $error);
+					redirect('dosen/tahapan_pelaksanaan_pengabmas');
+				}
+			} else {
+				$post['laporan_keuangan'] = null;
+				$this->pengabmas_m->edit_laporan_keuangan($post);
+				if ($this->db->affected_rows() > 0) {
+					$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Laporan keuangan tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+				}
+				redirect('dosen/tahapan_pelaksanaan_pengabmas/' . $id);
+			}
+		}
+
+		if (isset($_POST['edit_artikel_ilmiah'])) {
+			if (@$_FILES['artikel_ilmiah']['name'] != null) {
+				if ($this->upload->do_upload('artikel_ilmiah')) {
+
+					$pengabmas = $this->pengabmas_m->get_pengabmas($post['id_pengabmas'])->row();
+					if ($pengabmas->artikel_ilmiah != null) {
+						$target_file = './upload/tahapan_pelaksanaan/' . $pengabmas->artikel_ilmiah;
+						unlink($target_file);
+					}
+
+					$post['artikel_ilmiah'] = $this->upload->data('file_name');
+					$this->pengabmas_m->edit_artikel_ilmiah($post);
+					if ($this->db->affected_rows() > 0) {
+						$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Artikel ilmiah tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+					}
+					redirect('dosen/tahapan_pelaksanaan_pengabmas/' . $id);
+				} else {
+					$error = $this->upload->display_errors();
+					$this->session->set_flashdata('erroredit', $error);
+					redirect('dosen/tahapan_pelaksanaan_pengabmas');
+				}
+			} else {
+				$post['artikel_ilmiah'] = null;
+				$this->pengabmas_m->edit_artikel_ilmiah($post);
+				if ($this->db->affected_rows() > 0) {
+					$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Artikel ilmiah tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+				}
+				redirect('dosen/tahapan_pelaksanaan_pengabmas/' . $id);
+			}
+		}
+
+		if (isset($_POST['edit_sertifikat_hki'])) {
+			if (@$_FILES['sertifikat_hki']['name'] != null) {
+				if ($this->upload->do_upload('sertifikat_hki')) {
+
+					$pengabmas = $this->pengabmas_m->get_pengabmas($post['id_pengabmas'])->row();
+					if ($pengabmas->sertifikat_hki != null) {
+						$target_file = './upload/tahapan_pelaksanaan/' . $pengabmas->sertifikat_hki;
+						unlink($target_file);
+					}
+
+					$post['sertifikat_hki'] = $this->upload->data('file_name');
+					$this->pengabmas_m->edit_sertifikat_hki($post);
+					if ($this->db->affected_rows() > 0) {
+						$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Sertifikat hki tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+					}
+					redirect('dosen/tahapan_pelaksanaan_pengabmas/' . $id);
+				} else {
+					$error = $this->upload->display_errors();
+					$this->session->set_flashdata('erroredit', $error);
+					redirect('dosen/tahapan_pelaksanaan_pengabmas');
+				}
+			} else {
+				$post['sertifikat_hki'] = null;
+				$this->pengabmas_m->edit_sertifikat_hki($post);
+				if ($this->db->affected_rows() > 0) {
+					$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Sertifikat hki tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+				}
+				redirect('dosen/tahapan_pelaksanaan_pengabmas/' . $id);
+			}
+		}
+
+		if (isset($_POST['edit_url_artikel_ilmiah'])) {
+			$this->pengabmas_m->edit_url_artikel_ilmiah($post);
+			if ($this->db->affected_rows() > 0) {
+				$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Url artikel ilmiah tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+			}
+			redirect('dosen/tahapan_pelaksanaan_pengabmas/' . $id);
+		}
+	}
+
+	public function proses_log_book_pengabmas($id)
+	{
+		$config['upload_path']          = './upload/dokumentasi/';
+		$config['allowed_types']        = 'pdf|png|jpg|jpeg|doc|docx|pptx|xlsx|xls';
+		$config['max_size']            = 5000;
+		$config['encrypt_name']         = TRUE;
+
+		$this->load->library('upload', $config);
+
+		$post = $this->input->post(null, TRUE);
+		if (isset($_POST['submit_log_book'])) {
+			if (@$_FILES['dokumentasi']['name'] != null) {
+				if ($this->upload->do_upload('dokumentasi')) {
+
+					$logpengabmas = $this->logpengabmas_m->get_log_book($post['id_log_book'])->row();
+					if ($logpengabmas->dokumentasi != null) {
+						$target_file = './upload/dokumentasi/' . $logpengabmas->dokumentasi;
+						unlink($target_file);
+					}
+
+					$post['dokumentasi'] = $this->upload->data('file_name');
+					$this->logpengabmas_m->insert($post);
+					if ($this->db->affected_rows() > 0) {
+						$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Dokumentasi log book tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+					}
+					redirect('dosen/tahapan_pelaksanaan_pengabmas/' . $id);
+				} else {
+					$error = $this->upload->display_errors();
+					$this->session->set_flashdata('erroredit', $error);
+					redirect('dosen/tahapan_pelaksanaan_pengabmas');
+				}
+			} else {
+				$post['dokumentasi'] = null;
+				$this->logpengabmas_m->insert($post);
+				if ($this->db->affected_rows() > 0) {
+					$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Dokumentasi log book tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+				}
+				redirect('dosen/tahapan_pelaksanaan_pengabmas/' . $id);
+			}
+		}
+	}
+
 
 	// PROFILE DOSEN
 	public function profiledos($id)
