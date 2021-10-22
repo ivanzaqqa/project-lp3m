@@ -14,6 +14,7 @@ class Dosen extends CI_Controller
 		$this->load->model('jurpros_m');
 		$this->load->model('specscop_m');
 		$this->load->model('logpenelitian_m');
+		$this->load->model('logpengabmas_m');
 	}
 	public function index()
 	{
