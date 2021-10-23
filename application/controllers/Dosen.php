@@ -15,6 +15,7 @@ class Dosen extends CI_Controller
 		$this->load->model('specscop_m');
 		$this->load->model('logpenelitian_m');
 		$this->load->model('logpengabmas_m');
+		$this->load->model('periodepengajuan_m');
 	}
 	public function index()
 	{
@@ -26,7 +27,7 @@ class Dosen extends CI_Controller
 	// DAFTAR USULAN PENELITIAN
 	public function daftarusulanpenelitian()
 	{
-		$periode['row'] = $this->penelitian_m->get_periode();
+		$periode['row'] = $this->periodepengajuan_m->get_periode();
 		$this->load->view('templates/auth_header');
 		$this->load->view('dosen/menu');
 		$this->load->view('templates/topbar');
@@ -511,7 +512,7 @@ class Dosen extends CI_Controller
 	// PENGABDIAN MASYARAKAT
 	public function daftarusulanpengabdian()
 	{
-		$periode['row'] = $this->pengabmas_m->get_periode();
+		$periode['row'] = $this->periodepengajuan_m->get_periode();
 		$this->load->view('templates/auth_header');
 		$this->load->view('dosen/menu');
 		$this->load->view('templates/topbar');

@@ -15,6 +15,7 @@ class Operator extends CI_Controller
 		$this->load->model('specscop_m');
 		$this->load->model('logpenelitian_m');
 		$this->load->model('logpengabmas_m');
+		$this->load->model('periodepengajuan_m');
 	}
 	public function index()
 	{
@@ -28,7 +29,7 @@ class Operator extends CI_Controller
 	{
 		$data['row'] = $this->penelitian_m->get_penelitian();
 		$data['logs'] = $this->logpenelitian_m->get_log_book();
-		$data['periodes'] = $this->penelitian_m->get_periode();
+		$data['periodes'] = $this->periodepengajuan_m->get_periode();
 		$data['status'] = $this->penelitian_m->get_status();
 		$this->load->view('templates/auth_header');
 		$this->load->view('operator/menu');
@@ -311,7 +312,7 @@ class Operator extends CI_Controller
 	{
 		$data['row'] = $this->pengabmas_m->get_pengabmas();
 		$data['logs'] = $this->logpengabmas_m->get_log_book();
-		$data['periodes'] = $this->pengabmas_m->get_periode();
+		$data['periodes'] = $this->periodepengajuan_m->get_periode();
 		$data['status'] = $this->pengabmas_m->get_status();
 		$this->load->view('templates/auth_header');
 		$this->load->view('operator/menu');
