@@ -773,6 +773,38 @@ class Operator extends CI_Controller
 		$this->load->view('templates/auth_footer');
 	}
 
+	public function proses_tambah_periode_pengajuan()
+	{
+		if (isset($_POST['submit'])) {
+			$this->load->library('form_validation');
+			$this->form_validation->set_rules('periodepengajuan', 'Periode Pengajuan', 'required');
+
+			$this->form_validation->set_message('required', '%s Masih Kosong!!');
+			$this->form_validation->set_error_delimiters('<span class="help-block text-danger">', '</span>');
+
+			if ($this->form_validation->run()) {
+				$tahun_periode = $this->input->post('tahun_periode');
+				$data = [
+					'tahun_periode' => $tahun_periode,
+				];
+				$insert = $this->db->insert('periodepengajuan', $data);
+				if ($insert) {
+					$this->session->set_flashdata('successalert', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Periode pengajuan yang aktif berhasil ditambahkan.</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>');
+					redirect('dosen/daftarusulanpenelitian');
+				}
+			} else {
+				$this->periode_pengajuan();
+			}
+		} else {
+			$this->periode_pengajuan();
+		}
+	}
+
 	public function pembatasan_penelitian()
 	{
 		$this->load->view('templates/auth_header');
