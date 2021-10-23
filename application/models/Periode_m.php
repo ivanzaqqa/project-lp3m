@@ -11,4 +11,25 @@ class Periode_m extends CI_Model
         $query = $this->db->get();
         return $query;
     }
+
+    public function insert($post)
+    {
+        $params = [
+            'tahun_periode' => $post['tahun_periode'],
+        ];
+
+        $this->db->where('id_periode', $post['id_periode']);
+        $this->db->insert('periode_pengajuan', $params);
+    }
+
+    public function update($post)
+    {
+    }
+
+    function delete($id)
+    {
+        $this->db->where('id_periode', $id);
+        $this->db->delete('periode_pengajuan');
+        return true;
+    }
 }

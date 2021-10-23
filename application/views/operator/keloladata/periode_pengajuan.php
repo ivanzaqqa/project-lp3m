@@ -8,16 +8,25 @@
             </div>
         </div>
         <div class="card-body">
+            <?= $this->session->flashdata('successalert') ?>
+            <?= $this->session->flashdata('successdel') ?>
+            <?= $this->session->flashdata('errordel') ?>
+
+            <?= form_open_multipart('operator/proses_tambah_periode_pengajuan'); ?>
             <div class="table">
                 <tr>
                     <td>Tambah Data Periode Pengajuan</td>
                     <td>:</td>
                     <td>
-                        <input type="text" name="periode_pengajuan">
+                        <input type="hidden" name="id_periode" id="id_periode" value="">
+                        <input type="text" name="tahun_periode">
                     </td>
-                    <td><a href="" type="button" class="btn btn-primary btn-sm">Simpan</a></td>
+                    <td>
+                        <button type="submit" name="submit" class="btn btn-primary btn-sm">Simpan</button>
+                    </td>
                 </tr>
             </div>
+            <?= form_close(); ?>
             <br>
 
             <h6 class="font-weight-bold text-black-50">Periode Pengajuan Yang Aktif</h6>
@@ -29,14 +38,18 @@
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <td>1</td>
-                    <td>Genap 2090</td>
-                    <td>
-                        <a href="" type="button" class="btn btn-sm btn-danger">Hapus</a>
-                        <a href="" type="button" class="btn btn-sm btn-success">Edit</a>
-                    </td>
-                </tbody>
+                <?php
+                $no = 1;
+                foreach ($row->result() as $key => $data) { ?>
+                    <tbody>
+                        <td><?= $no++ ?></td>
+                        <td><?= $data->tahun_periode ?></td>
+                        <td>
+                            <a class="btn btn-sm btn-danger" href="<?= site_url('operator/del_periode_pengajuan/' . $data->id_periode) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data periode pengajuan ini?')" type="button">Hapus</a>
+                            <a href="" type="button" class="btn btn-sm btn-success">Edit</a>
+                        </td>
+                    </tbody>
+                <?php } ?>
             </table>
         </div>
     </div>

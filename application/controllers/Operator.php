@@ -763,6 +763,7 @@ class Operator extends CI_Controller
 		redirect('operator/datadosen');
 	}
 
+	// PERIODE PENGAJUAN
 	public function periode_pengajuan()
 	{
 		$periode['row'] = $this->periode_m->get_periode();
@@ -775,35 +776,42 @@ class Operator extends CI_Controller
 
 	public function proses_tambah_periode_pengajuan()
 	{
+		$post = $this->input->post(null, TRUE);
 		if (isset($_POST['submit'])) {
-			$this->load->library('form_validation');
-			$this->form_validation->set_rules('periodepengajuan', 'Periode Pengajuan', 'required');
-
-			$this->form_validation->set_message('required', '%s Masih Kosong!!');
-			$this->form_validation->set_error_delimiters('<span class="help-block text-danger">', '</span>');
-
-			if ($this->form_validation->run()) {
-				$tahun_periode = $this->input->post('tahun_periode');
-				$data = [
-					'tahun_periode' => $tahun_periode,
-				];
-				$insert = $this->db->insert('periodepengajuan', $data);
-				if ($insert) {
-					$this->session->set_flashdata('successalert', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>Periode pengajuan yang aktif berhasil ditambahkan.</strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>');
-					redirect('dosen/daftarusulanpenelitian');
-				}
-			} else {
-				$this->periode_pengajuan();
+			$this->periode_m->insert($post);
+			if ($this->db->affected_rows() > 0) {
+				$this->session->set_flashdata('successalert', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Periode pengajuan yang aktif berhasil ditambahkan.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
 			}
-		} else {
-			$this->periode_pengajuan();
+			redirect('operator/periode_pengajuan');
 		}
 	}
+
+	public function del_periode_pengajuan($id)
+	{
+		$this->periode_m->delete($id);
+		if ($this->db->affected_rows() > 0) {
+			$this->session->set_flashdata('successdel', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Data berhasil dihapus.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+		} else {
+			$this->session->set_flashdata('errordel', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Data gagal dihapus.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+		}
+		redirect('operator/periode_pengajuan');
+	}
+	// END OF PERIODE PENGAJUAN
 
 	public function pembatasan_penelitian()
 	{
