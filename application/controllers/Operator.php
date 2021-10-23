@@ -29,6 +29,7 @@ class Operator extends CI_Controller
 		$data['row'] = $this->penelitian_m->get_penelitian();
 		$data['logs'] = $this->logpenelitian_m->get_log_book();
 		$data['periodes'] = $this->penelitian_m->get_periode();
+		$data['status'] = $this->penelitian_m->get_status();
 		$this->load->view('templates/auth_header');
 		$this->load->view('operator/menu');
 		$this->load->view('templates/topbar');
@@ -311,6 +312,7 @@ class Operator extends CI_Controller
 		$data['row'] = $this->pengabmas_m->get_pengabmas();
 		$data['logs'] = $this->logpengabmas_m->get_log_book();
 		$data['periodes'] = $this->pengabmas_m->get_periode();
+		$data['status'] = $this->pengabmas_m->get_status();
 		$this->load->view('templates/auth_header');
 		$this->load->view('operator/menu');
 		$this->load->view('templates/topbar');

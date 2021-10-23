@@ -12,6 +12,16 @@ class Pengabmas_m extends CI_Model
         return $query;
     }
 
+    public function get_status($id_status = null)
+    {
+        $this->db->from('status_penelitian_pengabdian', $id_status);
+        if ($id_status != null) {
+            $this->db->where('id_status', $id_status);
+        }
+        $query = $this->db->get();
+        return $query;
+    }
+
     public function get_pengabmas($id = null)
     {
         $this->db->from('tbl_pengabmas');

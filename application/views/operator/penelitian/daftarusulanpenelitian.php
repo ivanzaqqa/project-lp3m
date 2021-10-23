@@ -18,7 +18,7 @@
                     <div class="dropdown">
                         <select class="btn btn-sm btn-primary dropdown-toggle" name="status" id="status">
                             <option>Status</option>
-                            <?php foreach ($row->result() as $key => $data) { ?>
+                            <?php foreach ($status->result() as $key => $data) { ?>
                                 <option value="<?= $data->id_status; ?>"><?= $data->status; ?></option>
                             <?php } ?>
                         </select>
@@ -102,6 +102,7 @@
                                         </div>
                                     </div>
                                 </td>
+
                                 <td>
                                     <!-- Hasil Review -->
                                     <?php if ($data->status == "Didanai" && $data->hasil_review != null) { ?>
@@ -354,7 +355,7 @@
                     </div>
                     <!-- body modal -->
                     <div class="modal-body">
-                        <?php if ($data->laporan_akhir != null) { ?>
+                        <?php if ($data->laporan_keuangan != null) { ?>
                             <a href="<?php echo base_url() . 'upload/tahapan_pelaksanaan/' . $data->laporan_keuangan; ?>" type="button" class="btn btn-sm btn-primary">Download</a>
                             <span><?= $data->laporan_keuangan ?></span>
                         <?php } else { ?>
@@ -378,7 +379,7 @@
                     </div>
                     <!-- body modal -->
                     <div class="modal-body">
-                        <?php if ($data->laporan_akhir != null) { ?>
+                        <?php if ($data->artikel_ilmiah != null) { ?>
                             <a href="<?php echo base_url() . 'upload/tahapan_pelaksanaan/' . $data->artikel_ilmiah; ?>" type="button" class="btn btn-sm btn-primary">Download</a>
                             <span><?= $data->artikel_ilmiah ?></span>
                         <?php } else { ?>
@@ -402,7 +403,7 @@
                     </div>
                     <!-- body modal -->
                     <div class="modal-body">
-                        <?php if ($data->laporan_akhir != null) { ?>
+                        <?php if ($data->sertifikat_hki != null) { ?>
                             <a href="<?php echo base_url() . 'upload/tahapan_pelaksanaan/' . $data->sertifikat_hki; ?>" type="button" class="btn btn-sm btn-primary">Download</a>
                             <span><?= $data->sertifikat_hki ?></span>
                         <?php } else { ?>
@@ -426,7 +427,7 @@
                     </div>
                     <!-- body modal -->
                     <div class="modal-body">
-                        <?php if ($data->laporan_akhir != null) { ?>
+                        <?php if ($data->url_artikel_ilmiah != null) { ?>
                             <span><?= $data->url_artikel_ilmiah ?></span>
                         <?php } else { ?>
                             <span>URL belum ada</span>
@@ -438,10 +439,10 @@
     <?php } ?>
     <!-- End URL-->
 
+    <!-- Hasil Monev Internal -->
     <?php
     $no = 0;
     foreach ($row->result() as $key => $data) { ?>
-        <!-- Hasil Monev Internal -->
         <div id="hasilmonev<?= $data->id_penelitian; ?>" class="modal fade shadow-lg" role="dialog">
             <div class="modal-dialog">
                 <!-- konten modal-->
@@ -487,9 +488,10 @@
                 </div>
             </div>
         </div>
-        <!--End Berita acara insentif-->
     <?php } ?>
+    <!--End Berita acara insentif-->
 
+    <!-- Detail -->
     <?php
     $no = 0;
     foreach ($row->result() as $key => $data) { ?>
@@ -621,6 +623,7 @@
         </div>
     <?php } ?>
     <!-- End Detail -->
+
     <!-- End Modal -->
 </div>
 <!-- /.container-fluid -->
