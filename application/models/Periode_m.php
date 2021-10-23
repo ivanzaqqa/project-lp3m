@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
-class Periodepengajuan_m extends CI_Model
+class Periode_m extends CI_Model
 {
     public function get_periode($id_periode = null)
     {

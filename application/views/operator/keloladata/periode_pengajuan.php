@@ -19,6 +19,7 @@
                 </tr>
             </div>
             <br>
+
             <h6 class="font-weight-bold text-black-50">Periode Pengajuan Yang Aktif</h6>
             <table class="table table-responsive table-striped">
                 <thead class="bg-sidebar text-white">
