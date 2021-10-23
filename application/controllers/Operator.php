@@ -28,8 +28,6 @@ class Operator extends CI_Controller
 	{
 		$data['row'] = $this->penelitian_m->get_penelitian();
 		$data['logs'] = $this->logpenelitian_m->get_log_book();
-		// var_dump($data['logs']);
-		// die;
 		$data['periodes'] = $this->penelitian_m->get_periode();
 		$this->load->view('templates/auth_header');
 		$this->load->view('operator/menu');
@@ -130,22 +128,6 @@ class Operator extends CI_Controller
 		$writer->save('php://output');
 
 		exit;
-	}
-
-	public function tahapan_pelaksanaan_penelitian()
-	{
-		$query = $this->penelitian_m->get_penelitian();
-		if ($query->num_rows() > 0) {
-			$penelitian = $query->row();
-			$data = array(
-				'page' => 'edit',
-				'tpp' => $penelitian,
-			);
-			$this->load->view('templates/auth_header');
-			$this->load->view('templates/topbar');
-			$this->load->view('operator/penelitian/daftarusulanpenelitian', $data);
-			$this->load->view('templates/auth_footer');
-		}
 	}
 
 	public function proses_tahapan_pelaksanaan_penelitian()
@@ -327,6 +309,8 @@ class Operator extends CI_Controller
 	public function pengabdian_masyarakat()
 	{
 		$data['row'] = $this->pengabmas_m->get_pengabmas();
+		$data['logs'] = $this->logpengabmas_m->get_log_book();
+		$data['periodes'] = $this->pengabmas_m->get_periode();
 		$this->load->view('templates/auth_header');
 		$this->load->view('operator/menu');
 		$this->load->view('templates/topbar');
@@ -426,7 +410,180 @@ class Operator extends CI_Controller
 		exit;
 	}
 
+	public function proses_tahapan_pelaksanaan_pengabmas()
+	{
+		$config['upload_path']          = './upload/tahapan_pelaksanaan/';
+		$config['allowed_types']        = 'pdf';
+		$config['max_size']            = 5000;
+		$config['encrypt_name']         = TRUE;
 
+		$this->load->library('upload', $config);
+
+		$post = $this->input->post(null, TRUE);
+		if (isset($_POST['edit_hasil_review'])) {
+			if (@$_FILES['hasil_review']['name'] != null) {
+				if ($this->upload->do_upload('hasil_review')) {
+
+					$pengabmas = $this->pengabmas_m->get_pengabmas($post['id_pengabmas'])->row();
+					if ($pengabmas->hasil_review != null) {
+						$target_file = './upload/tahapan_pelaksanaan/' . $pengabmas->hasil_review;
+						unlink($target_file);
+					}
+
+					$post['hasil_review'] = $this->upload->data('file_name');
+					$this->pengabmas_m->edit2($post);
+					if ($this->db->affected_rows() > 0) {
+						$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Hasil review tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+					}
+					redirect('operator/pengabdian_masyarakat/');
+				} else {
+					$error = $this->upload->display_errors();
+					$this->session->set_flashdata('erroredit', $error);
+					redirect('operator/pengabdian_masyarakat/');
+				}
+			} else {
+				$post['hasil_review'] = null;
+				$this->pengabmas_m->edit2($post);
+				if ($this->db->affected_rows() > 0) {
+					$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Hasil review tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+				}
+				redirect('operator/pengabdian_masyarakat/');
+			}
+		}
+
+		if (isset($_POST['edit_surat_tugas'])) {
+			if (@$_FILES['surat_tugas']['name'] != null) {
+				if ($this->upload->do_upload('surat_tugas')) {
+
+					$pengabmas = $this->pengabmas_m->get_pengabmas($post['id_pengabmas'])->row();
+					if ($pengabmas->surat_tugas != null) {
+						$target_file = './upload/tahapan_pelaksanaan/' . $pengabmas->surat_tugas;
+						unlink($target_file);
+					}
+
+					$post['surat_tugas'] = $this->upload->data('file_name');
+					$this->pengabmas_m->edit2($post);
+					if ($this->db->affected_rows() > 0) {
+						$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Surat tugas tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+					}
+					redirect('operator/pengabdian_masyarakat/');
+				} else {
+					$error = $this->upload->display_errors();
+					$this->session->set_flashdata('erroredit', $error);
+					redirect('operator/pengabdian_masyarakat/');
+				}
+			} else {
+				$post['surat_tugas'] = null;
+				$this->pengabmas_m->edit2($post);
+				if ($this->db->affected_rows() > 0) {
+					$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Surat tugas tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+				}
+				redirect('operator/pengabdian_masyarakat/');
+			}
+		}
+
+		if (isset($_POST['edit_hasil_monev_internal'])) {
+			if (@$_FILES['hasil_monev_internal']['name'] != null) {
+				if ($this->upload->do_upload('hasil_monev_internal')) {
+
+					$pengabmas = $this->pengabmas_m->get_pengabmas($post['id_pengabmas'])->row();
+					if ($pengabmas->hasil_monev_internal != null) {
+						$target_file = './upload/tahapan_pelaksanaan/' . $pengabmas->hasil_monev_internal;
+						unlink($target_file);
+					}
+
+					$post['hasil_monev_internal'] = $this->upload->data('file_name');
+					$this->pengabmas_m->edit2($post);
+					if ($this->db->affected_rows() > 0) {
+						$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Hasil monev internal tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+					}
+					redirect('operator/pengabdian_masyarakat/');
+				} else {
+					$error = $this->upload->display_errors();
+					$this->session->set_flashdata('erroredit', $error);
+					redirect('operator/pengabdian_masyarakat/');
+				}
+			} else {
+				$post['hasil_monev_internal'] = null;
+				$this->pengabmas_m->edit2($post);
+				if ($this->db->affected_rows() > 0) {
+					$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Hasil monev internal tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+				}
+				redirect('operator/pengabdian_masyarakat/');
+			}
+		}
+
+		if (isset($_POST['edit_berita_acara_inspub'])) {
+			if (@$_FILES['berita_acara_inspub']['name'] != null) {
+				if ($this->upload->do_upload('berita_acara_inspub')) {
+
+					$pengabmas = $this->pengabmas_m->get_pengabmas($post['id_pengabmas'])->row();
+					if ($pengabmas->berita_acara_inspub != null) {
+						$target_file = './upload/tahapan_pelaksanaan/' . $pengabmas->berita_acara_inspub;
+						unlink($target_file);
+					}
+
+					$post['berita_acara_inspub'] = $this->upload->data('file_name');
+					$this->pengabmas_m->edit2($post);
+					if ($this->db->affected_rows() > 0) {
+						$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Berita acara insentif publikasi tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+					}
+					redirect('operator/pengabdian_masyarakat/');
+				} else {
+					$error = $this->upload->display_errors();
+					$this->session->set_flashdata('erroredit', $error);
+					redirect('operator/pengabdian_masyarakat/');
+				}
+			} else {
+				$post['berita_acara_inspub'] = null;
+				$this->pengabmas_m->edit2($post);
+				if ($this->db->affected_rows() > 0) {
+					$this->session->set_flashdata('successedit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Berita acara insentif publikasi tahapan pelaksanaan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+				}
+				redirect('operator/pengabdian_masyarakat/');
+			}
+		}
+	}
 
 	// KELOLA DATA DOSEN
 	public function datadosen()
