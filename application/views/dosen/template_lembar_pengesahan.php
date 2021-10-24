@@ -8,7 +8,11 @@
             </div>
         </div>
         <div class="card-body">
-            <a href="" type="button" class="btn btn-md btn-primary text-center"> <i class="fas fa-download"></i> Donwload</a>
+            <?php
+            $no = 0;
+            foreach ($row->result() as $key => $data) { ?>
+                <a href="<?php echo base_url() . 'upload/templates/lembar_pengesahan/' . $data->file_lembar_pengesahan; ?>" type="button" class="btn btn-md btn-primary text-center"> <i class="fas fa-download"></i>Download</a>
+            <?php } ?>
         </div>
     </div>
 

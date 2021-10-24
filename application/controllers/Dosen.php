@@ -1851,12 +1851,14 @@ class Dosen extends CI_Controller
 		$this->load->view('dosen/tutorial');
 		$this->load->view('templates/auth_footer');
 	}
+
 	public function template_lembar_pengesahan()
 	{
+		$data['row'] = $this->lembarpengesahan_m->get_lp();
 		$this->load->view('templates/auth_header');
 		$this->load->view('dosen/menu');
 		$this->load->view('templates/topbar');
-		$this->load->view('dosen/template_lembar_pengesahan');
+		$this->load->view('dosen/template_lembar_pengesahan', $data);
 		$this->load->view('templates/auth_footer');
 	}
 }
