@@ -16,6 +16,7 @@ class Operator extends CI_Controller
 		$this->load->model('logpenelitian_m');
 		$this->load->model('logpengabmas_m');
 		$this->load->model('periode_m');
+		$this->load->model('lembarpengesahan_m');
 	}
 	public function index()
 	{
@@ -1176,10 +1177,63 @@ class Operator extends CI_Controller
 
 	public function upload_template()
 	{
+		$data['row'] = $this->lembarpengesahan_m->get_lp();
 		$this->load->view('templates/auth_header');
 		$this->load->view('operator/menu');
 		$this->load->view('templates/topbar');
-		$this->load->view('operator/upload_template');
+		$this->load->view('operator/upload_template', $data);
 		$this->load->view('templates/auth_footer');
+	}
+
+	public function proses_upload_lembar_pengesahan()
+	{
+		$config['upload_path']          = './upload/templates/lembar_pengesahan/';
+		$config['allowed_types']        = 'pdf';
+		$config['max_size']            = 5000;
+		$config['encrypt_name']         = TRUE;
+
+		$this->load->library('upload', $config);
+
+		$post = $this->input->post(null, TRUE);
+		if (isset($_POST['submit_lp'])) {
+			if (@$_FILES['file_lembar_pengesahan']['name'] != null) {
+				if ($this->upload->do_upload('file_lembar_pengesahan')) {
+
+					$lp = $this->lembarpengesahan_m->get_lp($post['id_lembar_pengesahan'])->row();
+					if ($lp->file_lembar_pengesahan != null) {
+						$target_file = './upload/templates/lembar_pengesahan/' . $lp->file_lembar_pengesahan;
+						unlink($target_file);
+					}
+
+					$post['file_lembar_pengesahan'] = $this->upload->data('file_name');
+					$this->lembarpengesahan_m->insert($post);
+					if ($this->db->affected_rows() > 0) {
+						$this->session->set_flashdata('successupload', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Template lembar pengesahan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+					}
+					redirect('operator/upload_template/');
+				} else {
+					$error = $this->upload->display_errors();
+					$this->session->set_flashdata('errorupload', $error);
+					redirect('operator/upload_template/');
+				}
+			} else {
+				$post['file_lembar_pengesahan'] = null;
+				$this->lembarpengesahan_m->insert($post);
+				if ($this->db->affected_rows() > 0) {
+					$this->session->set_flashdata('successupload', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Template lembar pengesahan berhasil diupload.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+				}
+				redirect('operator/upload_template/');
+			}
+		}
 	}
 }
