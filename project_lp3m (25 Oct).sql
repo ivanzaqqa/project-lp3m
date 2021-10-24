@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 22, 2021 at 05:35 PM
+-- Generation Time: Oct 24, 2021 at 11:38 PM
 -- Server version: 5.7.35
 -- PHP Version: 7.3.31
 
@@ -83,6 +83,24 @@ INSERT INTO `insentif_specscop` (`id_insentif_scopus`, `id`, `id_scopus`, `id_st
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `lembar_pengesahan`
+--
+
+CREATE TABLE `lembar_pengesahan` (
+  `id_lembar_pengesahan` int(11) NOT NULL,
+  `file_lembar_pengesahan` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `lembar_pengesahan`
+--
+
+INSERT INTO `lembar_pengesahan` (`id_lembar_pengesahan`, `file_lembar_pengesahan`) VALUES
+(1, '118fffe5ad64571c2704b8b67d7513ed.pdf');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `log_book_penelitian`
 --
 
@@ -127,7 +145,8 @@ CREATE TABLE `log_book_pengabmas` (
 --
 
 INSERT INTO `log_book_pengabmas` (`id_log_book`, `id_pengabmas`, `id`, `tgl_kegiatan`, `uraian_kegiatan`, `dokumentasi`) VALUES
-(1, 5, 14, '3123-12-12', 'asdasdsldjadasjdasdlkadsalkdjas', 'f5310c1dd2d0c5088239b53d798c9df8.pdf');
+(1, 5, 14, '3123-12-12', 'asdasdsldjadasjdasdlkadsalkdjas', 'f5310c1dd2d0c5088239b53d798c9df8.pdf'),
+(2, 5, 14, '1221-12-23', 'adadsssadass', 'e69ecd7fe0b9cf0d8b027ced9be18cff.pdf');
 
 -- --------------------------------------------------------
 
@@ -146,7 +165,8 @@ CREATE TABLE `periode_pengajuan` (
 
 INSERT INTO `periode_pengajuan` (`id_periode`, `tahun_periode`) VALUES
 (1, 'Genap 2021'),
-(2, 'Ganjil 2021');
+(2, 'Ganjil 2021'),
+(4, 'Genap 2025');
 
 -- --------------------------------------------------------
 
@@ -329,7 +349,8 @@ CREATE TABLE `tbl_pengabmas` (
 INSERT INTO `tbl_pengabmas` (`id_pengabmas`, `id`, `id_periode`, `judul_pengabmas`, `matkul_diampu`, `kelompok_riset`, `mhs_terlibat`, `file_proposal`, `file_rps`, `form_integrasi`, `id_status`, `tgl_submit`, `hasil_review`, `surat_tugas`, `laporan_akhir`, `tgl_upload_la`, `laporan_keuangan`, `tgl_upload_lk`, `artikel_ilmiah`, `tgl_upload_ai`, `url_artikel_ilmiah`, `sertifikat_hki`, `tgl_upload_sh`, `hasil_monev_internal`, `berita_acara_inspub`) VALUES
 (2, 1, 2, 'Mengabdi kepada para penghuni', 'Manajemen', 'Masykulin', 'Bagas (19317321)', '15ab7a6f477320baf38551802e4ce8ce.pdf', '890051a3a2f70dcb5dfeca438a91a3c1.pdf', '72a6196073d80e1f617135b66159bd30.pdf', 3, '2021-08-03 20:46:10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL),
 (3, 1, 1, 'Sultan Nih Bos', 'Jaringan', 'Efek', 'Andik (1233139)', '3d3a534ec9c0dae4b8aafe0c634bc55e.pdf', '6ec6320834d0114d35bb38d838418624.pdf', '0f58c2c436795db24037011913d79378.pdf', 1, '2021-08-03 20:49:39', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL),
-(5, 14, 2, 'Black magic dark water', 'Sastra', 'Haleluya', 'Fauzi (22727872)', '06059adc89bdee7cb5780a237cefb915.pdf', 'eb62991220f9e57d55a962d5d3c72422.pdf', 'c9f391f878fdfe7b14394eab4103115a.pdf', 1, '2021-10-22 21:15:57', NULL, NULL, '1cc343620c9ee54b2e8cb2a885415e42.pdf', '2021-10-23 00:26:33', '29a30b05c972658491cf097e55ad2b30.pdf', '2021-10-23 00:26:39', '82060ce8dc28e74bae2ed974f6829537.pdf', '2021-10-23 00:26:44', 'www.fauzi.com', '7eb6cd792d192ab7911952b1a4ac131e.pdf', '2021-10-23 00:27:04', '', NULL);
+(5, 14, 2, 'Black magic dark water', 'Sastra', 'Haleluya', 'Fauzi (22727872)', '06059adc89bdee7cb5780a237cefb915.pdf', 'eb62991220f9e57d55a962d5d3c72422.pdf', 'c9f391f878fdfe7b14394eab4103115a.pdf', 1, '2021-10-22 21:15:57', NULL, NULL, '1cc343620c9ee54b2e8cb2a885415e42.pdf', '2021-10-23 00:26:33', '29a30b05c972658491cf097e55ad2b30.pdf', '2021-10-23 00:26:39', '82060ce8dc28e74bae2ed974f6829537.pdf', '2021-10-23 00:26:44', 'www.fauzi.com', '7eb6cd792d192ab7911952b1a4ac131e.pdf', '2021-10-23 00:27:04', '', NULL),
+(6, 14, 1, 'Satria Nusantara', 'Biologi', 'Strata', 'Jhon (124124124)', '533a01356a286fc9c584db4dc2afeadf.pdf', 'b2ae98c25203293723c2e5fdcff68783.pdf', '4f3207a36e3f80698a688af18a71fc1e.pdf', 3, '2021-10-23 06:27:29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -406,6 +427,12 @@ ALTER TABLE `insentif_specscop`
   ADD KEY `id_jurnal_pros` (`id_scopus`),
   ADD KEY `id_users` (`id`),
   ADD KEY `id_status` (`id_status`);
+
+--
+-- Indexes for table `lembar_pengesahan`
+--
+ALTER TABLE `lembar_pengesahan`
+  ADD PRIMARY KEY (`id_lembar_pengesahan`);
 
 --
 -- Indexes for table `log_book_penelitian`
@@ -506,6 +533,12 @@ ALTER TABLE `insentif_specscop`
   MODIFY `id_insentif_scopus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `lembar_pengesahan`
+--
+ALTER TABLE `lembar_pengesahan`
+  MODIFY `id_lembar_pengesahan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `log_book_penelitian`
 --
 ALTER TABLE `log_book_penelitian`
@@ -515,13 +548,13 @@ ALTER TABLE `log_book_penelitian`
 -- AUTO_INCREMENT for table `log_book_pengabmas`
 --
 ALTER TABLE `log_book_pengabmas`
-  MODIFY `id_log_book` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_log_book` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `periode_pengajuan`
 --
 ALTER TABLE `periode_pengajuan`
-  MODIFY `id_periode` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_periode` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `pilih_jurnal_prosiding`
@@ -557,7 +590,7 @@ ALTER TABLE `tbl_penelitian`
 -- AUTO_INCREMENT for table `tbl_pengabmas`
 --
 ALTER TABLE `tbl_pengabmas`
-  MODIFY `id_pengabmas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_pengabmas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
