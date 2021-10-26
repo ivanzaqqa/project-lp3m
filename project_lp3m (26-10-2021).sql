@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 24, 2021 at 11:38 PM
+-- Generation Time: Oct 26, 2021 at 04:08 PM
 -- Server version: 5.7.35
 -- PHP Version: 7.3.31
 
@@ -147,6 +147,44 @@ CREATE TABLE `log_book_pengabmas` (
 INSERT INTO `log_book_pengabmas` (`id_log_book`, `id_pengabmas`, `id`, `tgl_kegiatan`, `uraian_kegiatan`, `dokumentasi`) VALUES
 (1, 5, 14, '3123-12-12', 'asdasdsldjadasjdasdlkadsalkdjas', 'f5310c1dd2d0c5088239b53d798c9df8.pdf'),
 (2, 5, 14, '1221-12-23', 'adadsssadass', 'e69ecd7fe0b9cf0d8b027ced9be18cff.pdf');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pembatasan_submit_penelitian`
+--
+
+CREATE TABLE `pembatasan_submit_penelitian` (
+  `id_pembatasan` int(11) NOT NULL,
+  `tanggal_mulai` date NOT NULL,
+  `tanggal_selesai` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `pembatasan_submit_penelitian`
+--
+
+INSERT INTO `pembatasan_submit_penelitian` (`id_pembatasan`, `tanggal_mulai`, `tanggal_selesai`) VALUES
+(3, '2021-10-25', '2021-10-26');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pembatasan_submit_pengabmas`
+--
+
+CREATE TABLE `pembatasan_submit_pengabmas` (
+  `id_pembatasan` int(11) NOT NULL,
+  `tanggal_mulai` date NOT NULL,
+  `tanggal_selesai` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `pembatasan_submit_pengabmas`
+--
+
+INSERT INTO `pembatasan_submit_pengabmas` (`id_pembatasan`, `tanggal_mulai`, `tanggal_selesai`) VALUES
+(1, '2021-10-25', '2021-10-26');
 
 -- --------------------------------------------------------
 
@@ -451,6 +489,18 @@ ALTER TABLE `log_book_pengabmas`
   ADD KEY `id` (`id`);
 
 --
+-- Indexes for table `pembatasan_submit_penelitian`
+--
+ALTER TABLE `pembatasan_submit_penelitian`
+  ADD PRIMARY KEY (`id_pembatasan`);
+
+--
+-- Indexes for table `pembatasan_submit_pengabmas`
+--
+ALTER TABLE `pembatasan_submit_pengabmas`
+  ADD PRIMARY KEY (`id_pembatasan`);
+
+--
 -- Indexes for table `periode_pengajuan`
 --
 ALTER TABLE `periode_pengajuan`
@@ -549,6 +599,18 @@ ALTER TABLE `log_book_penelitian`
 --
 ALTER TABLE `log_book_pengabmas`
   MODIFY `id_log_book` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `pembatasan_submit_penelitian`
+--
+ALTER TABLE `pembatasan_submit_penelitian`
+  MODIFY `id_pembatasan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `pembatasan_submit_pengabmas`
+--
+ALTER TABLE `pembatasan_submit_pengabmas`
+  MODIFY `id_pembatasan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `periode_pengajuan`
