@@ -85,9 +85,19 @@
                         <?= form_error('form_integrasi') ?>
                         <input type="file" name="form_integrasi" value="<?= set_value('form_integrasi') ?>" class="form-control-file form-control-sm" id="form_integrasi" accept="application/pdf">
                     </div>
-                    <div class="form-group ">
-                        <button type="submit" name="submit" class="mt-2 btn btn-md btn-warning">Submit</button>
-                    </div>
+                    <?php foreach ($date->result() as $key => $data) { ?>
+                        <div class="form-group ">
+
+                            <?php
+                            $date = date('Y-m-d');
+                            if ($date > $data->tanggal_mulai && $date < $data->tanggal_selesai) { ?>
+                                <button type="submit" name="submit" class="mt-2 btn btn-md btn-warning">Submit</button>
+                            <?php } else { ?>
+                                <button type="submit" class="mt-2 btn btn-md btn-warning" disabled>Submit</button>
+                            <?php } ?>
+
+                        </div>
+                    <?php } ?>
                 </div>
                 <?= form_close(); ?>
             </div>

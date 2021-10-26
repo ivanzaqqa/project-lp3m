@@ -21,4 +21,11 @@ class Pembatasan_m extends CI_Model
         $this->db->where('id_pembatasan', $post['id_pembatasan']);
         $this->db->insert('pembatasan_submit_penelitian', $params);
     }
+
+    function delete($id)
+    {
+        $this->db->where('id_pembatasan', $id);
+        $this->db->delete('pembatasan_submit_penelitian');
+        return true;
+    }
 }

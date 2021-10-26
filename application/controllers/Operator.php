@@ -817,11 +817,57 @@ class Operator extends CI_Controller
 
 	public function pembatasan_penelitian()
 	{
-		$this->load->view('templates/auth_header');
-		$this->load->view('operator/menu');
-		$this->load->view('templates/topbar');
-		$this->load->view('operator/keloladata/pembatasan_penelitian');
-		$this->load->view('templates/auth_footer');
+		$query = $this->pembatasan_m->get_pembatasan_penelitian();
+		if ($query->num_rows() >= 0) {
+			$pembatasan = $query->row();
+			$data = array(
+				'page' => 'edit',
+				'row' => $pembatasan,
+			);
+			$this->load->view('templates/auth_header');
+			$this->load->view('operator/menu');
+			$this->load->view('templates/topbar');
+			$this->load->view('operator/keloladata/pembatasan_penelitian', $data);
+			$this->load->view('templates/auth_footer');
+		}
+	}
+
+	public function proses_pembatasan_penelitian()
+	{
+		$post = $this->input->post(null, TRUE);
+		if (isset($_POST['pembatasan_penelitian'])) {
+			$this->pembatasan_m->insert($post);
+			if ($this->db->affected_rows() > 0) {
+				$this->session->set_flashdata('successsubmit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Pembatasan Submit Penelitian berhasil disubmit.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+			}
+			redirect('operator/pembatasan_penelitian');
+		}
+	}
+
+	public function reset_pembatasan_penelitian($id)
+	{
+		$this->pembatasan_m->delete($id);
+		if ($this->db->affected_rows() > 0) {
+			$this->session->set_flashdata('successdel', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+				<strong>Pembatasan submit penelitian berhasil direset.</strong>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>');
+		} else {
+			$this->session->set_flashdata('errordel', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+				<strong>Pembatasan submit penelitian gagal direset.</strong>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>');
+		}
+		redirect('operator/pembatasan_penelitian');
 	}
 
 	public function pembatasan_pengabdian()
