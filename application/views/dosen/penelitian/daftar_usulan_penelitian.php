@@ -90,7 +90,7 @@
 
                             <?php
                             $date = date('Y-m-d');
-                            if ($date > $data->tanggal_mulai && $date < $data->tanggal_selesai) { ?>
+                            if ($date > $data->tanggal_mulai && $date <= $data->tanggal_selesai) { ?>
                                 <button type="submit" name="submit" class="mt-2 btn btn-md btn-warning">Submit</button>
                             <?php } else { ?>
                                 <button type="submit" class="mt-2 btn btn-md btn-warning" disabled>Submit</button>
