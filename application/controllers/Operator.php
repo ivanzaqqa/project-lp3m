@@ -815,6 +815,7 @@ class Operator extends CI_Controller
 	}
 	// END OF PERIODE PENGAJUAN
 
+	// PEMBATASAN PENELITIAN
 	public function pembatasan_penelitian()
 	{
 		$query = $this->pembatasan_m->get_pembatasan_penelitian();
@@ -839,7 +840,7 @@ class Operator extends CI_Controller
 			$this->pembatasan_m->insert($post);
 			if ($this->db->affected_rows() > 0) {
 				$this->session->set_flashdata('successsubmit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Pembatasan Submit Penelitian berhasil disubmit.</strong>
+                <strong>Pembatasan submit penelitian berhasil ditentukan.</strong>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -869,18 +870,64 @@ class Operator extends CI_Controller
 		}
 		redirect('operator/pembatasan_penelitian');
 	}
+	// END OF PEMBATASAN PENELITIAN
 
-	public function pembatasan_pengabdian()
+	// PEMBATASAN PENGABDIAN MASYARAKAT
+	public function pembatasan_pengabmas()
 	{
-		$this->load->view('templates/auth_header');
-		$this->load->view('operator/menu');
-		$this->load->view('templates/topbar');
-		$this->load->view('operator/keloladata/pembatasan_pengabdian');
-		$this->load->view('templates/auth_footer');
+		$query = $this->pembatasan_m->get_pembatasan_pengabmas();
+		if ($query->num_rows() >= 0) {
+			$pembatasan = $query->row();
+			$data = array(
+				'page' => 'edit',
+				'row' => $pembatasan,
+			);
+			$this->load->view('templates/auth_header');
+			$this->load->view('operator/menu');
+			$this->load->view('templates/topbar');
+			$this->load->view('operator/keloladata/pembatasan_pengabmas', $data);
+			$this->load->view('templates/auth_footer');
+		}
 	}
 
+	public function proses_pembatasan_pengabmas()
+	{
+		$post = $this->input->post(null, TRUE);
+		if (isset($_POST['pembatasan_pengabmas'])) {
+			$this->pembatasan_m->insert_pengabmas($post);
+			if ($this->db->affected_rows() > 0) {
+				$this->session->set_flashdata('successsubmit', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Pembatasan submit pengabdian masyarakat berhasil ditentukan.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+			}
+			redirect('operator/pembatasan_pengabmas');
+		}
+	}
 
-	// End Kelola Data
+	public function reset_pembatasan_pengabmas($id)
+	{
+		$this->pembatasan_m->delete_pengabmas($id);
+		if ($this->db->affected_rows() > 0) {
+			$this->session->set_flashdata('successdel', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Pembatasan submit pengabdian masyarakat berhasil direset.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+		} else {
+			$this->session->set_flashdata('errordel', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Pembatasan submit pengabdian masyarakat gagal direset.</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+		}
+		redirect('operator/pembatasan_pengabmas');
+	}
+	// END OF PEMBATASAN PENGABDIAN MASYARAKAT
 
 	//INSENTIF PUBLIKASI
 	public function insentif_publikasi()

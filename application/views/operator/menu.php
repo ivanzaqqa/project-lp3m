@@ -25,7 +25,7 @@
             <div id="collapse1" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Menu</h6>
-                    <a class=" collapse-item" href="<?= base_url('operator/penelitian') ?>"">Daftar Usulan Penelitian</a>
+                    <a class=" collapse-item" href="<?= base_url('operator/penelitian') ?>">Daftar Usulan Penelitian</a>
                 </div>
             </div>
         </li>
@@ -70,7 +70,7 @@
                     <a class=" collapse-item" href="<?= base_url('operator/periode_pengajuan') ?>">Periode Pengajuan</a>
                     <h6 class="collapse-header">Menu Pembatasan</h6>
                     <a class=" collapse-item" href="<?= base_url('operator/pembatasan_penelitian') ?>">Pembatasan Penelitian</a>
-                    <a class=" collapse-item" href="<?= base_url('operator/pembatasan_pengabdian') ?>">Pembatasan Pengabdian</a>
+                    <a class=" collapse-item" href="<?= base_url('operator/pembatasan_pengabmas') ?>">Pembatasan Pengabdian</a>
                 </div>
             </div>
         </li>

@@ -514,6 +514,7 @@ class Dosen extends CI_Controller
 	public function daftarusulanpengabdian()
 	{
 		$periode['row'] = $this->periode_m->get_periode();
+		$periode['date'] = $this->pembatasan_m->get_pembatasan_pengabmas();
 		$this->load->view('templates/auth_header');
 		$this->load->view('dosen/menu');
 		$this->load->view('templates/topbar');
