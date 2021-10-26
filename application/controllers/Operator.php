@@ -17,6 +17,7 @@ class Operator extends CI_Controller
 		$this->load->model('logpengabmas_m');
 		$this->load->model('periode_m');
 		$this->load->model('lembarpengesahan_m');
+		$this->load->model('pembatasan_m');
 	}
 	public function index()
 	{

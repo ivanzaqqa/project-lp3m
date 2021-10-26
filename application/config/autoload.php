@@ -147,4 +147,5 @@ $autoload['model'] = array(
     'logpengabmas_m',
     'periode_m',
     'lembarpengesahan_m',
+    'pembatasan_m',
 );

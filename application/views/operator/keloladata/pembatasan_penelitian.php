@@ -13,12 +13,12 @@
                     <tr>
                         <td>Tanggal Mulai</td>
                         <td>:</td>
-                        <td><input type="date" class="form-control" id="tanggal_mulai"></td>
+                        <td><input type="date" class="form-control" name="tanggal_mulai" id="tanggal_mulai"></td>
                     </tr>
                     <tr>
                         <td>Tanggal Selesai</td>
                         <td>:</td>
-                        <td><input type="date" class="form-control" id="tanggal_selesai"></td>
+                        <td><input type="date" class="form-control" name="tanggal_selesai" id="tanggal_selesai"></td>
                     </tr>
                 </table>
                 <button type="submit" name="" class="btn btn-sm btn-primary mt-2">Simpan</button>
