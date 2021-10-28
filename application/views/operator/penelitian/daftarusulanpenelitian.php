@@ -4,26 +4,41 @@
             <h6 class="font-weight-bold text-primary" style="position: absolute; margin-top: 10px;">Daftar Usulan Penelitian</h6>
             <button class="btn btn-success mt-1 btn-sm" type="button" style="margin-left: 200px;"><a href="<?php echo base_url('operator/exportexcel_penelitian') ?>" style="color: white;">Export Data</a></button>
             <div class="row mt-2">
+                <!-- FILTER PERIODE PENGAJUAN -->
                 <div class="col-sm-2">
                     <div class="dropdown">
                         <select class="btn btn-sm btn-primary dropdown-toggle" name="periodepengajuan" id="PeriodePengajuan">
-                            <option>Pilih Periode Pengajuan</option>
+                            <option value="0">Pilih Periode Pengajuan</option>
                             <?php foreach ($periodes->result() as $key => $data) { ?>
                                 <option value="<?= $data->id_periode; ?>"><?= $data->tahun_periode; ?></option>
                             <?php } ?>
                         </select>
                     </div>
                 </div>
+                <!-- JS SCRIPT FOR FILTER PERIODE PENGAJUAN -->
+                <script>
+                    $(document).ready(function() {
+                        $('#PeriodePengajuan').change(function() {
+                            let a = $(this.value);
+                            console.log(a);
+                        });
+                    });
+                </script>
+                <!-- END OF JS SCRIPT -->
+
+                <!-- FILTER STATUS -->
                 <div class="col-sm-10">
                     <div class="dropdown">
-                        <select class="btn btn-sm btn-primary dropdown-toggle" name="status" id="status">
+                        <select class="btn btn-sm btn-primary dropdown-toggle" name="status" id="status" style="margin-left: 50px;">
                             <option>Status</option>
                             <?php foreach ($status->result() as $key => $data) { ?>
-                                <option value="<?= $data->id_status; ?>"><?= $data->status; ?></option>
+                                <option value=" <?= $data->id_status; ?>"><?= $data->status; ?></option>
                             <?php } ?>
                         </select>
                     </div>
                 </div>
+                <!-- END OF FILTER STATUS -->
+
             </div>
         </div>
         <div class="card-body">

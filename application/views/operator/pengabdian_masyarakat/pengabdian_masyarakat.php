@@ -16,7 +16,7 @@
                 </div>
                 <div class="col-sm-10">
                     <div class="dropdown">
-                        <select class="btn btn-sm btn-primary dropdown-toggle" name="status" id="status">
+                        <select class="btn btn-sm btn-primary dropdown-toggle" name="status" id="status" style="margin-left: 50px;">
                             <option>Status</option>
                             <?php foreach ($status->result() as $key => $data) { ?>
                                 <option value="<?= $data->id_status; ?>"><?= $data->status; ?></option>
