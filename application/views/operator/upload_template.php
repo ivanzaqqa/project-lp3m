@@ -16,9 +16,9 @@
             <input type="file" name="file_lembar_pengesahan" class="form-control form-control-sm bg-light" id="file_lembar_pengesahan">
 
             <?php if ($row->file_lembar_pengesahan != null) { ?>
-                <button type="submit" name="submit_lp" class="btn btn-sm btn-primary text-center mt-2"> <i class="fas fa-download"></i>Upload</button>
-            <?php } else { ?>
                 <button class="btn btn-sm btn-primary text-center mt-2" disabled> <i class="fas fa-download"></i>Upload</button>
+            <?php } else { ?>
+                <button type="submit" name="submit_lp" class="btn btn-sm btn-primary text-center mt-2"> <i class="fas fa-download"></i>Upload</button>
             <?php } ?>
 
             <?php echo form_close() ?>

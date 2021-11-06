@@ -1271,12 +1271,19 @@ class Operator extends CI_Controller
 
 	public function upload_template()
 	{
-		$data['row'] = $this->lembarpengesahan_m->get_lp();
-		$this->load->view('templates/auth_header');
-		$this->load->view('operator/menu');
-		$this->load->view('templates/topbar');
-		$this->load->view('operator/upload_template', $data);
-		$this->load->view('templates/auth_footer');
+		$query = $this->lembarpengesahan_m->get_lp();
+		if ($query->num_rows() > 0) {
+			$lp = $query->row();
+			$data = array(
+				'page' => 'edit',
+				'row' => $lp,
+			);
+			$this->load->view('templates/auth_header');
+			$this->load->view('operator/menu');
+			$this->load->view('templates/topbar');
+			$this->load->view('operator/upload_template', $data);
+			$this->load->view('templates/auth_footer');
+		}
 	}
 
 	public function proses_upload_lembar_pengesahan()
