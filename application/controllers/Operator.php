@@ -1272,7 +1272,7 @@ class Operator extends CI_Controller
 	public function upload_template()
 	{
 		$query = $this->lembarpengesahan_m->get_lp();
-		if ($query->num_rows() > 0) {
+		if ($query->num_rows() >= 0) {
 			$lp = $query->row();
 			$data = array(
 				'page' => 'edit',
@@ -1336,5 +1336,32 @@ class Operator extends CI_Controller
 				redirect('operator/upload_template/');
 			}
 		}
+	}
+
+	public function reset_upload_template($id)
+	{
+		$file_lembar_pengesahan = $this->lembarpengesahan_m->get_lp($id)->row();
+		if ($file_lembar_pengesahan->file_lembar_pengesahan != null) {
+			$target_file = './upload/templates/lembar_pengesahan/' . $file_lembar_pengesahan->file_lembar_pengesahan;
+			unlink($target_file);
+		}
+
+		$this->lembarpengesahan_m->delete($id);
+		if ($this->db->affected_rows() > 0) {
+			$this->session->set_flashdata('successdel', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+				<strong>Template lembar pengesahan berhasil direset.</strong>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>');
+		} else {
+			$this->session->set_flashdata('errordel', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+				<strong>Template lembar pengesahan berhasil direset.</strong>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>');
+		}
+		redirect('operator/upload_template');
 	}
 }

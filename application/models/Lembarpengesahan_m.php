@@ -20,4 +20,11 @@ class Lembarpengesahan_m extends CI_Model
         $this->db->where('id_lembar_pengesahan', $post['id_lembar_pengesahan']);
         $this->db->insert('lembar_pengesahan', $params);
     }
+
+    function delete($id)
+    {
+        $this->db->where('id_lembar_pengesahan', $id);
+        $this->db->delete('lembar_pengesahan');
+        return true;
+    }
 }
