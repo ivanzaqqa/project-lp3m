@@ -25,7 +25,11 @@
                     <tr>
                         <td><a href="<?= base_url('operator/arsip_jurnal_prosiding') ?>" type="button" class="btn btn-sm text-white" style="background-color: #670099;"> <i class="fa fa-chevron-circle-left"></i>
                                 Kembali</a>
-                            <button type="submit" name="edit" class="ml-2 btn btn-sm btn-warning">Upload</button>
+                            <?php if ($row->file_berita_acara != null) { ?>
+                                <button type="submit" name="edit" class="ml-2 btn btn-sm btn-warning">Ubah</button>
+                            <?php } else { ?>
+                                <button type="submit" name="edit" class="ml-2 btn btn-sm btn-warning">Upload</button>
+                            <?php } ?>
                         </td>
                     </tr>
                 </table>

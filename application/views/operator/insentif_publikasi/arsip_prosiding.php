@@ -58,7 +58,7 @@
                             </td>
                             <td>
                                 <?php if ($data->file_berita_acara != null) { ?>
-                                    <button class="btn btn-sm btn-warning" disabled>Sudah di Upload</button>
+                                    <a class="btn btn-sm btn-warning" href="<?= base_url('operator/upload_file_berita_acara_jurpros/' . $data->id_insentif_jurpros) ?>" class="btn btn-sm btn-warning" onclick="return confirm('Apakah anda yakin untuk mengubah file berita acara ini?')">Sudah di Upload</a>
                                 <?php } else { ?>
                                     <a class="btn btn-sm btn-warning" href="<?= base_url('operator/upload_file_berita_acara_jurpros/' . $data->id_insentif_jurpros) ?>" class="btn btn-sm btn-warning">Upload</a>
                                 <?php } ?>
