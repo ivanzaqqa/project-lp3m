@@ -13,6 +13,7 @@
                 <thead class="bg-sidebar text-white">
                     <tr>
                         <th>No</th>
+                        <th>Name</th>
                         <th>Judul</th>
                         <th>Jenis Insentif</th>
                         <th>Status</th>
@@ -26,6 +27,7 @@
                     foreach ($row->result() as $key => $data) { ?>
                         <tr>
                             <td><?= $no++ ?></td>
+                            <td><?= $data->name; ?></td>
                             <td><?= $data->judul_artikel; ?></td>
                             <td><?= $data->nama_jurnal; ?></td>
                             <td>
